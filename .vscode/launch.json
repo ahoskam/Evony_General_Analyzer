@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug app (gdb)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/app",
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "Build (make)",
+      "MIMode": "gdb",
+      "stopAtEntry": false
+    }
+  ]
+}
