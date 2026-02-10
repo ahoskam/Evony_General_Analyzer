@@ -26,6 +26,7 @@ This tool:
 ## Screenshots
 
 ### Compare / Analyze Generals (Main Screen)
+### Partial upgrade example
 ![Compare Generals](screenshots/ArtemisiaIPartial.png)
 
 ---
@@ -56,7 +57,7 @@ This tool:
 ---
 
 ### ⚠️ Add Stat Key (Advanced / Dev‑Only)
-![Add Stat Key](screenshots/Add Stat KeyNotValuable.png)
+![Add Stat Key](screenshots/AddStatKeyNotValuable.png)
 
 > **Important:**  
 > The **Add Stat Key** button only inserts a key into the database.  
