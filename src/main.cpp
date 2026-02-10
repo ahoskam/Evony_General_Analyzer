@@ -1,41 +1,55 @@
 #include <iostream>
-#include <iomanip>
 
-#include "General.h"
-#include "Stat.h"
+#include "Db.h"
+#include "Importer.h"
+#include "DbLoad.h"
+
+#include "GeneralLoader.h"
 #include "Compute.h"
 
-static void print_stat_percent(const General& g, Stat s) {
-    const double total = g.stats().total_percent(s);
-    std::cout << "- " << to_string(s) << ": " << total << "%\n";
-
-    auto items = g.stats().breakdown(s, ModifierKind::Percent);
-    for (const auto& m : items) {
-        std::cout << "    * " << std::setw(6) << m.value << "%  (" << m.source << ")\n";
-    }
-}
-
-static void print_stat_flat(const General& g, Stat s) {
-    const double total = g.stats().total_flat(s);
-    std::cout << "- " << to_string(s) << ": +" << total << "\n";
-
-    auto items = g.stats().breakdown(s, ModifierKind::Flat);
-    for (const auto& m : items) {
-        std::cout << "    * +" << m.value << "  (" << m.source << ")\n";
-    }
-}
-
 int main() {
-     GeneralDefinition lorenzo = load_general_from_file("data/lorenzo.txt");
+    // 1) Open DB
+    sqlite3* db = db_open("data/evony.db");
+    if (!db) return 1;
 
-    GeneralBuild build{};
-    build.ascensionLevel = 1;            // your current account
-    build.specialtyLevel = {0,0,0,0};    // none for now
+    // 2) Ensure schema exists
+    if (!db_ensure_schema(db)) {
+        db_close(db);
+        return 1;
+    }
 
-    Stats totals = computeStats(lorenzo, build);
+    // 3) Sync stat keys from code
+    if (!db_sync_stat_keys(db)) {
+        db_close(db);
+        return 1;
+    }
 
-    // print a few stats
-    std::cout << "Ground Attack total: "
-              << totals.total_percent(Stat::GroundAttackPct) << "%\n";
-  
+    // 4) Import any new generals from data/import/
+    if (!import_generals_from_folder(db, "data/import")) {
+        db_close(db);
+        return 1;
+    }
+
+    // ------------------------------------------------------------------
+    // For now: keep your existing “load from file and compute” demo
+    // Later: we’ll load from DB + drive GUI
+    // ------------------------------------------------------------------
+    try {
+        
+        auto def = db_load_general(db, "Lorenzo de' Medici");
+
+
+        GeneralBuild build;
+        build.ascensionLevel = 0;
+        build.specialtyLevel = {5,5,5,5};
+        build.covenantActive = {1,1,1,1,1,1};
+
+        Stats s = computeStats(def, build);
+        s.print_summary(std::cout);
+    } catch (const std::exception& e) {
+        std::cerr << "Runtime error: " << e.what() << "\n";
+    }
+
+    db_close(db);
+    return 0;
 }

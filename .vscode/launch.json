@@ -5,7 +5,7 @@
       "name": "Debug app (gdb)",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/app",
+      "program": "${workspaceFolder}/build/evony_generals",
       "cwd": "${workspaceFolder}",
       "preLaunchTask": "Build (make)",
       "MIMode": "gdb",

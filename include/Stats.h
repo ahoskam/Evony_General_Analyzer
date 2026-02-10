@@ -1,37 +1,48 @@
+// Stats.h
 #pragma once
-#include <array>
 #include <string>
 #include <vector>
-#include <string_view>
 #include <optional>
+#include <iosfwd>
 
 #include "Stat.h"
 
 enum class ModifierKind : int {
-    Percent, // store as "76" meaning 76%
-    Flat     // store as flat units (e.g., +50000 march size)
+    Percent,
+    Flat
 };
 
 struct Modifier {
     Stat stat;
     ModifierKind kind;
-    double value;          // percent points or flat amount
-    std::string source;    // "Ascension 3", "Specialty 2 L5", "Skill: XYZ"
+    double value;
+    std::string source;
 };
 
 class Stats {
 public:
+    // Store exactly what the DB says. No normalization here.
     void add(Stat stat, ModifierKind kind, double value, std::string source);
 
-    // Totals
-    double total_percent(Stat stat) const; // returns percent points (e.g., 76.0)
+    // Raw totals (exact stat only)
+    double total_percent(Stat stat) const;
     double total_flat(Stat stat) const;
 
-    // Human-friendly combined view:
-    // If you pass a Percent stat, you'll usually use total_percent.
-    // If you pass a Flat stat, you'll usually use total_flat.
-    // But we keep both channels for safety.
+    // "Effective" totals for GUI/calcs:
+    // For base troop stats (Ground/Mounted/Ranged/Siege ATK/DEF/HP), this returns:
+    //    base + attacking-only counterpart
+    // For all other stats, this equals total_percent().
+    double effective_percent(Stat stat) const;
+
+    // Breakdown helpers
     std::vector<Modifier> breakdown(Stat stat, std::optional<ModifierKind> kind = std::nullopt) const;
+
+    // Effective breakdown:
+    // For base troop stats, includes BOTH base + attacking-only modifiers (percent kind),
+    // while keeping the original stat in each Modifier so the UI can label them.
+    std::vector<Modifier> effective_breakdown_percent(Stat stat) const;
+
+    void print_summary(std::ostream& os) const;
 
 private:
     std::vector<Modifier> mods_;
