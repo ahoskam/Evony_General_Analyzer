@@ -56,7 +56,7 @@ struct AppUI {
     // --- Stat keys list (for dropdown)
     std::vector<StatKeyItem> statKeys;
 
-    // --- Add Stat Key modal state (NEW)
+    // --- Add Stat Key modal state
     bool showAddStatKeyModal = false;
     std::string addKeyError;
     char addKeyBuf[128] = {0};
@@ -77,6 +77,10 @@ struct AppUI {
     std::string addModError;
 
     std::vector<ModifierRow> currentMods;
+
+    // --- Edit General screen state
+    int editRoleIndex = 0;          // 0 Ground, 1 Mounted, 2 Ranged, 3 Siege
+    int editSelectedIndex = -1;     // index into filtered list
 
     explicit AppUI(const char* dbPath);
     ~AppUI();
@@ -106,10 +110,9 @@ private:
     bool db_delete_modifier(int modifier_id, std::string& outError);
 
     void drawAddGeneralModal();
-    void drawAddStatKeyModal();     // NEW
+    void drawAddStatKeyModal();
     void drawModifierEditor();
     void drawExistingModifiersTable();
 
-    // Stats display logic (NEW helper)
     void drawStatsTableFiltered();
 };

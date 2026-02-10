@@ -796,78 +796,189 @@ void AppUI::drawStatsTableFiltered() {
 void AppUI::draw() {
     ImGui::Begin("Evony Generals");
 
-    if (ImGui::Button("Add General...")) showAddGeneralModal = true;
-    ImGui::SameLine();
-    if (ImGui::Button("Refresh")) {
-        loadGeneralList();
-        loadStatKeys();
-        if (haveSelection) loadModifiersForSelected();
+    // Tabs-only navigation (no duplicate menu buttons)
+    static bool first_frame = true;
+
+    if (ImGui::BeginTabBar("##main_tabs")) {
+
+        // ---- HOME ----
+        ImGuiTabItemFlags homeFlags = first_frame ? ImGuiTabItemFlags_SetSelected : 0;
+        if (ImGui::BeginTabItem("Home", nullptr, homeFlags)) {
+            // Centered title
+            const char* title = "EVONY GENERAL ANALYZER";
+            ImVec2 avail = ImGui::GetContentRegionAvail();
+            ImVec2 ts = ImGui::CalcTextSize(title);
+
+            // Push down a bit so it feels centered vertically
+            float y = ImGui::GetCursorPosY() + (avail.y * 0.35f);
+            ImGui::SetCursorPosY(y);
+
+            float x = ImGui::GetCursorPosX() + (avail.x - ts.x) * 0.5f;
+            if (x > ImGui::GetCursorPosX()) ImGui::SetCursorPosX(x);
+
+            ImGui::TextUnformatted(title);
+            ImGui::Spacing();
+            ImGui::TextDisabled("Use the tabs above to navigate.");
+
+            ImGui::EndTabItem();
+        }
+
+        // ---- COMPARE GENERALS ----
+        if (ImGui::BeginTabItem("Compare Generals")) {
+
+            if (ImGui::Button("Refresh##Compare")) {
+                loadGeneralList();
+                loadStatKeys();
+                if (haveSelection) loadModifiersForSelected();
+            }
+
+            ImGui::Separator();
+            ImGui::Columns(2, nullptr, true);
+            ImGui::SetColumnWidth(0, 320);
+
+            // LEFT
+            ImGui::TextUnformatted("Generals");
+            ImGui::Separator();
+            ImGui::BeginChild("general_list_compare", ImVec2(0, 0), true);
+            for (int i = 0; i < (int)generals.size(); ++i) {
+                const bool isSel = (selectedIndex == i);
+                if (ImGui::Selectable(generals[i].name.c_str(), isSel)) {
+                    selectByIndex(i);
+                }
+            }
+            ImGui::EndChild();
+
+            ImGui::NextColumn();
+
+            // RIGHT
+            ImGui::TextUnformatted("Build");
+            ImGui::Separator();
+
+            if (!haveSelection) {
+                ImGui::TextDisabled("Select a general on the left.");
+                ImGui::Columns(1);
+                ImGui::EndTabItem();
+                ImGui::EndTabBar();
+                drawAddGeneralModal();
+                drawAddStatKeyModal();
+                first_frame = false;
+                ImGui::End();
+                return;
+            }
+
+            ImGui::Text("GENERAL: %s", currentDef.name.c_str());
+            ImGui::Text("ROLE: %s", currentDef.role.c_str());
+
+            ImGui::Separator();
+
+            bool changed = false;
+            changed |= ImGui::SliderInt("Ascension", &currentBuild.ascensionLevel, 0, 5);
+            for (int i = 0; i < 4; ++i) {
+                std::string label = "Specialty " + std::to_string(i + 1);
+                changed |= ImGui::SliderInt(label.c_str(), &currentBuild.specialtyLevel[i], 0, 5);
+            }
+
+            ImGui::Separator();
+            ImGui::TextUnformatted("Covenants");
+            for (int i = 0; i < 6; ++i) {
+                bool enabled = (currentBuild.covenantActive[i] != 0);
+                std::string label = "Covenant " + std::to_string(i + 1);
+                if (ImGui::Checkbox(label.c_str(), &enabled)) {
+                    currentBuild.covenantActive[i] = enabled ? 1 : 0;
+                    changed = true;
+                }
+            }
+
+            if (changed) statsDirty = true;
+            recomputeIfDirty();
+
+            ImGui::Separator();
+            ImGui::TextUnformatted("Computed Stats (filtered)");
+            drawStatsTableFiltered();
+
+            drawModifierEditor();
+            drawExistingModifiersTable();
+
+            ImGui::Columns(1);
+            ImGui::EndTabItem();
+        }
+
+        // ---- ADD GENERAL ----
+        if (ImGui::BeginTabItem("Add General")) {
+            ImGui::TextUnformatted("Add General");
+            ImGui::Separator();
+
+            if (ImGui::Button("Open Add General Form##Add")) {
+                showAddGeneralModal = true;
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Refresh##Add")) {
+                loadGeneralList();
+            }
+
+            ImGui::Separator();
+            ImGui::TextUnformatted("Existing Generals");
+            ImGui::BeginChild("general_list_add", ImVec2(0, 320), true);
+            for (const auto& g : generals) {
+                ImGui::BulletText("%s  (%s)", g.name.c_str(), g.role.c_str());
+            }
+            ImGui::EndChild();
+
+            ImGui::EndTabItem();
+        }
+
+        // ---- EDIT GENERAL ----
+        if (ImGui::BeginTabItem("Edit General")) {
+            ImGui::TextUnformatted("Edit General");
+            ImGui::Separator();
+
+            static const char* roles[] = {"Ground", "Mounted", "Ranged", "Siege"};
+            ImGui::Combo("Role", &editRoleIndex, roles, 4);
+
+            std::vector<int> filtered;
+            filtered.reserve(generals.size());
+            const char* want = roles[std::clamp(editRoleIndex, 0, 3)];
+
+            for (int i = 0; i < (int)generals.size(); ++i) {
+                if (ieq_contains(generals[i].role, want)) {
+                    filtered.push_back(i);
+                }
+            }
+
+            ImGui::Text("Select a %s General:", want);
+            ImGui::BeginChild("general_list_edit", ImVec2(0, 240), true);
+            for (int i = 0; i < (int)filtered.size(); ++i) {
+                int idx = filtered[i];
+                bool sel = (editSelectedIndex == i);
+                if (ImGui::Selectable(generals[idx].name.c_str(), sel)) {
+                    editSelectedIndex = i;
+                    selectByIndex(idx);
+                }
+            }
+            ImGui::EndChild();
+
+            ImGui::Separator();
+
+            if (!haveSelection) {
+                ImGui::TextDisabled("Select a general above.");
+            } else {
+                ImGui::Text("Selected: %s", currentDef.name.c_str());
+                ImGui::TextDisabled("(Editing UI coming next)");
+                drawExistingModifiersTable();
+            }
+
+            ImGui::EndTabItem();
+        }
+
+        ImGui::EndTabBar();
     }
 
+    // Modals can be opened from any tab
     drawAddGeneralModal();
+    drawAddStatKeyModal();
 
-    ImGui::Separator();
-    ImGui::Columns(2, nullptr, true);
-    ImGui::SetColumnWidth(0, 320);
-
-    // LEFT
-    ImGui::TextUnformatted("Generals");
-    ImGui::Separator();
-    ImGui::BeginChild("general_list", ImVec2(0, 0), true);
-    for (int i = 0; i < (int)generals.size(); ++i) {
-        const bool isSel = (selectedIndex == i);
-        if (ImGui::Selectable(generals[i].name.c_str(), isSel)) {
-            selectByIndex(i);
-        }
-    }
-    ImGui::EndChild();
-
-    ImGui::NextColumn();
-
-    // RIGHT
-    ImGui::TextUnformatted("Build");
-    ImGui::Separator();
-
-    if (!haveSelection) {
-        ImGui::TextDisabled("Select a general on the left.");
-        ImGui::Columns(1);
-        ImGui::End();
-        return;
-    }
-
-    ImGui::Text("GENERAL: %s", currentDef.name.c_str());
-    ImGui::Text("ROLE: %s", currentDef.role.c_str());
-
-    ImGui::Separator();
-
-    bool changed = false;
-    changed |= ImGui::SliderInt("Ascension", &currentBuild.ascensionLevel, 0, 5);
-    for (int i = 0; i < 4; ++i) {
-        std::string label = "Specialty " + std::to_string(i + 1);
-        changed |= ImGui::SliderInt(label.c_str(), &currentBuild.specialtyLevel[i], 0, 5);
-    }
-
-    ImGui::Separator();
-    ImGui::TextUnformatted("Covenants");
-    for (int i = 0; i < 6; ++i) {
-        bool enabled = (currentBuild.covenantActive[i] != 0);
-        std::string label = "Covenant " + std::to_string(i + 1);
-        if (ImGui::Checkbox(label.c_str(), &enabled)) {
-            currentBuild.covenantActive[i] = enabled ? 1 : 0;
-            changed = true;
-        }
-    }
-
-    if (changed) statsDirty = true;
-    recomputeIfDirty();
-
-    ImGui::Separator();
-    ImGui::TextUnformatted("Computed Stats (filtered)");
-    drawStatsTableFiltered();
-
-    drawModifierEditor();
-    drawExistingModifiersTable();
-
-    ImGui::Columns(1);
+    first_frame = false;
     ImGui::End();
 }
+
+
