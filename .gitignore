@@ -44,3 +44,8 @@ build/
 # debug information files
 *.dwo
 338b8b9c9f19df1da108662acd2ad400a32b6a90
+
+# sqlite db files
+/data/*.db
+/data/*.db-wal
+/data/*.db-shm
