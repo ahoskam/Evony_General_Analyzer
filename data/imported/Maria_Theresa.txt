@@ -1,0 +1,126 @@
+GENERAL: Maria Theresa
+ROLE: Unknown
+Leadership: 110 (8.64)
+Attack: 123 (8.85)
+Defense: 107 (8.91)
+Politics: 112 (8.49)
+
+==============================
+BASE SKILL | Queen of Hungary
+==============================
+MountedAttackPct +45
+MountedDefensePct +45
+MountedHPPct +45
+AttackingMonstersStaminaCostReductionPct +20
+
+==============================
+ASCENSION 1
+==============================
+AttackingDoubleItemsDropRateFromMonstersPct +10
+MarchSpeedPct +5
+
+==============================
+ASCENSION 2
+==============================
+MonstersAttackPct -10
+MarchSpeedPct +10
+
+==============================
+ASCENSION 3
+==============================
+MarchSizeCapacityPct +10
+AttackingMonstersStaminaCostReductionPct +5
+
+==============================
+ASCENSION 4
+==============================
+AttackingMountedAttackPct +30
+
+==============================
+ASCENSION 5
+==============================
+AttackingDoubleItemsDropRateFromMonstersPct +10
+AttackingMonstersStaminaCostReductionPct +5
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Hunter
+SPECIALTY 1 L5:
+MonstersAttackPct -15
+
+# SPECIALTY 2 | Strike
+SPECIALTY 2 L5:
+MarchSpeedPct +10
+AttackingMountedAttackPct +20
+
+# SPECIALTY 3 | Mounted Troop Ares
+SPECIALTY 3 L5:
+MountedAttackPct +10
+MountedHPPct +10
+MountedDefensePct +10
+
+# SPECIALTY 4 | War of Succession
+SPECIALTY 4 L5:
+GroundAndMountedAttackOnMonstersPct +25
+GroundAndMountedDefenseOnMonstersPct +25
+MarchSpeedPct +30
+
+==============================
+COVENANTS
+==============================
+
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - AttackingMonstersStaminaCostReductionPct | Stamina cost reduction when attacking Monsters
+
+InTavern=false
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Queen of Hungary
+Increases mounted troops' attack, defense and HP by 45% and reduces your Stamina cost by 20% when General is leading the army to attack Monsters.
+
+# ASCENSION_1_TEXT:
+When attacking Monsters, Double Items Drop Rate from Monsters +10%, March Speed to Monsters +5%
+
+# ASCENSION_2_TEXT:
+When attacking Monsters, Monsters Attack -10%, March Speed to Monsters +10%
+
+# ASCENSION_3_TEXT:
+March Size Capacity +10%; when attacking Monsters, Stamina cost -5%
+
+# ASCENSION_4_TEXT:
+When attacking Monsters, Mounted Troop Attack +30%
+
+# ASCENSION_5_TEXT:
+When attacking Monsters, Double Items Drop Rate from Monsters +10%, Stamina cost -5%
+
+# SPECIALTY_1_L5_TEXT:
+Hunter(Max Level Attributes)
+Monsters Attack -15%
+
+# SPECIALTY_2_L5_TEXT:
+Strike(Max Level Attributes)
+March Speed +10%
+Attacking Mounted Troop Attack +20%
+
+# SPECIALTY_3_L5_TEXT:
+Mounted Troop Ares(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop HP +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+War of Succession(Max Level Attributes)
+Ground and Mounted Troop Attack on Monsters +25%
+Ground and Mounted Troop Defense on Monsters +25%
+March Speed to Monsters +30%

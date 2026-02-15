@@ -1,0 +1,149 @@
+GENERAL: Henry IV
+ROLE: Mounted
+IN_TAVERN: false
+
+Leadership: 129 (9.02)
+Attack: 128 (8.91)
+Defense: 127 (8.62)
+Politics: 115 (8.47)
+
+BASE SKILL | Good King Henry
+MountedAttackPct +55
+MountedHPPct +55
+GroundDefensePct +40
+MountedDefensePct +40
+
+ASCENSION 1
+MountedDefensePct +20
+MountedHPPct +20
+
+ASCENSION 2
+AttackingTroopDeathToWoundedRatePct +8
+
+ASCENSION 3
+MountedAttackPct +20
+MountedHPPct +25
+GroundHPPct +25
+
+ASCENSION 4
+AttackingGroundAttackPct +25
+AttackingMountedAttackPct +25
+GroundDefensePct +25
+MountedDefensePct +25
+
+ASCENSION 5
+MountedAttackPct +40
+MountedDefensePct +40
+MarchSizeCapacityPct +8
+
+SPECIALTY 1 L5:
+MountedHPPct +10
+MountedDefensePct +10
+
+SPECIALTY 2 L5:
+GroundAttackPct +10
+MountedAttackPct +10
+
+SPECIALTY 3 L5:
+MountedAttackPct +10
+MountedHPPct +10
+MountedDefensePct +10
+
+SPECIALTY 4 L5:
+MountedAttackPct +55
+MountedDefensePct +45
+MountedHPPct +45
+
+COVENANT | War
+MountedHPPct +10
+
+COVENANT | Cooperation
+MountedTroopTrainingSpeedPct +10
+
+COVENANT | Peace
+MountedDefensePct +10
+
+COVENANT | Faith
+AttackingMountedHPPct +10
+InRallyMountedHPPct +5
+
+COVENANT | Honor
+MountedAttackPct +10
+
+COVENANT | Civilization
+AttackingMountedAttackPct +10
+MarchSizeCapacityPct +10
+
+NEW STAT KEYS NOTE:
+- MountedTroopTrainingSpeedPct
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Good King Henry
+Increases mounted troops' attack and HP by 55% and increases ground troops and mounted troops' defense by 40% when General is leading the army.
+
+# ASCENSION_1_TEXT:
+Mounted Troop Defense and HP +20%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+Mounted Troop Attack +20%, Mounted Troop and Ground Troop HP +25%
+
+# ASCENSION_4_TEXT:
+Attacking Ground Troop and Mounted Troop Attack and Defense +25%
+
+# ASCENSION_5_TEXT:
+Mounted Troop Attack and Defense +40%, March Size Capacity +8%
+
+# SPECIALTY_1_L5_TEXT:
+Mounted Troop Defense(Max Level Attributes)
+Mounted Troop HP +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Formation(Max Level Attributes)
+Ground Troop and Mounted Troop Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Mounted Troop Ares(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop HP +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Edict of Nantes(Max Level Attributes)
+Mounted Troop Attack +55%
+Mounted Troop Defense +45%
+Mounted Troop HP +45%
+
+# COVENANT_War_TEXT:
+War Covenant
+Mounted Troop HP +10%
+
+# COVENANT_Cooperation_TEXT:
+Cooperation Covenant
+Mounted Troop Training Speed +10%
+
+# COVENANT_Peace_TEXT:
+Peace Covenant
+Mounted Troop Defense +10%
+
+# COVENANT_Faith_TEXT:
+Faith Covenant
+Attacking Mounted Troop HP +10%
+In-Rally Mounted Troop HP +5%
+
+# COVENANT_Honor_TEXT:
+Honor Covenant
+Mounted Troop Attack +10%
+
+# COVENANT_Civilization_TEXT:
+Civilization Covenant
+Attacking Mounted Troop Attack +10%
+March Size Capacity +10%
+```}

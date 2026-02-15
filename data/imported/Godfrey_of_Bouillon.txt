@@ -1,0 +1,175 @@
+GENERAL: Godfrey of Bouillon
+ROLE: Unknown
+Leadership: 119 (9.01)
+Attack: 121 (9.05)
+Defense: 111 (8.68)
+Politics: 108 (8.51)
+
+==============================
+BASE SKILL | King of Jerusalem
+==============================
+RangedAttackPct +40
+RangedHPPct +40
+SiegeMachineDefensePct +10
+RangedDefensePct +10
+
+==============================
+ASCENSION 1
+==============================
+RangedAttackPct +10
+RangedDefensePct +15
+
+==============================
+ASCENSION 2
+==============================
+AttackingTroopDeathToWoundedRatePct +8
+
+==============================
+ASCENSION 3
+==============================
+MarchSizeCapacityPct +10
+
+==============================
+ASCENSION 4
+==============================
+RangedDefensePct +30
+RangedHPPct +30
+
+==============================
+ASCENSION 5
+==============================
+RangedAttackPct +25
+RangedDefensePct +15
+RangedHPPct +15
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Ranged Troop Defense
+SPECIALTY 1 L5:
+RangedHPPct +10
+RangedDefensePct +10
+
+# SPECIALTY 2 | Siege
+SPECIALTY 2 L5:
+MarchSizeCapacityPct +6
+AttackingSiegeMachineAttackPct +10
+AttackingRangedAttackPct +10
+
+# SPECIALTY 3 | Ranged Troop Ares
+SPECIALTY 3 L5:
+RangedAttackPct +10
+RangedHPPct +10
+RangedDefensePct +10
+
+# SPECIALTY 4 | Advocate of the Holy Sepulchre
+SPECIALTY 4 L5:
+RangedAttackPct +30
+RangedDefensePct +10
+RangedHPPct +10
+
+==============================
+COVENANTS
+==============================
+
+# War
+RangedDefensePct +5
+RangedTrainingCapacityPct +5
+
+# Cooperation
+DefendingRangedAttackPct +10
+
+# Peace
+MarchSpeedPct +15
+RangedAttackPct +5
+SiegeMachineAttackPct +5
+
+# Faith
+DefendingRangedAttackPct +10
+DefendingRangedDefensePct +15
+
+# Honor
+InCityRangedHPPct +10
+InCitySiegeHPPct +10
+
+# Civilization
+InCityRangedAttackPct +5
+InCitySiegeMachineAttackPct +5
+InCityRangedDefensePct +5
+InCitySiegeMachineDefensePct +5
+
+InTavern=false
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+King of Jerusalem
+Increases ranged troops' attack and HP by 40% and ranged troops and siege machines' defense by 10% when General is leading the army.
+
+# ASCENSION_1_TEXT:
+Ranged Troop Attack +10% and Defense +15%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+March Size Capacity +10%
+
+# ASCENSION_4_TEXT:
+Ranged Troop Defense +30% and HP +30%
+
+# ASCENSION_5_TEXT:
+Ranged Troop Attack +25%, Defense and HP +15%
+
+# SPECIALTY_1_MAX_TEXT:
+Ranged Troop Defense(Max Level Attributes)
+Ranged Troop HP +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_2_MAX_TEXT:
+Siege(Max Level Attributes)
+March Size Capacity +6%
+Attacking Siege Machine and Ranged Troop Attack +10%
+
+# SPECIALTY_3_MAX_TEXT:
+Ranged Troop Ares(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop HP +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_4_MAX_TEXT:
+Advocate of the Holy Sepulchre(Max Level Attributes)
+Ranged Troop Attack +30%
+Ranged Troop Defense +10%
+Ranged Troop HP +10%
+
+# COVENANT_WAR_TEXT:
+War Covenant
+Ranged Troop Defense +5%
+Ranged Troop Training Capacity +5%
+
+# COVENANT_COOPERATION_TEXT:
+Cooperation Covenant
+Defending Ranged Troop Attack +10%
+
+# COVENANT_PEACE_TEXT:
+Peace Covenant
+March Speed +15%
+Ranged Troop and Siege Machine Attack +5%
+
+# COVENANT_FAITH_TEXT:
+Faith Covenant
+Defending Ranged Troop Attack +10%
+Defending Ranged Troop Defense +15%
+
+# COVENANT_HONOR_TEXT:
+Honor Covenant
+In-city Ranged Troop and Siege Machine HP +10%
+
+# COVENANT_CIVILIZATION_TEXT:
+Civilization Covenant
+In-city Ranged Troop and Siege Machine Attack +5%
+In-city Ranged Troop and Siege Machine Defense +5%

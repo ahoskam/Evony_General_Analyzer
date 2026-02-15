@@ -1,0 +1,143 @@
+GENERAL: Charles VI
+ROLE: Ranged
+IN_TAVERN: false
+
+Leadership: 129 (8.91)
+Attack: 131 (8.99)
+Defense: 121 (8.63)
+Politics: 117 (8.48)
+
+BASE SKILL | Pragmatic Sanction
+AttackingRangedTroopAttackPct +55
+AttackingRangedTroopHPPct +55
+AttackingRangedTroopDefensePct +40
+
+ASCENSION 1
+AttackingRangedTroopAttackPct +15
+AttackingRangedTroopDefensePct +20
+
+ASCENSION 2
+AttackingTroopDeathToWoundedRatePct +8
+
+ASCENSION 3
+AttackingRangedTroopAttackPct +25
+AttackingSiegeMachineAttackPct +25
+AttackingRangedTroopHPPct +30
+
+ASCENSION 4
+AttackingRangedTroopDefensePct +30
+AttackingSiegeMachineDefensePct +30
+MarchSizeCapacityPct +10
+
+ASCENSION 5
+AttackingRangedTroopAttackPct +40
+AttackingRangedTroopDefensePct +40
+AttackingRangedTroopHPPct +40
+
+SPECIALTY 1 L5:
+RangedTroopHPPct +10
+RangedTroopDefensePct +10
+
+SPECIALTY 2 L5:
+RangedTroopAttackPct +10
+SiegeMachineAttackPct +10
+
+SPECIALTY 3 L5:
+RangedTroopAttackPct +10
+RangedTroopHPPct +10
+RangedTroopDefensePct +10
+
+SPECIALTY 4 L5:
+AttackingRangedTroopAttackPct +55
+AttackingRangedTroopDefensePct +40
+AttackingRangedTroopHPPct +40
+
+COVENANT | War
+AttackingRangedTroopAttackPct +10
+
+COVENANT | Cooperation
+RangedTrainingCapacityPct +10
+
+COVENANT | Peace
+AttackingRangedTroopDefensePct +10
+
+COVENANT | Faith
+RangedTroopAttackPct +10
+AttackingRangedTroopHPPct +5
+
+COVENANT | Honor
+InRallyRangedAttackPct +10
+
+COVENANT | Civilization
+RangedTroopHPPct +10
+MarchSizeCapacityPct +8
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Pragmatic Sanction
+Increases ranged troops' attack and HP by 55% and defense by 40% when General is leading the army to attack.
+
+# ASCENSION_1_TEXT:
+Attacking Ranged Troop Attack +15% and Defense +20%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+When attacking, Ranged Troop and Siege Machine Attack +25%, Ranged Troop HP +30%
+
+# ASCENSION_4_TEXT:
+When attacking, Ranged Troop and Siege Machine Defense +30% , March Size Capacity +10%
+
+# ASCENSION_5_TEXT:
+Attacking Ranged Troop Attack, Defense and HP +40%
+
+# SPECIALTY_1_L5_TEXT:
+Ranged Troop Defense(Max Level Attributes)
+Ranged Troop HP +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Ranged Troop Ares(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop HP +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Inherited Order(Max Level Attributes)
+Attacking Ranged Troop Attack +55%
+Attacking Ranged Troop Defense +40%
+Attacking Ranged Troop HP +40%
+
+# COVENANT_War_TEXT:
+War Covenant
+Attacking Ranged Troop Attack +10%
+
+# COVENANT_Cooperation_TEXT:
+Cooperation Covenant
+Ranged Troop Training Capacity +10%
+
+# COVENANT_Peace_TEXT:
+Peace Covenant
+Attacking Ranged Troop Defense +10%
+
+# COVENANT_Faith_TEXT:
+Faith Covenant
+Ranged Troop Attack +10%
+Attacking Ranged Troop HP +5%
+
+# COVENANT_Honor_TEXT:
+Honor Covenant
+In-Rally Ranged Troop Attack +10%
+
+# COVENANT_Civilization_TEXT:
+Civilization Covenant
+Ranged Troop HP +10%
+March Size Capacity +8%

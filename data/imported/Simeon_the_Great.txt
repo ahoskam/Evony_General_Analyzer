@@ -1,0 +1,82 @@
+GENERAL: Simeon the Great
+ROLE: Unknown
+Leadership: 115 (9.12)
+Attack: 110 (8.65)
+Defense: 115 (9.18)
+Politics: 112 (8.37)
+
+==============================
+BASE SKILL | Empire Offensive
+==============================
+RangedAttackPct +20
+SiegeAttackPct +20
+RangedAttackPct +15 (when General brings any dragon)
+
+==============================
+ASCENSION 1
+==============================
+SiegeAttackPct +5
+RangedAttackPct +5
+RangedHPPct +20
+
+==============================
+ASCENSION 2
+==============================
+EnemyInCityTroopWoundedToDeathRatePct +10
+
+==============================
+ASCENSION 3
+==============================
+RallyCapacityPct +8 (when General is launching Alliance War)
+
+==============================
+ASCENSION 4
+==============================
+SiegeAttackPct +10
+RangedAttackPct +10
+RangedHPPct +30
+
+==============================
+ASCENSION 5
+==============================
+SiegeAttackPct +5
+RangedAttackPct +5
+RangedAttackPct +20 (with Dragon)
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Ranged Troop Formation
+SPECIALTY 1 L5:
+RangedAttackPct +10
+RangedDefensePct +10
+
+# SPECIALTY 2 | Siege
+SPECIALTY 2 L5:
+MarchSizePct +6
+SiegeAttackPct +10
+RangedAttackPct +10
+
+# SPECIALTY 3 | War God
+SPECIALTY 3 L5:
+AllTroopsAttackPct +6
+
+# SPECIALTY 4 | Battle of Achelous
+SPECIALTY 4 L5:
+RangedAttackPct +35
+RangedDefensePct +35
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - EnemyInCityTroopWoundedToDeathRatePct | Enemy In-city Troop Wounded into Death Rate
+# - RallyCapacityPct | Rally Capacity
+
+InTavern=false

@@ -1,0 +1,79 @@
+GENERAL: William Wallace
+ROLE: Unknown
+Leadership: 103 (8.36)
+Attack: 113 (8.67)
+Defense: 110 (8.71)
+Politics: 97 (8.11)
+
+==============================
+BASE SKILL | Brave Heart
+==============================
+EnemyGroundDefensePct -20
+SiegeMachineAttackPct +20
+
+==============================
+ASCENSION 1
+==============================
+EnemyGroundDefensePct -10
+EnemyGroundHPPct -10
+
+==============================
+ASCENSION 2
+==============================
+AttackingTroopDeathToWoundedRatePct +8
+
+==============================
+ASCENSION 3
+==============================
+MarchSizePct +10
+
+==============================
+ASCENSION 4
+==============================
+SiegeMachineAttackPct +10
+EnemyGroundHPPct -10
+
+==============================
+ASCENSION 5
+==============================
+SiegeMachineAttackPct +15
+EnemyGroundDefensePct -10
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Siege Machine Assault
+SPECIALTY 1 L5:
+SiegeMachineAttackPct +10
+SiegeMachineHPPct +10
+
+# SPECIALTY 2 | Bash
+SPECIALTY 2 L5:
+RangedAttackPct +10
+SiegeMachineAttackPct +10
+
+# SPECIALTY 3 | Iron Warrior
+SPECIALTY 3 L5:
+EnemyWoundedToDeathWhenAttackingPct +10
+
+# SPECIALTY 4 | Battle of Stirling Bridge
+SPECIALTY 4 L5:
+SiegeMachineAttackPct +26
+SiegeMachineHPPct +26
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - EnemyGroundDefensePct | Enemy Ground Troop Defense reduction
+# - EnemyGroundHPPct | Enemy Ground Troop HP reduction
+# - AttackingTroopDeathToWoundedRatePct | Attacking Troop Death into Wounded Rate
+# - EnemyWoundedToDeathWhenAttackingPct | Enemy Wounded into Death when attacking
+
+InTavern=true

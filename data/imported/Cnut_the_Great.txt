@@ -1,0 +1,96 @@
+GENERAL: Cnut the Great
+ROLE: Unknown
+Leadership: 110 (8.83)
+Attack: 109 (8.37)
+Defense: 106 (8.62)
+Politics: 113 (8.97)
+
+==============================
+BASE SKILL | Chief of Expedition
+==============================
+EnemyRangedTroopAttackPct -25
+EnemyGroundTroopHPPct -15
+EnemyMountedTroopHPPct -15
+
+==============================
+ASCENSION 1
+==============================
+EnemyRangedTroopAttackPct -5
+EnemySiegeMachineAttackPct -5
+EnemyGroundTroopDefensePct -15
+EnemyMountedTroopDefensePct -15
+
+==============================
+ASCENSION 2
+==============================
+EnemyGroundTroopHPPct -15
+EnemyMountedTroopHPPct -15
+WhenGeneralIsMayorTrainingSpeedInThisSubordinateCityPct +15
+
+==============================
+ASCENSION 3
+==============================
+EnemyGroundTroopDefensePct -20
+EnemyMountedTroopDefensePct -20
+WhenGeneralIsMayorDeathIntoSurvivalRateInThisSubordinateCityPct +15
+
+==============================
+ASCENSION 4
+==============================
+EnemyRangedTroopAttackPct -10
+EnemySiegeMachineAttackPct -10
+EnemyGroundTroopHPPct -20
+EnemyMountedTroopHPPct -20
+
+==============================
+ASCENSION 5
+==============================
+EnemyRangedTroopAttackPct -15
+EnemySiegeMachineAttackPct -15
+EnemyGroundTroopDefensePct -25
+EnemyMountedTroopDefensePct -25
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Mounted Troop Assault
+SPECIALTY 1 L5:
+MountedAttackPct +10
+MountedHPPct +10
+
+# SPECIALTY 2 | Snipe
+SPECIALTY 2 L5:
+EnemyTroopAttackPct -10
+
+# SPECIALTY 3 | Ruler
+SPECIALTY 3 L5:
+# Applied to Subordinate City Mayor
+TroopCapacityInSubordinateCityPct +36
+
+# SPECIALTY 4 | The North Sea Empire
+SPECIALTY 4 L5:
+EnemyRangedTroopAttackPct -26
+EnemyRangedTroopDefensePct -26
+EnemyRangedTroopHPPct -26
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - EnemyGroundTroopHPPct
+# - EnemyMountedTroopHPPct
+# - EnemyGroundTroopDefensePct
+# - EnemyMountedTroopDefensePct
+# - EnemySiegeMachineAttackPct
+# - EnemyTroopAttackPct
+# - TroopCapacityInSubordinateCityPct
+# - WhenGeneralIsMayorTrainingSpeedInThisSubordinateCityPct
+# - WhenGeneralIsMayorDeathIntoSurvivalRateInThisSubordinateCityPct
+
+InTavern=false

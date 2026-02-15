@@ -1,0 +1,119 @@
+GENERAL: Edward the Black Prince
+ROLE: Unknown
+Leadership: 111 (8.96)
+Attack: 109 (8.39)
+Defense: 116 (8.83)
+Politics: 93 (7.94)
+
+==============================
+BASE SKILL | Rain of Arrows
+==============================
+LeadingRangedAttackPct +25
+LeadingEnemyMountedAttackDebuffPct +15
+
+==============================
+ASCENSION 1
+==============================
+RangedAttackPct +5
+EnemyMountedDefenseDebuffPct +15
+
+==============================
+ASCENSION 2
+==============================
+EnemyInCityTroopWoundedIntoDeathRatePct +8
+
+==============================
+ASCENSION 3
+==============================
+MarchSizeCapacityPct +10
+
+==============================
+ASCENSION 4
+==============================
+RangedAttackPct +10
+EnemyMountedHPDebuffPct +20
+
+==============================
+ASCENSION 5
+==============================
+RangedAttackPct +15
+EnemyMountedAttackDebuffPct +5
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Ranged Troop Assault
+SPECIALTY 1 L1:
+LeadingRangedAttackPct +1
+LeadingRangedHPPct +1
+SPECIALTY 1 L2:
+LeadingRangedAttackPct +1
+LeadingRangedHPPct +1
+SPECIALTY 1 L3:
+LeadingRangedAttackPct +2
+LeadingRangedHPPct +2
+SPECIALTY 1 L4:
+LeadingRangedAttackPct +2
+LeadingRangedHPPct +2
+SPECIALTY 1 L5:
+LeadingRangedAttackPct +4
+LeadingRangedHPPct +4
+
+# SPECIALTY 2 | Suppress
+SPECIALTY 2 L1:
+LeadingEnemyTroopHPDebuffPct +1
+SPECIALTY 2 L2:
+LeadingEnemyTroopHPDebuffPct +1
+SPECIALTY 2 L3:
+LeadingEnemyTroopHPDebuffPct +2
+SPECIALTY 2 L4:
+LeadingEnemyTroopHPDebuffPct +2
+SPECIALTY 2 L5:
+LeadingEnemyTroopHPDebuffPct +4
+
+# SPECIALTY 3 | Ranged Troop Ares
+SPECIALTY 3 L1:
+LeadingRangedAttackPct +1
+LeadingRangedHPPct +1
+LeadingRangedDefensePct +1
+SPECIALTY 3 L2:
+LeadingRangedAttackPct +1
+LeadingRangedHPPct +1
+LeadingRangedDefensePct +1
+SPECIALTY 3 L3:
+LeadingRangedAttackPct +2
+LeadingRangedHPPct +2
+LeadingRangedDefensePct +2
+SPECIALTY 3 L4:
+LeadingRangedAttackPct +2
+LeadingRangedHPPct +2
+LeadingRangedDefensePct +2
+SPECIALTY 3 L5:
+LeadingRangedAttackPct +4
+LeadingRangedHPPct +4
+LeadingRangedDefensePct +4
+
+# SPECIALTY 4 | Battle of Poitiers
+SPECIALTY 4 L5CompletedTotal: 26
+LeadingRangedAttackPct +26
+LeadingRangedHPPct +26
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - LeadingRangedAttackPct | Ranged troops' attack when General is leading the army
+# - LeadingEnemyMountedAttackDebuffPct | Reduces enemy mounted troops' attack when General is leading the army
+# - EnemyInCityTroopWoundedIntoDeathRatePct | Enemy in-city troop wounded into death rate
+# - MarchSizeCapacityPct | March Size Capacity
+# - LeadingRangedHPPct | Ranged troops' HP when General is leading the army
+# - LeadingEnemyTroopHPDebuffPct | Enemy troop HP - when General is leading the army
+# - LeadingRangedDefensePct | Ranged troops' defense when General is leading the army
+
+InTavern=true

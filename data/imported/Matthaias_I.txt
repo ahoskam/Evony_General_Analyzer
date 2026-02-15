@@ -1,0 +1,92 @@
+GENERAL: Matthias I
+ROLE: Unknown
+Leadership: 107 (8.79)
+Attack: 117 (8.82)
+Defense: 111 (8.95)
+Politics: 104 (8.75)
+
+==============================
+BASE SKILL | Leader of Mercenaries
+==============================
+RangedAttackPct +20
+SiegeAttackPct +20
+MarchSizePct +5
+Condition: When General is leading the army to attack
+
+==============================
+ASCENSION 1
+==============================
+AttackingRangedDefensePct +10
+AttackingSiegeDefensePct +10
+AttackingRangedHPPct +15
+AttackingSiegeHPPct +15
+
+==============================
+ASCENSION 2
+==============================
+EnemyInCityTroopWoundedToDeathRatePct +10
+
+==============================
+ASCENSION 3
+==============================
+RallyCapacityPct +8
+Condition: When General is launching Alliance War
+
+==============================
+ASCENSION 4
+==============================
+AttackingRangedAttackPct +15
+AttackingSiegeAttackPct +15
+AttackingRangedHPPct +5
+AttackingSiegeHPPct +5
+
+==============================
+ASCENSION 5
+==============================
+AttackingRangedAttackPct +15
+AttackingSiegeAttackPct +15
+AttackingRangedDefensePct +10
+AttackingSiegeDefensePct +10
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Siege Machine Assault
+SPECIALTY 1 L5CompletedTotal:
+SiegeAttackPct +10
+SiegeHPPct +10
+
+# SPECIALTY 2 | Bash
+SPECIALTY 2 L5CompletedTotal:
+RangedAttackPct +10
+SiegeAttackPct +10
+
+# SPECIALTY 3 | Siege Machine Ares
+SPECIALTY 3 L5CompletedTotal:
+SiegeAttackPct +10
+SiegeHPPct +10
+SiegeDefensePct +10
+
+# SPECIALTY 4 | King of the Black Army
+SPECIALTY 4 L5CompletedTotal:
+RangedAttackPct +20
+SiegeAttackPct +20
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - AttackingRangedDefensePct
+# - AttackingSiegeDefensePct
+# - AttackingRangedHPPct
+# - AttackingSiegeHPPct
+# - EnemyInCityTroopWoundedToDeathRatePct
+# - RallyCapacityPct
+
+InTavern=true

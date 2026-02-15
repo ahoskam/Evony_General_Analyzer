@@ -1,0 +1,114 @@
+GENERAL: Margaret of Valois
+ROLE: Duty
+IN_TAVERN: false
+
+Leadership: 145 (9.43)
+Attack: 96 (7.65)
+Defense: 106 (7.81)
+Politics: 150 (9.51)
+
+BASE SKILL | Queen Margot
+ResearchSpeedPct +15
+TroopAttackPct +10
+TroopDefensePct +10
+TroopHPPct +10
+
+ASCENSION 1
+AttackingGroundAttackPct +20
+AttackingGroundHPPct +20
+AttackingMountedAttackPct +20
+AttackingMountedHPPct +20
+ResearchSpeedPct +4
+
+ASCENSION 2
+InCityGroundDefensePct +10
+InCityGroundHPPct +10
+InCityMountedDefensePct +10
+InCityMountedHPPct +10
+ResearchSpeedPct +6
+
+ASCENSION 3
+RangedAttackPct +20
+RangedDefensePct +20
+SiegeMachineAttackPct +20
+SiegeMachineDefensePct +20
+
+ASCENSION 4
+EnemyGroundAttackPct -30
+EnemyGroundHPPct -30
+EnemyMountedAttackPct -30
+EnemyMountedHPPct -30
+
+ASCENSION 5
+AttackingRangedAttackPct +30
+AttackingRangedDefensePct +30
+AttackingSiegeMachineAttackPct +30
+AttackingSiegeMachineDefensePct +30
+RallyCapacityPct +6
+
+SPECIALTY 1 L5:
+RangedTroopHPPct +10
+RangedTroopDefensePct +10
+
+SPECIALTY 2 L5:
+GroundAttackPct +10
+MountedAttackPct +10
+
+SPECIALTY 3 L5:
+ResearchSpeedPct +8
+AttackingTroopAttackPct +8
+AttackingTroopsDefensePct +8
+
+SPECIALTY 4 L5:
+ResearchSpeedPct +8
+AttackingTroopAttackPct +15
+AttackingMountedHPPct +15
+AttackingGroundHPPct +15
+
+# None available (locked or not shown)
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Queen Margot
+Increases research speed by 15% and troops' attack, defense and HP by 10% when General is the Research Factory Officer.
+
+# ASCENSION_1_TEXT:
+When General is the Research Factory Officer, Attacking Ground Troop and Mounted Troop Attack and HP +20%, Research Speed +4%
+
+# ASCENSION_2_TEXT:
+When General is the Research Factory Officer, In-city Ground Troop and Mounted Troop Defense and HP +10%, Research Speed +6%
+
+# ASCENSION_3_TEXT:
+When General is the Research Factory Officer, Ranged Troop and Siege Machine Attack and Defense +20%
+
+# ASCENSION_4_TEXT:
+When General is the Research Factory Officer, Enemy Ground Troop and Mounted Troop Attack and HP against your in-rally troops -30%
+
+# ASCENSION_5_TEXT:
+When General is the Research Factory Officer, Attacking Ranged Troop and Siege Machine Attack and Defense +30%, Rally Capacity +6%
+
+# SPECIALTY_1_L5_TEXT:
+Ranged Troop Defense(Max Level Attributes)
+Ranged Troop HP +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Formation(Max Level Attributes)
+Ground Troop and Mounted Troop Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Sage(Max Level Attributes)
+Applied to Research Factory Officer
+Research Speed +8%
+Attacking Troop's Attack +8%
+Attacking Troops Defense +8%
+
+# SPECIALTY_4_L5_TEXT:
+Memoirs of the Queen(Max Level Attributes)
+Applied to Research Factory Officer
+Research Speed +8%
+Attacking Troop's Attack +15%
+Attacking Mounted Troop and Ground Troop HP +15%

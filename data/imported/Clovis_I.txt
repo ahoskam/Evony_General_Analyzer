@@ -1,0 +1,64 @@
+GENERAL: Clovis I
+ROLE: Duty
+IN_TAVERN: false
+
+
+Leadership: 115 (8.69)
+Attack: 122 (8.91)
+Defense: 119 (9.04)
+Politics: 109 (8.72)
+
+BASE SKILL | Salic Law
+EnemyGroundTroopDefensePct -15
+EnemyGroundTroopHPPct -15
+EnemyMountedTroopDefensePct -15
+EnemyMountedTroopHPPct -15
+InCityRangedTroopAttackPct +35
+InCitySiegeMachineAttackPct +35
+
+SPECIALTY 1 L5:
+RangedTroopHPPct +10
+RangedTroopDefensePct +10
+
+SPECIALTY 2 L5:
+EnemyTroopDefensePct -10
+
+SPECIALTY 3 L5:
+InCityTroopHPPct +15
+NEW STAT KEYS NOTE:
+- BunkerProtectingCapacityPct
+
+SPECIALTY 4 L5:
+InCityTroopAttackPct +10
+InCityTroopsDefensePct +25
+InCityTroopsHPPct +25
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Salic Law
+Reduces enemy ground troops and mounted troops' defense and HP by 15% and increases your in-city ranged troops and siege machines' attack by 35% when General is the Bunker Officer.
+
+# SPECIALTY_1_L5_TEXT:
+Ranged Troop Defense(Max Level Attributes)
+Ranged Troop HP +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Sabotage(Max Level Attributes)
+Enemy Troop Defense -10%
+
+# SPECIALTY_3_L5_TEXT:
+Sage(Max Level Attributes)
+Applied to Bunker Officer
+Bunker Protecting Capacity +40%
+In City Troop HP +15%
+
+# SPECIALTY_4_L5_TEXT:
+Unification of Franks(Max Level Attributes)
+Applied to Bunker Officer
+In City Troop Attack +10%
+In-City Troop Defense +25%
+In City Troop HP +25%

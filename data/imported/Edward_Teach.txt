@@ -1,0 +1,95 @@
+GENERAL: Edward Teach
+ROLE: Siege
+IN_TAVERN: false
+
+Leadership: 117 (8.71)
+Attack: 119 (9.01)
+Defense: 117 (9.00)
+Politics: 108 (8.65)
+
+BASE SKILL | Queen Anne’s Revenge
+SiegeMachineAttackPct +30
+SiegeMachineDefensePct +30
+RangedTroopAttackPct +10
+SiegeMachineAttackPct +10
+
+ASCENSION 1
+SiegeMachineAttackPct +5
+SiegeMachineDefensePct +15
+
+ASCENSION 2
+AttackingTroopDeathToWoundedRatePct +8
+
+ASCENSION 3
+SiegeMachineAttackPct +5
+WhenLaunchingAllianceWarRallyCapacityPct +8
+
+ASCENSION 4
+SiegeMachineHPPct +55
+
+ASCENSION 5
+SiegeMachineAttackPct +25
+SiegeMachineDefensePct +25
+
+SPECIALTY 1 L5:
+SiegeMachineAttackPct +10
+SiegeMachineDefensePct +10
+
+SPECIALTY 2 L5:
+RangedTroopAttackPct +10
+SiegeMachineAttackPct +10
+
+SPECIALTY 3 L5:
+SiegeMachineAttackPct +10
+SiegeMachineHPPct +10
+SiegeMachineDefensePct +10
+
+SPECIALTY 4 L5:
+SiegeMachineAttackPct +35
+RangedTroopHPPct +25
+SiegeMachineHPPct +25
+
+# None available (locked or not shown)
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Queen Anne’s Revenge
+Increases siege machines' attack and defense by 30% when General is leading the army. Increases ranged troops and siege machines' attack by 10% when General brings any dragon or Spiritual Beast.
+
+# ASCENSION_1_TEXT:
+Siege Machine Attack +5% and Defense +15%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+Siege Machine Attack +5%; when General is launching Alliance War, Rally Capacity +8%
+
+# ASCENSION_4_TEXT:
+Siege Machine HP +55%
+
+# ASCENSION_5_TEXT:
+Siege Machine Attack +25% and Defense +25%
+
+# SPECIALTY_1_L5_TEXT:
+Siege Machine Formation(Max Level Attributes)
+Siege Machine Attack +10%
+Siege Machine Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Siege Machine Ares(Max Level Attributes)
+Siege Machine Attack +10%
+Siege Machine HP +10%
+Siege Machine Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Blackbeard(Max Level Attributes)
+Siege Machine Attack +35%
+Ranged Troop and Siege Machine HP +25%

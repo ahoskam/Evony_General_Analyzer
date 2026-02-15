@@ -1,0 +1,79 @@
+GENERAL: Barbarossa
+ROLE: Unknown
+InTavern=true
+
+Leadership: 115 (9.15)
+Attack: 107 (8.43)
+Defense: 109 (8.47)
+Politics: 112 (8.63)
+
+==============================
+BASE SKILL | Bloody Leader
+==============================
+MarchSizePct +10
+MountedAttackPct +15
+
+==============================
+ASCENSION 1
+==============================
+AttackingMountedDefensePct +15
+AttackingMountedHPPct +15
+
+==============================
+ASCENSION 2
+==============================
+AttackingTroopDeathToWoundedRatePct +8
+
+==============================
+ASCENSION 3
+==============================
+RallyCapacityPct +6
+AttackingMountedAttackPct +15
+AttackingMountedDefensePct +20
+
+==============================
+ASCENSION 4
+==============================
+AttackingMountedAttackPct +20
+AttackingMountedHPPct +20
+
+==============================
+ASCENSION 5
+==============================
+# Not visible in provided file
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Mounted Troop Assault
+MountedAttackPct +10
+MountedHPPct +10
+
+# SPECIALTY 2 | Annihilation
+MarchSizePct +6
+AttackingMountedAttackPct +10
+AttackingGroundAttackPct +10
+
+# SPECIALTY 3 | Iron Warrior
+EnemyWoundedToDeathWhenAttackingPct +10
+
+# SPECIALTY 4 | Crusaders
+AttackingMountedAttackPct +26
+AttackingMountedDefensePct +26
+AttackingMountedHPPct +26
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+NEW STAT KEYS NOTE
+==============================
+NEW_STAT_KEYS:
+- AttackingMountedDefensePct
+- AttackingMountedHPPct
+- AttackingMountedAttackPct
+- AttackingGroundAttackPct
+- EnemyWoundedToDeathWhenAttackingPct

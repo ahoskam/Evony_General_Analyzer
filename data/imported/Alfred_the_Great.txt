@@ -1,0 +1,94 @@
+GENERAL: Alfred the Great
+ROLE: Unknown
+Leadership: 117 (9.03)
+Attack: 112 (8.64)
+Defense: 116 (8.87)
+Politics: 112 (8.56)
+
+==============================
+BASE SKILL | Great King
+==============================
+RangedAttackPct +30
+SiegeAttackPct +20
+# Condition:
+# When General is leading the army to attack.
+
+==============================
+ASCENSION 1
+==============================
+AttackingRangedDefensePct +10
+AttackingSiegeDefensePct +10
+AttackingRangedHPPct +15
+AttackingSiegeHPPct +15
+
+==============================
+ASCENSION 2
+==============================
+EnemyInCityTroopWoundedToDeathRatePct +10
+
+==============================
+ASCENSION 3
+==============================
+RallyCapacityPct +8
+# Condition:
+# When General is launching Alliance War.
+
+==============================
+ASCENSION 4
+==============================
+AttackingRangedAttackPct +10
+AttackingSiegeAttackPct +10
+AttackingRangedHPPct +15
+AttackingSiegeHPPct +15
+
+==============================
+ASCENSION 5
+==============================
+AttackingRangedAttackPct +15
+AttackingSiegeAttackPct +15
+AttackingRangedDefensePct +10
+AttackingSiegeDefensePct +10
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Ranged Troop Formation
+SPECIALTY 1 L5:
+RangedAttackPct +10
+RangedDefensePct +10
+
+# SPECIALTY 2 | Siege
+SPECIALTY 2 L5:
+MarchSizeCapacityPct +6
+AttackingSiegeAttackPct +10
+AttackingRangedAttackPct +10
+
+# SPECIALTY 3 | Ranged Troop Ares
+SPECIALTY 3 L5:
+RangedAttackPct +10
+RangedHPPct +10
+RangedDefensePct +10
+
+# SPECIALTY 4 | Battle of Edington
+SPECIALTY 4 L5:
+RangedAttackPct +35
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - AttackingRangedDefensePct
+# - AttackingSiegeDefensePct
+# - AttackingRangedHPPct
+# - AttackingSiegeHPPct
+# - EnemyInCityTroopWoundedToDeathRatePct
+# - RallyCapacityPct
+# - MarchSizeCapacityPct
+
+InTavern=true

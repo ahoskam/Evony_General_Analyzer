@@ -1,0 +1,101 @@
+GENERAL: Arminius
+ROLE: Unknown
+InTavern=true
+
+Leadership: 115 (8.73)
+Attack: 113 (8.42)
+Defense: 107 (8.52)
+Politics: 109 (9.06)
+
+==============================
+BASE SKILL | Germanic Hero
+==============================
+EnemyGroundTroopHPPct -10
+EnemyMountedTroopHPPct -10
+EnemyRangedTroopAttackPct -15
+EnemySiegeMachineAttackPct -15
+Condition: When General is leading the army
+
+==============================
+ASCENSION 1
+==============================
+EnemyGroundTroopHPPct -10
+EnemyMountedTroopHPPct -10
+
+==============================
+ASCENSION 2
+==============================
+EnemyGroundTroopDefensePct -5
+EnemyMountedTroopDefensePct -5
+When General is the Mayor:
+    SubCityDeathToSurvivalRatePct +10
+
+==============================
+ASCENSION 3
+==============================
+EnemyGroundTroopDefensePct -5
+EnemyMountedTroopDefensePct -5
+When General is the Mayor:
+    SubCityTrainingSpeedPct +20
+
+==============================
+ASCENSION 4
+==============================
+EnemyRangedTroopDefensePct -15
+EnemyRangedTroopHPPct -15
+EnemySiegeMachineDefensePct -15
+EnemySiegeMachineHPPct -15
+
+==============================
+ASCENSION 5
+==============================
+EnemyRangedTroopAttackPct -10
+EnemyRangedTroopHPPct -10
+EnemySiegeMachineAttackPct -10
+EnemySiegeMachineHPPct -10
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Ranged Troop Assault
+SPECIALTY 1 L5CompletedTotal:
+RangedAttackPct +10
+RangedHPPct +10
+
+# SPECIALTY 2 | Snipe
+SPECIALTY 2 L5CompletedTotal:
+EnemyTroopAttackPct -10
+
+# SPECIALTY 3 | Iron Warrior
+SPECIALTY 3 L5CompletedTotal:
+EnemyWoundedToDeathWhenAttackingPct +10
+
+# SPECIALTY 4 | Battle of the Teutoburg Forest
+SPECIALTY 4 L5CompletedTotal:
+EnemyGroundTroopHPPct -30
+EnemyMountedTroopHPPct -30
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - EnemyGroundTroopHPPct
+# - EnemyMountedTroopHPPct
+# - EnemyRangedTroopAttackPct
+# - EnemySiegeMachineAttackPct
+# - EnemyGroundTroopDefensePct
+# - EnemyMountedTroopDefensePct
+# - SubCityDeathToSurvivalRatePct
+# - SubCityTrainingSpeedPct
+# - EnemyRangedTroopDefensePct
+# - EnemyRangedTroopHPPct
+# - EnemySiegeMachineDefensePct
+# - EnemySiegeMachineHPPct
+# - EnemyTroopAttackPct
+# - EnemyWoundedToDeathWhenAttackingPct

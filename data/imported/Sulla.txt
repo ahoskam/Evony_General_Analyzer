@@ -1,0 +1,96 @@
+GENERAL: Sulla
+ROLE: Duty
+IN_TAVERN: false
+
+Leadership: 121 (9.02)
+Attack: 116 (8.92)
+Defense: 107 (8.65)
+Politics: 114 (8.79)
+
+BASE SKILL | Military Dictatorship
+RangedTroopAttackPct +15
+RangedTroopDefensePct +10
+RangedTroopHPPct +10
+
+ASCENSION 1
+InCityTroopsDefensePct +15
+InCityTroopsHPPct +15
+
+ASCENSION 2
+InCityTroopsDefensePct +25
+RangedTrainingSpeedPct +30
+
+ASCENSION 3
+InCityTroopsHPPct +25
+RangedTrainingCapacityPct +30
+
+ASCENSION 4
+InCityTroopsDefensePct +25
+InCityTroopsHPPct +25
+
+ASCENSION 5
+RangedTroopAttackPct +10
+RangedTroopDefensePct +20
+RangedTroopHPPct +20
+
+SPECIALTY 1 L5:
+RangedTroopAttackPct +10
+RangedTroopDefensePct +10
+
+SPECIALTY 2 L5:
+RangedTroopAttackPct +10
+SiegeMachineAttackPct +10
+
+SPECIALTY 3 L5:
+RangedTrainingSpeedPct +20
+RangedTrainingCapacityPct +20
+
+SPECIALTY 4 L5:
+RangedTrainingSpeedPct +30
+RangedTroopAttackPct +20
+
+# None available (locked or not shown)
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Military Dictatorship
+Increases ranged troops' attack by 15% and ranged troops' defense and HP by 10% when General is the Archer Camp Officer.
+
+# ASCENSION_1_TEXT:
+When General is the Archer Camp Officer, In-city Troops Defense +15% and HP +15%
+
+# ASCENSION_2_TEXT:
+When General is the Archer Camp Officer, In-city Troops Defense +25%, Ranged Troop Training Speed +30%
+
+# ASCENSION_3_TEXT:
+When General is the Archer Camp Officer, In-city Troops HP +25%, Ranged Troop Training Capacity +30%
+
+# ASCENSION_4_TEXT:
+When General is the Archer Camp Officer, In-city Troops Defense +25% and HP +25%
+
+# ASCENSION_5_TEXT:
+When General is the Archer Camp Officer, Ranged Troop Attack +10%, Defense and HP +20%
+
+# SPECIALTY_1_L5_TEXT:
+Ranged Troop Formation(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Sage(Max Level Attributes)
+Applied to Archer Camp Officer
+Ranged Troop Training Speed +20%
+Ranged Troop Training Capacity +20%
+
+# SPECIALTY_4_L5_TEXT:
+Battle of Orchomenus(Max Level Attributes)
+Applied to Archer Camp Officer
+Ranged Troop Training Speed +30%
+Ranged Troop Attack +20%

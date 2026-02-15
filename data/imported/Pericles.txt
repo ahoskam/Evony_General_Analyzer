@@ -1,0 +1,95 @@
+GENERAL: Pericles
+ROLE: Duty
+IN_TAVERN: false
+
+Leadership: 109 (8.71)
+Attack: 120 (9.00)
+Defense: 122 (9.02)
+Politics: 108 (8.64)
+
+BASE SKILL | Archon of Athens
+HospitalCapacityPct +25
+TroopHPPct +10
+
+ASCENSION 1
+InCityRangedDefensePct +20
+InCitySiegeMachineDefensePct +20
+InCityRangedHPPct +20
+InCitySiegeHPPct +20
+
+ASCENSION 2
+HospitalCapacityPct +10
+InCityGroundHPPct +20
+InCityMountedHPPct +20
+
+ASCENSION 3
+HealingSpeedPct +15
+InCityGroundDefensePct +20
+InCityMountedDefensePct +20
+
+ASCENSION 4
+InCityTroopAttackPct +10
+InCityTroopHPPct +25
+
+ASCENSION 5
+InCityTroopAttackPct +15
+InCityTroopsDefensePct +25
+
+SPECIALTY 1 L5:
+SiegeMachineHPPct +10
+SiegeMachineDefensePct +10
+
+SPECIALTY 2 L5:
+EnemyTroopDefensePct -10
+
+SPECIALTY 3 L5:
+HealingSpeedPct +20
+
+SPECIALTY 4 L5:
+HealingSpeedPct +30
+InCityTroopDefensePct +10
+
+# None available (locked or not shown)
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Archon of Athens
+Increases hospital capacity by 25% and troops' HP by 10% when General is the hospital officer.
+
+# ASCENSION_1_TEXT:
+When General is the Hospital Officer, In-city Ranged Troop and Siege Machine Defense +20% and HP +20%
+
+# ASCENSION_2_TEXT:
+When General is the Hospital Officer, Hospital Capacity +10%, In-city Ground Troop and Mounted Troop HP +20%
+
+# ASCENSION_3_TEXT:
+When General is the Hospital Officer, Healing Speed +15%, In-city Ground Troop and Mounted Troop Defense +20%
+
+# ASCENSION_4_TEXT:
+When General is the Hospital Officer, In-City Troops Attack +10% and HP +25%
+
+# ASCENSION_5_TEXT:
+When General is the Hospital Officer, In-City Troops Attack +15% and Defense +25%
+
+# SPECIALTY_1_L5_TEXT:
+Siege Machine Defense(Max Level Attributes)
+Siege Machine HP +10%
+Siege Machine Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Sabotage(Max Level Attributes)
+Enemy Troop Defense -10%
+
+# SPECIALTY_3_L5_TEXT:
+Sage(Max Level Attributes)
+Applied to Hospital Officer
+Healing Speed +20%
+
+# SPECIALTY_4_L5_TEXT:
+Age of Pericles(Max Level Attributes)
+Applied to Hospital Officer
+Healing Speed +30%
+In-City Troop Defense +10%

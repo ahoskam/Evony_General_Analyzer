@@ -1,0 +1,133 @@
+GENERAL: Sappho
+ROLE: Unknown
+IN_TAVERN: false
+
+Leadership: 111 (8.70)
+Attack: 102 (8.29)
+Defense: 104 (8.23)
+Politics: 123 (9.31)
+
+BASE SKILL | The Tenth Muse
+FreeConstructionSpeedUpTimeFlat +25
+MarchSpeedPct +10
+ConstructionSpeedPct +10
+
+ASCENSION 1
+ConstructionSpeedPct +2
+FreeConstructionSpeedUpTimeFlat +15
+InCityTroopAttackPct +10
+
+ASCENSION 2
+ConstructionSpeedPct +2
+HospitalCapacityPct +20
+
+ASCENSION 3
+ConstructionSpeedPct +2
+FreeConstructionSpeedUpTimeFlat +15
+InCityGroundTroopDefensePct +15
+InCityGroundTroopHPPct +15
+InCityMountedTroopDefensePct +15
+InCityMountedTroopHPPct +15
+
+ASCENSION 4
+ConstructionSpeedPct +2
+InCityRangedTroopAttackPct +10
+InCitySiegeMachineAttackPct +10
+InCityGroundTroopHPPct +10
+InCityMountedTroopHPPct +10
+
+ASCENSION 5
+ConstructionSpeedPct +2
+InCityRangedTroopAttackPct +15
+InCitySiegeMachineAttackPct +15
+HealingSpeedPct +15
+
+SPECIALTY 1 L5:
+GroundHPPct +10
+GroundDefensePct +10
+
+SPECIALTY 2 L5:
+GroundAttackPct +10
+MountedTroopAttackPct +10
+
+SPECIALTY 3 L5:
+AllTroopsAttackPct +6
+
+SPECIALTY 4 L5:
+SiegeMachineAttackPct +30
+SiegeMachineDefensePct +20
+
+# None available (locked or not shown)
+
+NEW STAT KEYS NOTE:
+- ConstructionSpeedPct
+- FreeConstructionSpeedUpTimeFlat
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+The Tenth Muse
+Increases the Free Construction Speed Up Time by 25 minutes, March Speed by 10% and Construction Speed by 10% when you own the General.
+
+# ASCENSION_1_TEXT:
+Increases the Construction Speed by 2% and the Free Construction Speed Up Time by 15 minutes when you own the General.
+Increases in-city troops' attack by 10% when General is the Main City Defense General.
+
+# ASCENSION_2_TEXT:
+When you own the General,
+Construction Speed +2%; when
+General is the Main City Defense
+General, Hospital Capacity +20%
+
+# ASCENSION_3_TEXT:
+Increases the Construction Speed
+by 2% and the Free Construction
+Speed Up Time by 15 minutes
+when you own the General.
+Increases in-city ground troops and
+mounted troops' defense and HP by
+15% when General is the Main City
+Defense General.
+
+# ASCENSION_4_TEXT:
+When you own the General,
+Construction Speed +2%; when
+General is the Main City Defense
+General, In-city Ranged Troop and
+Siege Machine Attack +10%, In-city
+Ground Troop and Mounted Troop
+HP +10%
+
+# ASCENSION_5_TEXT:
+When you own the General,
+Construction Speed +2%; when
+General is the Main City Defense
+General, In-city Ranged Troop and
+Siege Machine Attack +15%,
+Healing Speed +15%
+
+# SPECIALTY_1_L5_TEXT:
+Ground Troop
+Defense(Max Level
+Attributes)
+Ground Troop HP +10%
+Ground Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Formation(Max Level
+Attributes)
+Ground Troop and Mounted
+Troop Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+War God(Max Level
+Attributes)
+All Troops Attack +6%
+
+# SPECIALTY_4_L5_TEXT:
+Sappho’s Metre(Max
+Level Attributes)
+Siege Machine Attack +30%
+Siege Machine Defense +20%

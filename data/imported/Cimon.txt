@@ -1,0 +1,123 @@
+GENERAL: Cimon
+ROLE: Unknown
+IN_TAVERN: false
+BASE SKILL | Delian League
+
+Leadership: 128 (9.01)
+Attack: 106 (8.12)
+Defense: 130 (9.22)
+Politics: 115 (8.65)
+
+BASE SKILL | Delian League
+EnemyRangedTroopAttackPct -40
+EnemySiegeMachineAttackPct -40
+EnemySiegeMachineDefensePct -30
+EnemySiegeMachineHPPct -30
+
+ASCENSION 1
+EnemyGroundTroopAttackPct -10
+EnemyMountedTroopAttackPct -10
+EnemyGroundTroopDefensePct -10
+EnemyMountedTroopDefensePct -10
+EnemyGroundTroopHPPct -10
+EnemyMountedTroopHPPct -10
+
+ASCENSION 2
+EnemyGroundTroopDefensePct -20
+EnemyMountedTroopDefensePct -20
+WhenGeneralIsTheMayor_SubCityDeathIntoSurvivalRatePct +10
+
+ASCENSION 3
+EnemyTroopAttackPct -10
+EnemyTroopDefensePct -10
+
+ASCENSION 4
+EnemyRangedTroopAttackPct -15
+EnemySiegeMachineAttackPct -15
+EnemyRangedTroopDefensePct -15
+EnemySiegeMachineDefensePct -15
+EnemyRangedTroopHPPct -15
+EnemySiegeMachineHPPct -15
+
+ASCENSION 5
+EnemySiegeMachineAttackPct -10
+EnemySiegeMachineDefensePct -10
+EnemySiegeMachineHPPct -10
+
+SPECIALTY 1 L5:
+GroundHPPct +10
+GroundDefensePct +10
+
+SPECIALTY 2 L5:
+EnemyTroopAttackPct -10
+
+SPECIALTY 3 L5:
+AttackingTroopDeathToWoundedRatePct +10
+
+SPECIALTY 4 L5:
+EnemyRangedTroopAttackPct -25
+EnemySiegeMachineAttackPct -25
+EnemyRangedTroopDefensePct -20
+EnemySiegeMachineDefensePct -20
+EnemyRangedTroopHPPct -20
+EnemySiegeMachineHPPct -20
+
+COVENANT | War
+# None available (locked)
+
+COVENANT | Cooperation
+# None available (locked)
+
+COVENANT | Peace
+# None available (locked)
+
+COVENANT | Faith
+# None available (locked)
+
+COVENANT | Honor
+# None available (locked)
+
+COVENANT | Civilization
+# None available (locked)
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Delian League
+Reduces enemy ranged troops and siege machines' attack by 40% and enemy siege machines' defense and HP by 30% when General is leading the army.
+
+# ASCENSION_1_TEXT:
+Enemy Ground Troop and Mounted Troop Attack -10%, Defense and HP -10%
+
+# ASCENSION_2_TEXT:
+Enemy Ground Troop and Mounted Troop Defense -20%; when General is the Mayor, Death into Survival Rate in this Subordinate City +10%
+
+# ASCENSION_3_TEXT:
+Enemy Troop Attack -10% and Defense -10%
+
+# ASCENSION_4_TEXT:
+Enemy Ranged Troop and Siege Machine Attack -15%, Defense and HP -15%
+
+# ASCENSION_5_TEXT:
+Enemy Siege Machine Attack -10%, Defense and HP -10%
+
+# SPECIALTY_1_L5_TEXT:
+Ground Troop Defense(Max Level Attributes)
+Ground Troop HP +10%
+Ground Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Snipe(Max Level Attributes)
+Enemy Troop Attack -10%
+
+# SPECIALTY_3_L5_TEXT:
+Unparalleled Leader(Max Level Attributes)
+The death-turning-wounded rate of troops when they are attacking. +10%
+
+# SPECIALTY_4_L5_TEXT:
+Ten Strategoi(Max Level Attributes)
+Enemy Ranged Troop and Siege Machine Attack -25%
+Enemy Ranged Troop and Siege Machine Defense -20%
+Enemy Ranged Troop and Siege Machine HP -20%

@@ -1,0 +1,105 @@
+GENERAL: Visconti
+ROLE: Ranged
+IN_TAVERN: false
+
+Leadership: 129 (9.01)
+Attack: 133 (9.36)
+Defense: 123 (8.54)
+Politics: 117 (8.22)
+
+BASE SKILL | Serpent of Milan
+RangedTroopAttackPct +60
+RangedTroopDefensePct +60
+RangedTroopHPPct +45
+
+SPECIALTY 1 L5:
+RangedTroopDefensePct +15
+RangedTroopHPPct +15
+
+SPECIALTY 2 L5:
+AttackingTroopDeathToWoundedRatePct +8
+
+SPECIALTY 3 L5:
+RangedTroopAttackPct +15
+RangedTroopDefensePct +15
+SiegeMachineDefensePct +15
+
+SPECIALTY 4 L5:
+RangedTroopAttackPct +15
+RangedTroopHPPct +15
+SiegeMachineAttackPct +15
+SiegeMachineHPPct +15
+
+SPECIALTY 5 L5:
+RangedTroopAttackPct +30
+RangedTroopDefensePct +30
+MarchSizeCapacityPct +8
+
+COVENANT | War
+RangedTroopAttackPct +5
+
+COVENANT | Cooperation
+RangedTrainingSpeedPct +10
+
+COVENANT | Peace
+RangedTroopHPPct +10
+
+COVENANT | Faith
+RangedTroopDefensePct +15
+InRallyRangedAttackPct +5
+
+COVENANT | Honor
+AttackingRangedTroopAttackPct +15
+
+COVENANT | Civilization
+AttackingRangedTroopHPPct +10
+MarchSizeCapacityPct +10
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Serpent of Milan
+Increases ranged troops' attack and defense by 60% and ranged troops' HP by 45% when General is leading the army.
+
+# SPECIALTY_1_L5_TEXT:
+Ranged Troop Defense and HP +15%
+
+# SPECIALTY_2_L5_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# SPECIALTY_3_L5_TEXT:
+Ranged Troop Attack +15%, Ranged Troop and Siege Machine Defense +15%
+
+# SPECIALTY_4_L5_TEXT:
+Ranged Troop and Siege Machine Attack and HP +15%
+
+# SPECIALTY_5_L5_TEXT:
+Ranged Troop Attack and Defense +30%, March Size Capacity +8%
+
+# COVENANT_WAR_TEXT:
+War Covenant
+Ranged Troop Attack +5%
+
+# COVENANT_COOPERATION_TEXT:
+Cooperation Covenant
+Ranged Troop Training Speed +10%
+
+# COVENANT_PEACE_TEXT:
+Peace Covenant
+Ranged Troop HP +10%
+
+# COVENANT_FAITH_TEXT:
+Faith Covenant
+Ranged Troop Defense +15%
+In-Rally Ranged Troop Attack +5%
+
+# COVENANT_HONOR_TEXT:
+Honor Covenant
+Attacking Ranged Troop Attack +15%
+
+# COVENANT_CIVILIZATION_TEXT:
+Civilization Covenant
+Attacking Ranged Troop HP +10%
+March Size Capacity +10%

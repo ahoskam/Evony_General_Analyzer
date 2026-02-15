@@ -1,0 +1,145 @@
+GENERAL: Louis II
+ROLE: Ground
+IN_TAVERN: false
+
+Leadership: 129 (8.90)
+Attack: 129 (8.90)
+Defense: 127 (8.68)
+Politics: 112 (8.38)
+
+BASE SKILL | Liberator of Bari
+AttackingGroundAttackPct +55
+AttackingGroundHPPct +55
+AttackingGroundDefensePct +40
+
+ASCENSION 1
+AttackingGroundAttackPct +15
+AttackingGroundDefensePct +10
+AttackingGroundHPPct +10
+
+ASCENSION 2
+AttackingTroopDeathToWoundedRatePct +8
+
+ASCENSION 3
+AttackingGroundAttackPct +25
+AttackingGroundDefensePct +25
+AttackingMountedDefensePct +25
+
+ASCENSION 4
+AttackingMountedHPPct +25
+AttackingGroundHPPct +25
+MarchSizeCapacityPct +10
+
+ASCENSION 5
+AttackingMountedAttackPct +40
+AttackingGroundAttackPct +40
+AttackingGroundDefensePct +25
+AttackingGroundHPPct +25
+
+SPECIALTY 1 L5:
+GroundHPPct +10
+GroundDefensePct +10
+
+SPECIALTY 2 L5:
+GroundAttackPct +10
+MountedAttackPct +10
+
+SPECIALTY 3 L5:
+GroundAttackPct +10
+GroundHPPct +10
+GroundDefensePct +10
+
+SPECIALTY 4 L5:
+AttackingGroundAttackPct +50
+AttackingGroundDefensePct +40
+AttackingGroundHPPct +40
+
+COVENANT | War
+AttackingGroundDefensePct +10
+
+COVENANT | Cooperation
+GroundTroopTrainingCapacityPct +10
+
+COVENANT | Peace
+GroundAttackPct +10
+
+COVENANT | Faith
+GroundDefensePct +10
+AttackingGroundAttackPct +5
+
+COVENANT | Honor
+InRallyGroundAttackPct +10
+
+COVENANT | Civilization
+AttackingGroundHPPct +10
+MarchSizeCapacityPct +8
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Liberator of Bari
+Increases ground troops' attack and HP by 55% and ground troops' defense by 40% when General is leading the army to attack.
+
+# ASCENSION_1_TEXT:
+Attacking Ground Troop Attack +15%, Defense and HP +10%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+Attacking Ground Troop Attack +25%, Attacking Ground Troop and Mounted Troop Defense +25%
+
+# ASCENSION_4_TEXT:
+Attacking Mounted Troop and Ground Troop HP +25%, March Size Capacity +10%
+
+# ASCENSION_5_TEXT:
+Attacking Mounted Troop and Ground Troop Attack +40%, Attacking Ground Troop Defense and HP +25%
+
+# SPECIALTY_1_L5_TEXT:
+Ground Troop Defense(Max Level Attributes)
+Ground Troop HP +10%
+Ground Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Formation(Max Level Attributes)
+Ground Troop and Mounted Troop Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Ground Troop Ares(Max Level Attributes)
+Ground Troop Attack +10%
+Ground Troop HP +10%
+Ground Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Emperor of Italy(Max Level Attributes)
+Attacking Ground Troop Attack +50%
+Attacking Ground Troop Defense +40%
+Attacking Ground Troop HP +40%
+
+# COVENANT_War_TEXT:
+War Covenant
+Attacking Ground Troop Defense +10%
+
+# COVENANT_Cooperation_TEXT:
+Cooperation Covenant
+Ground Troop Training Capacity +10%
+
+# COVENANT_Peace_TEXT:
+Peace Covenant
+Ground Troop Attack +10%
+
+# COVENANT_Faith_TEXT:
+Faith Covenant
+Ground Troop Defense +10%
+Attacking Ground Troop Attack +5%
+
+# COVENANT_Honor_TEXT:
+Honor Covenant
+In-Rally Ground Troop Attack +10%
+
+# COVENANT_Civilization_TEXT:
+Civilization Covenant
+Attacking Ground Troop HP +10%
+March Size Capacity +8%

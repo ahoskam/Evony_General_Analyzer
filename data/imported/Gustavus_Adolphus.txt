@@ -1,0 +1,88 @@
+GENERAL: Gustavus Adolphus
+ROLE: Unknown
+Leadership: 106 (8.98)
+Attack: 115 (8.69)
+Defense: 95 (8.28)
+Politics: 110 (8.51)
+
+==============================
+BASE SKILL | Fire Suppression
+==============================
+Reduces enemy ranged troops and siege machines' defense by 15% and increases your ranged troops and siege machines' attack by 15% when General is leading the army.
+EnemyRangedDefensePct -15
+EnemySiegeMachineDefensePct -15
+RangedAttackPct +15
+SiegeMachineAttackPct +15
+
+==============================
+ASCENSION 1
+==============================
+EnemyRangedTroopAndSiegeMachineHPPct -15
+
+==============================
+ASCENSION 2
+==============================
+AttackingTroopDeathToWoundedRatePct +8
+
+==============================
+ASCENSION 3
+==============================
+MarchSizeCapacityPct +10
+
+==============================
+ASCENSION 4
+==============================
+RangedAttackPct +10
+SiegeMachineAttackPct +10
+
+==============================
+ASCENSION 5
+==============================
+RangedAttackPct +15
+SiegeMachineAttackPct +15
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Siege Machine Assault
+SPECIALTY 1 L5CompletedTotal:
+SiegeMachineAttackPct +10
+SiegeMachineHPPct +10
+
+# SPECIALTY 2 | Bash
+SPECIALTY 2 L5CompletedTotal:
+RangedAttackPct +10
+SiegeMachineAttackPct +10
+
+# SPECIALTY 3 | Siege Machine Ares
+SPECIALTY 3 L5CompletedTotal:
+SiegeMachineAttackPct +10
+SiegeMachineHPPct +10
+SiegeMachineDefensePct +10
+
+# SPECIALTY 4 | Battle of Bradfield
+SPECIALTY 4 L5CompletedTotal:
+AttackingSiegeMachineAttackPct +16
+AttackingRangedAttackPct +16
+AttackingRangedHPPct +16
+AttackingSiegeMachineHPPct +16
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - EnemyRangedTroopAndSiegeMachineHPPct | Enemy Ranged Troop and Siege Machine HP
+# - MarchSizeCapacityPct | March Size Capacity
+# - AttackingTroopDeathToWoundedRatePct | Attacking Troop Death into Wounded Rate
+# - AttackingSiegeMachineAttackPct | Attacking Siege Machine Attack
+# - AttackingRangedAttackPct | Attacking Ranged Troop Attack
+# - AttackingRangedHPPct | Attacking Ranged Troop HP
+# - AttackingSiegeMachineHPPct | Attacking Siege Machine HP
+
+InTavern=true

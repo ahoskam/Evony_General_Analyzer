@@ -1,0 +1,200 @@
+GENERAL: Artemisia I
+ROLE: Ranged
+IN_TAVERN: false
+
+Leadership: 127 (8.63)
+Attack: 129 (9.86)
+Defense: 126 (8.68)
+Politics: 115 (8.50)
+
+BASE SKILL | Queen of Caria
+AttackingRangedTroopAttackPct +55
+AttackingRangedTroopDefensePct +55
+AttackingRangedTroopHPPct +35
+
+ASCENSION 1
+AttackingRangedTroopAttackPct +10
+AttackingRangedTroopDefensePct +15
+
+ASCENSION 2
+AttackingTroopDeathToWoundedRatePct +8
+
+ASCENSION 3
+AttackingRangedTroopAttackPct +25
+AttackingSiegeMachineAttackPct +25
+MarchSizeCapacityPct +10
+
+ASCENSION 4
+AttackingRangedTroopHPPct +25
+AttackingRangedTroopDefensePct +25
+AttackingSiegeMachineHPPct +25
+AttackingSiegeMachineDefensePct +25
+
+ASCENSION 5
+AttackingRangedTroopAttackPct +40
+AttackingRangedTroopHPPct +40
+WhenLaunchingAllianceWarRallyCapacityPct +8
+
+SPECIALTY 1 L1:
+RangedTroopAttackPct +1
+RangedTroopHPPct +1
+SPECIALTY 1 L2:
+RangedTroopAttackPct +1
+RangedTroopHPPct +1
+SPECIALTY 1 L3:
+RangedTroopAttackPct +2
+RangedTroopHPPct +2
+SPECIALTY 1 L4:
+RangedTroopAttackPct +2
+RangedTroopHPPct +2
+SPECIALTY 1 L5:
+RangedTroopAttackPct +4
+RangedTroopHPPct +4
+
+SPECIALTY 2 L1:
+RangedTroopAttackPct +1
+SiegeMachineAttackPct +1
+SPECIALTY 2 L2:
+RangedTroopAttackPct +1
+SiegeMachineAttackPct +1
+SPECIALTY 2 L3:
+RangedTroopAttackPct +2
+SiegeMachineAttackPct +2
+SPECIALTY 2 L4:
+RangedTroopAttackPct +2
+SiegeMachineAttackPct +2
+SPECIALTY 2 L5:
+RangedTroopAttackPct +4
+SiegeMachineAttackPct +4
+
+SPECIALTY 3 L1:
+RangedTroopAttackPct +1
+RangedTroopHPPct +1
+RangedTroopDefensePct +1
+SPECIALTY 3 L2:
+RangedTroopAttackPct +1
+RangedTroopHPPct +1
+RangedTroopDefensePct +1
+SPECIALTY 3 L3:
+RangedTroopAttackPct +2
+RangedTroopHPPct +2
+RangedTroopDefensePct +2
+SPECIALTY 3 L4:
+RangedTroopAttackPct +2
+RangedTroopHPPct +2
+RangedTroopDefensePct +2
+SPECIALTY 3 L5:
+RangedTroopAttackPct +4
+RangedTroopHPPct +4
+RangedTroopDefensePct +4
+
+SPECIALTY 4 L1:
+AttackingRangedTroopAttackPct +10
+AttackingSiegeMachineAttackPct +6
+AttackingRangedTroopDefensePct +6
+SPECIALTY 4 L2:
+AttackingRangedTroopAttackPct +10
+AttackingSiegeMachineAttackPct +6
+AttackingRangedTroopDefensePct +6
+SPECIALTY 4 L3:
+AttackingRangedTroopAttackPct +10
+AttackingSiegeMachineAttackPct +6
+AttackingRangedTroopDefensePct +6
+SPECIALTY 4 L4:
+AttackingRangedTroopAttackPct +10
+AttackingSiegeMachineAttackPct +6
+AttackingRangedTroopDefensePct +6
+SPECIALTY 4 L5:
+AttackingRangedTroopAttackPct +10
+AttackingSiegeMachineAttackPct +6
+AttackingRangedTroopDefensePct +6
+
+COVENANT | War
+AttackingRangedTroopDefensePct +10
+
+COVENANT | Cooperation
+RangedTrainingCapacityPct +10
+
+COVENANT | Peace
+InRallyRangedAttackPct +10
+
+COVENANT | Faith
+AttackingRangedTroopHPPct +10
+AttackingRangedTroopAttackPct +5
+
+COVENANT | Honor
+MarchSizeCapacityPct +8
+
+COVENANT | Civilization
+AttackingRangedTroopAttackPct +10
+InRallyRangedTroopHPPct +10
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Queen of Caria
+Increases ranged troops' attack and defense by 55% and HP by 35% when General is leading the army to attack.
+
+# ASCENSION_1_TEXT:
+Attacking Ranged Troop Attack +10% and Defense +15%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+Attacking Ranged Troop and Siege Machine Attack +25%, March Size Capacity +10%
+
+# ASCENSION_4_TEXT:
+Attacking Ranged Troop and Siege Machine HP +25% and Defense +25%
+
+# ASCENSION_5_TEXT:
+Attacking Ranged Troop Attack and HP +40%; When General is launching Alliance War, Rally Capacity +8%
+
+# SPECIALTY_1_L5_TEXT:
+Ranged Troop Assault(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop HP +10%
+
+# SPECIALTY_2_L5_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Ranged Troop Ares(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop HP +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Conquest of Kos(Max Level Attributes)
+Attacking Ranged Troop Attack +50%
+Attacking Siege Machine and Ranged Troop Defense +30%
+Attacking Ranged Troop and Siege Machine HP +30%
+
+# COVENANT_WAR_TEXT:
+War Covenant
+Attacking Ranged Troop Defense +10%
+
+# COVENANT_COOPERATION_TEXT:
+Cooperation Covenant
+Ranged Troop Training Capacity +10%
+
+# COVENANT_PEACE_TEXT:
+Peace Covenant
+In-Rally Ranged Troop Attack +10%
+
+# COVENANT_FAITH_TEXT:
+Faith Covenant
+Attacking Ranged Troop HP +10%
+Attacking Ranged Troop Attack +5%
+
+# COVENANT_HONOR_TEXT:
+Honor Covenant
+March Size Capacity +8%
+
+# COVENANT_CIVILIZATION_TEXT:
+Civilization Covenant
+Attacking Ranged Troop Attack +10%
+In-Rally Ranged Troop HP +10%

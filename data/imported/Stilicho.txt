@@ -1,0 +1,112 @@
+GENERAL: Stilicho
+ROLE: Duty
+IN_TAVERN: false
+
+Leadership: 112 (8.71)
+Attack: 115 (8.75)
+Defense: 113 (8.71)
+Politics: 120 (9.15)
+
+BASE SKILL | Shield of Rome
+MountedTroopAttackPct +15
+MountedTroopDefensePct +10
+MountedTroopHPPct +10
+
+ASCENSION 1
+InCityTroopsDefensePct +15
+InCityTroopsHPPct +15
+
+ASCENSION 2
+MountedTroopTrainingSpeedPct +30
+EnemyTroopDefensePct -15
+
+ASCENSION 3
+MountedTroopTrainingCapacityPct +30
+EnemyTroopHPPct -15
+
+ASCENSION 4
+InCityTroopsDefensePct +25
+InCityTroopsHPPct +25
+
+ASCENSION 5
+MountedTroopAttackPct +15
+MountedTroopDefensePct +15
+MountedTroopHPPct +15
+
+SPECIALTY 1 L5:
+MountedTroopHPPct +10
+MountedTroopDefensePct +10
+
+SPECIALTY 2 L5:
+GroundAttackPct +10
+MountedAttackPct +10
+
+SPECIALTY 3 L5:
+MountedTroopTrainingSpeedPct +20
+MountedTroopTrainingCapacityPct +20
+
+SPECIALTY 4 L5:
+MountedTroopTrainingSpeedPct +30
+MountedTroopAttackPct +20
+
+COVENANT | War
+# None available (locked)
+
+COVENANT | Cooperation
+# None available (locked)
+
+COVENANT | Peace
+# None available (locked)
+
+COVENANT | Faith
+# None available (locked)
+
+COVENANT | Honor
+# None available (locked)
+
+COVENANT | Civilization
+# None available (locked)
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Shield of Rome
+Increases mounted troops' attack by 15% and mounted troops' defense and HP by 10% when General is the Stables Officer.
+
+# ASCENSION_1_TEXT:
+When General is the Stables Officer, In-city Troops Defense +15% and HP +15%
+
+# ASCENSION_2_TEXT:
+When General is the Stables Officer, Mounted Troop Training Speed +30%, Enemy Troop Defense -15%
+
+# ASCENSION_3_TEXT:
+When General is the Stables Officer, Mounted Troop Training Capacity +30%, Enemy Troop HP -15%
+
+# ASCENSION_4_TEXT:
+When General is the Stables Officer, In-city Troops Defense +25% and HP +25%
+
+# ASCENSION_5_TEXT:
+When General is the Stables Officer, Mounted Troop Attack +15%, Defense and HP +15%
+
+# SPECIALTY_1_L5_TEXT:
+Mounted Troop Defense(Max Level Attributes)
+Mounted Troop HP +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Formation(Max Level Attributes)
+Ground Troop and Mounted Troop Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Sage(Max Level Attributes)
+Applied to Stables Officer
+Mounted Troop Training Speed +20%
+Mounted Troop Training Capacity +20%
+
+# SPECIALTY_4_L5_TEXT:
+Imperial Commander(Max Level Attributes)
+Applied to Stables Officer
+Mounted Troop Training Speed +30%
+Mounted Troop Attack +20%

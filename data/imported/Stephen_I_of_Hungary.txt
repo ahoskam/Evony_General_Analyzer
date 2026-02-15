@@ -1,0 +1,142 @@
+GENERAL: Stephen I of Hungary
+ROLE: Mounted
+IN_TAVERN: false
+
+Leadership: 128 (8.96)
+Attack: 133 (9.41)
+Defense: 123 (8.66)
+Politics: 118 (8.11)
+
+BASE SKILL | Saint Stephen
+MountedAttackPct +60
+MountedHPPct +60
+AttackingMountedDefensePct +45
+
+ASCENSION 1
+AttackingMountedDefensePct +15
+AttackingMountedHPPct +15
+
+ASCENSION 2
+AttackingTroopDeathToWoundedRatePct +8
+
+ASCENSION 3
+AttackingMountedAttackPct +25
+AttackingGroundDefensePct +25
+
+ASCENSION 4
+AttackingGroundAttackPct +20
+AttackingMountedAttackPct +20
+MarchSizeCapacityPct +10
+
+ASCENSION 5
+AttackingMountedAttackPct +40
+AttackingMountedDefensePct +40
+AttackingMountedHPPct +40
+
+SPECIALTY 1 L5:
+MountedAttackPct +10
+MountedDefensePct +10
+
+SPECIALTY 2 L5:
+GroundAttackPct +10
+MountedAttackPct +10
+
+SPECIALTY 3 L5:
+MountedAttackPct +10
+MountedHPPct +10
+MountedDefensePct +10
+
+SPECIALTY 4 L5:
+AttackingMountedAttackPct +50
+AttackingMountedDefensePct +35
+AttackingMountedHPPct +35
+
+COVENANT | War
+AttackingMountedAttackPct +5
+
+COVENANT | Cooperation
+MountedTroopTrainingSpeedPct +10
+
+COVENANT | Peace
+MountedAttackPct +10
+
+COVENANT | Faith
+AttackingMountedDefensePct +10
+MountedHPPct +5
+
+COVENANT | Honor
+InRallyMountedAttackPct +10
+
+COVENANT | Civilization
+AttackingMountedHPPct +10
+MarchSizeCapacityPct +8
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Saint Stephen
+Increases mounted troops' attack and HP by 60% and increases mounted troops' defense by 45% when General is leading the army to attack.
+
+# ASCENSION_1_TEXT:
+Attacking Mounted Troop Defense and HP +15%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+Attacking Mounted Troop Attack +25%, Attacking Ground Troop and Mounted Troop Defense +25%
+
+# ASCENSION_4_TEXT:
+Attacking Ground Troop and Mounted Troop Attack +20%, March Size Capacity +10%
+
+# ASCENSION_5_TEXT:
+Attacking Mounted Troop Attack, Defense and HP +40%
+
+# SPECIALTY_1_L5_TEXT:
+Mounted Troop Formation(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Formation(Max Level Attributes)
+Ground Troop and Mounted Troop Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Mounted Troop Ares(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop HP +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Battle of Veszprém(Max Level Attributes)
+Attacking Mounted Troop Attack +50%
+Attacking Mounted Troop Defense +35%
+Attacking Mounted Troop HP +35%
+
+# COVENANT_War_TEXT:
+War Covenant
+Attacking Mounted Troop Attack +5%
+
+# COVENANT_Cooperation_TEXT:
+Cooperation Covenant
+Mounted Troop Training Speed +10%
+
+# COVENANT_Peace_TEXT:
+Peace Covenant
+Mounted Troop Attack +10%
+
+# COVENANT_Faith_TEXT:
+Faith Covenant
+Attacking Mounted Troop Defense +10%
+Mounted Troop HP +5%
+
+# COVENANT_Honor_TEXT:
+Honor Covenant
+In-Rally Mounted Troop Attack +10%
+
+# COVENANT_Civilization_TEXT:
+Civilization Covenant
+Attacking Mounted Troop HP +10%
+March Size Capacity +8%

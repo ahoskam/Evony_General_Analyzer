@@ -1,0 +1,104 @@
+GENERAL: Pyrrhus
+ROLE: Unknown
+IN_TAVERN: false
+
+Leadership: 118 (9.02)
+Attack: 116 (8.92)
+Defense: 120 (8.78)
+Politics: 106 (8.69)
+
+BASE SKILL | Pyrrhic War
+GroundAttackPct +35
+GroundDefensePct +35
+GroundHPPct +15
+MountedHPPct +15
+
+ASCENSION 1
+GroundAttackPct +10
+GroundHPPct +10
+MountedHPPct +10
+
+ASCENSION 2
+AttackingTroopDeathToWoundedRatePct +10
+
+ASCENSION 3
+WhenLaunchingAllianceWarRallyCapacityPct +8
+
+ASCENSION 4
+GroundAttackPct +15
+GroundDefensePct +15
+MountedAttackPct +15
+MountedDefensePct +15
+
+ASCENSION 5
+GroundAttackPct +25
+GroundDefensePct +15
+GroundHPPct +15
+
+SPECIALTY 1 L5:
+GroundHPPct +10
+GroundDefensePct +10
+
+SPECIALTY 2 L5:
+MarchSizeCapacityPct +6
+AttackingMountedAttackPct +10
+AttackingGroundAttackPct +10
+
+SPECIALTY 3 L5:
+GroundAttackPct +10
+GroundHPPct +10
+GroundDefensePct +10
+
+SPECIALTY 4 L5:
+GroundAttackPct +35
+GroundDefensePct +15
+MountedDefensePct +15
+GroundHPPct +15
+MountedHPPct +15
+
+# None available (locked)
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Pyrrhic War
+Increases ground troops' attack and defense by 35% and ground troops and mounted troops' HP by 15% when General is leading the army.
+
+# ASCENSION_1_TEXT:
+Ground Troop Attack +10%, Ground Troop and Mounted Troop HP +10%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +10%
+
+# ASCENSION_3_TEXT:
+When General is launching Alliance War, Rally Capacity +8%
+
+# ASCENSION_4_TEXT:
+Mounted Troop and Ground Troop Attack +15% and Defense +15%
+
+# ASCENSION_5_TEXT:
+Ground Troop Attack +25%, Defense and HP +15%
+
+# SPECIALTY_1_L5_TEXT:
+Ground Troop Defense(Max Level Attributes)
+Ground Troop HP +10%
+Ground Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Annihilation(Max Level Attributes)
+March Size Capacity +6%
+Attacking Mounted Troop and Ground Troop Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Ground Troop Ares(Max Level Attributes)
+Ground Troop Attack +10%
+Ground Troop HP +10%
+Ground Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Pyrrhic Victory(Max Level Attributes)
+Ground Troop Attack +35%
+Ground Troop and Mounted Troop Defense +15%
+Ground Troop and Mounted Troop HP +15%

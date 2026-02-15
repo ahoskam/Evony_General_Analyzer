@@ -1,0 +1,95 @@
+GENERAL: Septimius Severus
+ROLE: Siege
+IN_TAVERN: false
+
+Leadership: 118 (8.92)
+Attack: 122 (9.00)
+Defense: 118 (8.95)
+Politics: 102 (8.51)
+
+BASE SKILL | Severan Dynasty
+LeadingSiegeMachineAttackPct +35
+LeadingSiegeMachineHPPct +20
+
+ASCENSION 1
+SiegeMachineAttackPct +5
+SiegeMachineDefensePct +10
+SiegeMachineHPPct +10
+
+ASCENSION 2
+AttackingTroopDeathToWoundedRatePct +8
+
+ASCENSION 3
+SiegeMachineAttackPct +10
+MarchSizeCapacityPct +4
+
+ASCENSION 4
+SiegeMachineDefensePct +25
+SiegeMachineHPPct +25
+
+ASCENSION 5
+SiegeMachineAttackPct +20
+MarchSizeCapacityPct +6
+
+SPECIALTY 1 L5:
+SiegeMachineAttackPct +10
+SiegeMachineDefensePct +10
+
+SPECIALTY 2 L5:
+MarchSizeCapacityPct +6
+AttackingSiegeMachineAndRangedTroopAttackPct +10
+
+SPECIALTY 3 L5:
+SiegeMachineAttackPct +10
+SiegeMachineHPPct +10
+SiegeMachineDefensePct +10
+
+SPECIALTY 4 L5:
+SiegeMachineAttackPct +30
+SiegeMachineDefensePct +20
+
+# None available (locked or not shown)
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Severan Dynasty
+Increases siege machines' attack by 35% and HP by 20% when General is leading the army.
+
+# ASCENSION_1_TEXT:
+Siege Machine Attack +5%, Defense and HP +10%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+Siege Machine Attack +10%, March Size Capacity +4%
+
+# ASCENSION_4_TEXT:
+Siege Machine Defense +25% and HP +25%
+
+# ASCENSION_5_TEXT:
+Siege Machine Attack +20%, March Size Capacity +6%
+
+# SPECIALTY_1_L5_TEXT:
+Siege Machine Formation(Max Level Attributes)
+Siege Machine Attack +10%
+Siege Machine Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Siege(Max Level Attributes)
+March Size Capacity +6%
+Attacking Siege Machine and Ranged Troop Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Siege Machine Ares(Max Level Attributes)
+Siege Machine Attack +10%
+Siege Machine HP +10%
+Siege Machine Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Battle of Lugdunum(Max Level Attributes)
+Siege Machine Attack +30%
+Siege Machine Defense +20%

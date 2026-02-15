@@ -1,0 +1,82 @@
+GENERAL: Charles the Great
+ROLE: Mayor
+Leadership: 118 (8.66)
+Attack: 103 (7.84)
+Defense: 100 (7.83)
+Politics: 114 (8.98)
+
+==============================
+BASE SKILL | Domination
+==============================
+GoldProductionSpeedSubordinateCityMayorPct +75
+
+==============================
+ASCENSION 1
+==============================
+EnemyRangedAttackPct -15
+EnemySiegeAttackPct -15
+
+==============================
+ASCENSION 2
+==============================
+EnemyRangedDefensePct -5
+EnemySiegeDefensePct -5
+MayorTrainingSpeedSubordinateCityPct +30
+
+==============================
+ASCENSION 3
+==============================
+EnemyRangedHPPct -5
+EnemySiegeHPPct -5
+MayorDeathToSurvivalRateSubordinateCityPct +20
+
+==============================
+ASCENSION 4
+==============================
+EnemyTroopAttackPct -10
+
+==============================
+ASCENSION 5
+==============================
+EnemyRangedAttackPct -20
+EnemyRangedDefensePct -15
+EnemyRangedHPPct -15
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Mounted Troop Formation
+SPECIALTY 1 L5CompletedTotal:
+MountedAttackPct +10
+MountedDefensePct +10
+
+# SPECIALTY 2 | Trapping
+SPECIALTY 2 L5CompletedTotal:
+MayorTrainingSpeedSubordinateCityPct +20
+MayorDeathToSurvivalRateSubordinateCityPct +6
+
+# SPECIALTY 3 | Ruler
+SPECIALTY 3 L5CompletedTotal:
+MayorTroopCapacitySubordinateCityPct +36
+
+# SPECIALTY 4 | Empire Founder
+SPECIALTY 4 L5CompletedTotal:
+MayorConstructionSpeedSubordinateCityPct +80
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - GoldProductionSpeedSubordinateCityMayorPct
+# - MayorTrainingSpeedSubordinateCityPct
+# - MayorDeathToSurvivalRateSubordinateCityPct
+# - MayorTroopCapacitySubordinateCityPct
+# - MayorConstructionSpeedSubordinateCityPct
+
+InTavern=true

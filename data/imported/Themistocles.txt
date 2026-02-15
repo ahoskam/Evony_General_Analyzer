@@ -1,0 +1,107 @@
+GENERAL: Themistocles
+ROLE: Duty
+IN_TAVERN: false
+
+Leadership: 115 (8.23)
+Attack: 135 (9.33)
+Defense: 130 (9.21)
+Politics: 108 (7.88)
+
+BASE SKILL | Themistoclean Wall
+InCityTroopsAttackPct +25
+EnemyTroopAttackPct -15
+
+ASCENSION 1
+EnemyRangedTroopAttackPct -15
+EnemyRangedTroopDefensePct -15
+EnemyRangedTroopHPPct -15
+EnemySiegeMachineAttackPct -15
+EnemySiegeMachineDefensePct -15
+EnemySiegeMachineHPPct -15
+
+ASCENSION 2
+RangedTroopDefensePct +20
+RangedTroopHPPct +20
+SiegeMachineDefensePct +20
+SiegeMachineHPPct +20
+RangedAttackPct +30
+
+ASCENSION 3
+InCityTroopsAttackPct +40
+InCityTroopsDefensePct +20
+InCityTroopsHPPct +20
+
+ASCENSION 4
+EnemyRangedTroopAttackPct -10
+EnemyRangedTroopDefensePct -10
+EnemyRangedTroopHPPct -10
+EnemySiegeMachineAttackPct -10
+EnemySiegeMachineDefensePct -10
+EnemySiegeMachineHPPct -10
+
+ASCENSION 5
+RangedTroopAttackPct +30
+RallyCapacityPct +10
+
+SPECIALTY 1 L5:
+RangedTroopAttackPct +10
+RangedTroopDefensePct +10
+
+SPECIALTY 2 L5:
+RangedTroopAttackPct +10
+SiegeMachineAttackPct +10
+
+SPECIALTY 3 L5:
+InCityRangedTroopAttackPct +10
+RangedAttackPct +100
+
+SPECIALTY 4 L5:
+InCityRangedTroopAttackPct +20
+InCitySiegeMachineAttackPct +40
+
+COVENANT
+# None available (locked or not shown)
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Themistoclean Wall
+Increases your in-city troops' attack by 25% and reduces enemy troops' attack by 15% when General is the Archer Tower Officer.
+
+# ASCENSION_1_TEXT:
+When General is the Archer Tower Officer, Enemy Ranged Troop and Siege Machine Attack -15%, Defense and HP -15%
+
+# ASCENSION_2_TEXT:
+When General is the Archer Tower Officer, Ranged Troop and Siege Machine Defense and HP +20%, Archer Tower Attack +30%
+
+# ASCENSION_3_TEXT:
+When General is the Archer Tower Officer, In-city Troops Attack +40%, Defense and HP +20%
+
+# ASCENSION_4_TEXT:
+When General is the Archer Tower Officer, Enemy Ranged Troop and Siege Machine Attack -10%, Defense and HP -10%
+
+# ASCENSION_5_TEXT:
+When General is the Archer Tower Officer, Ranged Troop Attack +30%, Rally Capacity +10%
+
+# SPECIALTY_1_L5_TEXT:
+Ranged Troop Formation(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Sage(Max Level Attributes)
+Applied to Archer Tower Officer
+In City Ranged Troop Attack +10%
+Archer Tower Attack +100%
+
+# SPECIALTY_4_L5_TEXT:
+Battle of Salamis(Max Level Attributes)
+Applied to Archer Tower Officer
+In City Ranged Troop Attack +20%
+In City Siege Machine Attack +40%

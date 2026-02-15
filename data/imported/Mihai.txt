@@ -1,0 +1,63 @@
+GENERAL: Mihai
+ROLE: Unknown
+IN_TAVERN: false
+
+Leadership: 118 (8.82)
+Attack: 120 (9.05)
+Defense: 117 (8.87)
+Politics: 106 (8.69)
+
+BASE SKILL | Battle of Șelimbăr
+AttackingRangedTroopAttackPct +45
+AttackingRangedTroopDefensePct +45
+AttackingSiegeMachineDefensePct +45
+
+# No ascensions visible in provided images
+
+SPECIALTY 1 L5:
+RangedTroopAttackPct +10
+RangedTroopHPPct +10
+
+SPECIALTY 2 L5:
+RangedTroopAttackPct +10
+SiegeMachineAttackPct +10
+
+SPECIALTY 3 L5:
+RangedTroopAttackPct +10
+RangedTroopHPPct +10
+RangedTroopDefensePct +10
+
+SPECIALTY 4 L5:
+RangedTroopAttackPct +35
+RangedTroopDefensePct +40
+
+COVENANT:
+# None available (locked or not shown)
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Battle of Șelimbăr
+Increases ranged troops' attack by 45% and ranged troops and siege machines' defense by 45% when General is leading the army to attack.
+
+# SPECIALTY_1_L5_TEXT:
+Ranged Troop Assault(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop HP +10%
+
+# SPECIALTY_2_L5_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Ranged Troop Ares(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop HP +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Romanian Ruler(Max Level Attributes)
+Ranged Troop Attack +35%
+Ranged Troop Defense +40%

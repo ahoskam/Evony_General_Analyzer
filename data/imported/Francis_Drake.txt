@@ -1,0 +1,149 @@
+GENERAL: Francis Drake
+ROLE: Siege
+IN_TAVERN: false
+
+Leadership: 125 (8.79)
+Attack: 131 (8.87)
+Defense: 125 (8.82)
+Politics: 116 (8.38)
+
+BASE SKILL | Royal Navy Vice Admiral
+SiegeMachineAttackPct +55
+SiegeMachineHPPct +55
+SiegeMachineDefensePct +40
+
+ASCENSION 1
+SiegeMachineAttackPct +10
+SiegeMachineDefensePct +10
+
+ASCENSION 2
+AttackingTroopDeathToWoundedRatePct +8
+
+ASCENSION 3
+SiegeMachineAttackPct +15
+SiegeMachineHPPct +20
+
+ASCENSION 4
+RangedTroopDefensePct +20
+RangedTroopHPPct +20
+SiegeMachineDefensePct +20
+SiegeMachineHPPct +20
+
+ASCENSION 5
+AttackingRangedTroopAttackPct +35
+AttackingSiegeMachineAttackPct +35
+SiegeMachineDefensePct +35
+SiegeMachineHPPct +35
+
+SPECIALTY 1 L5:
+SiegeMachineHPPct +10
+SiegeMachineDefensePct +10
+
+SPECIALTY 2 L5:
+RangedTroopAttackPct +10
+SiegeMachineAttackPct +10
+
+SPECIALTY 3 L5:
+SiegeMachineAttackPct +10
+SiegeMachineHPPct +10
+SiegeMachineDefensePct +10
+
+SPECIALTY 4 L5:
+SiegeMachineAttackPct +55
+SiegeMachineDefensePct +40
+SiegeMachineHPPct +40
+
+COVENANT | War
+SiegeMachineHPPct +5
+
+COVENANT | Cooperation
+SiegeMachineTrainingSpeedPct +10
+
+COVENANT | Peace
+SiegeMachineDefensePct +10
+
+COVENANT | Faith
+SiegeMachineAttackPct +5
+ReinforcingSiegeMachineHPPct +5
+
+COVENANT | Honor
+AttackingSiegeMachineAttackPct +10
+
+COVENANT | Civilization
+ReinforcingSiegeMachineAttackPct +20
+MarchSizeCapacityPct +10
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+- SiegeMachineTrainingSpeedPct
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Royal Navy Vice Admiral
+Increases siege machines' attack and HP by 55% and siege machines' defense by 40% when General is leading the army.
+
+# ASCENSION_1_TEXT:
+Siege Machine Attack and Defense +10%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+Siege Machine Attack +15% and HP +20%
+
+# ASCENSION_4_TEXT:
+Ranged Troop and Siege Machine Defense and HP +20%
+
+# ASCENSION_5_TEXT:
+Attacking Ranged Troop and Siege Machine Attack +35%; Siege Machine Defense and HP +35%
+
+# SPECIALTY_1_L5_TEXT:
+Siege Machine Defense(Max Level Attributes)
+Siege Machine HP +10%
+Siege Machine Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Siege Machine Ares(Max Level Attributes)
+Siege Machine Attack +10%
+Siege Machine HP +10%
+Siege Machine Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Circumnavigation(Max Level Attributes)
+Siege Machine Attack +55%
+Siege Machine Defense +40%
+Siege Machine HP +40%
+
+# COVENANT_WAR_TEXT:
+War Covenant
+Siege Machine HP +5%
+
+# COVENANT_COOPERATION_TEXT:
+Cooperation Covenant
+Siege Machine Training Speed +10%
+
+# COVENANT_PEACE_TEXT:
+Peace Covenant
+Siege Machine Defense +10%
+
+# COVENANT_FAITH_TEXT:
+Faith Covenant
+Siege Machine Attack +5%
+Reinforcing Siege Machine HP +5%
+
+# COVENANT_HONOR_TEXT:
+Honor Covenant
+Attacking Siege Machine Attack +10%
+
+# COVENANT_CIVILIZATION_TEXT:
+Civilization Covenant
+Reinforcing Siege Machine Attack +20%
+March Size Capacity +10%

@@ -1,0 +1,102 @@
+GENERAL: Basil II
+ROLE: Unknown
+Leadership: 115 (8.96)
+Attack: 118 (9.06)
+Defense: 116 (8.85)
+Politics: 112 (8.49)
+
+==============================
+BASE SKILL | Ironhanded Leader
+==============================
+Increases ground troops and mounted troops' attack by 30% and increases ground troops and mounted troops' defense by 15% when General is leading the army to attack.
+
+GroundAttackPct +30
+MountedAttackPct +30
+GroundDefensePct +15
+MountedDefensePct +15
+
+==============================
+ASCENSION 1
+==============================
+Increases Mounted Troop and Ground Troop Attack by 10% and Defense by 10% when General is leading the army to attack.
+
+GroundAttackPct +10
+MountedAttackPct +10
+GroundDefensePct +10
+MountedDefensePct +10
+
+==============================
+ASCENSION 2
+==============================
+Attacking Troop Death into Wounded Rate +10%
+
+AttackingTroopDeathToWoundedRatePct +10
+
+==============================
+ASCENSION 3
+==============================
+When General is launching Alliance War, Rally Capacity +8%
+
+RallyCapacityPct +8
+
+==============================
+ASCENSION 4
+==============================
+Increases Mounted Troop and Ground Troop Attack by 10% and HP by 10% when General is leading the army to attack.
+
+GroundAttackPct +10
+MountedAttackPct +10
+GroundHPPct +10
+MountedHPPct +10
+
+==============================
+ASCENSION 5
+==============================
+Increases Mounted Troop and Ground Troop Attack by 10%, Defense by 10% and HP by 10% when General is leading the army to attack.
+
+GroundAttackPct +10
+MountedAttackPct +10
+GroundDefensePct +10
+MountedDefensePct +10
+GroundHPPct +10
+MountedHPPct +10
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Ground Troop Defense
+SPECIALTY 1 L5CompletedTotal:
+GroundHPPct +10
+GroundDefensePct +10
+
+# SPECIALTY 2 | Snipe
+SPECIALTY 2 L5CompletedTotal:
+EnemyTroopAttackPct -10
+
+# SPECIALTY 3 | War God
+SPECIALTY 3 L5CompletedTotal:
+AllTroopsAttackPct +6
+
+# SPECIALTY 4 | Battle of Kleidion
+SPECIALTY 4 L5CompletedTotal:
+GroundAttackPct +20
+MountedAttackPct +20
+GroundHPPct +10
+MountedHPPct +10
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - AttackingTroopDeathToWoundedRatePct
+# - RallyCapacityPct
+# - EnemyTroopAttackPct
+# - AllTroopsAttackPct
+
+InTavern=false

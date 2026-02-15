@@ -1,0 +1,78 @@
+GENERAL: Nero
+ROLE: Unknown
+Leadership: 95 (8.51)
+Attack: 113 (8.09)
+Defense: 116 (8.32)
+Politics: 103 (7.79)
+
+==============================
+BASE SKILL | Bloodlust
+==============================
+EnemyTroopHPPct -15
+
+==============================
+ASCENSION 1
+==============================
+EnemyTroopHPPct -10
+
+==============================
+ASCENSION 2
+==============================
+EnemyTroopHPPct -10
+TrainingSpeedInSubordinateCityPct +10
+
+==============================
+ASCENSION 3
+==============================
+EnemyTroopDefensePct -10
+DeathIntoSurvivalRateInSubordinateCityPct +10
+
+==============================
+ASCENSION 4
+==============================
+EnemyTroopAttackPct -5
+EnemyTroopDefensePct -10
+
+==============================
+ASCENSION 5
+==============================
+EnemyTroopAttackPct -10
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Mounted Troop Defense
+SPECIALTY 1 L5CompletedTotal:
+MountedHPPct +10
+MountedDefensePct +10
+
+# SPECIALTY 2 | Sabotage
+SPECIALTY 2 L5CompletedTotal:
+EnemyTroopDefensePct -10
+
+# SPECIALTY 3 | Ruler
+SPECIALTY 3 L5CompletedTotal:
+TroopCapacityInSubordinateCityPct +36
+
+# SPECIALTY 4 | Bloody Emperor
+SPECIALTY 4 L5CompletedTotal:
+EnemyTroopHPPct -16
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - EnemyTroopHPPct
+# - TrainingSpeedInSubordinateCityPct
+# - DeathIntoSurvivalRateInSubordinateCityPct
+# - EnemyTroopAttackPct
+# - EnemyTroopDefensePct
+# - TroopCapacityInSubordinateCityPct
+
+InTavern=true

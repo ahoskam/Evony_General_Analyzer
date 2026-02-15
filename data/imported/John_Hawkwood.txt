@@ -1,0 +1,102 @@
+GENERAL: John Hawkwood
+ROLE: Duty
+IN_TAVERN: false
+
+Leadership: 140 (9.35)
+Attack: 145 (9.44)
+Defense: 104 (7.41)
+Politics: 109 (7.66)
+
+BASE SKILL | White Company
+RangedTroopAttackPct +30
+RangedTroopDefensePct +10
+RangedTroopHPPct +10
+
+ASCENSION 1
+RangedTroopAttackPct +15
+RangedTroopDefensePct +10
+RangedTroopHPPct +10
+
+ASCENSION 2
+InCityTroopAttackPct +30
+EnemyRangedTroopAttackPct -15
+EnemySiegeMachineAttackPct -15
+
+ASCENSION 3
+RangedTroopAttackPct +15
+AttackingRangedTroopAttackPct +15
+
+ASCENSION 4
+EnemyMountedTroopAttackPct -25
+EnemyMountedTroopDefensePct -25
+EnemyMountedTroopHPPct -25
+
+ASCENSION 5
+AttackingRangedTroopAttackPct +30
+AttackingRangedTroopHPPct +30
+RallyCapacityPct +6
+
+SPECIALTY 1 L5:
+RangedTroopAttackPct +10
+RangedTroopDefensePct +10
+
+SPECIALTY 2 L5:
+RangedTroopAttackPct +10
+SiegeMachineAttackPct +10
+
+SPECIALTY 3 L5:
+RangedTrainingSpeedPct +20
+AttackingRangedTroopAttackPct +10
+
+SPECIALTY 4 L5:
+RangedTrainingSpeedPct +25
+RangedTroopAttackPct +15
+AttackingRangedTroopAttackPct +15
+
+COVENANT
+# None available (locked or not shown)
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+White Company
+Increases ranged troops' attack by 30% and ranged troops' defense and HP by 10% when General is the Archer Camp Officer.
+
+# ASCENSION_1_TEXT:
+When General is the Archer Camp Officer, Ranged Troop Attack +15%, Defense and HP +10%
+
+# ASCENSION_2_TEXT:
+When General is the Archer Camp Officer, In-city Troops Attack +30%, Enemy Ranged Troop and Siege Machine Attack -15%
+
+# ASCENSION_3_TEXT:
+When General is the Archer Camp Officer, Ranged Troops Attack +15%, Attacking Ranged Troop Attack +15%
+
+# ASCENSION_4_TEXT:
+When General is the Archer Camp Officer, Enemy Defending Mounted Troop Attack, Defense, and HP against your attacking troops -25%
+
+# ASCENSION_5_TEXT:
+When General is the Archer Camp Officer, Attacking Ranged Troops Attack and HP +30%, Rally Capacity +6%
+
+# SPECIALTY_1_L5_TEXT:
+Ranged Troop Formation(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Sage(Max Level Attributes)
+Applied to Archer Camp Officer
+Ranged Troop Training Speed +20%
+Attacking Ranged Troop Attack +10%
+
+# SPECIALTY_4_L5_TEXT:
+Battle of Castagnaro(Max Level Attributes)
+Applied to Archer Camp Officer
+Ranged Troop Training Speed +25%
+Ranged Troop Attack +15%
+Attacking Ranged Troop Attack +15%

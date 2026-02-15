@@ -1,0 +1,89 @@
+GENERAL: Aethelflaed
+ROLE: Unknown
+Leadership: 112 (8.94)
+Attack: 107 (8.78)
+Defense: 115 (9.12)
+Politics: 113 (8.44)
+
+==============================
+BASE SKILL | Lady of the Mercians
+==============================
+MountedAttackOnMonstersPct +55
+MountedDefenseOnMonstersPct +55
+
+==============================
+ASCENSION 1
+==============================
+WhenAttackingMonstersMountedTroopHPPct +30
+WhenAttackingMonstersTroopsDefensePct +10
+
+==============================
+ASCENSION 2
+==============================
+WhenAttackingMonstersEnemyDefensePct -10
+WhenAttackingMonstersTroopsHPPct +15
+
+==============================
+ASCENSION 3
+==============================
+WhenAttackingMonstersEnemyAttackPct -10
+WhenAttackingMonstersTroopsDefensePct +20
+
+==============================
+ASCENSION 4
+==============================
+WhenAttackingMonstersMountedAttackPct +15
+WhenAttackingMonstersTroopsHPPct +20
+
+==============================
+ASCENSION 5
+==============================
+WhenAttackingMonstersMountedAttackPct +20
+WhenAttackingMonstersTroopsDefensePct +10
+WhenAttackingMonstersTroopsHPPct +10
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Hunter
+SPECIALTY 1 L5CompletedTotal:
+MonstersAttackPct -15
+
+# SPECIALTY 2 | Fortune
+SPECIALTY 2 L5CompletedTotal:
+DoubleItemsDropRateFromMonstersPct +15
+
+# SPECIALTY 3 | Mounted Troop Ares
+SPECIALTY 3 L5CompletedTotal:
+MountedAttackPct +10
+MountedHPPct +10
+MountedDefensePct +10
+
+# SPECIALTY 4 | Lord of the Mercians
+SPECIALTY 4 L5CompletedTotal:
+GroundAndMountedAttackOnMonstersPct +30
+GroundAndMountedDefenseOnMonstersPct +30
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - MountedAttackOnMonstersPct
+# - MountedDefenseOnMonstersPct
+# - WhenAttackingMonstersMountedTroopHPPct
+# - WhenAttackingMonstersTroopsDefensePct
+# - WhenAttackingMonstersEnemyDefensePct
+# - WhenAttackingMonstersTroopsHPPct
+# - WhenAttackingMonstersEnemyAttackPct
+# - WhenAttackingMonstersMountedAttackPct
+# - DoubleItemsDropRateFromMonstersPct
+# - GroundAndMountedAttackOnMonstersPct
+# - GroundAndMountedDefenseOnMonstersPct
+
+InTavern=false

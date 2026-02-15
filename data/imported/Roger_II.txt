@@ -1,0 +1,115 @@
+GENERAL: Roger II
+ROLE: Duty
+IN_TAVERN: false
+
+Leadership: 139 (9.31)
+Attack: 145 (9.45)
+Defense: 105 (7.58)
+Politics: 108 (7.81)
+
+BASE SKILL | Mediterranean Overlord
+SiegeMachineAttackPct +20
+SiegeMachineDefensePct +20
+EnemyRangedTroopAttackPct -20
+EnemyRangedTroopHPPct -20
+EnemySiegeMachineAttackPct -20
+EnemySiegeMachineHPPct -20
+
+ASCENSION 1
+SiegeMachineHPPct +20
+SiegeMachineDefensePct +20
+SiegeMachineTrainingSpeedPct +20
+
+ASCENSION 2
+InCityTroopsAttackPct +15
+InCityTroopsDefensePct +15
+InCityTroopsHPPct +15
+
+ASCENSION 3
+SiegeMachineAttackPct +15
+SiegeMachineDefensePct +15
+EnemyDefendingTroopsHPPct -20
+
+ASCENSION 4
+EnemyDefendingSiegeMachineAttackPct -25
+EnemyDefendingSiegeMachineDefensePct -25
+EnemyDefendingSiegeMachineHPPct -25
+
+ASCENSION 5
+SiegeMachineAttackPct +15
+SiegeMachineHPPct +15
+RallyCapacityPct +6
+
+SPECIALTY 1 L5:
+SiegeMachineAttackPct +10
+SiegeMachineDefensePct +10
+
+SPECIALTY 2 L5:
+RangedTroopAttackPct +10
+SiegeMachineAttackPct +10
+
+SPECIALTY 3 L5:
+MayorSiegeMachineTrainingSpeedPct +20
+MayorSiegeMachineTrainingCapacityPct +20
+MayorSiegeMachineAttackPct +15
+
+SPECIALTY 4 L5:
+MayorSiegeMachineTrainingSpeedPct +35
+MayorSiegeMachineAttackPct +20
+MayorSiegeMachineDefensePct +20
+
+# None available (locked or not shown)
+
+NEW STAT KEYS NOTE:
+- SiegeMachineTrainingSpeedPct
+- EnemyDefendingTroopsHPPct
+- EnemyDefendingSiegeMachineAttackPct
+- EnemyDefendingSiegeMachineDefensePct
+- EnemyDefendingSiegeMachineHPPct
+- MayorSiegeMachineTrainingCapacityPct
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Mediterranean Overlord
+Increases siege machines' attack and defense by 20% and reduces enemy defending ranged troops and siege machines' attack and HP against your rally by 20% when General is the Workshop Officer.
+
+# ASCENSION_1_TEXT:
+When General is the Workshop Officer, Siege Machine HP, Defense, and Training Speed +20%
+
+# ASCENSION_2_TEXT:
+When General is the Workshop Officer, In-city Troops Attack, Defense, and HP +15%
+
+# ASCENSION_3_TEXT:
+When General is the Workshop Officer, Siege Machine Attack and Defense +15%, Enemy Defending Troops HP against your in-rally troops -20%
+
+# ASCENSION_4_TEXT:
+When General is the Workshop Officer, Enemy Defending Siege Machine Attack, Defense, and HP against your attacking troops -25%
+
+# ASCENSION_5_TEXT:
+When General is the Workshop Officer, Siege Machine Attack and HP +15%, Rally Capacity +6%
+
+# SPECIALTY_1_L5_TEXT:
+Siege Machine Formation(Max Level Attributes)
+Siege Machine Attack +10%
+Siege Machine Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Sage(Max Level Attributes)
+Applied to Workshop Officer
+Siege Machine Training Speed +20%
+Siege Machine Training Capacity +20%
+Siege Machine Attack +15%
+
+# SPECIALTY_4_L5_TEXT:
+North African Expedition(Max Level Attributes)
+Applied to Workshop Officer
+Siege Machine Training Speed +35%
+Siege Machine Attack +20%
+Siege Machine Defense +20%

@@ -1,0 +1,154 @@
+GENERAL: Isaac Brock
+ROLE: Defense
+IN_TAVERN: false
+
+
+Leadership: 118 (8.92)
+Attack: 112 (8.52)
+Defense: 118 (8.92)
+Politics: 112 (8.52)
+
+BASE SKILL | Siege of Detroit
+InCityGroundTroopAttackPct +30
+InCityMountedTroopAttackPct +30
+InCityGroundTroopHPPct +30
+InCityMountedTroopHPPct +30
+InCityGroundTroopAttackPct +20
+InCityGroundTroopDefensePct +20
+
+ASCENSION 1
+InCityGroundTroopAttackPct +5
+InCityMountedTroopAttackPct +5
+InCityGroundTroopHPPct +5
+InCityMountedTroopHPPct +5
+
+ASCENSION 2
+HospitalCapacityPct +20
+InCityGroundTroopAttackPct +5
+
+ASCENSION 3
+InCityRangedTroopDefensePct +15
+InCitySiegeMachineDefensePct +15
+InCityRangedTroopHPPct +15
+InCitySiegeMachineHPPct +15
+
+ASCENSION 4
+InCityTroopsDefensePct +10
+InCityTroopsHPPct +10
+
+ASCENSION 5
+InCityGroundTroopAttackPct +40
+InCityGroundTroopDefensePct +20
+InCityGroundTroopHPPct +20
+
+SPECIALTY 1 L5:
+GroundHPPct +10
+GroundDefensePct +10
+
+SPECIALTY 2 L5:
+InCityTroopAttackPct +6
+
+SPECIALTY 3 L5:
+GroundAttackPct +10
+GroundHPPct +10
+GroundDefensePct +10
+
+SPECIALTY 4 L5:
+InCityTroopHPPct +10
+InCityGroundTroopAttackPct +40
+InCityGroundTroopDefensePct +15
+
+COVENANT | War
+InCityTroopAttackPct +5
+
+COVENANT | Cooperation
+TroopDeathIntoTroopSoulRateMainCityPct +10
+
+COVENANT | Peace
+InCityTroopHPPct +5
+InCityTroopsDefensePct +5
+
+COVENANT | Faith
+InCityGroundTroopHPPct +10
+InCityGroundTroopDefensePct +10
+
+COVENANT | Honor
+InCityGroundTroopDefensePct +5
+InCityMountedTroopDefensePct +5
+InCityGroundTroopHPPct +5
+InCityMountedTroopHPPct +5
+
+COVENANT | Civilization
+InCityGroundTroopAttackPct +30
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Siege of Detroit
+Increases in-city ground troops and mounted troops' attack and HP by 30%, and in-city ground troops' attack and defense by 20% when General is the Main City Defense General.
+
+# ASCENSION_1_TEXT:
+When General is the Main City Defense General, In-city Ground Troop and Mounted Troop Attack +5% and HP +5%
+
+# ASCENSION_2_TEXT:
+When General is the Main City Defense General, Hospital Capacity +20%, In-city Ground Troop Attack +5%
+
+# ASCENSION_3_TEXT:
+When General is the Main City Defense General, In-city Ranged Troop and Siege Machine Defense +15% and HP +15%
+
+# ASCENSION_4_TEXT:
+When General is the Main City Defense General, In-city Troops Defense +10% and HP +10%
+
+# ASCENSION_5_TEXT:
+When General is the Main City Defense General, In-city Ground Troop Attack +40%, Defense and HP +20%
+
+# SPECIALTY_1_L5_TEXT:
+Ground Troop Defense(Max Level Attributes)
+Ground Troop HP +10%
+Ground Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Fortification(Max Level Attributes)
+Applied to Main City Defense General
+In City Troop Attack +6%
+
+# SPECIALTY_3_L5_TEXT:
+Ground Troop Ares(Max Level Attributes)
+Ground Troop Attack +10%
+Ground Troop HP +10%
+Ground Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+The Hero of Upper Canada(Max Level Attributes)
+In City Troop HP +10%
+In City Ground Troop Attack +40%
+In City Ground Troop Defense +15%
+
+# COVENANT_War_TEXT:
+War Covenant
+In City Troop Attack +5%
+
+# COVENANT_Cooperation_TEXT:
+Cooperation Covenant
+Troop death into troop soul rate in the main city +10%
+
+# COVENANT_Peace_TEXT:
+Peace Covenant
+In City Troop HP +5%
+In-City Troop Defense +5%
+
+# COVENANT_Faith_TEXT:
+Faith Covenant
+In City Ground Troop HP +10%
+In City Ground Troop Defense +10%
+
+# COVENANT_Honor_TEXT:
+Honor Covenant
+In-city Ground Troop and Mounted Troop Defense +5%
+In-city Ground Troop and Mounted Troop HP +5%
+
+# COVENANT_Civilization_TEXT:
+Civilization Covenant
+In City Ground Troop Attack +30%

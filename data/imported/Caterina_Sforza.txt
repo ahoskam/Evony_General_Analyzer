@@ -1,0 +1,116 @@
+GENERAL: Caterina Sforza
+ROLE: Duty
+IN_TAVERN: false
+
+Leadership: 107 (8.03)
+Attack: 145 (9.32)
+Defense: 147 (9.38)
+Politics: 98 (7.85)
+
+BASE SKILL | Regent of Forlì
+RangedTroopAttackPct +15
+SiegeMachineAttackPct +15
+EnemyRangedTroopDefensePct -15
+EnemyRangedTroopHPPct -15
+EnemySiegeMachineDefensePct -15
+EnemySiegeMachineHPPct -15
+
+ASCENSION 1
+WhenGeneralIsTheMayor_SubCityTrainingSpeedPct +20
+AttackingGroundDefensePct +20
+AttackingGroundHPPct +20
+AttackingMountedDefensePct +20
+AttackingMountedHPPct +20
+HospitalCapacityPct +100
+
+ASCENSION 2
+AttackingRangedTroopAttackPct +20
+AttackingRangedTroopDefensePct +20
+AttackingRangedTroopHPPct +20
+AttackingSiegeMachineAttackPct +20
+AttackingSiegeMachineDefensePct +20
+AttackingSiegeMachineHPPct +20
+
+ASCENSION 3
+EnemySiegeMachineAttackPct -40
+EnemyMountedTroopAttackPct -40
+
+ASCENSION 4
+InCityRangedTroopAttackPct +20
+InCityRangedTroopDefensePct +20
+InCityRangedTroopHPPct +20
+InCitySiegeMachineAttackPct +20
+InCitySiegeMachineDefensePct +20
+InCitySiegeMachineHPPct +20
+
+ASCENSION 5
+RangedTroopAttackPct +25
+RangedTroopHPPct +25
+SiegeMachineAttackPct +25
+SiegeMachineHPPct +25
+WhenLaunchingAllianceWarRallyCapacityPct +6
+
+SPECIALTY 1 L5:
+GroundAttackPct +10
+GroundHPPct +10
+
+SPECIALTY 2 L5:
+RangedTroopAttackPct +10
+SiegeMachineAttackPct +10
+
+SPECIALTY 3 L5:
+HospitalCapacityPct +50
+AllTroopHPPct +10
+
+SPECIALTY 4 L5:
+AllTroopAttackPct +15
+AllTroopHPPct +15
+AllTroopsDefensePct +15
+
+COVENANT
+# None available (locked or not shown)
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Regent of Forlì
+Increases your ranged troops and siege machines' attack by 15% and reduces enemy ranged troops and siege machines' defense and HP by 15% when General is the Bunker Officer.
+
+# ASCENSION_1_TEXT:
+When General is the Bunker Officer, Attacking Ground and Mounted Troop Defense and HP +20%, Bunker Protecting Capacity +100%
+
+# ASCENSION_2_TEXT:
+When General is the Bunker Officer, Attacking Ranged Troop and Siege Machine Attack, Defense and HP +20%
+
+# ASCENSION_3_TEXT:
+When General is the Bunker Officer, Enemy Siege Machine Attack -40%, Enemy Mounted Troop Attack -40%
+
+# ASCENSION_4_TEXT:
+When General is the Bunker Officer, In-city Ranged Troop and Siege Machine Attack, Defense and HP +20%
+
+# ASCENSION_5_TEXT:
+When General is the Bunker Officer, Ranged Troop and Siege Machine Attack and HP +25%, Rally Capacity +6%
+
+# SPECIALTY_1_L5_TEXT:
+Ground Troop Assault(Max Level Attributes)
+Ground Troop Attack +10%
+Ground Troop HP +10%
+
+# SPECIALTY_2_L5_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Sage(Max Level Attributes)
+Applied to Bunker Officer
+Bunker Protecting Capacity +50%
+All Troops HP +10%
+
+# SPECIALTY_4_L5_TEXT:
+Alchemical Experiment(Max Level Attributes)
+Applied to Bunker Officer
+All Troops Attack +15%
+All Troops HP +15%
+All Troops Defense +15%

@@ -1,0 +1,450 @@
+#include "DbImportV2.h"
+#include <iostream>
+#include <string>
+#include <cctype>
+
+DbImportV2::~DbImportV2() { close(); }
+
+bool DbImportV2::exec_sql(const char* sql)
+{
+    if (!db_) return false;
+
+    char* err = nullptr;
+    int rc = sqlite3_exec(db_, sql, nullptr, nullptr, &err);
+    if (rc != SQLITE_OK) {
+        std::cerr << "SQLite error: " << (err ? err : "(unknown)") << "\n";
+        sqlite3_free(err);
+        return false;
+    }
+    return true;
+}
+
+bool DbImportV2::column_exists(const char* table, const char* column)
+{
+    if (!db_) return false;
+
+    std::string sql = "PRAGMA table_info(" + std::string(table) + ");";
+    sqlite3_stmt* stmt = nullptr;
+
+    if (sqlite3_prepare_v2(db_, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK) {
+        std::cerr << "prepare failed (PRAGMA table_info): " << sqlite3_errmsg(db_) << "\n";
+        return false;
+    }
+
+    auto lower = [](std::string s){
+        for (auto& c : s) c = (char)std::tolower((unsigned char)c);
+        return s;
+    };
+
+    bool found = false;
+    while (sqlite3_step(stmt) == SQLITE_ROW) {
+        // columns: cid, name, type, notnull, dflt_value, pk
+        const unsigned char* nameTxt = sqlite3_column_text(stmt, 1);
+        std::string name = nameTxt ? (const char*)nameTxt : "";
+        if (lower(name) == lower(column)) { found = true; break; }
+    }
+
+    sqlite3_finalize(stmt);
+    return found;
+}
+
+bool DbImportV2::ensure_v2_migrations()
+{
+    if (!db_) return false;
+
+    const struct {
+        const char* col;
+        const char* alter_sql;
+    } migrations[] = {
+        {
+            "source_text_verbatim",
+            "ALTER TABLE generals ADD COLUMN source_text_verbatim TEXT NOT NULL DEFAULT '';"
+        },
+        {
+            "double_checked_in_game",
+            "ALTER TABLE generals ADD COLUMN double_checked_in_game INTEGER NOT NULL DEFAULT 0;"
+        }
+    };
+
+    for (const auto& m : migrations) {
+        if (column_exists("generals", m.col)) continue;
+
+        char* err = nullptr;
+        int rc = sqlite3_exec(db_, m.alter_sql, nullptr, nullptr, &err);
+        if (rc != SQLITE_OK) {
+            std::string msg = err ? err : "";
+            sqlite3_free(err);
+
+            if (msg.find("duplicate column") != std::string::npos ||
+                msg.find("already exists") != std::string::npos) {
+                continue;
+            }
+
+            std::cerr << "Migration failed for generals." << m.col << ": " << msg << "\n";
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool DbImportV2::open(const std::string& path)
+{
+    close();
+
+    if (sqlite3_open(path.c_str(), &db_) != SQLITE_OK) {
+        std::cerr << "sqlite3_open failed: " << sqlite3_errmsg(db_) << "\n";
+        close();
+        return false;
+    }
+
+    exec_sql("PRAGMA foreign_keys = ON;");
+    exec_sql("PRAGMA journal_mode = WAL;");
+
+    std::cerr << "[DbImportV2] running ensure_v2_migrations()\n";
+    if (!ensure_v2_migrations()) {
+        std::cerr << "DB migrations failed.\n";
+        close();
+        return false;
+    }
+
+    return true;
+}
+
+void DbImportV2::close()
+{
+    if (db_) sqlite3_close(db_);
+    db_ = nullptr;
+}
+
+bool DbImportV2::begin()    { return exec_sql("BEGIN;"); }
+bool DbImportV2::commit()   { return exec_sql("COMMIT;"); }
+bool DbImportV2::rollback() { return exec_sql("ROLLBACK;"); }
+
+bool DbImportV2::upsert_general(
+    const std::string& name,
+    const std::string& role,
+    bool role_confirmed,
+    bool in_tavern,
+    const std::string& base_skill_name,
+    int leadership, double leadership_green,
+    int attack, double attack_green,
+    int defense, double defense_green,
+    int politics, double politics_green,
+    const std::string& source_text_verbatim,
+    bool double_checked_in_game,
+    int& out_general_id)
+{
+    if (!db_) return false;
+
+    const char* sql = R"SQL(
+        INSERT INTO generals(
+            name, role, role_confirmed, in_tavern, base_skill_name,
+            leadership, leadership_green,
+            attack, attack_green,
+            defense, defense_green,
+            politics, politics_green,
+            source_text_verbatim,
+            double_checked_in_game
+        ) VALUES (
+            ?1, ?2, ?3, ?4, ?5,
+            ?6, ?7,
+            ?8, ?9,
+            ?10, ?11,
+            ?12, ?13,
+            ?14,
+            ?15
+        )
+        ON CONFLICT(name) DO UPDATE SET
+            role=excluded.role,
+            role_confirmed=excluded.role_confirmed,
+            in_tavern=excluded.in_tavern,
+            base_skill_name=excluded.base_skill_name,
+            leadership=excluded.leadership,
+            leadership_green=excluded.leadership_green,
+            attack=excluded.attack,
+            attack_green=excluded.attack_green,
+            defense=excluded.defense,
+            defense_green=excluded.defense_green,
+            politics=excluded.politics,
+            politics_green=excluded.politics_green,
+            source_text_verbatim=excluded.source_text_verbatim,
+            double_checked_in_game=excluded.double_checked_in_game;
+    )SQL";
+
+    sqlite3_stmt* stmt = nullptr;
+    if (sqlite3_prepare_v2(db_, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        std::cerr << "prepare upsert_general failed: " << sqlite3_errmsg(db_) << "\n";
+        return false;
+    }
+
+    sqlite3_bind_text(stmt, 1, name.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 2, role.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_int (stmt, 3, role_confirmed ? 1 : 0);
+    sqlite3_bind_int (stmt, 4, in_tavern ? 1 : 0);
+    sqlite3_bind_text(stmt, 5, base_skill_name.c_str(), -1, SQLITE_TRANSIENT);
+
+    sqlite3_bind_int   (stmt, 6, leadership);
+    sqlite3_bind_double(stmt, 7, leadership_green);
+
+    sqlite3_bind_int   (stmt, 8, attack);
+    sqlite3_bind_double(stmt, 9, attack_green);
+
+    sqlite3_bind_int   (stmt, 10, defense);
+    sqlite3_bind_double(stmt, 11, defense_green);
+
+    sqlite3_bind_int   (stmt, 12, politics);
+    sqlite3_bind_double(stmt, 13, politics_green);
+
+    sqlite3_bind_text(stmt, 14, source_text_verbatim.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_int (stmt, 15, double_checked_in_game ? 1 : 0);
+
+    bool ok = (sqlite3_step(stmt) == SQLITE_DONE);
+    if (!ok) std::cerr << "upsert_general failed: " << sqlite3_errmsg(db_) << "\n";
+    sqlite3_finalize(stmt);
+    if (!ok) return false;
+
+    // Fetch id
+    const char* sel = "SELECT id FROM generals WHERE name=?1;";
+    if (sqlite3_prepare_v2(db_, sel, -1, &stmt, nullptr) != SQLITE_OK) {
+        std::cerr << "prepare select id failed: " << sqlite3_errmsg(db_) << "\n";
+        return false;
+    }
+    sqlite3_bind_text(stmt, 1, name.c_str(), -1, SQLITE_TRANSIENT);
+
+    int rc = sqlite3_step(stmt);
+    if (rc == SQLITE_ROW) {
+        out_general_id = sqlite3_column_int(stmt, 0);
+        sqlite3_finalize(stmt);
+        return true;
+    }
+
+    std::cerr << "select general id failed: " << sqlite3_errmsg(db_) << "\n";
+    sqlite3_finalize(stmt);
+    return false;
+}
+
+std::optional<int> DbImportV2::resolve_stat_key_id(const std::string& raw_key)
+{
+    if (!db_) return std::nullopt;
+
+    // 1) alias match
+    {
+        const char* sql = "SELECT stat_key_id FROM stat_key_aliases WHERE alias_key=?1;";
+        sqlite3_stmt* stmt = nullptr;
+        if (sqlite3_prepare_v2(db_, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+            std::cerr << "prepare failed: " << sqlite3_errmsg(db_) << "\n";
+            return std::nullopt;
+        }
+        sqlite3_bind_text(stmt, 1, raw_key.c_str(), -1, SQLITE_TRANSIENT);
+
+        int rc = sqlite3_step(stmt);
+        if (rc == SQLITE_ROW) {
+            int id = sqlite3_column_int(stmt, 0);
+            sqlite3_finalize(stmt);
+            return id;
+        }
+        sqlite3_finalize(stmt);
+    }
+
+    // 2) exact canonical key match
+    {
+        const char* sql = "SELECT id FROM stat_keys WHERE key=?1;";
+        sqlite3_stmt* stmt = nullptr;
+        if (sqlite3_prepare_v2(db_, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+            std::cerr << "prepare failed: " << sqlite3_errmsg(db_) << "\n";
+            return std::nullopt;
+        }
+        sqlite3_bind_text(stmt, 1, raw_key.c_str(), -1, SQLITE_TRANSIENT);
+
+        int rc = sqlite3_step(stmt);
+        if (rc == SQLITE_ROW) {
+            int id = sqlite3_column_int(stmt, 0);
+            sqlite3_finalize(stmt);
+            return id;
+        }
+        sqlite3_finalize(stmt);
+    }
+
+    return std::nullopt;
+}
+
+bool DbImportV2::ensure_pending_key(
+    const std::string& raw_key,
+    const std::string& first_seen_file,
+    int first_seen_line,
+    PendingInfo& out)
+{
+    if (!db_) return false;
+
+    const char* ins = R"SQL(
+        INSERT INTO pending_stat_keys(raw_key, status, first_seen_file, first_seen_line)
+        VALUES(?1, 'pending', ?2, ?3);
+    )SQL";
+
+    sqlite3_stmt* stmt = nullptr;
+    if (sqlite3_prepare_v2(db_, ins, -1, &stmt, nullptr) != SQLITE_OK) {
+        std::cerr << "prepare failed: " << sqlite3_errmsg(db_) << "\n";
+        return false;
+    }
+    sqlite3_bind_text(stmt, 1, raw_key.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 2, first_seen_file.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_int (stmt, 3, first_seen_line);
+
+    int rc = sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+
+    if (rc == SQLITE_DONE) {
+        out.pending_id = (int)sqlite3_last_insert_rowid(db_);
+        out.was_new = true;
+        return true;
+    }
+
+    // If insert failed (likely UNIQUE), fetch existing id.
+    const char* sel = "SELECT id FROM pending_stat_keys WHERE raw_key=?1;";
+    if (sqlite3_prepare_v2(db_, sel, -1, &stmt, nullptr) != SQLITE_OK) {
+        std::cerr << "prepare failed: " << sqlite3_errmsg(db_) << "\n";
+        return false;
+    }
+    sqlite3_bind_text(stmt, 1, raw_key.c_str(), -1, SQLITE_TRANSIENT);
+
+    rc = sqlite3_step(stmt);
+    if (rc == SQLITE_ROW) {
+        out.pending_id = sqlite3_column_int(stmt, 0);
+        out.was_new = false;
+        sqlite3_finalize(stmt);
+        return true;
+    }
+
+    std::cerr << "ensure_pending_key failed: " << sqlite3_errmsg(db_) << "\n";
+    sqlite3_finalize(stmt);
+    return false;
+}
+
+bool DbImportV2::add_pending_example(
+    int pending_id,
+    const std::string& general_name,
+    const std::string& context_type,
+    const std::string& context_name,
+    const std::optional<int>& level,
+    double value,
+    const std::string& file_path,
+    int line_number,
+    const std::string& raw_line)
+{
+    if (!db_) return false;
+
+    const char* sql = R"SQL(
+        INSERT OR IGNORE INTO pending_stat_key_examples(
+            pending_id, general_name, context_type, context_name, level, value,
+            file_path, line_number, raw_line
+        ) VALUES (
+            ?1, ?2, ?3, ?4, ?5, ?6,
+            ?7, ?8, ?9
+        );
+    )SQL";
+
+    sqlite3_stmt* stmt = nullptr;
+    if (sqlite3_prepare_v2(db_, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        std::cerr << "prepare failed: " << sqlite3_errmsg(db_) << "\n";
+        return false;
+    }
+
+    sqlite3_bind_int (stmt, 1, pending_id);
+    sqlite3_bind_text(stmt, 2, general_name.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 3, context_type.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 4, context_name.c_str(), -1, SQLITE_TRANSIENT);
+
+    if (level.has_value()) sqlite3_bind_int(stmt, 5, *level);
+    else sqlite3_bind_null(stmt, 5);
+
+    sqlite3_bind_double(stmt, 6, value);
+    sqlite3_bind_text  (stmt, 7, file_path.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_int   (stmt, 8, line_number);
+    sqlite3_bind_text  (stmt, 9, raw_line.c_str(), -1, SQLITE_TRANSIENT);
+
+    const int rc = sqlite3_step(stmt);
+    const bool ok = (rc == SQLITE_DONE);
+
+    if (!ok) {
+        std::cerr << "add_pending_example failed: " << sqlite3_errmsg(db_) << "\n";
+    }
+
+    sqlite3_finalize(stmt);
+    return ok;
+}
+
+bool DbImportV2::delete_occurrences_for_general_file(int general_id, const std::string& file_path)
+{
+    if (!db_) return false;
+
+    const char* sql = "DELETE FROM stat_occurrences WHERE general_id=?1 AND file_path=?2;";
+    sqlite3_stmt* stmt = nullptr;
+
+    if (sqlite3_prepare_v2(db_, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        std::cerr << "prepare failed: " << sqlite3_errmsg(db_) << "\n";
+        return false;
+    }
+
+    sqlite3_bind_int(stmt, 1, general_id);
+    sqlite3_bind_text(stmt, 2, file_path.c_str(), -1, SQLITE_TRANSIENT);
+
+    bool ok = (sqlite3_step(stmt) == SQLITE_DONE);
+    if (!ok) std::cerr << "delete_occurrences_for_general_file failed: " << sqlite3_errmsg(db_) << "\n";
+    sqlite3_finalize(stmt);
+    return ok;
+}
+
+bool DbImportV2::insert_stat_occurrence(
+    int general_id,
+    int stat_key_id,
+    double value,
+    const std::string& context_type,
+    const std::string& context_name,
+    const std::optional<int>& level,
+    bool is_total,
+    const std::string& file_path,
+    int line_number,
+    const std::string& raw_line)
+{
+    if (!db_) return false;
+
+    const char* sql = R"SQL(
+        INSERT INTO stat_occurrences(
+            general_id, stat_key_id, value,
+            context_type, context_name, level, is_total,
+            file_path, line_number, raw_line
+        ) VALUES (
+            ?1, ?2, ?3,
+            ?4, ?5, ?6, ?7,
+            ?8, ?9, ?10
+        );
+    )SQL";
+
+    sqlite3_stmt* stmt = nullptr;
+    if (sqlite3_prepare_v2(db_, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        std::cerr << "prepare failed: " << sqlite3_errmsg(db_) << "\n";
+        return false;
+    }
+
+    sqlite3_bind_int(stmt, 1, general_id);
+    sqlite3_bind_int(stmt, 2, stat_key_id);
+    sqlite3_bind_double(stmt, 3, value);
+
+    sqlite3_bind_text(stmt, 4, context_type.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 5, context_name.c_str(), -1, SQLITE_TRANSIENT);
+
+    if (level.has_value()) sqlite3_bind_int(stmt, 6, *level);
+    else sqlite3_bind_null(stmt, 6);
+
+    sqlite3_bind_int(stmt, 7, is_total ? 1 : 0);
+
+    sqlite3_bind_text(stmt, 8, file_path.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_int(stmt, 9, line_number);
+    sqlite3_bind_text(stmt, 10, raw_line.c_str(), -1, SQLITE_TRANSIENT);
+
+    bool ok = (sqlite3_step(stmt) == SQLITE_DONE);
+    if (!ok) std::cerr << "insert_stat_occurrence failed: " << sqlite3_errmsg(db_) << "\n";
+    sqlite3_finalize(stmt);
+    return ok;
+}

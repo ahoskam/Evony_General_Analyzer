@@ -1,0 +1,129 @@
+# CHAT_TITLE: Caesar data
+
+GENERAL: Caesar
+ROLE: Unknown
+Leadership: 119 (9.45)
+Attack: 112 (8.52)
+Defense: 113 (8.84)
+Politics: 111 (8.61)
+
+InTavern=false
+
+==============================
+BASE SKILL | Dictator
+==============================
+MountedAttackPct +45 (when General is leading the army to attack Monsters)
+GroundAttackPct +15 (when General brings any dragon)
+MountedAttackPct +15 (when General brings any dragon)
+
+==============================
+ASCENSION 1
+==============================
+AttackingTroopAttackPct +5 (when attacking Monsters)
+AttackingTroopDefensePct +10 (when attacking Monsters)
+
+==============================
+ASCENSION 2
+==============================
+MonsterDefensePct -10 (when attacking Monsters)
+AttackingTroopHPPct +15 (when attacking Monsters)
+
+==============================
+ASCENSION 3
+==============================
+MonsterAttackPct -10 (when attacking Monsters)
+AttackingTroopDefensePct +20 (when attacking Monsters)
+
+==============================
+ASCENSION 4
+==============================
+AttackingTroopAttackPct +10 (when attacking Monsters)
+AttackingTroopHPPct +20 (when attacking Monsters)
+
+==============================
+ASCENSION 5
+==============================
+AttackingTroopAttackPct +15 (when attacking Monsters)
+AttackingTroopDefensePct +10 (when attacking Monsters)
+AttackingTroopHPPct +10 (when attacking Monsters)
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Mounted Troop Assault
+SPECIALTY 1 L1:
+MountedAttackPct +1
+MountedHPPct +1
+SPECIALTY 1 L2:
+MountedAttackPct +1
+MountedHPPct +1
+SPECIALTY 1 L3:
+MountedAttackPct +2
+MountedHPPct +2
+SPECIALTY 1 L4:
+MountedAttackPct +2
+MountedHPPct +2
+SPECIALTY 1 L5:
+MountedAttackPct +4
+MountedHPPct +4
+
+# SPECIALTY 2 | Fortune
+SPECIALTY 2 L1:
+DoubleItemsDropRateFromMonstersPct +1
+SPECIALTY 2 L2:
+DoubleItemsDropRateFromMonstersPct +2
+SPECIALTY 2 L3:
+DoubleItemsDropRateFromMonstersPct +3
+SPECIALTY 2 L4:
+DoubleItemsDropRateFromMonstersPct +3
+SPECIALTY 2 L5:
+DoubleItemsDropRateFromMonstersPct +6
+
+# SPECIALTY 3 | War God
+SPECIALTY 3 L1:
+TroopAttackPct +1
+SPECIALTY 3 L2:
+TroopAttackPct +1
+SPECIALTY 3 L3:
+TroopAttackPct +1
+SPECIALTY 3 L4:
+TroopAttackPct +1
+SPECIALTY 3 L5:
+TroopAttackPct +2
+
+# SPECIALTY 4 | Gallic Wars
+SPECIALTY 4 L1:
+MountedAttackPct +3 (against Monsters)
+MonsterAttackPct -2
+MonsterDefensePct -2
+SPECIALTY 4 L2:
+MountedAttackPct +3 (against Monsters)
+MonsterAttackPct -2
+MonsterDefensePct -2
+SPECIALTY 4 L3:
+MountedAttackPct +6 (against Monsters)
+MonsterAttackPct -4
+MonsterDefensePct -4
+SPECIALTY 4 L4:
+MountedAttackPct +6 (against Monsters)
+MonsterAttackPct -4
+MonsterDefensePct -4
+SPECIALTY 4 L5:
+MountedAttackPct +12 (against Monsters)
+MonsterAttackPct -8
+MonsterDefensePct -8
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - AttackingTroopAttackPct
+# - AttackingTroopDefensePct
+# - AttackingTroopHPPct
+# - DoubleItemsDropRateFromMonstersPct

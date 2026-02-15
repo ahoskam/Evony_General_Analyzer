@@ -1,0 +1,149 @@
+GENERAL: Leonidas I
+ROLE: Unknown
+Leadership: 110 (9.17)
+Attack: 112 (8.54)
+Defense: 120 (9.35)
+Politics: 103 (8.33)
+
+==============================
+BASE SKILL | The 300 Spartans
+==============================
+InCityGroundAttackPct +30
+InCityGroundHPPct +30
+InCityRangedAttackPct +25
+Condition: When General is the Main City Defense General
+
+==============================
+ASCENSION 1
+==============================
+InCityMountedDefensePct +15
+InCityGroundDefensePct +15
+InCityMountedHPPct +10
+InCityGroundHPPct +10
+Condition: When General is the Main City Defense General
+
+==============================
+ASCENSION 2
+==============================
+HospitalCapacityPct +20
+Condition: When General is the Main City Defense General
+
+==============================
+ASCENSION 3
+==============================
+InCityMountedAttackPct +20
+InCityGroundAttackPct +20
+InCityMountedDefensePct +15
+InCityGroundDefensePct +15
+Condition: When General is the Main City Defense General
+
+==============================
+ASCENSION 4
+==============================
+InCityGroundAttackPct +30
+InCityMountedHPPct +20
+InCityGroundHPPct +20
+Condition: When General is the Main City Defense General
+
+==============================
+ASCENSION 5
+==============================
+InCityRangedAttackPct +20
+InCityGroundHPPct +30
+Condition: When General is the Main City Defense General
+
+==============================
+# SPECIALTY 1 | Ground Troop Assault
+==============================
+SPECIALTY 1 L5:
+GroundAttackPct +10
+GroundHPPct +10
+
+==============================
+# SPECIALTY 2 | Defensive
+==============================
+SPECIALTY 2 L5:
+HospitalCapacityPct +10
+InCityGroundAttackPct +10
+InCityMountedAttackPct +10
+Condition: Applied to Main City Defense General
+
+==============================
+# SPECIALTY 3 | Ground Troop Ares
+==============================
+SPECIALTY 3 L5:
+GroundAttackPct +10
+GroundHPPct +10
+GroundDefensePct +10
+
+==============================
+# SPECIALTY 4 | Battle of Thermopylae
+==============================
+SPECIALTY 4 L5:
+GroundAttackPct +30
+EnemyMountedAttackPct -30
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - InCityGroundAttackPct
+# - InCityGroundHPPct
+# - InCityRangedAttackPct
+# - InCityMountedDefensePct
+# - InCityGroundDefensePct
+# - InCityMountedHPPct
+# - InCityMountedAttackPct
+# - EnemyMountedAttackPct
+
+InTavern=false
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+The 300 Spartans
+Increases in-city ground troops' attack and HP by 30%, and in-city ranged troops' attack by 25% when General is the Main City Defense General.
+
+# ASCENSION_1_TEXT:
+When General is the Main City Defense General, In-city Mounted Troop and Ground Troop Defense +15% and HP +10%
+
+# ASCENSION_2_TEXT:
+When General is the Main City Defense General, Hospital Capacity +20%
+
+# ASCENSION_3_TEXT:
+When General is the Main City Defense General, In-city Mounted Troop and Ground Troop Attack +20% and Defense +15%
+
+# ASCENSION_4_TEXT:
+When General is the Main City Defense General, In-city Ground Troop Attack +30% and In-city Mounted Troop and Ground Troop HP +20%
+
+# ASCENSION_5_TEXT:
+When General is the Main City Defense General, In-city Ranged Troop Attack +20% and In-city Ground Troop HP +30%
+
+# SPECIALTY_1_TEXT:
+Ground Troop Assault(Max Level Attributes)
+Ground Troop Attack +10%
+Ground Troop HP +10%
+
+# SPECIALTY_2_TEXT:
+Defensive(Max Level Attributes)
+Applied to Main City Defense General
+Hospital Capacity +10%
+In-city Ground Troop and Mounted Troop Attack +10%
+
+# SPECIALTY_3_TEXT:
+Ground Troop Ares(Max Level Attributes)
+Ground Troop Attack +10%
+Ground Troop HP +10%
+Ground Troop Defense +10%
+
+# SPECIALTY_4_TEXT:
+Battle of Thermopylae(Max Level Attributes)
+Ground Troop Attack +30%
+Enemy Mounted Troop Attack -30%

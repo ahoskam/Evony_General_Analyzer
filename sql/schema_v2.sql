@@ -7,6 +7,7 @@ CREATE TABLE generals (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
     name            TEXT NOT NULL UNIQUE,
     role            TEXT NOT NULL,
+    role_confirmed  INTEGER NOT NULL DEFAULT 1,
     in_tavern       INTEGER NOT NULL CHECK (in_tavern IN (0,1)),
     base_skill_name TEXT NOT NULL,
 
@@ -42,6 +43,22 @@ CREATE TABLE stat_key_aliases (
     stat_key_id   INTEGER NOT NULL,
     FOREIGN KEY (stat_key_id) REFERENCES stat_keys(id)
 );
+
+-- ==========================================
+-- ALIAS TRANSFORMS (FOR MERGES / NORMALIZATION)
+-- ==========================================
+CREATE TABLE stat_key_transforms (
+    alias_key     TEXT PRIMARY KEY,      -- same string as stat_key_aliases.alias_key
+    stat_key_id   INTEGER NOT NULL,       -- should match stat_key_aliases.stat_key_id
+    multiplier    REAL NOT NULL DEFAULT 1.0,
+    notes         TEXT,
+
+    FOREIGN KEY (alias_key) REFERENCES stat_key_aliases(alias_key) ON DELETE CASCADE,
+    FOREIGN KEY (stat_key_id) REFERENCES stat_keys(id) ON DELETE CASCADE
+);
+
+CREATE INDEX idx_transforms_statkey ON stat_key_transforms(stat_key_id);
+
 
 -- ==========================================
 -- STAT OCCURRENCES (NO DATA LOSS)

@@ -1,0 +1,78 @@
+GENERAL: Richard the Lionheart
+ROLE: Unknown
+Leadership: 115 (9.23)
+Attack: 105 (7.85)
+Defense: 118 (9.05)
+Politics: 101 (7.72)
+
+==============================
+BASE SKILL | King’s Blessing
+==============================
+Increases Hospital Capacity by 30% when General is the Main City's Defense General.
+
+==============================
+ASCENSION 1
+==============================
+When General is the Main City Defense General, In-city Troops HP +20%
+
+==============================
+ASCENSION 2
+==============================
+When General is the Main City Defense General, In-city Troops Defense +15%, Hospital Capacity +15%
+
+==============================
+ASCENSION 3
+==============================
+When General is the Main City Defense General, In-city Troops Attack +5% and HP +20%
+
+==============================
+ASCENSION 4
+==============================
+When General is the Main City Defense General, In-city Troops Attack +10% and Defense +20%
+
+==============================
+ASCENSION 5
+==============================
+When General is the Main City Defense General, In-city Troops Attack +10%, Defense and HP +15%
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Siege Machine Defense
+SPECIALTY 1 L5CompletedTotal:
+SiegeMachineHPPct +10
+SiegeMachineDefensePct +10
+
+# SPECIALTY 2 | Defensive
+SPECIALTY 2 L5CompletedTotal:
+HospitalCapacityPct +10
+InCityGroundAttackPct +10
+InCityMountedAttackPct +10
+
+# SPECIALTY 3 | Siege Machine Ares
+SPECIALTY 3 L5CompletedTotal:
+SiegeMachineAttackPct +10
+SiegeMachineHPPct +10
+SiegeMachineDefensePct +10
+
+# SPECIALTY 4 | Battle of Arsuf
+SPECIALTY 4 L5CompletedTotal:
+HospitalCapacityPct +36
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - InCityTroopsHPPct
+# - InCityTroopsDefensePct
+# - InCityTroopsAttackPct
+# - InCityGroundAttackPct
+# - InCityMountedAttackPct
+
+InTavern=true

@@ -1,0 +1,124 @@
+GENERAL: Carus
+ROLE: Unknown
+Leadership: 116 (9.09)
+Attack: 119 (8.66)
+Defense: 115 (8.78)
+Politics: 112 (8.65)
+
+==============================
+BASE SKILL | Expedition to Persia
+==============================
+AttackingTroopAttackPct +10
+AttackingGroundAttackPct +25
+
+==============================
+ASCENSION 1
+==============================
+AttackingTroopAttackPct +5
+AttackingGroundDefensePct +10
+
+==============================
+ASCENSION 2
+==============================
+EnemyInCityTroopWoundedIntoDeathRatePct +10
+
+==============================
+ASCENSION 3
+==============================
+RallyCapacityPct +8
+Condition: When General is launching Alliance War.
+
+==============================
+ASCENSION 4
+==============================
+AttackingGroundAttackPct +20
+AttackingGroundHPPct +20
+
+==============================
+ASCENSION 5
+==============================
+AttackingTroopAttackPct +10
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Ground Troop Assault
+SPECIALTY 1 L5CompletedTotal:
+GroundAttackPct +10
+GroundHPPct +10
+
+# SPECIALTY 2 | Annihilation
+SPECIALTY 2 L5CompletedTotal:
+MarchSizeCapacityPct +6
+AttackingMountedAttackPct +10
+AttackingGroundAttackPct +10
+
+# SPECIALTY 3 | War God
+SPECIALTY 3 L5CompletedTotal:
+AllTroopAttackPct +6
+
+# SPECIALTY 4 | Persicus Maximus
+SPECIALTY 4 L5CompletedTotal:
+AttackingMountedAttackPct +20
+AttackingGroundAttackPct +20
+AttackingMountedDefensePct +20
+AttackingGroundDefensePct +20
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - EnemyInCityTroopWoundedIntoDeathRatePct | Enemy In-city Troop Wounded into Death rate
+# - RallyCapacityPct | Rally Capacity
+# - MarchSizeCapacityPct | March Size Capacity
+
+InTavern=false
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Expedition to Persia
+Increases Troop Attack by 10% and increases ground troops' attack by another 25% when General is leading the army to attack.
+
+# ASCENSION_1_TEXT:
+Attacking Troops Attack +5%,
+Attacking Ground Troop Defense +10%
+
+# ASCENSION_2_TEXT:
+Enemy In-city Troop Wounded into Death rate +10%
+
+# ASCENSION_3_TEXT:
+When General is launching Alliance War, Rally Capacity +8%
+
+# ASCENSION_4_TEXT:
+Attacking Ground Troop Attack +20% and HP +20%
+
+# ASCENSION_5_TEXT:
+Attacking Troops Attack +10%
+
+# SPECIALTY_1_L5_TEXT:
+Ground Troop Assault(Max Level Attributes)
+Ground Troop Attack +10%
+Ground Troop HP +10%
+
+# SPECIALTY_2_L5_TEXT:
+Annihilation(Max Level Attributes)
+March Size Capacity +6%
+Attacking Mounted Troop and Ground Troop Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+War God(Max Level Attributes)
+All Troops Attack +6%
+
+# SPECIALTY_4_L5_TEXT:
+Persicus Maximus(Max Level Attributes)
+Attacking Mounted Troop and Ground Troop Attack +20%
+Attacking Mounted Troop and Ground Troop Defense +20%

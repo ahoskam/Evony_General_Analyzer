@@ -1,0 +1,135 @@
+GENERAL: Guinevere (Awakened)
+ROLE: Duty
+IN_TAVERN: false
+
+
+Leadership: 111 (8.75)
+Attack: 118 (9.04)
+Defense: 118 (9.03)
+Politics: 109 (8.70)
+
+BASE SKILL | Queen of Camelot
+InCityRangedTroopAttackPct +35
+InCityRangedTroopDefensePct +35
+EnemyRangedTroopDefensePct -15
+EnemyRangedTroopHPPct -15
+EnemySiegeMachineDefensePct -15
+EnemySiegeMachineHPPct -15
+
+ASCENSION 1
+MayorConstructionSpeedSubordinateCityPct +4
+InCityRangedTroopHPPct +35
+InCitySiegeMachineHPPct +35
+
+ASCENSION 2
+MayorConstructionSpeedSubordinateCityPct +6
+InCityRangedTroopDefensePct +40
+InCitySiegeMachineDefensePct +40
+
+ASCENSION 3
+InCityTroopsAttackPct +15
+InCityTroopsDefensePct +15
+InCityTroopsHPPct +15
+
+ASCENSION 4
+EnemyRangedTroopDefensePct -25
+EnemyRangedTroopHPPct -25
+EnemySiegeMachineDefensePct -25
+EnemySiegeMachineHPPct -25
+
+ASCENSION 5
+RangedTroopAttackPct +15
+RangedTroopDefensePct +15
+RangedTroopHPPct +15
+SiegeMachineDefensePct +15
+SiegeMachineHPPct +15
+
+SPECIALTY 1 L1:
+RangedTroopAttackPct +1
+RangedTroopDefensePct +1
+SPECIALTY 1 L2:
+RangedTroopAttackPct +1
+RangedTroopDefensePct +1
+SPECIALTY 1 L3:
+RangedTroopAttackPct +2
+RangedTroopDefensePct +2
+SPECIALTY 1 L4:
+RangedTroopAttackPct +2
+RangedTroopDefensePct +2
+SPECIALTY 1 L5:
+RangedTroopAttackPct +4
+RangedTroopDefensePct +4
+
+SPECIALTY 2 L5:
+EnemyTroopDefensePct -10
+
+SPECIALTY 3 L5:
+MayorTroopCapacitySubordinateCityPct +80
+# NEW STAT KEYS NOTE:
+- MayorFoodProtectedFromTroopUpkeepPct
+InCityTroopAttackPct +10
+
+SPECIALTY 4 L5:
+InCityTroopAttackPct +10
+InCityRangedTroopAttackPct +30
+EnemyGroundTroopDefensePct -30
+EnemyMountedTroopDefensePct -30
+
+COVENANT | War
+# None available (locked)
+COVENANT | Cooperation
+# None available (locked)
+COVENANT | Peace
+# None available (locked)
+COVENANT | Faith
+# None available (locked)
+COVENANT | Honor
+# None available (locked)
+COVENANT | Civilization
+# None available (locked)
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Queen of Camelot
+Increases in-city ranged troops' attack and defense by 35% and reduces enemy ranged troops and siege machines' defense and HP by 15% when General is the Warehouse Officer.
+
+# ASCENSION_1_TEXT:
+When General is the Warehouse Officer, Construction Speed +4%, In-city Ranged Troop and Siege Machine HP +35%
+
+# ASCENSION_2_TEXT:
+When General is the Warehouse Officer, Construction Speed +6%, In-city Ranged Troop and Siege Machine Defense +40%
+
+# ASCENSION_3_TEXT:
+When General is the Warehouse Officer, In-city Troops Attack, Defense and HP +15%
+
+# ASCENSION_4_TEXT:
+When General is the Warehouse Officer, Enemy Ranged Troop and Siege Machine Defense and HP -25%
+
+# ASCENSION_5_TEXT:
+When General is the Warehouse Officer, Ranged Troop Attack +15%, Ranged Troop and Siege Machine Defense and HP +15%
+
+# SPECIALTY_1_L5_TEXT:
+Ranged Troop Formation(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Sabotage(Max Level Attributes)
+Enemy Troop Defense -10%
+
+# SPECIALTY_3_L5_TEXT:
+Sage(Max Level Attributes)
+Applied to Warehouse Officer
+Resources Protected +80%
+Food Protected from Troop Upkeep +120%
+In City Troop Attack +10%
+
+# SPECIALTY_4_L5_TEXT:
+Nun’s Salvation(Max Level Attributes)
+Applied to Warehouse Officer
+In City Troop Attack +10%
+In City Ranged Troop Attack +30%
+Enemy Ground Troop and Mounted Troop Defense -30%

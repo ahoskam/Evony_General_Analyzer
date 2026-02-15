@@ -1,0 +1,74 @@
+GENERAL: El Cid
+ROLE: Unknown
+Leadership: 114 (9.06)
+Attack: 115 (8.65)
+Defense: 120 (8.75)
+Politics: 110 (8.47)
+
+==============================
+BASE SKILL | National Warrior
+==============================
+Increases Troop Attack by 10% when General is leading the army to attack.
+Increases ground troops and mounted troops' attack by 15% when General brings any dragon.
+
+==============================
+ASCENSION 1
+==============================
+Attacking Ground Troop and Mounted Troop Defense +10%
+Attacking Ground Troop and Mounted Troop HP +10%
+
+==============================
+ASCENSION 2
+==============================
+Enemy In-city Troop Wounded into Death rate +10%
+
+==============================
+ASCENSION 3
+==============================
+When General is launching Alliance War, Rally Capacity +8%
+
+==============================
+ASCENSION 4
+==============================
+Attacking Mounted Troop and Ground Troop HP +20%
+
+==============================
+ASCENSION 5
+==============================
+Attacking Mounted Troop and Ground Troop Attack +15%
+Attacking Mounted Troop and Ground Troop Defense +15%
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Mounted Troop Formation
+SPECIALTY 1 L5:
+Mounted Troop Attack +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY 2 | Formation
+SPECIALTY 2 L5:
+Ground Troop and Mounted Troop Attack +10%
+
+# SPECIALTY 3 | War God
+SPECIALTY 3 L5:
+All Troops Attack +6%
+
+# SPECIALTY 4 | The Poem of the Cid
+SPECIALTY 4 L5:
+Attacking Mounted Troop and Ground Troop Attack +30%
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - EnemyInCityTroopWoundedIntoDeathRatePct
+# - RallyCapacityPct
+
+InTavern=false

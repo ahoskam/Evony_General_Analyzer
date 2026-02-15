@@ -1,0 +1,94 @@
+GENERAL: Queen Boudica
+ROLE: Unknown
+Leadership: 108 (8.84)
+Attack: 109 (8.65)
+Defense: 109 (8.45)
+Politics: 115 (8.65)
+
+==============================
+BASE SKILL | Rebel Leader
+==============================
+InCityGroundTroopHPPct +15
+InCityMountedTroopHPPct +15
+InCityMountedTroopAttackPct +30
+Condition: When General is the Main City Defense General
+
+==============================
+ASCENSION 1
+==============================
+InCityMountedTroopHPPct +20
+InCityGroundTroopHPPct +20
+Condition: When General is the Main City Defense General
+
+==============================
+ASCENSION 2
+==============================
+HospitalCapacityPct +20
+Condition: When General is the Main City Defense General
+
+==============================
+ASCENSION 3
+==============================
+InCityMountedTroopDefensePct +30
+InCityGroundTroopHPPct +15
+InCityMountedTroopHPPct +15
+Condition: When General is the Main City Defense General
+
+==============================
+ASCENSION 4
+==============================
+InCityMountedTroopHPPct +30
+InCityGroundTroopDefensePct +30
+InCityMountedTroopDefensePct +30
+Condition: When General is the Main City Defense General
+
+==============================
+ASCENSION 5
+==============================
+InCityMountedTroopAttackPct +20
+InCityMountedTroopDefensePct +30
+InCityMountedTroopHPPct +30
+Condition: When General is the Main City Defense General
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Mounted Troop Defense
+SPECIALTY 1 L5CompletedTotal:
+MountedTroopHPPct +10
+MountedTroopDefensePct +10
+
+# SPECIALTY 2 | Defensive
+SPECIALTY 2 L5CompletedTotal:
+HospitalCapacityPct +10
+InCityGroundTroopAttackPct +10
+InCityMountedTroopAttackPct +10
+
+# SPECIALTY 3 | War God
+SPECIALTY 3 L5CompletedTotal:
+AllTroopsAttackPct +6
+
+# SPECIALTY 4 | Battle of Watling Street
+SPECIALTY 4 L5CompletedTotal:
+InCityMountedTroopAttackPct +46
+InCityMountedTroopHPPct +46
+Condition: Applied to Main City Defense General
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - InCityGroundTroopHPPct
+# - InCityMountedTroopHPPct
+# - InCityMountedTroopAttackPct
+# - InCityMountedTroopDefensePct
+# - InCityGroundTroopDefensePct
+# - InCityGroundTroopAttackPct
+
+InTavern=true

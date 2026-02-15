@@ -1,0 +1,81 @@
+GENERAL: Joan of Arc
+ROLE: Mounted
+IN_TAVERN: true
+
+Leadership: 95 (6.35)
+Attack: 101 (7.69)
+Defense: 102 (7.78)
+Politics: 65 (5.35)
+
+BASE SKILL | Holy Light
+MountedTroopHPPct +35
+
+ASCENSION 1
+MountedTroopDefensePct +10
+MountedTroopHPPct +10
+
+ASCENSION 2
+MountedTroopAttackPct +10
+
+ASCENSION 3
+TroopHPPct +10
+
+ASCENSION 4
+GroundTroopDefensePct +10
+GroundTroopHPPct +10
+MountedTroopDefensePct +10
+MountedTroopHPPct +10
+
+ASCENSION 5
+MountedTroopAttackPct +20
+
+SPECIALTY 1 L5:
+MountedTroopHPPct +10
+MountedTroopDefensePct +10
+
+SPECIALTY 2 L5:
+EnemyTroopHPPct -10
+
+SPECIALTY 3 L5:
+AttackingTroopDeathToWoundedRatePct +10
+
+SPECIALTY 4 L5:
+nothing
+
+# None available (locked or not shown)
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Holy Light
+Increases Mounted Troop HP by 35% when General is leading the army.
+
+# ASCENSION_1_TEXT:
+Mounted Troop Defense +10% and HP +10%
+
+# ASCENSION_2_TEXT:
+Mounted Troop Attack +10%
+
+# ASCENSION_3_TEXT:
+Troops HP +10%
+
+# ASCENSION_4_TEXT:
+Ground Troop and Mounted Troop Defense +10% and HP +10%
+
+# ASCENSION_5_TEXT:
+Mounted Troop Attack +20%
+
+# SPECIALTY_1_L5_TEXT:
+Mounted Troop Defense(Max Level Attributes)
+Mounted Troop HP +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Suppress(Max Level Attributes)
+Enemy Troop HP -10%
+
+# SPECIALTY_3_L5_TEXT:
+Unparalleled Leader(Max Level Attributes)
+The death-turning-wounded rate of troops when they are attacking. +10%

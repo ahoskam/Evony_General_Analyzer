@@ -1,0 +1,116 @@
+GENERAL: Blanche
+ROLE: Duty
+IN_TAVERN: false
+
+Leadership: 112 (8.13)
+Attack: 132 (9.43)
+Defense: 137 (9.48)
+Politics: 101 (7.95)
+
+BASE SKILL | Art of Regency
+HospitalCapacityPct +20
+HealingSpeedPct +20
+TroopDefensePct +8
+TroopHPPct +8
+
+ASCENSION 1
+TroopAttackPct +5
+TroopHPPct +10
+
+ASCENSION 2
+EnemyTroopHPPct -10
+EnemyTroopDefensePct -10
+
+ASCENSION 3
+InCityTroopAttackPct +10
+InCityTroopsDefensePct +10
+InCityTroopsHPPct +10
+
+ASCENSION 4
+EnemyTroopHPPct -10
+EnemyTroopDefensePct -10
+
+ASCENSION 5
+TroopHPPct +10
+TroopDefensePct +10
+
+SPECIALTY 1 L5:
+RangedTroopAttackPct +10
+RangedTroopDefensePct +10
+
+SPECIALTY 2 L5:
+HospitalCapacityPct +10
+InCityGroundTroopAttackPct +10
+InCityMountedTroopAttackPct +10
+
+SPECIALTY 3 L5:
+HealingSpeedPct +20
+
+SPECIALTY 4 L5:
+HealingSpeedPct +50
+InCityTroopAttackPct +8
+InCityTroopDefensePct +8
+
+COVENANT | War
+# None available (locked)
+
+COVENANT | Cooperation
+# None available (locked)
+
+COVENANT | Peace
+# None available (locked)
+
+COVENANT | Faith
+# None available (locked)
+
+COVENANT | Honor
+# None available (locked)
+
+COVENANT | Civilization
+# None available (locked)
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Art of Regency
+Increases hospital capacity and healing speed by 20% and troops' defense and HP by 8% when General is the hospital officer.
+
+# ASCENSION_1_TEXT:
+When General is the Hospital Officer, Troops Attack +5% and HP +10%
+
+# ASCENSION_2_TEXT:
+When General is the Hospital Officer, Enemy Troop HP -10% and Defense -10%
+
+# ASCENSION_3_TEXT:
+When General is the Hospital Officer, In-city Troops Attack +10%, Defense and HP +10%
+
+# ASCENSION_4_TEXT:
+When General is the Hospital Officer, Enemy Troop HP -10% and Defense -10%
+
+# ASCENSION_5_TEXT:
+When General is the Hospital Officer, Troops HP +10% and Defense +10%
+
+# SPECIALTY_1_L5_TEXT:
+Ranged Troop Formation(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Defensive(Max Level Attributes)
+Applied to Main City Defense General
+Hospital Capacity +10%
+In-city Ground Troop and Mounted Troop Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Sage(Max Level Attributes)
+Applied to Hospital Officer
+Healing Speed +20%
+
+# SPECIALTY_4_L5_TEXT:
+Noble Mother Blanche(Max Level Attributes)
+Applied to Hospital Officer
+Healing Speed +50%
+In City Troop Attack +8%
+In-City Troop Defense +8%

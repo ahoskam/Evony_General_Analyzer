@@ -1,0 +1,124 @@
+GENERAL: Theodora
+ROLE: Unknown
+Leadership: 105 (8.23)
+Attack: 109 (8.45)
+Defense: 108 (8.63)
+Politics: 110 (8.85)
+
+==============================
+BASE SKILL | Legendary Empress
+==============================
+AttackingGroundAttackPct +30
+AttackingMountedAttackPct +30
+AttackingDoubleItemsDropRateFromMonstersPct +10
+
+==============================
+ASCENSION 1
+==============================
+AttackingGroundAttackPct +10
+AttackingMountedAttackPct +10
+AttackingGroundDefensePct +20
+AttackingMountedDefensePct +20
+# Condition: When attacking Monsters
+
+==============================
+ASCENSION 2
+==============================
+AttackingEnemyDefensePct -10
+AttackingGroundHPPct +25
+AttackingMountedHPPct +25
+# Condition: When attacking Monsters
+
+==============================
+ASCENSION 3
+==============================
+AttackingEnemyAttackPct -10
+AttackingGroundDefensePct +25
+AttackingMountedDefensePct +25
+# Condition: When attacking Monsters
+
+==============================
+ASCENSION 4
+==============================
+AttackingGroundAttackPct +20
+AttackingMountedAttackPct +20
+AttackingGroundHPPct +20
+AttackingMountedHPPct +20
+# Condition: When attacking Monsters
+
+==============================
+ASCENSION 5
+==============================
+AttackingGroundAttackPct +25
+AttackingMountedAttackPct +25
+AttackingGroundDefensePct +15
+AttackingMountedDefensePct +15
+AttackingGroundHPPct +15
+AttackingMountedHPPct +15
+# Condition: When attacking Monsters
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Inspiration
+SPECIALTY 1 L1:
+AttackingRangedAttackPct +2
+SPECIALTY 1 L2:
+AttackingRangedAttackPct +2
+SPECIALTY 1 L3:
+AttackingRangedAttackPct +4
+SPECIALTY 1 L4:
+AttackingRangedAttackPct +4
+SPECIALTY 1 L5:
+AttackingRangedAttackPct +8
+# Ranged Troop Attack on Monsters +20%
+
+# SPECIALTY 2 | Fortune
+SPECIALTY 2 L1:
+AttackingDoubleItemsDropRateFromMonstersPct +1
+SPECIALTY 2 L2:
+AttackingDoubleItemsDropRateFromMonstersPct +1
+SPECIALTY 2 L3:
+AttackingDoubleItemsDropRateFromMonstersPct +1
+SPECIALTY 2 L4:
+AttackingDoubleItemsDropRateFromMonstersPct +2
+SPECIALTY 2 L5:
+AttackingDoubleItemsDropRateFromMonstersPct +3
+# Double Items Drop Rate from Monsters +15%
+
+# SPECIALTY 3 | Unparalleled Leader
+SPECIALTY 3 L1:
+AttackingTroopDeathToWoundedRatePct +1
+SPECIALTY 3 L2:
+AttackingTroopDeathToWoundedRatePct +1
+SPECIALTY 3 L3:
+AttackingTroopDeathToWoundedRatePct +2
+SPECIALTY 3 L4:
+AttackingTroopDeathToWoundedRatePct +2
+SPECIALTY 3 L5:
+AttackingTroopDeathToWoundedRatePct +4
+# The death-turning-wounded rate of troops when they are attacking +10%
+
+# SPECIALTY 4 | Partner of Justinian
+SPECIALTY 4 L5CompletedTotal: 15
+AttackingGroundAttackPct +15
+AttackingMountedAttackPct +15
+AttackingMonstersAttackPct -15
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - AttackingDoubleItemsDropRateFromMonstersPct | Double Items Drop Rate from Monsters when attacking
+# - AttackingEnemyDefensePct | Enemy Defense when attacking
+# - AttackingEnemyAttackPct | Enemy Attack when attacking
+# - AttackingMonstersAttackPct | Monsters Attack when attacking
+# - AttackingTroopDeathToWoundedRatePct | Death-turning-wounded rate when attacking
+
+InTavern=false

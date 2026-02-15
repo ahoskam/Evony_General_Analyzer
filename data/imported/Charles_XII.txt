@@ -1,0 +1,104 @@
+GENERAL: Charles XII
+ROLE: Ranged
+IN_TAVERN: true
+
+Leadership: 112 (8.82)
+Attack: 121 (8.94)
+Defense: 120 (9.08)
+Politics: 104 (8.57)
+
+BASE SKILL | Great Northern War
+RangedAttackPct +40
+MarchSizeCapacityPct +10
+RangedDefensePct +10
+SiegeMachineDefensePct +10
+
+ASCENSION 1
+AttackingRangedTroopAttackPct +5
+AttackingSiegeMachineAttackPct +5
+AttackingRangedTroopDefensePct +15
+AttackingSiegeMachineDefensePct +15
+
+ASCENSION 2
+EnemyInCityTroopWoundedToDeathRatePct +10
+
+ASCENSION 3
+AttackingRangedTroopDefensePct +15
+AttackingSiegeMachineDefensePct +15
+MarchSizeCapacityPct +6
+
+ASCENSION 4
+AttackingRangedTroopAttackPct +10
+AttackingSiegeMachineAttackPct +10
+AttackingRangedTroopDefensePct +20
+AttackingSiegeMachineDefensePct +20
+
+ASCENSION 5
+AttackingRangedTroopAttackPct +15
+AttackingRangedTroopDefensePct +25
+AttackingRangedTroopHPPct +25
+
+SPECIALTY 1 L5:
+RangedTroopAttackPct +10
+RangedTroopDefensePct +10
+
+SPECIALTY 2 L5:
+RangedTroopAttackPct +10
+SiegeMachineAttackPct +10
+
+SPECIALTY 3 L5:
+RangedTroopAttackPct +10
+RangedTroopHPPct +10
+RangedTroopDefensePct +10
+
+SPECIALTY 4 L5:
+AttackingSiegeMachineAttackPct +35
+AttackingRangedTroopAttackPct +35
+AttackingRangedTroopDefensePct +10
+AttackingRangedTroopHPPct +10
+
+# None available (locked or not shown)
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Great Northern War
+Increases ranged troops' attack by 40% and increases the March Size and ranged troops and siege machines' defense by 10% when General is leading the army to attack.
+
+# ASCENSION_1_TEXT:
+Attacking Ranged Troop and Siege Machine Attack +5% and Defense +15%
+
+# ASCENSION_2_TEXT:
+Enemy In-city Troop Wounded into Death rate +10%
+
+# ASCENSION_3_TEXT:
+When attacking, Ranged Troop and Siege Machine Defense +15%, March Size Capacity +6%
+
+# ASCENSION_4_TEXT:
+Attacking Ranged Troop and Siege Machine Attack +10% and Defense +20%
+
+# ASCENSION_5_TEXT:
+Attacking Ranged Troop Attack +15%, Defense and HP +25%
+
+# SPECIALTY_1_L5_TEXT:
+Ranged Troop Formation(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Ranged Troop Ares(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop HP +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Battle of Narva(Max Level Attributes)
+Attacking Siege Machine and Ranged Troop Attack +35%
+Attacking Ranged Troop Defense +10%
+Attacking Ranged Troop HP +10%

@@ -1,0 +1,121 @@
+GENERAL: Maximilian II
+ROLE: Unknown
+Leadership: 113 (8.78)
+Attack: 114 (8.81)
+Defense: 120 (9.35)
+Politics: 101 (8.52)
+
+==============================
+BASE SKILL | The White Emperor
+==============================
+AttackingMountedAttackPct +30
+AttackingMountedDefensePct +30
+AttackingEnemyRangedAttackPct -20
+
+==============================
+ASCENSION 1
+==============================
+AttackingMountedAttackPct +10
+AttackingMountedDefensePct +10
+AttackingGroundAttackPct +10
+AttackingGroundDefensePct +10
+
+==============================
+ASCENSION 2
+==============================
+EnemyInCityTroopWoundedIntoDeathRatePct +10
+
+==============================
+ASCENSION 3
+==============================
+MarchSizeCapacityPct +14
+
+==============================
+ASCENSION 4
+==============================
+AttackingMountedHPPct +20
+AttackingGroundHPPct +20
+
+==============================
+ASCENSION 5
+==============================
+AttackingMountedAttackPct +20
+AttackingMountedDefensePct +15
+AttackingMountedHPPct +15
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Mounted Troop Assault
+SPECIALTY 1 L5CompletedTotal:
+MountedAttackPct +10
+MountedHPPct +10
+
+# SPECIALTY 2 | Snipe
+SPECIALTY 2 L5CompletedTotal:
+EnemyTroopAttackPct -10
+
+# SPECIALTY 3 | War God
+SPECIALTY 3 L5CompletedTotal:
+AllTroopsAttackPct +6
+
+# SPECIALTY 4 | Battle of Guinegate
+SPECIALTY 4 L5CompletedTotal:
+MountedAttackPct +30
+EnemyRangedDefensePct -30
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - AttackingEnemyRangedAttackPct
+# - EnemyInCityTroopWoundedIntoDeathRatePct
+
+InTavern=false
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+The White Emperor
+Increases your mounted troops' attack and defense by 30% and reduces enemy ranged troops' attack by 20% when General is leading the army to attack.
+
+# ASCENSION_1_TEXT:
+Attacking Mounted Troop and Ground Troop Attack +10% and Defense +10%
+
+# ASCENSION_2_TEXT:
+Enemy In-city Troop Wounded into Death rate +10%
+
+# ASCENSION_3_TEXT:
+March Size Capacity +14%
+
+# ASCENSION_4_TEXT:
+Attacking Mounted Troop and Ground Troop HP +20%
+
+# ASCENSION_5_TEXT:
+Attacking Mounted Troop Attack +20%, Defense and HP +15%
+
+# SPECIALTY_1_MAX_TEXT:
+Mounted Troop Assault(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop HP +10%
+
+# SPECIALTY_2_MAX_TEXT:
+Snipe(Max Level Attributes)
+Enemy Troop Attack -10%
+
+# SPECIALTY_3_MAX_TEXT:
+War God(Max Level Attributes)
+All Troops Attack +6%
+
+# SPECIALTY_4_MAX_TEXT:
+Battle of Guinegate(Max Level Attributes)
+Mounted Troop Attack +30%
+Enemy Ranged Troop Defense -30%

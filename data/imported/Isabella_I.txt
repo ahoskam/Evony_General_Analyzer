@@ -1,0 +1,86 @@
+GENERAL: Isabella I
+ROLE: Unknown
+Leadership: 115 (8.86)
+Attack: 112 (8.27)
+Defense: 113 (8.28)
+Politics: 120 (9.15)
+
+==============================
+BASE SKILL | Queen’s Expansion
+==============================
+MountedAttackPct +10
+SiegeAttackPct +10
+AttackingMarchSizePct +10 (When General brings any Sacred Dragon)
+
+==============================
+ASCENSION 1
+==============================
+AttackingMountedDefensePct +15
+AttackingMountedHPPct +15
+
+==============================
+ASCENSION 2
+==============================
+AttackingTroopDeathToWoundedRatePct +8
+
+==============================
+ASCENSION 3
+==============================
+RallyCapacityPct +6 (When launching Alliance War)
+
+==============================
+ASCENSION 4
+==============================
+AttackingMountedAttackPct +10
+AttackingMountedDefensePct +15
+AttackingMountedHPPct +15
+
+==============================
+ASCENSION 5
+==============================
+AttackingSiegeAttackPct +15
+AttackingSiegeDefensePct +15
+AttackingSiegeHPPct +15
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Siege Machine Assault
+SPECIALTY 1 L5CompletedTotal:
+SiegeAttackPct +10
+SiegeHPPct +10
+
+# SPECIALTY 2 | Bash
+SPECIALTY 2 L5CompletedTotal:
+RangedAttackPct +10
+SiegeAttackPct +10
+
+# SPECIALTY 3 | King's Ambition
+SPECIALTY 3 L5CompletedTotal:
+MainCityTroopDeathToSoulRatePct +10
+
+# SPECIALTY 4 | Age of Discovery
+SPECIALTY 4 L5CompletedTotal:
+AttackingSiegeAttackPct +30 (When General brings any dragon)
+MarchSizeCapacityPct +10 (When General brings any dragon)
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - AttackingMountedDefensePct
+# - AttackingMountedHPPct
+# - AttackingMountedAttackPct
+# - AttackingSiegeAttackPct
+# - AttackingSiegeDefensePct
+# - AttackingSiegeHPPct
+# - MainCityTroopDeathToSoulRatePct
+# - MarchSizeCapacityPct
+
+InTavern=true

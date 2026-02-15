@@ -1,0 +1,170 @@
+GENERAL: Elizabeth I
+ROLE: Unknown
+Leadership: 115 (8.73)
+Attack: 113 (8.72)
+Defense: 112 (8.65)
+Politics: 120 (9.25)
+
+==============================
+BASE SKILL | Glory of the Queen
+==============================
+RangedTroopAttackPct +15
+SiegeMachineAttackPct +15
+EnemyRangedTroopAttackPct -15
+# Condition: when General is leading the army
+
+==============================
+ASCENSION 1
+==============================
+RangedTroopDefensePct +5
+SiegeMachineDefensePct +5
+RangedTroopHPPct +10
+SiegeMachineHPPct +10
+
+==============================
+ASCENSION 2
+==============================
+AttackingTroopDeathToWoundedRatePct +10
+
+==============================
+ASCENSION 3
+==============================
+MarchSizeCapacityPct +14
+
+==============================
+ASCENSION 4
+==============================
+RangedTroopDefensePct +15
+SiegeMachineDefensePct +15
+RangedTroopHPPct +10
+SiegeMachineHPPct +10
+
+==============================
+ASCENSION 5
+==============================
+RangedTroopAttackPct +15
+SiegeMachineAttackPct +15
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Ranged Troop Formation
+SPECIALTY 1 L1:
+RangedTroopAttackPct +1
+RangedTroopDefensePct +1
+SPECIALTY 1 L2:
+RangedTroopAttackPct +1
+RangedTroopDefensePct +1
+SPECIALTY 1 L3:
+RangedTroopAttackPct +2
+RangedTroopDefensePct +2
+SPECIALTY 1 L4:
+RangedTroopAttackPct +2
+RangedTroopDefensePct +2
+SPECIALTY 1 L5:
+RangedTroopAttackPct +4
+RangedTroopDefensePct +4
+
+# SPECIALTY 2 | Annihilation
+SPECIALTY 2 L5CompletedTotal: 6
+MarchSizeCapacityPct +6
+AttackingMountedAttackPct +10
+AttackingGroundAttackPct +10
+
+# SPECIALTY 3 | Ranged Troop Ares
+SPECIALTY 3 L1:
+RangedTroopAttackPct +1
+RangedTroopHPPct +1
+RangedTroopDefensePct +1
+SPECIALTY 3 L2:
+RangedTroopAttackPct +1
+RangedTroopHPPct +1
+RangedTroopDefensePct +1
+SPECIALTY 3 L3:
+RangedTroopAttackPct +2
+RangedTroopHPPct +2
+RangedTroopDefensePct +2
+SPECIALTY 3 L4:
+RangedTroopAttackPct +2
+RangedTroopHPPct +2
+RangedTroopDefensePct +2
+SPECIALTY 3 L5:
+RangedTroopAttackPct +4
+RangedTroopHPPct +4
+RangedTroopDefensePct +4
+
+# SPECIALTY 4 | Golden Age
+SPECIALTY 4 L5CompletedTotal: 20
+RangedTroopAttackPct +20
+EnemyRangedTroopAttackPct -25
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - MarchSizeCapacityPct
+
+InTavern=false
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Glory of the Queen
+Increases ranged troops and siege machines' attack
+by 15% and reduces enemy ranged troops' attack
+by 15% when General is leading the army.
+
+# ASCENSION_1_TEXT:
+Ranged Troop and Siege Machine
+Defense +5% and HP +10%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into
+Wounded Rate +10%
+
+# ASCENSION_3_TEXT:
+March Size Capacity +14%
+
+# ASCENSION_4_TEXT:
+Ranged Troop and Siege Machine
+Defense +15% and HP +10%
+
+# ASCENSION_5_TEXT:
+Ranged Troop and Siege Machine
+Attack +15%
+
+# SPECIALTY_1_MAX_TEXT:
+Ranged Troop
+Formation(Max Level
+Attributes)
+Ranged Troop Attack +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_2_MAX_TEXT:
+Annihilation(Max Level
+Attributes)
+March Size Capacity +6%
+Attacking Mounted Troop and
+Ground Troop Attack +10%
+
+# SPECIALTY_3_MAX_TEXT:
+Ranged Troop Ares(Max
+Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop HP +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_4_MAX_TEXT:
+Golden Age(Max Level
+Attributes)
+Ranged Troop Attack +20%
+Enemy Ranged Troop Attack
+-25%

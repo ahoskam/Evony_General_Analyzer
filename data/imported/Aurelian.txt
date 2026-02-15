@@ -1,0 +1,99 @@
+GENERAL: Aurelian
+ROLE: Ground
+IN_TAVERN: true
+
+Leadership: 118 (9.01)
+Attack: 120 (9.01)
+Defense: 114 (8.82)
+Politics: 105 (8.57)
+
+BASE SKILL | Restorer of the World
+AttackingGroundAttackPct +40
+AttackingGroundHPPct +35
+AttackingMountedHPPct +35
+
+ASCENSION 1
+AttackingGroundDefensePct +10
+AttackingGroundHPPct +10
+AttackingMountedDefensePct +10
+AttackingMountedHPPct +10
+
+ASCENSION 2
+EnemyInCityTroopWoundedToDeathRatePct +10
+
+ASCENSION 3
+AttackingGroundDefensePct +10
+AttackingGroundHPPct +10
+MarchSizeCapacityPct +8
+
+ASCENSION 4
+AttackingGroundAttackPct +15
+AttackingGroundDefensePct +25
+AttackingMountedDefensePct +25
+
+ASCENSION 5
+AttackingGroundAttackPct +20
+AttackingGroundDefensePct +20
+AttackingGroundHPPct +20
+
+SPECIALTY 1 L5:
+GroundAttackPct +10
+GroundDefensePct +10
+
+SPECIALTY 2 L5:
+EnemyTroopDefensePct -10
+
+SPECIALTY 3 L5:
+GroundAttackPct +10
+GroundHPPct +10
+GroundDefensePct +10
+
+SPECIALTY 4 L5:
+AttackingGroundAttackPct +35
+AttackingMountedHPPct +40
+AttackingGroundHPPct +40
+
+# None available (locked or not shown)
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Restorer of the World
+Increases ground troops' attack by 40% and increases ground troops and mounted troops' HP by 35% when General is leading the army to attack.
+
+# ASCENSION_1_TEXT:
+Attacking Ground Troop and Mounted Troop Defense +10% and HP +10%
+
+# ASCENSION_2_TEXT:
+Enemy In-city Troop Wounded into Death rate +10%
+
+# ASCENSION_3_TEXT:
+When attacking, Ground Troop Defense and HP +10%, March Size Capacity +8%
+
+# ASCENSION_4_TEXT:
+Attacking Ground Troop Attack +15%, Attacking Ground Troop and Mounted Troop Defense +25%
+
+# ASCENSION_5_TEXT:
+Attacking Ground Troop Attack +20%, Defense and HP +20%
+
+# SPECIALTY_1_L5_TEXT:
+Ground Troop Formation(Max Level Attributes)
+Ground Troop Attack +10%
+Ground Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Sabotage(Max Level Attributes)
+Enemy Troop Defense -10%
+
+# SPECIALTY_3_L5_TEXT:
+Ground Troop Ares(Max Level Attributes)
+Ground Troop Attack +10%
+Ground Troop HP +10%
+Ground Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Siege of Tyana(Max Level Attributes)
+Attacking Ground Troop Attack +35%
+Attacking Mounted Troop and Ground Troop HP +40%

@@ -1,0 +1,199 @@
+GENERAL: Gonzalo
+ROLE: Ranged
+IN_TAVERN: false
+
+Leadership: 130 (8.87)
+Attack: 128 (8.76)
+Defense: 125 (8.73)
+Politics: 114 (8.42)
+
+BASE SKILL | Muskets Array
+RangedTroopAttackPct +55
+RangedTroopHPPct +55
+MarchSizeCapacityPct +8
+
+ASCENSION 1
+RangedTroopAttackPct +10
+RangedTroopDefensePct +10
+
+ASCENSION 2
+AttackingTroopDeathToWoundedRatePct +8
+
+ASCENSION 3
+RangedTroopAttackPct +15
+SiegeMachineAttackPct +15
+RangedTroopHPPct +15
+
+ASCENSION 4
+RangedTroopDefensePct +15
+SiegeMachineDefensePct +15
+RangedTroopHPPct +15
+
+ASCENSION 5
+RangedTroopAttackPct +40
+RangedTroopDefensePct +40
+
+SPECIALTY 1 L1:
+RangedTroopAttackPct +1
+RangedTroopHPPct +1
+SPECIALTY 1 L2:
+RangedTroopAttackPct +1
+RangedTroopHPPct +1
+SPECIALTY 1 L3:
+RangedTroopAttackPct +2
+RangedTroopHPPct +2
+SPECIALTY 1 L4:
+RangedTroopAttackPct +2
+RangedTroopHPPct +2
+SPECIALTY 1 L5:
+RangedTroopAttackPct +4
+RangedTroopHPPct +4
+
+SPECIALTY 2 L1:
+RangedTroopAttackPct +1
+SiegeMachineAttackPct +1
+SPECIALTY 2 L2:
+RangedTroopAttackPct +1
+SiegeMachineAttackPct +1
+SPECIALTY 2 L3:
+RangedTroopAttackPct +2
+SiegeMachineAttackPct +2
+SPECIALTY 2 L4:
+RangedTroopAttackPct +2
+SiegeMachineAttackPct +2
+SPECIALTY 2 L5:
+RangedTroopAttackPct +4
+SiegeMachineAttackPct +4
+
+SPECIALTY 3 L1:
+RangedTroopAttackPct +1
+RangedTroopHPPct +1
+RangedTroopDefensePct +1
+SPECIALTY 3 L2:
+RangedTroopAttackPct +1
+RangedTroopHPPct +1
+RangedTroopDefensePct +1
+SPECIALTY 3 L3:
+RangedTroopAttackPct +2
+RangedTroopHPPct +2
+RangedTroopDefensePct +2
+SPECIALTY 3 L4:
+RangedTroopAttackPct +2
+RangedTroopHPPct +2
+RangedTroopDefensePct +2
+SPECIALTY 3 L5:
+RangedTroopAttackPct +4
+RangedTroopHPPct +4
+RangedTroopDefensePct +4
+
+SPECIALTY 4 L1:
+RangedTroopAttackPct +5
+RangedTroopDefensePct +4
+RangedTroopHPPct +4
+SPECIALTY 4 L2:
+RangedTroopAttackPct +5
+RangedTroopDefensePct +4
+RangedTroopHPPct +4
+SPECIALTY 4 L3:
+RangedTroopAttackPct +10
+RangedTroopDefensePct +8
+RangedTroopHPPct +8
+SPECIALTY 4 L4:
+RangedTroopAttackPct +10
+RangedTroopDefensePct +8
+RangedTroopHPPct +8
+SPECIALTY 4 L5:
+RangedTroopAttackPct +20
+RangedTroopDefensePct +16
+RangedTroopHPPct +16
+
+COVENANT | War
+RangedTroopDefensePct +10
+
+COVENANT | Cooperation
+RangedTrainingCapacityPct +10
+
+COVENANT | Peace
+RangedTroopAttackPct +10
+
+COVENANT | Faith
+ReinforcingRangedAttackPct +10
+InRallyRangedAttackPct +10
+
+COVENANT | Honor
+RangedTroopAttackPct +10
+SiegeMachineAttackPct +10
+
+COVENANT | Civilization
+RangedTroopHPPct +10
+MarchSizeCapacityPct +6
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Muskets Array
+Increases ranged troops' attack and HP by 55% and march size capacity by 8% when General is leading the army.
+
+# ASCENSION_1_TEXT:
+Ranged Troop Attack and Defense +10%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+Ranged Troop and Siege Machine Attack +15%, Ranged Troop HP +15%
+
+# ASCENSION_4_TEXT:
+Ranged Troop and Siege Machine Defense and HP +15%
+
+# ASCENSION_5_TEXT:
+Ranged Troop Attack and Defense +40%
+
+# SPECIALTY_1_MAX_TEXT:
+Ranged Troop Assault(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop HP +10%
+
+# SPECIALTY_2_MAX_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_MAX_TEXT:
+Ranged Troop Ares(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop HP +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_4_MAX_TEXT:
+Battle of Cerignola(Max Level Attributes)
+Ranged Troop Attack +50%
+Ranged Troop Defense +40%
+Ranged Troop HP +40%
+
+# COVENANT_War_TEXT:
+War Covenant
+Ranged Troop Defense +10%
+
+# COVENANT_Cooperation_TEXT:
+Cooperation Covenant
+Ranged Troop Training Capacity +10%
+
+# COVENANT_Peace_TEXT:
+Peace Covenant
+Ranged Troop Attack +10%
+
+# COVENANT_Faith_TEXT:
+Faith Covenant
+Reinforcing Ranged Troop Attack +10%
+In-Rally Ranged Troop Attack +10%
+
+# COVENANT_Honor_TEXT:
+Honor Covenant
+Ranged Troop and Siege Machine Attack +10%
+
+# COVENANT_Civilization_TEXT:
+Civilization Covenant
+Ranged Troop HP +10%
+March Size Capacity +6%

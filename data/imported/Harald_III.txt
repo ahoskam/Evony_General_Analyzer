@@ -1,0 +1,131 @@
+GENERAL: Harald III
+ROLE: Unknown
+InTavern=false
+
+Leadership: 113 (9.13)
+Attack: 118 (8.69)
+Defense: 116 (9.01)
+Politics: 112 (8.51)
+
+==============================
+BASE SKILL | The Heartless
+==============================
+Increases ranged troops' attack by 30% and ground troops' defense by 25% when General is leading the army.
+
+==============================
+ASCENSION 1
+==============================
+RangedAttackPct +10
+GroundDefensePct +10
+
+==============================
+ASCENSION 2
+==============================
+AttackingTroopDeathToWoundedRatePct +10
+
+==============================
+ASCENSION 3
+==============================
+When General is launching Alliance War, RallyCapacityPct +8
+
+==============================
+ASCENSION 4
+==============================
+RangedAttackPct +10
+GroundHPPct +10
+
+==============================
+ASCENSION 5
+==============================
+RangedAttackPct +10
+GroundDefensePct +10
+GroundHPPct +10
+
+==============================
+# SPECIALTY 1 | Ranged Troop Defense
+==============================
+SPECIALTY 1 L1:
+RangedHPPct +1
+RangedDefensePct +1
+SPECIALTY 1 L2:
+RangedHPPct +1
+RangedDefensePct +1
+SPECIALTY 1 L3:
+RangedHPPct +2
+RangedDefensePct +2
+SPECIALTY 1 L4:
+RangedHPPct +2
+RangedDefensePct +2
+SPECIALTY 1 L5:
+RangedHPPct +4
+RangedDefensePct +4
+
+==============================
+# SPECIALTY 2 | Snipe
+==============================
+SPECIALTY 2 L1:
+EnemyAttackPct -1
+SPECIALTY 2 L2:
+EnemyAttackPct -1
+SPECIALTY 2 L3:
+EnemyAttackPct -2
+SPECIALTY 2 L4:
+EnemyAttackPct -2
+SPECIALTY 2 L5:
+EnemyAttackPct -4
+
+==============================
+# SPECIALTY 3 | Ranged Troop Ares
+==============================
+SPECIALTY 3 L1:
+RangedAttackPct +1
+RangedHPPct +1
+RangedDefensePct +1
+SPECIALTY 3 L2:
+RangedAttackPct +1
+RangedHPPct +1
+RangedDefensePct +1
+SPECIALTY 3 L3:
+RangedAttackPct +2
+RangedHPPct +2
+RangedDefensePct +2
+SPECIALTY 3 L4:
+RangedAttackPct +2
+RangedHPPct +2
+RangedDefensePct +2
+SPECIALTY 3 L5:
+RangedAttackPct +4
+RangedHPPct +4
+RangedDefensePct +4
+
+==============================
+# SPECIALTY 4 | Viking Spirit
+==============================
+SPECIALTY 4 L1:
+RangedAttackPct +2
+GroundHPPct +2
+SPECIALTY 4 L2:
+RangedAttackPct +2
+GroundHPPct +2
+SPECIALTY 4 L3:
+RangedAttackPct +4
+GroundHPPct +4
+SPECIALTY 4 L4:
+RangedAttackPct +4
+GroundHPPct +4
+SPECIALTY 4 L5:
+RangedAttackPct +8
+GroundHPPct +8
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - AttackingTroopDeathToWoundedRatePct | Attacking Troop Death into Wounded Rate
+# - RallyCapacityPct | Rally Capacity
+# - EnemyAttackPct | Enemy Troop Attack

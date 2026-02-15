@@ -1,0 +1,126 @@
+GENERAL: Laudon
+ROLE: Unknown
+Leadership: 117 (8.82)
+Attack: 118 (9.12)
+Defense: 113 (8.76)
+Politics: 108 (8.74)
+
+==============================
+BASE SKILL | Silesian Wars
+==============================
+MountedAttackPct +40
+MountedDefensePct +15
+MountedHPPct +15
+
+==============================
+ASCENSION 1
+==============================
+MountedAttackPct +5
+GroundAttackPct +5
+MountedDefensePct +5
+GroundDefensePct +5
+MountedHPPct +5
+GroundHPPct +5
+
+==============================
+ASCENSION 2
+==============================
+AttackingTroopDeathToWoundedRatePct +10
+
+==============================
+ASCENSION 3
+==============================
+MarchSizeCapacityPct +14
+
+==============================
+ASCENSION 4
+==============================
+MountedAttackPct +10
+GroundAttackPct +10
+MountedDefensePct +20
+GroundDefensePct +20
+
+==============================
+ASCENSION 5
+==============================
+MountedAttackPct +25
+MountedDefensePct +10
+MountedHPPct +10
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Mounted Troop Defense
+SPECIALTY 1 L5:
+MountedHPPct +10
+MountedDefensePct +10
+
+# SPECIALTY 2 | Strike
+SPECIALTY 2 L5:
+MarchSpeedPct +10
+AttackingMountedAttackPct +20
+
+# SPECIALTY 3 | Mounted Troop Ares
+SPECIALTY 3 L5:
+MountedAttackPct +10
+MountedHPPct +10
+MountedDefensePct +10
+
+# SPECIALTY 4 | Field Marshal of Austria
+SPECIALTY 4 L5:
+MountedAttackPct +35
+MountedDefensePct +25
+MountedHPPct +15
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+InTavern=false
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Silesian Wars
+Increases mounted troops' attack by 40% and mounted troops' defense and HP by 15% when General is leading the army.
+
+# ASCENSION_1_TEXT:
+Mounted Troop and Ground Troop Attack +5%, Defense and HP +5%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +10%
+
+# ASCENSION_3_TEXT:
+March Size Capacity +14%
+
+# ASCENSION_4_TEXT:
+Mounted Troop and Ground Troop Attack +10% and Defense +20%
+
+# ASCENSION_5_TEXT:
+Mounted Troop Attack +25%, Mounted Troop Defense and HP +10%
+
+# SPECIALTY_1_L5_TEXT:
+Mounted Troop Defense(Max Level Attributes)
+Mounted Troop HP +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Strike(Max Level Attributes)
+March Speed +10%
+Attacking Mounted Troop Attack +20%
+
+# SPECIALTY_3_L5_TEXT:
+Mounted Troop Ares(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop HP +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Field Marshal of Austria(Max Level Attributes)
+Mounted Troop Attack +35%
+Mounted Troop Defense +25%
+Mounted Troop HP +15%

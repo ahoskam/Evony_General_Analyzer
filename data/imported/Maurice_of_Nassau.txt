@@ -1,0 +1,105 @@
+GENERAL: Maurice of Nassau
+ROLE: Duty
+IN_TAVERN: false
+
+Leadership: 114 (8.85)
+Attack: 118 (8.78)
+Defense: 114 (8.85)
+Politics: 118 (8.78)
+
+BASE SKILL | Maurices Formation
+EnemyRangedTroopAttackPct -15
+InCityRangedTroopAttackPct +20
+InCitySiegeMachineAttackPct +20
+
+ASCENSION 1
+InCityRangedTroopHPPct +35
+InCitySiegeMachineHPPct +35
+EnemyRangedTroopDefensePct -20
+EnemySiegeMachineDefensePct -20
+
+ASCENSION 2
+InCityRangedTroopDefensePct +35
+InCitySiegeMachineDefensePct +35
+EnemyRangedTroopHPPct -20
+EnemySiegeMachineHPPct -20
+
+ASCENSION 3
+EnemyRangedTroopAttackPct -10
+EnemyRangedTroopHPPct -20
+EnemySiegeMachineAttackPct -10
+EnemySiegeMachineHPPct -20
+
+ASCENSION 4
+EnemyRangedTroopAttackPct -15
+EnemyRangedTroopDefensePct -30
+EnemySiegeMachineAttackPct -15
+EnemySiegeMachineDefensePct -30
+
+ASCENSION 5
+InCityRangedTroopAttackPct +30
+InCityRangedTroopDefensePct +30
+InCityRangedTroopHPPct +30
+InCitySiegeMachineAttackPct +30
+InCitySiegeMachineDefensePct +30
+InCitySiegeMachineHPPct +30
+
+SPECIALTY 1 L5:
+RangedTroopAttackPct +10
+RangedTroopHPPct +10
+
+SPECIALTY 2 L5:
+EnemyTroopDefensePct -10
+
+SPECIALTY 3 L5:
+ArcherTowerAttackPct +90
+
+SPECIALTY 4 L5:
+InCityRangedTroopAttackPct +30
+InCitySiegeMachineAttackPct +15
+
+NEW STAT KEYS NOTE:
+- ArcherTowerAttackPct
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Maurices Formation
+Reduces enemy ranged troops' attack by 15% and increases your in-city ranged troops and siege machines' attack by 20% when General is the Archer Tower Officer.
+
+# ASCENSION_1_TEXT:
+When General is the Archer Tower Officer, In-city Ranged Troop and Siege Machine HP +35%, Enemy Ranged Troop and Siege Machine Defense -20%
+
+# ASCENSION_2_TEXT:
+When General is the Archer Tower Officer, In-city Ranged Troop and Siege Machine Defense +35%, Enemy Ranged Troop and Siege Machine HP -20%
+
+# ASCENSION_3_TEXT:
+When General is the Archer Tower Officer, Enemy Ranged Troop and Siege Machine Attack -10% and HP -20%
+
+# ASCENSION_4_TEXT:
+When General is the Archer Tower Officer, Enemy Ranged Troop and Siege Machine Attack -15% and Defense -30%
+
+# ASCENSION_5_TEXT:
+When General is the Archer Tower Officer, In-city Ranged Troop and Siege Machine Attack +30%, Defense and HP +30%
+
+# SPECIALTY_1_L5_TEXT:
+Ranged Troop Assault(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop HP +10%
+
+# SPECIALTY_2_L5_TEXT:
+Sabotage(Max Level Attributes)
+Enemy Troop Defense -10%
+
+# SPECIALTY_3_L5_TEXT:
+Sage(Max Level Attributes)
+Applied to Archer Tower Officer
+Archer Tower Attack +90%
+
+# SPECIALTY_4_L5_TEXT:
+Reformation Pioneer(Max Level Attributes)
+Applied to Archer Tower Officer
+In City Ranged Troop Attack +30%
+In City Siege Machine Attack +15%

@@ -1,0 +1,90 @@
+GENERAL: Robert Guiscard
+ROLE: Unknown
+Leadership: 112 (9.03)
+Attack: 109 (8.82)
+Defense: 108 (8.69)
+Politics: 106 (8.46)
+
+==============================
+BASE SKILL | Leader of Normans
+==============================
+MountedAttackPct +25
+EnemyGroundDefensePct -15
+EnemyMountedDefensePct -15
+
+==============================
+ASCENSION 1
+==============================
+GroundDefensePct +5
+MountedDefensePct +5
+GroundHPPct +5
+MountedHPPct +5
+
+==============================
+ASCENSION 2
+==============================
+AttackingTroopDeathToWoundedRatePct +8
+
+==============================
+ASCENSION 3
+==============================
+MarchSizePct +10
+
+==============================
+ASCENSION 4
+==============================
+MountedAttackPct +10
+MountedDefensePct +10
+GroundDefensePct +10
+
+==============================
+ASCENSION 5
+==============================
+MountedAttackPct +10
+MountedHPPct +10
+GroundHPPct +10
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Mounted Troop Assault
+SPECIALTY 1 L5CompletedTotal:
+MountedAttackPct +10
+MountedHPPct +10
+
+# SPECIALTY 2 | Annihilation
+SPECIALTY 2 L5CompletedTotal:
+MarchSizePct +6
+MountedAttackPct +10
+GroundAttackPct +10
+
+# SPECIALTY 3 | Mounted Troop Ares
+SPECIALTY 3 L5CompletedTotal:
+MountedAttackPct +10
+MountedHPPct +10
+MountedDefensePct +10
+
+# SPECIALTY 4 | Battle of Dyrrhachium
+SPECIALTY 4 L5CompletedTotal:
+GroundAttackPct +10
+MountedAttackPct +10
+GroundDefensePct +10
+MountedDefensePct +10
+GroundHPPct +10
+MountedHPPct +10
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - EnemyGroundDefensePct | Reduces enemy ground troops' defense
+# - EnemyMountedDefensePct | Reduces enemy mounted troops' defense
+# - AttackingTroopDeathToWoundedRatePct | Attacking Troop Death into Wounded Rate
+
+InTavern=true

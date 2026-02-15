@@ -1,0 +1,146 @@
+GENERAL: Olaf Skötkonung
+ROLE: Siege
+IN_TAVERN: false
+
+Leadership: 127 (8.99)
+Attack: 132 (9.22)
+Defense: 125 (8.73)
+Politics: 118 (8.19)
+
+BASE SKILL | Ode to Olaf
+AttackingSiegeMachineAttackPct +60
+AttackingSiegeMachineDefensePct +60
+AttackingSiegeMachineHPPct +45
+
+ASCENSION 1
+AttackingSiegeMachineAttackPct +10
+AttackingSiegeMachineDefensePct +10
+AttackingSiegeMachineHPPct +10
+
+ASCENSION 2
+AttackingTroopDeathToWoundedRatePct +8
+
+ASCENSION 3
+AttackingSiegeMachineAttackPct +30
+AttackingSiegeMachineDefensePct +30
+
+ASCENSION 4
+AttackingSiegeMachineHPPct +30
+MarchSizeCapacityPct +10
+
+ASCENSION 5
+AttackingRangedTroopAttackPct +45
+AttackingSiegeMachineAttackPct +45
+AttackingSiegeMachineDefensePct +30
+AttackingSiegeMachineHPPct +30
+
+SPECIALTY 1 L5:
+SiegeMachineHPPct +10
+SiegeMachineDefensePct +10
+
+SPECIALTY 2 L5:
+AttackingRangedTroopAttackPct +10
+AttackingSiegeMachineAttackPct +10
+
+SPECIALTY 3 L5:
+SiegeMachineAttackPct +10
+SiegeMachineHPPct +10
+SiegeMachineDefensePct +10
+
+SPECIALTY 4 L5:
+AttackingSiegeMachineAttackPct +55
+AttackingSiegeMachineDefensePct +45
+AttackingSiegeMachineHPPct +45
+
+COVENANT | War
+AttackingSiegeMachineHPPct +5
+
+COVENANT | Cooperation
+SiegeMachineTrainingSpeedPct +10
+
+COVENANT | Peace
+SiegeMachineHPPct +10
+
+COVENANT | Faith
+AttackingSiegeMachineDefensePct +10
+InRallySiegeMachineAttackPct +5
+
+COVENANT | Honor
+MarchSizeCapacityPct +8
+
+COVENANT | Civilization
+AttackingSiegeMachineAttackPct +15
+SiegeMachineDefensePct +10
+
+NEW STAT KEYS NOTE:
+- SiegeMachineTrainingSpeedPct
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Ode to Olaf
+Increases siege machines' attack and defense by 60% and siege machines' HP by 45% when General is leading the army to attack.
+
+# ASCENSION_1_TEXT:
+Attacking Siege Machine Attack, Defense and HP +10%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+Attacking Siege Machine Attack and Defense +30%
+
+# ASCENSION_4_TEXT:
+Attacking Siege Machine HP +30%, March Size Capacity +10%
+
+# ASCENSION_5_TEXT:
+Attacking Ranged Troop and Siege Machine Attack +45%; Siege Machine Defense and HP +30%
+
+# SPECIALTY_1_L5_TEXT:
+Siege Machine Defense(Max Level Attributes)
+Siege Machine HP +10%
+Siege Machine Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Siege Machine Ares(Max Level Attributes)
+Siege Machine Attack +10%
+Siege Machine HP +10%
+Siege Machine Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Expedition to Wendland(Max Level Attributes)
+Attacking Siege Machine Attack +55%
+Attacking Siege Machine Defense +45%
+Attacking Siege Machine HP +45%
+
+# COVENANT_War_TEXT:
+War Covenant
+Attacking Siege Machine HP +5%
+
+# COVENANT_Cooperation_TEXT:
+Cooperation Covenant
+Siege Machine Training Speed +10%
+
+# COVENANT_Peace_TEXT:
+Peace Covenant
+Siege Machine HP +10%
+
+# COVENANT_Faith_TEXT:
+Faith Covenant
+Attacking Siege Machine Defense +10%
+In-Rally Siege Machine Attack +5%
+
+# COVENANT_Honor_TEXT:
+Honor Covenant
+March Size Capacity +8%
+
+# COVENANT_Civilization_TEXT:
+Civilization Covenant
+Attacking Siege Machine Attack +15%
+Siege Machine Defense +10%

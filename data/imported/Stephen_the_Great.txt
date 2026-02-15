@@ -1,0 +1,88 @@
+GENERAL: Stephen the Great
+ROLE: Duty
+Leadership: 113 (8.94)
+Attack: 110 (8.82)
+Defense: 111 (8.79)
+Politics: 119 (8.91)
+
+==============================
+BASE SKILL | Holy Ruler
+==============================
+DutyOfficerResearchSpeedPct +10
+DutyOfficerInCityTroopDefensePct +15
+DutyOfficerInCityTroopHPPct +15
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Ranged Troop Formation
+SPECIALTY 1 L5:
+RangedTroopAttackPct +10
+RangedTroopDefensePct +10
+
+# SPECIALTY 2 | Snipe
+SPECIALTY 2 L5:
+EnemyTroopAttackPct -10
+
+# SPECIALTY 3 | Sage
+SPECIALTY 3 L5:
+DutyOfficerResearchSpeedPct +5
+DutyOfficerInCityTroopDefensePct +5
+DutyOfficerInCityTroopHPPct +5
+
+# SPECIALTY 4 | Battle of Vaslui
+SPECIALTY 4 L5:
+DutyOfficerResearchSpeedPct +5
+DutyOfficerInCityTroopAttackPct +10
+EnemyRangedTroopAttackPct -20
+EnemySiegeMachineAttackPct -20
+
+==============================
+COVENANTS
+==============================
+
+# None available (locked)
+
+InTavern=false
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - DutyOfficerResearchSpeedPct
+# - DutyOfficerInCityTroopDefensePct
+# - DutyOfficerInCityTroopHPPct
+# - DutyOfficerInCityTroopAttackPct
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Holy Ruler
+Increases research speed by 10% and in-city troops' defense and HP by 15% 
+when General is the Research Factory Officer.
+
+# SPECIALTY_1_MAX_TEXT:
+Ranged Troop Formation(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_2_MAX_TEXT:
+Snipe(Max Level Attributes)
+Enemy Troop Attack -10%
+
+# SPECIALTY_3_MAX_TEXT:
+Sage(Max Level Attributes)
+Applied to Research Factory Officer
+Research Speed +5%
+In-City Troop Defense +5%
+In City Troop HP +5%
+
+# SPECIALTY_4_MAX_TEXT:
+Battle of Vaslui(Max Level Attributes)
+Applied to Research Factory Officer
+Research Speed +5%
+In City Troop Attack +10%
+Enemy Ranged Troop and Siege Machine Attack -20%

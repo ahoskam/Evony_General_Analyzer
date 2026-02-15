@@ -1,0 +1,148 @@
+# CHAT_TITLE: Gaius Octavius data
+
+GENERAL: Gaius Octavius
+ROLE: Unknown
+Leadership: 116 (9.18)
+Attack: 115 (8.83)
+Defense: 113 (9.02)
+Politics: 115 (8.45)
+
+==============================
+BASE SKILL | Augustus
+==============================
+AttackingMountedAttackPct +40
+AttackingRangedAttackPct +15
+
+==============================
+ASCENSION 1
+==============================
+AttackingRangedAttackPct +10
+AttackingMountedDefensePct +20
+
+==============================
+ASCENSION 2
+==============================
+EnemyInCityTroopWoundedIntoDeathRatePct +10
+
+==============================
+ASCENSION 3
+==============================
+MarchSizeCapacityPct +14
+
+==============================
+ASCENSION 4
+==============================
+AttackingRangedAttackPct +20
+AttackingMountedHPPct +20
+
+==============================
+ASCENSION 5
+==============================
+AttackingMountedAttackPct +20
+DefenseAndHPPct +15
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Mounted Troop Assault
+SPECIALTY 1 L1:
+MountedAttackPct +1
+MountedHPPct +1
+SPECIALTY 1 L2:
+MountedAttackPct +1
+MountedHPPct +1
+SPECIALTY 1 L3:
+MountedAttackPct +2
+MountedHPPct +2
+SPECIALTY 1 L4:
+MountedAttackPct +2
+MountedHPPct +2
+SPECIALTY 1 L5:
+MountedAttackPct +4
+MountedHPPct +4
+
+# SPECIALTY 2 | Annihilation
+SPECIALTY 2 L5CompletedTotal:
+MarchSizeCapacityPct +6
+AttackingMountedAttackPct +10
+AttackingGroundAttackPct +10
+
+# SPECIALTY 3 | War God
+SPECIALTY 3 L5CompletedTotal:
+AllTroopsAttackPct +6
+
+# SPECIALTY 4 | Battle of Actium
+SPECIALTY 4 L5CompletedTotal:
+MountedAttackPct +30
+MountedHPPct +20
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - EnemyInCityTroopWoundedIntoDeathRatePct
+# - DefenseAndHPPct
+
+InTavern=false
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Augustus
+Increases mounted troops' attack by 40% and
+ranged troops' attack by 15% when General is
+leading the army to attack.
+
+# ASCENSION_1_TEXT:
+Attacking Ranged Troop Attack
++10%, Attacking Mounted Troop
+Defense +20%
+
+# ASCENSION_2_TEXT:
+Enemy In-city Troop Wounded into
+Death rate +10%
+
+# ASCENSION_3_TEXT:
+March Size Capacity +14%
+
+# ASCENSION_4_TEXT:
+Attacking Ranged Troop Attack
++20%, Attacking Mounted Troop HP
++20%
+
+# ASCENSION_5_TEXT:
+Attacking Mounted Troop Attack
++20%, Defense and HP +15%
+
+# SPECIALTY_1_MAX_TEXT:
+Mounted Troop
+Assault(Max Level
+Attributes)
+Mounted Troop Attack +10%
+Mounted Troop HP +10%
+
+# SPECIALTY_2_MAX_TEXT:
+Annihilation(Max Level
+Attributes)
+March Size Capacity +6%
+Attacking Mounted Troop and
+Ground Troop Attack +10%
+
+# SPECIALTY_3_MAX_TEXT:
+War God(Max Level
+Attributes)
+All Troops Attack +6%
+
+# SPECIALTY_4_MAX_TEXT:
+Battle of Actium(Max
+Level Attributes)
+Mounted Troop Attack +30%
+Mounted Troop HP +20%

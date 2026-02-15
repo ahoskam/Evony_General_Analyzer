@@ -1,0 +1,206 @@
+GENERAL: Olav II
+ROLE: Mounted
+IN_TAVERN: false
+
+Leadership: 129 (8.87)
+Attack: 124 (8.75)
+Defense: 125 (8.69)
+Politics: 119 (8.45)
+
+BASE SKILL | Eternal King of Norway
+AttackingMountedAttackPct +55
+AttackingMountedDefensePct +40
+AttackingMountedHPPct +40
+
+ASCENSION 1
+AttackingGroundAttackPct +15
+AttackingGroundHPPct +10
+AttackingMountedAttackPct +15
+AttackingMountedHPPct +10
+
+ASCENSION 2
+AttackingTroopDeathToWoundedRatePct +8
+
+ASCENSION 3
+AttackingMountedAttackPct +25
+AttackingGroundDefensePct +10
+AttackingMountedDefensePct +10
+
+ASCENSION 4
+AttackingMountedDefensePct +25
+AttackingMountedHPPct +25
+
+ASCENSION 5
+AttackingMountedAttackPct +40
+AttackingMountedHPPct +40
+MarchSizeCapacityPct +10
+
+SPECIALTY 1 L1:
+MountedAttackPct +1
+MountedDefensePct +1
+SPECIALTY 1 L2:
+MountedAttackPct +1
+MountedDefensePct +1
+SPECIALTY 1 L3:
+MountedAttackPct +2
+MountedDefensePct +2
+SPECIALTY 1 L4:
+MountedAttackPct +2
+MountedDefensePct +2
+SPECIALTY 1 L5:
+MountedAttackPct +4
+MountedDefensePct +4
+
+SPECIALTY 2 L1:
+MarchSizeCapacityPct +1
+AttackingMountedAttackPct +1
+AttackingGroundAttackPct +1
+SPECIALTY 2 L2:
+MarchSizeCapacityPct +1
+AttackingMountedAttackPct +1
+AttackingGroundAttackPct +1
+SPECIALTY 2 L3:
+MarchSizeCapacityPct +1
+AttackingMountedAttackPct +2
+AttackingGroundAttackPct +2
+SPECIALTY 2 L4:
+MarchSizeCapacityPct +1
+AttackingMountedAttackPct +2
+AttackingGroundAttackPct +2
+SPECIALTY 2 L5:
+MarchSizeCapacityPct +2
+AttackingMountedAttackPct +4
+AttackingGroundAttackPct +4
+
+SPECIALTY 3 L1:
+MountedAttackPct +1
+MountedHPPct +1
+MountedDefensePct +1
+SPECIALTY 3 L2:
+MountedAttackPct +1
+MountedHPPct +1
+MountedDefensePct +1
+SPECIALTY 3 L3:
+MountedAttackPct +2
+MountedHPPct +2
+MountedDefensePct +2
+SPECIALTY 3 L4:
+MountedAttackPct +2
+MountedHPPct +2
+MountedDefensePct +2
+SPECIALTY 3 L5:
+MountedAttackPct +4
+MountedHPPct +4
+MountedDefensePct +4
+
+SPECIALTY 4 L1:
+AttackingMountedAttackPct +5
+AttackingMountedDefensePct +5
+AttackingMountedHPPct +5
+SPECIALTY 4 L2:
+AttackingMountedAttackPct +5
+AttackingMountedDefensePct +5
+AttackingMountedHPPct +5
+SPECIALTY 4 L3:
+AttackingMountedAttackPct +10
+AttackingMountedDefensePct +10
+AttackingMountedHPPct +10
+SPECIALTY 4 L4:
+AttackingMountedAttackPct +10
+AttackingMountedDefensePct +10
+AttackingMountedHPPct +10
+SPECIALTY 4 L5:
+AttackingMountedAttackPct +20
+AttackingMountedDefensePct +15
+AttackingMountedHPPct +15
+
+COVENANT | War
+AttackingMountedHPPct +10
+
+COVENANT | Cooperation
+MountedTroopTrainingSpeedPct +10
+
+COVENANT | Peace
+InRallyMountedAttackPct +10
+
+COVENANT | Faith
+AttackingMountedDefensePct +10
+AttackingMountedAttackPct +5
+
+COVENANT | Honor
+MountedAttackPct +10
+
+COVENANT | Civilization
+InRallyMountedHPPct +15
+MarchSizeCapacityPct +8
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Eternal King of Norway
+Increases mounted troops' attack by 55% and increases mounted troops' defense and HP by 40% when General is leading the army to attack.
+
+# ASCENSION_1_TEXT:
+Attacking Ground Troop and Mounted Troop Attack +15% and HP +10%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+Attacking Mounted Troop Attack +25%, Attacking Ground Troop and Mounted Troop Defense +10%
+
+# ASCENSION_4_TEXT:
+Attacking Mounted Troop Defense and HP +25%
+
+# ASCENSION_5_TEXT:
+Attacking Mounted Troop Attack and HP +40%, March Size Capacity +10%
+
+# SPECIALTY_1_MAX_TEXT:
+Mounted Troop Formation(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY_2_MAX_TEXT:
+Annihilation(Max Level Attributes)
+March Size Capacity +6%
+Attacking Mounted Troop and Ground Troop Attack +10%
+
+# SPECIALTY_3_MAX_TEXT:
+Mounted Troop Ares(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop HP +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY_4_MAX_TEXT:
+Battle of Nesjar(Max Level Attributes)
+Attacking Mounted Troop Attack +50%
+Attacking Mounted Troop Defense +35%
+Attacking Mounted Troop HP +35%
+
+# COVENANT_War_TEXT:
+War Covenant
+Attacking Mounted Troop HP +10%
+
+# COVENANT_Cooperation_TEXT:
+Cooperation Covenant
+Mounted Troop Training Speed +10%
+
+# COVENANT_Peace_TEXT:
+Peace Covenant
+In-Rally Mounted Troop Attack +10%
+
+# COVENANT_Faith_TEXT:
+Faith Covenant
+Attacking Mounted Troop Defense +10%
+Attacking Mounted Troop Attack +5%
+
+# COVENANT_Honor_TEXT:
+Honor Covenant
+Mounted Troop Attack +10%
+
+# COVENANT_Civilization_TEXT:
+Civilization Covenant
+In-Rally Mounted Troop HP +15%
+March Size Capacity +8%

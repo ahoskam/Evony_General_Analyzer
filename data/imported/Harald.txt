@@ -1,0 +1,76 @@
+GENERAL: Harald
+ROLE: Unknown
+Leadership: 110 (8.85)
+Attack: 113 (8.77)
+Defense: 112 (8.88)
+Politics: 103 (8.64)
+
+==============================
+BASE SKILL | King of the Vikings
+==============================
+Reduces enemy troops' attack by 10% and reduces enemy troops' HP by 10% when General is leading the army.
+
+==============================
+ASCENSION 1
+==============================
+EnemyTroopDefensePct -10
+
+==============================
+ASCENSION 2
+==============================
+EnemyRangedTroopDefensePct -10
+EnemySiegeMachineDefensePct -10
+SubordinateCityTrainingSpeedPct +20
+
+==============================
+ASCENSION 3
+==============================
+EnemyGroundTroopDefensePct -10
+EnemyMountedTroopDefensePct -10
+SubordinateCityDeathIntoSurvivalRatePct +15
+
+==============================
+ASCENSION 4
+==============================
+EnemyTroopHPPct -10
+
+==============================
+ASCENSION 5
+==============================
+EnemyTroopAttackPct -10
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Siege Machine Assault
+SPECIALTY 1 L5CompletedTotal:
+SiegeMachineAttackPct +10
+SiegeMachineHPPct +10
+
+# SPECIALTY 2 | Sabotage
+SPECIALTY 2 L5CompletedTotal:
+EnemyTroopDefensePct -10
+
+# SPECIALTY 3 | King's Ambition
+SPECIALTY 3 L5CompletedTotal:
+TroopDeathIntoTroopSoulRateMainCityPct +10
+
+# SPECIALTY 4 | Harald Bluetooth
+SPECIALTY 4 L5CompletedTotal:
+EnemyWoundedToDeathWhenAttackingPct +10
+EnemyTroopDefensePct -10
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - TroopDeathIntoTroopSoulRateMainCityPct | Troop death into troop soul rate in the main city
+# - SubordinateCityDeathIntoSurvivalRatePct | Death into Survival Rate in this Subordinate City
+
+InTavern=true

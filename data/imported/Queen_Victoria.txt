@@ -1,0 +1,105 @@
+GENERAL: Queen Victoria
+ROLE: Unknown
+Leadership: 108 (8.53)
+Attack: 85 (6.55)
+Defense: 100 (8.32)
+Politics: 121 (9.09)
+
+==============================
+BASE SKILL | Victorian Era
+==============================
+TroopHPPct +10
+
+==============================
+ASCENSION 1
+==============================
+GroundDefensePct +15
+MountedDefensePct +15
+
+==============================
+ASCENSION 2
+==============================
+AttackingTroopDeathToWoundedRatePct +6
+
+==============================
+ASCENSION 3
+==============================
+RallyCapacityPct +6
+
+==============================
+ASCENSION 4
+==============================
+GroundHPPct +15
+MountedHPPct +15
+
+==============================
+ASCENSION 5
+==============================
+GroundAttackPct +15
+MountedAttackPct +15
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Ground Troop Formation
+SPECIALTY 1 L1:
+GroundAttackPct +1
+GroundDefensePct +1
+SPECIALTY 1 L2:
+GroundAttackPct +1
+GroundDefensePct +1
+SPECIALTY 1 L3:
+GroundAttackPct +2
+GroundDefensePct +2
+SPECIALTY 1 L4:
+GroundAttackPct +2
+GroundDefensePct +2
+SPECIALTY 1 L5:
+GroundAttackPct +4
+GroundDefensePct +4
+
+# SPECIALTY 2 | Fortification
+SPECIALTY 2 L5CompletedTotal:
+InCityTroopAttackPct +6
+
+# SPECIALTY 3 | King’s Ambition
+SPECIALTY 3 L1:
+MainCityTroopDeathToSoulRatePct +1
+SPECIALTY 3 L2:
+MainCityTroopDeathToSoulRatePct +1
+SPECIALTY 3 L3:
+MainCityTroopDeathToSoulRatePct +2
+SPECIALTY 3 L4:
+MainCityTroopDeathToSoulRatePct +2
+SPECIALTY 3 L5:
+MainCityTroopDeathToSoulRatePct +4
+
+# SPECIALTY 4 | Queen of Britain
+SPECIALTY 4 L1:
+AllTroopHPPct +1
+SPECIALTY 4 L2:
+AllTroopHPPct +1
+SPECIALTY 4 L3:
+AllTroopHPPct +2
+SPECIALTY 4 L4:
+AllTroopHPPct +2
+SPECIALTY 4 L5:
+AllTroopHPPct +4
+
+==============================
+COVENANTS
+==============================
+# None available (locked)
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - AttackingTroopDeathToWoundedRatePct
+# - RallyCapacityPct
+# - InCityTroopAttackPct
+# - MainCityTroopDeathToSoulRatePct
+# - AllTroopHPPct
+
+InTavern=true

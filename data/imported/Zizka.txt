@@ -1,0 +1,74 @@
+GENERAL: Zizka
+ROLE: Unknown
+Leadership: 114 (8.89)
+Attack: 115 (8.82)
+Defense: 109 (8.85)
+Politics: 122 (8.82)
+
+==============================
+BASE SKILL | Battle of Kutna Hora
+==============================
+EnemyRangedTroopAttackPct -40
+EnemyRangedTroopDefensePct -15
+EnemyRangedTroopHPPct -15
+EnemySiegeMachineDefensePct -15
+EnemySiegeMachineHPPct -15
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Siege Machine Defense
+SPECIALTY 1 L5:
+SiegeMachineHPPct +10
+SiegeMachineDefensePct +10
+
+# SPECIALTY 2 | Sabotage
+SPECIALTY 2 L5:
+EnemyTroopDefensePct -10
+
+# SPECIALTY 3 | War God
+SPECIALTY 3 L5:
+AllTroopsAttackPct +6
+
+# SPECIALTY 4 | Wagenburg Tactics
+SPECIALTY 4 L5:
+EnemyRangedTroopAttackPct -30
+EnemySiegeMachineAttackPct -30
+EnemyRangedTroopDefensePct -20
+EnemyRangedTroopHPPct -20
+
+==============================
+COVENANTS
+==============================
+
+# None available (locked)
+
+InTavern=false
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Battle of Kutna Hora
+Reduces enemy ranged troops' attack by 40%, enemy ranged troops and siege machines' defense and HP by 15% when General is leading the army.
+
+# SPECIALTY_1_MAX_TEXT:
+Siege Machine Defense(Max Level Attributes)
+Siege Machine HP +10%
+Siege Machine Defense +10%
+
+# SPECIALTY_2_MAX_TEXT:
+Sabotage(Max Level Attributes)
+Enemy Troop Defense -10%
+
+# SPECIALTY_3_MAX_TEXT:
+War God(Max Level Attributes)
+All Troops Attack +6%
+
+# SPECIALTY_4_MAX_TEXT:
+Wagenburg Tactics(Max Level Attributes)
+Enemy Ranged Troop and Siege Machine Attack -30%
+Enemy Ranged Troop Defense -20%
+Enemy Ranged Troop HP -20%

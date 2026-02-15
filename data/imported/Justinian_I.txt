@@ -1,0 +1,111 @@
+GENERAL: Justinian I (Awakened)
+ROLE: Duty
+IN_TAVERN: false
+
+Leadership: 115 (8.77)
+Attack: 110 (8.81)
+Defense: 114 (8.83)
+Politics: 121 (8.98)
+
+BASE SKILL | Code of Justinian
+WhenGeneralIsTheMilitaryAcademyOfficer_ResearchSpeedPct +10
+WhenGeneralIsTheMilitaryAcademyOfficer_GroundDefensePct +12
+WhenGeneralIsTheMilitaryAcademyOfficer_MountedDefensePct +12
+WhenGeneralIsTheMilitaryAcademyOfficer_GroundHPPct +12
+WhenGeneralIsTheMilitaryAcademyOfficer_MountedHPPct +12
+
+SPECIALTY 1 L5:
+SiegeMachineHPPct +10
+SiegeMachineDefensePct +10
+
+SPECIALTY 2 L5:
+EnemyTroopAttackPct -10
+
+SPECIALTY 3 L5:
+WhenGeneralIsTheMilitaryAcademyOfficer_ResearchSpeedPct +5
+WhenGeneralIsTheMilitaryAcademyOfficer_GroundDefensePct +10
+WhenGeneralIsTheMilitaryAcademyOfficer_MountedDefensePct +10
+
+SPECIALTY 4 L5:
+WhenGeneralIsTheMilitaryAcademyOfficer_ResearchSpeedPct +10
+WhenGeneralIsTheMilitaryAcademyOfficer_EnemyTroopDefensePct -20
+
+COVENANT | War
+# None available (locked or not shown)
+COVENANT | Cooperation
+# None available (locked or not shown)
+COVENANT | Peace
+# None available (locked or not shown)
+COVENANT | Faith
+# None available (locked or not shown)
+COVENANT | Honor
+# None available (locked or not shown)
+COVENANT | Civilization
+# None available (locked or not shown)
+
+NEW STAT KEYS NOTE:
+- WhenGeneralIsTheMilitaryAcademyOfficer_ResearchSpeedPct
+- WhenGeneralIsTheMilitaryAcademyOfficer_GroundDefensePct
+- WhenGeneralIsTheMilitaryAcademyOfficer_MountedDefensePct
+- WhenGeneralIsTheMilitaryAcademyOfficer_GroundHPPct
+- WhenGeneralIsTheMilitaryAcademyOfficer_MountedHPPct
+- WhenGeneralIsTheMilitaryAcademyOfficer_EnemyTroopDefensePct
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Code of Justinian
+Increases research speed by 10% and increases
+ground troops and
+mounted troops' defense and HP
+by 12% when General is the Military Academy
+Officer.
+
+# SPECIALTY_1_L5_TEXT:
+Siege Machine
+Defense(Max Level
+Attributes)
+Siege Machine HP +10%
+Siege Machine Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Snipe(Max Level
+Attributes)
+Enemy Troop Attack -10%
+
+# SPECIALTY_3_L5_TEXT:
+Sage(Max Level
+Attributes)
+Applied to Military
+Academy Officer
+Research Speed +5%
+Ground Troop and Mounted
+Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Gothic War(Max Level
+Attributes)
+Applied to Military
+Academy Officer
+Research Speed +10%
+Enemy Troop Defense -20%
+
+# COVENANT_War_TEXT:
+# None available (locked or not shown)
+
+# COVENANT_Cooperation_TEXT:
+# None available (locked or not shown)
+
+# COVENANT_Peace_TEXT:
+# None available (locked or not shown)
+
+# COVENANT_Faith_TEXT:
+# None available (locked or not shown)
+
+# COVENANT_Honor_TEXT:
+# None available (locked or not shown)
+
+# COVENANT_Civilization_TEXT:
+# None available (locked or not shown)

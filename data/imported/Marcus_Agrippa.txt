@@ -1,0 +1,227 @@
+GENERAL: Marcus Agrippa
+ROLE: Unknown
+Leadership: 117 (8.91)
+Attack: 120 (8.99)
+Defense: 113 (8.85)
+Politics: 111 (8.70)
+
+==============================
+BASE SKILL | Governor of Transalpine Gaul
+==============================
+AttackingRangedTroopAttackPct +40
+AttackingRangedTroopDefensePct +30
+AttackingRangedTroopHPPct +30
+AttackingSiegeMachineDefensePct +30
+AttackingSiegeMachineHPPct +30
+
+==============================
+ASCENSION 1
+==============================
+AttackingRangedTroopDefensePct +20
+AttackingSiegeMachineDefensePct +20
+AttackingRangedTroopHPPct +10
+AttackingSiegeMachineHPPct +10
+
+==============================
+ASCENSION 2
+==============================
+AttackingTroopDeathToWoundedRatePct +10
+
+==============================
+ASCENSION 3
+==============================
+AttackingRangedTroopAttackPct +15
+AttackingMarchSizePct +8
+
+==============================
+ASCENSION 4
+==============================
+AttackingRangedTroopDefensePct +45
+AttackingSiegeMachineDefensePct +45
+
+==============================
+ASCENSION 5
+==============================
+AttackingRangedTroopAttackPct +35
+AttackingRangedTroopHPPct +25
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Ranged Troop Formation
+SPECIALTY 1 L1:
+RangedTroopAttackPct +1
+RangedTroopDefensePct +1
+SPECIALTY 1 L2:
+RangedTroopAttackPct +1
+RangedTroopDefensePct +1
+SPECIALTY 1 L3:
+RangedTroopAttackPct +2
+RangedTroopDefensePct +2
+SPECIALTY 1 L4:
+RangedTroopAttackPct +2
+RangedTroopDefensePct +2
+SPECIALTY 1 L5:
+RangedTroopAttackPct +4
+RangedTroopDefensePct +4
+
+# SPECIALTY 2 | Bash
+SPECIALTY 2 L1:
+RangedTroopAttackPct +1
+SiegeMachineAttackPct +1
+SPECIALTY 2 L2:
+RangedTroopAttackPct +1
+SiegeMachineAttackPct +1
+SPECIALTY 2 L3:
+RangedTroopAttackPct +2
+SiegeMachineAttackPct +2
+SPECIALTY 2 L4:
+RangedTroopAttackPct +2
+SiegeMachineAttackPct +2
+SPECIALTY 2 L5:
+RangedTroopAttackPct +4
+SiegeMachineAttackPct +4
+
+# SPECIALTY 3 | Ranged Troop Ares
+SPECIALTY 3 L1:
+RangedTroopAttackPct +1
+RangedTroopHPPct +1
+RangedTroopDefensePct +1
+SPECIALTY 3 L2:
+RangedTroopAttackPct +1
+RangedTroopHPPct +1
+RangedTroopDefensePct +1
+SPECIALTY 3 L3:
+RangedTroopAttackPct +2
+RangedTroopHPPct +2
+RangedTroopDefensePct +2
+SPECIALTY 3 L4:
+RangedTroopAttackPct +2
+RangedTroopHPPct +2
+RangedTroopDefensePct +2
+SPECIALTY 3 L5:
+RangedTroopAttackPct +4
+RangedTroopHPPct +4
+RangedTroopDefensePct +4
+
+# SPECIALTY 4 | Battle of Actium
+SPECIALTY 4 L1:
+AttackingRangedTroopAttackPct +5
+AttackingSiegeMachineDefensePct +5
+AttackingRangedTroopDefensePct +5
+SPECIALTY 4 L2:
+AttackingRangedTroopAttackPct +5
+AttackingSiegeMachineDefensePct +5
+AttackingRangedTroopDefensePct +5
+SPECIALTY 4 L3:
+AttackingRangedTroopAttackPct +10
+AttackingSiegeMachineDefensePct +10
+AttackingRangedTroopDefensePct +10
+SPECIALTY 4 L4:
+AttackingRangedTroopAttackPct +10
+AttackingSiegeMachineDefensePct +10
+AttackingRangedTroopDefensePct +10
+SPECIALTY 4 L5:
+AttackingRangedTroopAttackPct +20
+AttackingSiegeMachineDefensePct +20
+AttackingRangedTroopDefensePct +20
+
+==============================
+COVENANTS
+==============================
+
+# War Covenant
+AllTroopProductionPct +5
+
+# Cooperation Covenant
+RangedTroopHPPct +5
+SiegeMachineHPPct +5
+
+# Peace Covenant
+RangedTrainingCapacityPct +10
+
+# Faith Covenant
+RangedTroopDefensePct +5
+SiegeMachineDefensePct +5
+MarchSpeedPct +15
+
+# Honor Covenant
+InRallySiegeMachineAttackPct +5
+InRallyRangedAttackPct +10
+
+# Civilization Covenant
+AttackingRangedTroopAttackPct +15
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - AllTroopProductionPct | All Resources Production
+
+InTavern=false
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Governor of Transalpine Gaul
+Increases ranged troops' attack by 40% and increases ranged troops and siege machines'
+defense and HP by 30% when General is leading the army to attack.
+
+# ASCENSION_1_TEXT:
+Attacking Ranged Troop and Siege Machine Defense +20% and HP +10%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +10%
+
+# ASCENSION_3_TEXT:
+When attacking, Ranged Troop Attack +15%, March Size Capacity +8%
+
+# ASCENSION_4_TEXT:
+Attacking Ranged Troop and Siege Machine Defense +45%
+
+# ASCENSION_5_TEXT:
+Attacking Ranged Troop Attack +35% and HP +25%
+
+# SPECIALTY_1_MAX_TEXT:
+Ranged Troop Formation(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_2_MAX_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_MAX_TEXT:
+Ranged Troop Ares(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop HP +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_4_MAX_TEXT:
+Battle of Actium(Max Level Attributes)
+Attacking Ranged Troop Attack +40%
+Attacking Siege Machine and Ranged Troop Defense +40%
+
+# COVENANT_TEXT:
+War Covenant
+All Resources Production +5%
+
+Cooperation Covenant
+Ranged Troop and Siege Machine HP +5%
+
+Peace Covenant
+Ranged Troop Training Capacity +10%
+
+Faith Covenant
+Ranged Troop and Siege Machine Defense +5%
+March Speed +15%
+
+Honor Covenant
+In-Rally Ranged Troop and Siege Machine Attack +5%
+In-Rally Ranged Troop Attack +10%
+
+Civilization Covenant
+Attacking Ranged Troop Attack +15%

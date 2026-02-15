@@ -1,0 +1,145 @@
+GENERAL: Marco Polo (Awakened)
+ROLE: Mounted
+IN_TAVERN: false
+
+Leadership: 111 (8.32)
+Attack: 145 (9.62)
+Defense: 122 (8.78)
+Politics: 101 (7.78)
+
+BASE SKILL | Ride the Waves
+AttackingMountedAttackPct +45
+AttackingMountedDefensePct +40
+AttackingMountedHPPct +40
+
+ASCENSION 1
+AttackingMountedAttackPct +25
+AttackingMountedHPPct +15
+
+ASCENSION 2
+AttackingTroopDeathToWoundedRatePct +8
+
+ASCENSION 3
+AttackingMountedAttackPct +30
+MarchSizeCapacityPct +8
+
+ASCENSION 4
+EnemyGroundTroopDefensePct -10
+EnemyGroundTroopHPPct -10
+EnemyMountedTroopDefensePct -10
+EnemyMountedTroopHPPct -10
+
+ASCENSION 5
+AttackingMountedAttackPct +40
+AttackingMountedDefensePct +25
+AttackingMountedHPPct +25
+
+SPECIALTY 1 L5:
+MountedAttackPct +10
+MountedDefensePct +10
+
+SPECIALTY 2 L5:
+MarchSizeCapacityPct +6
+AttackingMountedAttackPct +10
+AttackingGroundAttackPct +10
+
+SPECIALTY 3 L5:
+MountedAttackPct +10
+MountedHPPct +10
+MountedDefensePct +10
+
+SPECIALTY 4 L5:
+AttackingMountedAttackPct +50
+AttackingMountedHPPct +30
+MarchSizeCapacityPct +15
+
+COVENANT | War
+MountedAttackPct +5
+
+COVENANT | Cooperation
+MarchSpeedPct +10
+
+COVENANT | Peace
+MountedTroopTrainingCapacityPct +10
+
+COVENANT | Faith
+InRallyMountedAttackPct +5
+MountedAttackPct +5
+
+COVENANT | Honor
+InRallyMountedAttackPct +10
+
+COVENANT | Civilization
+MountedDefensePct +10
+MountedHPPct +10
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Ride the Waves
+Increases mounted troops' attack by 45% and increases mounted troops' defense and HP by 40% when General is leading the army to attack.
+
+# ASCENSION_1_TEXT:
+Attacking Mounted Troop Attack +25% and HP +15%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+When attacking, Mounted Troop Attack +30%, March Size Capacity +8%
+
+# ASCENSION_4_TEXT:
+Enemy Ground Troop and Mounted Troop Defense -10% and HP -10%
+
+# ASCENSION_5_TEXT:
+Attacking Mounted Troop Attack +40%, Defense and HP +25%
+
+# SPECIALTY_1_L5_TEXT:
+Mounted Troop Formation(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Annihilation(Max Level Attributes)
+March Size Capacity +6%
+Attacking Mounted Troop and Ground Troop Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Mounted Troop Ares(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop HP +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+The Million(Max Level Attributes)
+Attacking Mounted Troop Attack +50%
+Attacking Mounted Troop HP +30%
+March Size Capacity +15%
+
+# COVENANT_WAR_TEXT:
+War Covenant
+Mounted Troop Attack +5%
+
+# COVENANT_COOPERATION_TEXT:
+Cooperation Covenant
+March Speed +10%
+
+# COVENANT_PEACE_TEXT:
+Peace Covenant
+Mounted Troop Training Capacity +10%
+
+# COVENANT_FAITH_TEXT:
+Faith Covenant
+In-Rally Mounted Troop Attack +5%
+Mounted Troop Attack +5%
+
+# COVENANT_HONOR_TEXT:
+Honor Covenant
+In-Rally Mounted Troop Attack +10%
+
+# COVENANT_CIVILIZATION_TEXT:
+Civilization Covenant
+Mounted Troop Defense +10%
+Mounted Troop HP +10%

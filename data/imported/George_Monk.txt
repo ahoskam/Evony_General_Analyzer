@@ -1,0 +1,229 @@
+GENERAL: George Monk
+ROLE: Unknown
+Leadership: 115 (8.23)
+Attack: 147 (9.46)
+Defense: 126 (8.71)
+Politics: 106 (8.08)
+
+==============================
+BASE SKILL | Monarchy Restoration
+==============================
+AttackingMountedAttackPct +50
+GroundDefensePct +40
+GroundHPPct +40
+MountedDefensePct +40
+MountedHPPct +40
+
+==============================
+ASCENSION 1
+==============================
+AttackingMountedDefensePct +15
+AttackingMountedHPPct +15
+
+==============================
+ASCENSION 2
+==============================
+AttackingTroopDeathToWoundedRatePct +8
+
+==============================
+ASCENSION 3
+==============================
+AttackingMountedAttackPct +35
+MarchSizePct +8
+
+==============================
+ASCENSION 4
+==============================
+AttackingGroundAttackPct +15
+AttackingGroundHPPct +15
+AttackingMountedAttackPct +15
+AttackingMountedHPPct +15
+
+==============================
+ASCENSION 5
+==============================
+AttackingMountedAttackPct +40
+AttackingMountedDefensePct +25
+AttackingMountedHPPct +25
+
+==============================
+SPECIALTIES
+==============================
+
+# SPECIALTY 1 | Mounted Troop Assault
+SPECIALTY 1 L1:
+MountedAttackPct +1
+MountedHPPct +1
+SPECIALTY 1 L2:
+MountedAttackPct +1
+MountedHPPct +1
+SPECIALTY 1 L3:
+MountedAttackPct +2
+MountedHPPct +2
+SPECIALTY 1 L4:
+MountedAttackPct +2
+MountedHPPct +2
+SPECIALTY 1 L5:
+MountedAttackPct +4
+MountedHPPct +4
+
+# SPECIALTY 2 | Formation
+SPECIALTY 2 L1:
+GroundAttackPct +1
+MountedAttackPct +1
+SPECIALTY 2 L2:
+GroundAttackPct +1
+MountedAttackPct +1
+SPECIALTY 2 L3:
+GroundAttackPct +2
+MountedAttackPct +2
+SPECIALTY 2 L4:
+GroundAttackPct +2
+MountedAttackPct +2
+SPECIALTY 2 L5:
+GroundAttackPct +4
+MountedAttackPct +4
+
+# SPECIALTY 3 | Mounted Troop Ares
+SPECIALTY 3 L1:
+MountedAttackPct +1
+MountedHPPct +1
+MountedDefensePct +1
+SPECIALTY 3 L2:
+MountedAttackPct +1
+MountedHPPct +1
+MountedDefensePct +1
+SPECIALTY 3 L3:
+MountedAttackPct +2
+MountedHPPct +2
+MountedDefensePct +2
+SPECIALTY 3 L4:
+MountedAttackPct +2
+MountedHPPct +2
+MountedDefensePct +2
+SPECIALTY 3 L5:
+MountedAttackPct +4
+MountedHPPct +4
+MountedDefensePct +4
+
+# SPECIALTY 4 | Duke of Albemarle
+SPECIALTY 4 L1:
+AttackingMountedAttackPct +5
+AttackingMountedHPPct +3
+AttackingMountedDefensePct +3
+SPECIALTY 4 L2:
+AttackingMountedAttackPct +5
+AttackingMountedHPPct +4
+AttackingMountedDefensePct +4
+SPECIALTY 4 L3:
+AttackingMountedAttackPct +10
+AttackingMountedHPPct +7
+AttackingMountedDefensePct +7
+SPECIALTY 4 L4:
+AttackingMountedAttackPct +10
+AttackingMountedHPPct +8
+AttackingMountedDefensePct +8
+SPECIALTY 4 L5:
+AttackingMountedAttackPct +20
+AttackingMountedHPPct +8
+AttackingMountedDefensePct +8
+
+==============================
+COVENANTS
+==============================
+
+# War Covenant
+MarchSpeedPct +10
+
+# Cooperation Covenant
+MountedTroopTrainingCapacityPct +10
+
+# Peace Covenant
+AttackingMountedAttackPct +5
+
+# Faith Covenant
+AttackingMountedDefensePct +10
+InRallyMountedAttackPct +10
+
+# Honor Covenant
+AttackingMountedHPPct +10
+
+# Civilization Covenant
+MountedAttackPct +5
+InRallyMountedDefensePct +10
+
+==============================
+# NEW STAT KEYS NOTE
+==============================
+# NEW_STAT_KEYS:
+# - AttackingTroopDeathToWoundedRatePct | Attacking Troop Death into Wounded Rate
+# - MountedTroopTrainingCapacityPct | Mounted Troop Training Capacity
+# - InRallyMountedAttackPct | In-Rally Mounted Troop Attack
+# - InRallyMountedDefensePct | In-Rally Mounted Troop Defense
+
+InTavern=false
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Monarchy Restoration
+Increases mounted troops' attack by 50% when General is leading the army to attack. Increases ground troops and mounted troops' defense and HP by 40% when General brings any Dragon or Spiritual Beast to attack.
+
+# ASCENSION_1_TEXT:
+Attacking Mounted Troop Defense +15% and HP +15%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+When attacking, Mounted Troop Attack +35%, March Size Capacity +8%
+
+# ASCENSION_4_TEXT:
+Attacking Ground Troop and Mounted Troop Attack +15% and HP +15%
+
+# ASCENSION_5_TEXT:
+Attacking Mounted Troop Attack +40%, Defense and HP +25%
+
+# SPECIALTY_1_MAX_TEXT:
+Mounted Troop Assault(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop HP +10%
+
+# SPECIALTY_2_MAX_TEXT:
+Formation(Max Level Attributes)
+Ground Troop and Mounted Troop Attack +10%
+
+# SPECIALTY_3_MAX_TEXT:
+Mounted Troop Ares(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop HP +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY_4_MAX_TEXT:
+Duke of Albemarle(Max Level Attributes)
+Attacking Mounted Troop Attack +50%
+Attacking Mounted Troop HP +30%
+Attacking Mounted Troop Defense +30%
+
+# COVENANT_TEXT:
+War Covenant
+March Speed +10%
+
+Cooperation Covenant
+Mounted Troop Training Capacity +10%
+
+Peace Covenant
+Attacking Mounted Troop Attack +5%
+
+Faith Covenant
+Attacking Mounted Troop Defense +10%
+In-Rally Mounted Troop Attack +10%
+
+Honor Covenant
+Attacking Mounted Troop HP +10%
+
+Civilization Covenant
+Mounted Troop Attack +5%
+In-Rally Mounted Troop Defense +10%

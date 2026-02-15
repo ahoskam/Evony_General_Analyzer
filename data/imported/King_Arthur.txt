@@ -1,0 +1,98 @@
+GENERAL: King Arthur
+ROLE: Mounted
+IN_TAVERN: true
+
+Leadership: 115 (9.08)
+Attack: 109 (8.14)
+Defense: 105 (8.25)
+Politics: 94 (7.33)
+
+BASE SKILL | Caliburn
+MarchSizePct +15
+AttackingMountedAttackPct +35
+AttackingMountedDefensePct +35
+ResearchTimeReductionMinutesFlat +15
+
+ASCENSION 1
+AttackingMountedAttackPct +20
+ResearchSpeedPct +5
+
+ASCENSION 2
+AttackingTroopDeathToWoundedRatePct +8
+ResearchTimeReductionMinutesFlat +25
+
+ASCENSION 3
+ResearchSpeedPct +10
+WhenLaunchingAllianceWarRallyCapacityPct +8
+
+ASCENSION 4
+AttackingMountedDefensePct +20
+AttackingMountedHPPct +20
+ResearchTimeReductionMinutesFlat +20
+
+ASCENSION 5
+AttackingMountedAttackPct +15
+AttackingRangedAttackPct +15
+ResearchSpeedPct +8
+
+SPECIALTY 1 L5:
+MountedAttackPct +10
+MountedDefensePct +10
+
+SPECIALTY 2 L5:
+RangedTroopAttackPct +10
+SiegeMachineAttackPct +10
+
+SPECIALTY 3 L5:
+MainCityTroopDeathToSoulRatePct +10
+
+SPECIALTY 4 L5:
+EnemyTroopAttackDebuffPct -6
+MarchSizeCapacityPct +10
+
+# None available (locked or not shown)
+
+NEW STAT KEYS NOTE:
+- ResearchTimeReductionMinutesFlat
+- ResearchSpeedPct
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Caliburn
+Reduces Research Time by 15 minutes when you own the general. Increases march size by 15% when general is leading the army. Increases mounted troops' attack and defense by 35% when general is leading the army to attack.
+
+# ASCENSION_1_TEXT:
+Attacking Mounted Troop Attack +20%; when you own the General, Research Speed +5%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%; when you own the General, Research Time -25 minutes
+
+# ASCENSION_3_TEXT:
+When you own the General,Research Speed +10%; when General is launching Alliance War, Rally Capacity +8%
+
+# ASCENSION_4_TEXT:
+Attacking Mounted Troop Defense and HP +20%; when you own the General, Research Time -20 minutes
+
+# ASCENSION_5_TEXT:
+Attacking Mounted Troop Attack +15%, Attacking Ranged Troop Attack +15%; when you own the General, Research Speed +8%
+
+# SPECIALTY_1_L5_TEXT:
+Mounted Troop Formation(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+King’s Ambition(Max Level Attributes)
+Troop death into troop soul rate in the main city +10%
+
+# SPECIALTY_4_L5_TEXT:
+Legendary Knight(Max Level Attributes)
+Enemy Troop Attack -6%
+March Size Capacity +10%

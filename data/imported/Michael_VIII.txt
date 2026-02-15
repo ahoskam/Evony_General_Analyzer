@@ -1,0 +1,113 @@
+GENERAL: Michael VIII
+ROLE: Duty
+IN_TAVERN: false
+
+Leadership: 118 (8.95)
+Attack: 112 (8.77)
+Defense: 109 (8.69)
+Politics: 116 (9.01)
+
+BASE SKILL | Palaiologan Dynasty
+InCityGroundTroopAttackPct +25
+InCityMountedTroopAttackPct +25
+InCityGroundTroopDefensePct +25
+InCityMountedTroopDefensePct +25
+InCityGroundTroopHPPct +30
+InCityMountedTroopHPPct +30
+
+ASCENSION 1
+InCityGroundTroopDefensePct +20
+InCityMountedTroopDefensePct +20
+InCityGroundTroopHPPct +20
+InCityMountedTroopHPPct +20
+
+ASCENSION 2
+ConstructionSpeedPct +10
+InCityGroundTroopAttackPct +15
+InCityMountedTroopAttackPct +15
+
+ASCENSION 3
+EnemyRangedTroopAttackPct -30
+EnemyRangedTroopDefensePct -20
+
+ASCENSION 4
+InRallyGroundTroopAttackPct +20
+InRallyMountedTroopAttackPct +20
+InRallyGroundTroopDefensePct +20
+InRallyMountedTroopDefensePct +20
+InRallyGroundTroopHPPct +20
+InRallyMountedTroopHPPct +20
+
+ASCENSION 5
+GroundTroopAttackPct +15
+MountedTroopAttackPct +15
+GroundTroopHPPct +20
+MountedTroopHPPct +20
+
+SPECIALTY 1 L5:
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
+
+SPECIALTY 2 L5:
+EnemyTroopDefensePct -10
+
+SPECIALTY 3 L5:
+ResourceTaxAmountPct +20
+InCityTroopAttackPct +10
+
+SPECIALTY 4 L5:
+ConstructionSpeedPct +10
+GroundTroopAttackPct +15
+MountedTroopAttackPct +15
+GroundTroopDefensePct +15
+MountedTroopDefensePct +15
+
+# None available (locked)
+
+NEW STAT KEYS NOTE:
+- ResourceTaxAmountPct
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Palaiologan Dynasty
+Increases in-city ground troops and mounted troops' attack and defense by 25% and in-city ground troops and mounted troops' HP by 30% when General is the Market Officer.
+
+# ASCENSION_1_TEXT:
+When General is the Market Officer, In-city Ground Troop and Mounted Troop Defense and HP +20%
+
+# ASCENSION_2_TEXT:
+When General is the Market Officer, Construction Speed +10%, In-city Ground Troop and Mounted Troop Attack +15%
+
+# ASCENSION_3_TEXT:
+When General is the Market Officer, Enemy Ranged Troop Attack -30% and Defense -20%
+
+# ASCENSION_4_TEXT:
+When General is the Market Officer, In-Rally Ground Troop and Mounted Troop Attack, Defense and HP +20%
+
+# ASCENSION_5_TEXT:
+When General is the Market Officer, Ground Troop and Mounted Troop Attack +15% and HP +20%
+
+# SPECIALTY_1_L5_TEXT:
+Ground Troop Defense(Max Level Attributes)
+Ground Troop HP +10%
+Ground Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Sabotage(Max Level Attributes)
+Enemy Troop Defense -10%
+
+# SPECIALTY_3_L5_TEXT:
+Sage(Max Level Attributes)
+Applied to Market Officer
+Resource Tax Amount +20%
+In City Troop Attack +10%
+
+# SPECIALTY_4_L5_TEXT:
+Battle of Pelagonia(Max Level Attributes)
+Applied to Market Officer
+Construction Speed +10%
+Ground Troop and Mounted Troop Attack +15%
+Ground Troop and Mounted Troop Defense +15%

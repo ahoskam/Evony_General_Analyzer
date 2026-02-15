@@ -1,0 +1,141 @@
+GENERAL: André Masséna
+ROLE: Unknown
+IN_TAVERN: false
+BASE SKILL | Dear Child of Victory
+
+Leadership: 117 (8.75)
+Attack: 120 (9.04)
+Defense: 115 (8.95)
+Politics: 110 (8.69)
+
+MarchSizeCapacityPct +12
+MountedAttackPct +45
+
+ASCENSION 1
+MountedTroopAttackPct +10
+MountedTroopDefensePct +10
+
+ASCENSION 2
+EnemyInCityTroopWoundedToDeathRatePct +10
+
+ASCENSION 3
+GroundTroopAttackPct +15
+MountedTroopAttackPct +15
+
+ASCENSION 4
+MountedTroopDefensePct +55
+
+ASCENSION 5
+MountedTroopAttackPct +25
+MountedTroopDefensePct +15
+MountedTroopHPPct +15
+
+SPECIALTY 1 L5:
+MountedTroopAttackPct +10
+MountedTroopHPPct +10
+
+SPECIALTY 2 L5:
+MarchSizeCapacityPct +6
+AttackingMountedAttackPct +10
+AttackingGroundAttackPct +10
+
+SPECIALTY 3 L5:
+MountedTroopAttackPct +10
+MountedTroopHPPct +10
+MountedTroopDefensePct +10
+
+SPECIALTY 4 L5:
+MountedTroopAttackPct +45
+MountedTroopDefensePct +45
+
+COVENANT | War
+MonstersDefensePct -8
+
+COVENANT | Cooperation
+MarchSpeedPct +15
+
+COVENANT | Peace
+InRallyMountedDefensePct +10
+AttackingMountedAttackPct +10
+
+COVENANT | Faith
+EnemyRangedTroopAttackPct -5
+EnemySiegeMachineAttackPct -5
+
+COVENANT | Honor
+AttackingEnemyRangedTroopAttackPct -5
+AttackingEnemySiegeMachineAttackPct -5
+
+COVENANT | Civilization
+InRallyGroundAttackPct +10
+InRallyMountedAttackPct +10
+
+==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+Dear Child of Victory
+Increases the March Size by 12% and mounted troops' attack by 45% when General is leading the army.
+
+# ASCENSION_1_TEXT:
+Mounted Troop Attack +10% and Defense +10%
+
+# ASCENSION_2_TEXT:
+Enemy In-city Troop Wounded into Death rate +10%
+
+# ASCENSION_3_TEXT:
+Ground Troop and Mounted Troop Attack +15%
+
+# ASCENSION_4_TEXT:
+Mounted Troop Defense +55%
+
+# ASCENSION_5_TEXT:
+Mounted Troop Attack +25%, Mounted Troop Defense and HP +15%
+
+# SPECIALTY_1_L5_TEXT:
+Mounted Troop Assault(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop HP +10%
+
+# SPECIALTY_2_L5_TEXT:
+Annihilation(Max Level Attributes)
+March Size Capacity +6%
+Attacking Mounted Troop and Ground Troop Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Mounted Troop Ares(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop HP +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Prince of Essling(Max Level Attributes)
+Mounted Troop Attack +45%
+Mounted Troop Defense +45%
+
+# COVENANT_War_TEXT:
+War Covenant
+Monsters Defense -8%
+
+# COVENANT_Cooperation_TEXT:
+Cooperation Covenant
+March Speed +15%
+
+# COVENANT_Peace_TEXT:
+Peace Covenant
+In-Rally Mounted Troop Defense +10%
+Attacking Mounted Troop Attack +10%
+
+# COVENANT_Faith_TEXT:
+Faith Covenant
+Enemy Ranged Troop and Siege Machine Attack -5%
+
+# COVENANT_Honor_TEXT:
+Honor Covenant
+When attacking, Enemy Ranged Troop and Siege Machine Attack -5%
+
+# COVENANT_Civilization_TEXT:
+Civilization Covenant
+In-Rally Ground Troop and Mounted Troop Attack +10%
+In-Rally Mounted Troop Attack +10%
