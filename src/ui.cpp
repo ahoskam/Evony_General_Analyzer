@@ -11,7 +11,12 @@
 #include <cstdio>
 #include <cstdint>
 #include <cctype>
+#include <cmath>
 #include <map>
+#include <unordered_map>
+#include <sstream>
+
+
 
 static void mark_dirty(EditorState& st) { st.dirty = true; }
 static bool is_locked(const EditorState& st) { return st.meta.double_checked_in_game != 0; }
@@ -29,6 +34,23 @@ static void ui_separator(float thickness)
   ImGui::Dummy(ImVec2(0.0f, thickness + 3.0f));
 }
 
+static void ui_section_bar(const char* label, ImU32 bg_col)
+{
+  ImDrawList* dl = ImGui::GetWindowDrawList();
+  ImVec2 p = ImGui::GetCursorScreenPos();
+  float w = ImGui::GetContentRegionAvail().x;
+  float h = ImGui::GetTextLineHeight() + ImGui::GetStyle().FramePadding.y * 2.0f;
+
+  dl->AddRectFilled(p, ImVec2(p.x + w, p.y + h), bg_col, 4.0f);
+
+  ImGui::SetCursorScreenPos(ImVec2(p.x + ImGui::GetStyle().FramePadding.x,
+                                   p.y + ImGui::GetStyle().FramePadding.y));
+  ImGui::TextUnformatted(label);
+
+  ImGui::SetCursorScreenPos(ImVec2(p.x, p.y + h + 4.0f));
+}
+
+
 static int parse_first_int(const std::string& s)
 {
   for (size_t i = 0; i < s.size(); ++i) {
@@ -44,12 +66,12 @@ static int parse_first_int(const std::string& s)
   return 0;
 }
 
-static int ascension_index(const Occurrence& o)
+/* static int ascension_index(const Occurrence& o)
 {
   // importer uses context_name like "ASCENSION 1"
   if (o.context_type != "Ascension") return 0;
   return parse_first_int(o.context_name);
-}
+} */
 
 static int covenant_index(const Occurrence& o)
 {
@@ -122,6 +144,33 @@ static bool has_specialty_level_row(const EditorState& st, int spec_n, int stat_
   }
   return false;
 }
+
+static std::optional<std::vector<int>> split_total_abs_to_increments(double abs_total)
+{
+  // Match by integer totals. Patterns you’ve verified:
+  // 10 => 1,1,2,2,4
+  // 6  => 1,1,1,1,2
+  // 50 => 5,5,10,10,20
+  // 16 => 2,2,3,3,6
+  // 26 => 3,3,5,5,10
+  // 35 => 3,4,6,7,15
+  // 46 => 5,5,9,9,18
+  static const std::unordered_map<int, std::vector<int>> patterns = {
+    { 10, {1,1,2,2,4} },
+    {  6, {1,1,1,1,2} },
+    { 50, {5,5,10,10,20} },
+    { 16, {2,2,3,3,6} },
+    { 26, {3,3,5,5,10} },
+    { 35, {3,4,6,7,15} },
+    { 46, {5,5,9,9,18} },
+  };
+
+  int t = (int)std::lround(abs_total);
+  auto it = patterns.find(t);
+  if (it == patterns.end()) return std::nullopt;
+  return it->second;
+}
+
 
 static void expand_specialty_total(EditorState& st, const Occurrence& total_row)
 {
@@ -234,6 +283,84 @@ static bool save_changes(Db& db, EditorState& st)
       }
     }
 
+        // ------------------------------------------------------------
+    // Auto-expand Specialty L5 (TOTAL) rows into L1..L5 increments
+    // when no level rows exist yet, using known patterns.
+    // This materializes the rows into DB on Save (no restart needed).
+    // ------------------------------------------------------------
+    auto has_any_levels_for = [&](int spec_n, int stat_key_id) -> bool {
+      for (const auto& x : st.occ) {
+        if (x.context_type != "Specialty") continue;
+        if (specialty_index(x) != spec_n) continue;
+        if (x.stat_key_id != stat_key_id) continue;
+        if (x.is_total) continue;
+        if (!x.level.has_value()) continue;
+        int lv = *x.level;
+        if (lv >= 1 && lv <= 5) return true;
+      }
+      return false;
+    };
+
+    std::vector<Occurrence> to_add;
+    to_add.reserve(64);
+
+    for (const auto& total : st.occ) {
+      if (total.context_type != "Specialty") continue;
+      if (!total.is_total) continue;
+      if (!total.level.has_value() || *total.level != 5) continue;
+
+      int spec_n = specialty_index(total);
+      if (spec_n <= 0) continue;
+
+      if (has_any_levels_for(spec_n, total.stat_key_id)) continue;
+
+      double v = total.value;
+      double abs_total = std::fabs(v);
+      auto inc_opt = split_total_abs_to_increments(abs_total);
+      if (!inc_opt.has_value()) continue;
+
+      const auto& inc = *inc_opt;
+      if (inc.size() != 5) continue;
+
+      double sign = (v < 0.0) ? -1.0 : 1.0;
+
+      for (int lv = 1; lv <= 5; ++lv) {
+        Occurrence o{};
+        o.id = 0;
+        o.general_id = st.selected_general_id;
+        o.context_type = "Specialty";
+        o.context_name = make_specialty_name(spec_n, lv, false);
+        o.level = lv;
+        o.is_total = 0;
+
+        o.stat_key_id = total.stat_key_id;
+        o.stat_key    = total.stat_key;
+        o.value = sign * (double)inc[(size_t)lv - 1];
+
+        o.origin = "generated";
+        o.edited_by_user = 1;
+        if (total.id > 0) o.generated_from_total_id = total.id;
+
+        o.file_path = "";
+        o.line_number = 0;
+        o.raw_line = "";
+
+        to_add.push_back(std::move(o));
+      }
+    }
+
+    for (auto& o : to_add) {
+      int new_id = db_insert_occurrence(db, o);
+      if (new_id <= 0) {
+        db.rollback();
+        st.last_save_error = "Auto-expand insert failed (invalid id)";
+        return false;
+      }
+      o.id = new_id;
+      st.occ.push_back(o); // keep UI in sync inside this save call
+    }
+
+
     db.commit();
     st.dirty = false;
     return true;
@@ -269,6 +396,15 @@ void ui_tick(Db& db, EditorState& st) {
 // ---------------------------
 static void draw_left_contents(Db& db, EditorState& st)
 {
+  // Local flag bits (must match model.cpp)
+  enum GeneralStatusFlags : int {
+    GS_MISSING_SOURCE_TEXT   = 1 << 0,
+    GS_MISSING_BASE_SKILL    = 1 << 1,
+    GS_MISSING_ASCENSIONS    = 1 << 2,
+    GS_MISSING_SPECIALTIES   = 1 << 3,
+    GS_MISSING_COVENANT_6    = 1 << 4,
+  };
+
   ImGui::TextUnformatted("Filters");
   ImGui::Separator();
 
@@ -295,13 +431,61 @@ static void draw_left_contents(Db& db, EditorState& st)
 
   ImGui::Separator();
 
+  // Legend (optional but helpful)
+  ImGui::TextDisabled("LOCK = yellow");
+ImGui::TextDisabled("NO SRC = red");
+ImGui::TextDisabled("NO BASE = orange");
+ImGui::TextDisabled("ASC<5 = purple");
+ImGui::TextDisabled("SPEC<4 = cyan");
+ImGui::TextDisabled("COV<6 = green");
+
+
+  ImGui::Separator();
+
   for (const auto& g : st.list) {
     bool selected = (st.selected_general_id == g.id);
 
-    if (g.double_checked_in_game)
-      ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 200, 80, 255));
+    // Build label with tags so you can see WHY it’s colored
+    std::string label = g.name;
 
-    if (ImGui::Selectable(g.name.c_str(), selected)) {
+    const int flags = g.status_flags;
+
+    if (flags & GS_MISSING_SOURCE_TEXT)  label += " [NO SRC]";
+    if (flags & GS_MISSING_BASE_SKILL)   label += " [NO BASE]";
+    if (flags & GS_MISSING_ASCENSIONS)   label += " [ASC<5]";
+    if (flags & GS_MISSING_SPECIALTIES)  label += " [SPEC<4]";
+    if (flags & GS_MISSING_COVENANT_6)   label += " [COV<6]";
+
+    // Color priority:
+    // 1) locked yellow overrides all
+    // 2) missing source
+    // 3) missing base
+    // 4) missing ascensions
+    // 5) missing specialties
+    // 6) has covenants but missing 6th
+    bool pushed = false;
+
+    if (g.double_checked_in_game) {
+      ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 200, 80, 255));
+      pushed = true;
+    } else if (flags & GS_MISSING_SOURCE_TEXT) {
+      ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 90, 90, 255));
+      pushed = true;
+    } else if (flags & GS_MISSING_BASE_SKILL) {
+      ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 170, 80, 255));
+      pushed = true;
+    } else if (flags & GS_MISSING_ASCENSIONS) {
+      ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(200, 140, 255, 255));
+      pushed = true;
+    } else if (flags & GS_MISSING_SPECIALTIES) {
+      ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(120, 220, 255, 255));
+      pushed = true;
+    } else if (flags & GS_MISSING_COVENANT_6) {
+      ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(120, 255, 140, 255));
+      pushed = true;
+    }
+
+    if (ImGui::Selectable(label.c_str(), selected)) {
       if (st.dirty) {
         st.pending_select_general_id = g.id;
         st.show_dirty_modal = true;
@@ -311,10 +495,10 @@ static void draw_left_contents(Db& db, EditorState& st)
       }
     }
 
-    if (g.double_checked_in_game)
-      ImGui::PopStyleColor();
+    if (pushed) ImGui::PopStyleColor();
   }
 }
+
 
 // ---------------------------
 // DETAILS PANEL (contents only)
@@ -388,19 +572,52 @@ if (last_save_failed) {
     ImGui::Text("Double Checked In-Game (LOCK): %s", st.meta.double_checked_in_game ? "Yes" : "No");
 
     ImGui::Separator();
-    ImGui::Text("Leadership: %d  (Green %.3f)", st.meta.leadership, st.meta.leadership_green);
-    ImGui::Text("Attack:     %d  (Green %.3f)", st.meta.attack, st.meta.attack_green);
-    ImGui::Text("Defense:    %d  (Green %.3f)", st.meta.defense, st.meta.defense_green);
-    ImGui::Text("Politics:   %d  (Green %.3f)", st.meta.politics, st.meta.politics_green);
+    ImGui::Text("Leadership: %d  (Green %.2f)", st.meta.leadership, st.meta.leadership_green);
+    ImGui::Text("Attack:     %d  (Green %.2f)", st.meta.attack, st.meta.attack_green);
+    ImGui::Text("Defense:    %d  (Green %.2f)", st.meta.defense, st.meta.defense_green);
+    ImGui::Text("Politics:   %d  (Green %.2f)", st.meta.politics, st.meta.politics_green);
 
     ImGui::Separator();
     ImGui::Text("Base Skill Name: %s", st.meta.base_skill_name.c_str());
 
     ImGui::Separator();
     ImGui::TextUnformatted("SOURCE TEXT (VERBATIM):");
-    ImGui::BeginDisabled();
-    ImGui::InputTextMultiline("##source", &st.meta.source_text_verbatim, ImVec2(-1, 140));
-    ImGui::EndDisabled();
+    // Soft wrap at ~120 characters for display
+auto wrap_text_120 = [](const std::string& in) {
+    const int max_width = 120;
+
+    std::ostringstream out;
+    std::istringstream words(in);
+    std::string word;
+
+    int line_len = 0;
+
+    while (words >> word) {
+        int word_len = (int)word.size();
+
+        // If this word would overflow the line
+        if (line_len > 0 && line_len + 1 + word_len > max_width) {
+            out << '\n';
+            line_len = 0;
+        }
+        else if (line_len > 0) {
+            out << ' ';
+            line_len += 1;
+        }
+
+        out << word;
+        line_len += word_len;
+    }
+
+    return out.str();
+};
+
+std::string wrapped = wrap_text_120(st.meta.source_text_verbatim);
+
+ImGui::BeginDisabled();
+ImGui::InputTextMultiline("##source", &wrapped, ImVec2(-1, 160));
+ImGui::EndDisabled();
+
     return;
   }
 
@@ -438,19 +655,41 @@ if (last_save_failed) {
   ImGui::Separator();
  if (ImGui::InputInt("Leadership", &st.meta.leadership)) mark_dirty(st);
 ImGui::SameLine();
-if (ImGui::InputDouble("L Green", &st.meta.leadership_green)) mark_dirty(st);
+
+ImGui::PushStyleColor(ImGuiCol_FrameBg,        IM_COL32(40, 120, 40, 110));
+ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, IM_COL32(40, 120, 40, 140));
+ImGui::PushStyleColor(ImGuiCol_FrameBgActive,  IM_COL32(40, 120, 40, 170));
+if (ImGui::InputDouble("L Green", &st.meta.leadership_green, 0.01, 0.1, "%.2f")) mark_dirty(st);
+ImGui::PopStyleColor(3);
 
 if (ImGui::InputInt("Attack", &st.meta.attack)) mark_dirty(st);
 ImGui::SameLine();
-if (ImGui::InputDouble("A Green", &st.meta.attack_green)) mark_dirty(st);
+
+ImGui::PushStyleColor(ImGuiCol_FrameBg,        IM_COL32(40, 120, 40, 110));
+ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, IM_COL32(40, 120, 40, 140));
+ImGui::PushStyleColor(ImGuiCol_FrameBgActive,  IM_COL32(40, 120, 40, 170));
+if (ImGui::InputDouble("A Green", &st.meta.attack_green, 0.01, 0.1, "%.2f")) mark_dirty(st);
+ImGui::PopStyleColor(3);
 
 if (ImGui::InputInt("Defense", &st.meta.defense)) mark_dirty(st);
 ImGui::SameLine();
-if (ImGui::InputDouble("D Green", &st.meta.defense_green)) mark_dirty(st);
+
+ImGui::PushStyleColor(ImGuiCol_FrameBg,        IM_COL32(40, 120, 40, 110));
+ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, IM_COL32(40, 120, 40, 140));
+ImGui::PushStyleColor(ImGuiCol_FrameBgActive,  IM_COL32(40, 120, 40, 170));
+if (ImGui::InputDouble("D Green", &st.meta.defense_green, 0.01, 0.1, "%.2f")) mark_dirty(st);
+ImGui::PopStyleColor(3);
+
 
 if (ImGui::InputInt("Politics", &st.meta.politics)) mark_dirty(st);
 ImGui::SameLine();
-if (ImGui::InputDouble("P Green", &st.meta.politics_green)) mark_dirty(st);
+
+ImGui::PushStyleColor(ImGuiCol_FrameBg,        IM_COL32(40, 120, 40, 110));
+ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, IM_COL32(40, 120, 40, 140));
+ImGui::PushStyleColor(ImGuiCol_FrameBgActive,  IM_COL32(40, 120, 40, 170));
+if (ImGui::InputDouble("P Green", &st.meta.politics_green, 0.01, 0.1, "%.2f")) mark_dirty(st);
+ImGui::PopStyleColor(3);
+
 
   // Source text
   ImGui::Separator();
@@ -541,7 +780,7 @@ static void draw_occurrences_contents(EditorState& st)
   // ---------------------------
   // 1) Base Skill
   // ---------------------------
-  ImGui::TextUnformatted("Base Skill");
+  ui_section_bar("Base Skill", IM_COL32(70, 70, 70, 140));
   ui_separator(3.0f);
 
   for (auto& o : st.occ) {
@@ -565,8 +804,13 @@ static void draw_occurrences_contents(EditorState& st)
   // 2) Ascensions 1..5
   // ---------------------------
   for (int asc = 1; asc <= 5; ++asc) {
+
     ImGui::Text("Ascension %d", asc);
     ui_separator(1.0f);
+    // before: ImGui::Text("Ascension %d", asc);
+char buf[64];
+std::snprintf(buf, sizeof(buf), "Ascension %d", asc);
+ui_section_bar(buf, IM_COL32(60, 90, 160, 140));
 
     std::string ctx = make_ascension_name(asc);
     for (auto& o : st.occ) {
@@ -593,16 +837,29 @@ static void draw_occurrences_contents(EditorState& st)
   // ---------------------------
   // 3) Specialties
   // ---------------------------
-  std::map<int, bool> specs;
-  for (const auto& o : st.occ) {
-    if (o.context_type != "Specialty") continue;
-    int n = specialty_index(o);
-    if (n > 0) specs[n] = true;
-  }
+  int max_spec = 4;
+for (const auto& o : st.occ) {
+  if (o.context_type != "Specialty") continue;
+  max_spec = std::max(max_spec, specialty_index(o));
+}
 
-  for (const auto& [spec_n, _] : specs) {
+for (int spec_n = 1; spec_n <= max_spec; ++spec_n) {
+    char buf[64];
+std::snprintf(buf, sizeof(buf), "Specialty %d", spec_n);
+ui_section_bar(buf, IM_COL32(110, 70, 140, 140));
+
     ImGui::Text("Specialty %d", spec_n);
     ui_separator(1.0f);
+    bool has_any_spec_rows = false;
+for (const auto& o : st.occ) {
+  if (o.context_type == "Specialty" && specialty_index(o) == spec_n) { has_any_spec_rows = true; break; }
+}
+if (pretty && !has_any_spec_rows) {
+  ImGui::TextDisabled("(none)");
+  ui_separator(3.0f);
+  continue;
+}
+
 
     // TOTAL rows first
     for (auto& total : st.occ) {
@@ -684,19 +941,18 @@ static void draw_occurrences_contents(EditorState& st)
   // ---------------------------
   // 4) Covenants
   // ---------------------------
-  std::map<int, bool> covs;
-  for (const auto& o : st.occ) {
-    if (o.context_type != "Covenant") continue;
-    int n = covenant_index(o);
-    if (n > 0) covs[n] = true;
-  }
+ int max_cov = 4;
+for (const auto& o : st.occ) {
+  if (o.context_type != "Covenant") continue;
+  max_cov = std::max(max_cov, covenant_index(o));
+}
 
-  if (!covs.empty()) {
-    ImGui::TextUnformatted("Covenants");
-    ui_separator(3.0f);
-  }
+ImGui::TextUnformatted("Covenants");
+ui_separator(3.0f);
 
-  for (const auto& [c_n, _] : covs) {
+for (int c_n = 1; c_n <= max_cov; ++c_n) {
+  ui_section_bar("Covenants", IM_COL32(60, 140, 140, 140));
+
     ImGui::Text("Covenant %d", c_n);
     ui_separator(1.0f);
 
@@ -707,6 +963,14 @@ static void draw_occurrences_contents(EditorState& st)
         else        draw_stat_row(st, o);
       }
     }
+    if (pretty) {
+  bool any = false;
+  for (const auto& o2 : st.occ) {
+    if (o2.context_type == "Covenant" && o2.context_name == ctx) { any = true; break; }
+  }
+  if (!any) ImGui::TextDisabled("(none)");
+}
+
 
     if (!pretty) {
       if (locked) ImGui::BeginDisabled();

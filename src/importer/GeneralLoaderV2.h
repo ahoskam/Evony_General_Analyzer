@@ -7,7 +7,7 @@ struct StatOccurrenceV2 {
     std::string raw_key;
     double value = 0.0;
 
-    std::string context_type; // BaseSkill / Ascension / Specialty / Covenant
+    std::string context_type; // BaseSkill / Ascension / Specialty / Covenant / Unknown
     std::string context_name;
     std::optional<int> level;
     bool is_total = false;

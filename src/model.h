@@ -8,7 +8,18 @@ struct GeneralRow {
   std::string name;
   std::string role;
   int double_checked_in_game = 0;
+  int status_flags = 0;
+  int covenant_max = 0; // 0 if none
 };
+
+enum GeneralStatusFlags : int {
+  GS_MISSING_SOURCE_TEXT   = 1 << 0,
+  GS_MISSING_BASE_SKILL    = 1 << 1,
+  GS_MISSING_ASCENSIONS    = 1 << 2,
+  GS_MISSING_SPECIALTIES   = 1 << 3,
+  GS_MISSING_COVENANT_6    = 1 << 4,
+};
+
 
 struct GeneralMeta {
   int id = 0;

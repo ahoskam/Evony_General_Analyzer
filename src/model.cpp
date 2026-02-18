@@ -8,18 +8,41 @@
 
 std::vector<GeneralRow> db_load_general_list(Db& db, const std::string& role_filter, const std::string& name_like)
 {
+  // Local flag bits (use these same values in UI)
+  enum GeneralStatusFlags : int {
+    GS_MISSING_SOURCE_TEXT   = 1 << 0,
+    GS_MISSING_BASE_SKILL    = 1 << 1,
+    GS_MISSING_ASCENSIONS    = 1 << 2,
+    GS_MISSING_SPECIALTIES   = 1 << 3,
+    GS_MISSING_COVENANT_6    = 1 << 4,
+  };
+
   std::string sql =
-    "SELECT id, name, role, double_checked_in_game "
-    "FROM generals "
+    "SELECT "
+    "  g.id, "
+    "  g.name, "
+    "  g.role, "
+    "  g.double_checked_in_game, "
+    "  CASE WHEN g.source_text_verbatim IS NOT NULL AND LENGTH(TRIM(g.source_text_verbatim)) > 0 THEN 1 ELSE 0 END AS has_source, "
+    "  (SELECT COUNT(1) FROM stat_occurrences s "
+    "     WHERE s.general_id = g.id AND s.context_type = 'BaseSkill') AS base_cnt, "
+    "  (SELECT COUNT(DISTINCT s.context_name) FROM stat_occurrences s "
+    "     WHERE s.general_id = g.id AND s.context_type = 'Ascension') AS asc_cnt, "
+    "  (SELECT COUNT(DISTINCT s.context_name) FROM stat_occurrences s "
+    "     WHERE s.general_id = g.id AND s.context_type = 'Specialty' AND s.is_total = 1) AS spec_cnt, "
+    "  COALESCE((SELECT MAX(CAST(TRIM(SUBSTR(s.context_name, 10)) AS INT)) FROM stat_occurrences s "
+    "     WHERE s.general_id = g.id AND s.context_type = 'Covenant' "
+    "       AND (s.context_name LIKE 'COVENANT %' OR s.context_name LIKE 'Covenant %')), 0) AS cov_max "
+    "FROM generals g "
     "WHERE 1=1 ";
 
   int bind = 1;
   bool has_role = (!role_filter.empty() && role_filter != "All");
   bool has_like = (!name_like.empty());
 
-  if (has_role) sql += "AND role=?1 ";
-  if (has_like) sql += std::string("AND name LIKE ?") + std::to_string(has_role ? 2 : 1) + " ";
-  sql += "ORDER BY name;";
+  if (has_role) sql += "AND g.role=?1 ";
+  if (has_like) sql += std::string("AND g.name LIKE ?") + std::to_string(has_role ? 2 : 1) + " ";
+  sql += "ORDER BY g.name;";
 
   DbStmt st(db, sql.c_str());
   if (has_role) st.bind_text(bind++, role_filter.c_str());
@@ -35,10 +58,28 @@ std::vector<GeneralRow> db_load_general_list(Db& db, const std::string& role_fil
     g.name = st.col_text(1);
     g.role = st.col_text(2);
     g.double_checked_in_game = st.col_int(3);
+
+    const int has_source = st.col_int(4);
+    const int base_cnt   = st.col_int(5);
+    const int asc_cnt    = st.col_int(6);
+    const int spec_cnt   = st.col_int(7);
+    const int cov_max    = st.col_int(8);
+
+    int flags = 0;
+    if (!has_source)      flags |= GS_MISSING_SOURCE_TEXT;
+    if (base_cnt <= 0)    flags |= GS_MISSING_BASE_SKILL;
+    if (asc_cnt < 5)      flags |= GS_MISSING_ASCENSIONS;
+    if (spec_cnt < 4)     flags |= GS_MISSING_SPECIALTIES;
+    if (cov_max >= 1 && cov_max < 6) flags |= GS_MISSING_COVENANT_6;
+
+    g.status_flags = flags;
+    g.covenant_max = cov_max;
+
     out.push_back(std::move(g));
   }
   return out;
 }
+
 
 std::vector<StatKey> db_load_stat_keys(Db& db)
 {
