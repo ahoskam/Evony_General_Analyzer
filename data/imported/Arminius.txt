@@ -1,6 +1,6 @@
 GENERAL: Arminius
 ROLE: Unknown
-InTavern=true
+IN_TAVERN: true
 
 Leadership: 115 (8.73)
 Attack: 113 (8.42)
@@ -59,20 +59,20 @@ SPECIALTIES
 ==============================
 
 # SPECIALTY 1 | Ranged Troop Assault
-SPECIALTY 1 L5CompletedTotal:
+SPECIALTY 1 L5:
 RangedAttackPct +10
 RangedHPPct +10
 
 # SPECIALTY 2 | Snipe
-SPECIALTY 2 L5CompletedTotal:
+SPECIALTY 2 L5:
 EnemyTroopAttackPct -10
 
 # SPECIALTY 3 | Iron Warrior
-SPECIALTY 3 L5CompletedTotal:
+SPECIALTY 3 L5:
 EnemyWoundedToDeathWhenAttackingPct +10
 
 # SPECIALTY 4 | Battle of the Teutoburg Forest
-SPECIALTY 4 L5CompletedTotal:
+SPECIALTY 4 L5:
 EnemyGroundTroopHPPct -30
 EnemyMountedTroopHPPct -30
 

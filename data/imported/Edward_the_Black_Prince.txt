@@ -116,4 +116,4 @@ COVENANTS
 # - LeadingEnemyTroopHPDebuffPct | Enemy troop HP - when General is leading the army
 # - LeadingRangedDefensePct | Ranged troops' defense when General is leading the army
 
-InTavern=true
+IN_TAVERN: true

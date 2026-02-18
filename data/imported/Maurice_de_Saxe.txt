@@ -2,7 +2,6 @@ GENERAL: Maurice de Saxe
 ROLE: Unknown
 IN_TAVERN: false
 
-
 Leadership: 121 (8.87)
 Attack: 117 (8.78)
 Defense: 131 (9.13)

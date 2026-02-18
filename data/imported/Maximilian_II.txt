@@ -48,20 +48,20 @@ SPECIALTIES
 ==============================
 
 # SPECIALTY 1 | Mounted Troop Assault
-SPECIALTY 1 L5CompletedTotal:
+SPECIALTY 1 L5:
 MountedAttackPct +10
 MountedHPPct +10
 
 # SPECIALTY 2 | Snipe
-SPECIALTY 2 L5CompletedTotal:
+SPECIALTY 2 L5:
 EnemyTroopAttackPct -10
 
 # SPECIALTY 3 | War God
-SPECIALTY 3 L5CompletedTotal:
+SPECIALTY 3 L5:
 AllTroopsAttackPct +6
 
 # SPECIALTY 4 | Battle of Guinegate
-SPECIALTY 4 L5CompletedTotal:
+SPECIALTY 4 L5:
 MountedAttackPct +30
 EnemyRangedDefensePct -30
 
@@ -77,7 +77,7 @@ COVENANTS
 # - AttackingEnemyRangedAttackPct
 # - EnemyInCityTroopWoundedIntoDeathRatePct
 
-InTavern=false
+IN_TAVERN: false
 
 ==============================
 # SOURCE TEXT (VERBATIM)

@@ -91,4 +91,4 @@ COVENANTS
 # - RallyCapacityPct
 # - MarchSizeCapacityPct
 
-InTavern=true
+IN_TAVERN: true

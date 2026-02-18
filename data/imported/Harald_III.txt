@@ -1,6 +1,6 @@
 GENERAL: Harald III
 ROLE: Unknown
-InTavern=false
+IN_TAVERN: false
 
 Leadership: 113 (9.13)
 Attack: 118 (8.69)

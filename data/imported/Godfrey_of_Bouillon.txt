@@ -99,7 +99,7 @@ InCitySiegeMachineAttackPct +5
 InCityRangedDefensePct +5
 InCitySiegeMachineDefensePct +5
 
-InTavern=false
+IN_TAVERN: false
 
 ==============================
 # SOURCE TEXT (VERBATIM)

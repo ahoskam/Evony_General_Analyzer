@@ -47,21 +47,21 @@ SPECIALTIES
 ==============================
 
 # SPECIALTY 1 | Hunter
-SPECIALTY 1 L5CompletedTotal:
+SPECIALTY 1 L5:
 MonstersAttackPct -15
 
 # SPECIALTY 2 | Fortune
-SPECIALTY 2 L5CompletedTotal:
+SPECIALTY 2 L5:
 DoubleItemsDropRateFromMonstersPct +15
 
 # SPECIALTY 3 | Mounted Troop Ares
-SPECIALTY 3 L5CompletedTotal:
+SPECIALTY 3 L5:
 MountedAttackPct +10
 MountedHPPct +10
 MountedDefensePct +10
 
 # SPECIALTY 4 | Lord of the Mercians
-SPECIALTY 4 L5CompletedTotal:
+SPECIALTY 4 L5:
 GroundAndMountedAttackOnMonstersPct +30
 GroundAndMountedDefenseOnMonstersPct +30
 
@@ -86,4 +86,4 @@ COVENANTS
 # - GroundAndMountedAttackOnMonstersPct
 # - GroundAndMountedDefenseOnMonstersPct
 
-InTavern=false
+IN_TAVERN: false

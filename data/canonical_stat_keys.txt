@@ -1,175 +1,291 @@
-AllTroopAttackPct
-AllTroopHPPct
-AllTroopsAttackPct
-AttackingDoubleItemsDropRateFromMonstersPct
-AttackingEnemyAttackPct
-AttackingEnemyDefensePct
-AttackingEnemyRangedAttackPct
-AttackingGroundAttackPct
-AttackingGroundDefensePct
-AttackingGroundHPPct
-AttackingMarchSizePct
-AttackingMonstersAttackPct
-AttackingMountedAttackPct
-AttackingMountedDefensePct
-AttackingMountedHPPct
-AttackingRangedAttackPct
-AttackingRangedDefensePct
-AttackingRangedHPPct
-AttackingRangedTroopAttackPct
-AttackingRangedTroopHPPct
-AttackingSiegeAttackPct
-AttackingSiegeDefensePct
-AttackingSiegeHPPct
-AttackingSiegeMachineAndRangedTroopAttackPct
-AttackingSiegeMachineAttackPct
-AttackingSiegeMachineDefensePct
-AttackingSiegeMachineHPPct
-AttackingTroopAttackPct
-AttackingTroopDeathToWoundedRatePct
-AttackingTroopsAttackPct
-AttackingTroopsDefensePct
-DefenseAndHPPct
-DoubleItemsDropRateFromMonstersPct
-EnemyGroundAttackPct
-EnemyGroundDefensePct
-EnemyGroundHPPct
-EnemyGroundTroopAttackPct
-EnemyGroundTroopDefensePct
-EnemyGroundTroopHPPct
-EnemyInCityTroopWoundedToDeathRatePct
-EnemyMountedAttackDebuffPct
-EnemyMountedAttackPct
-EnemyMountedDefenseDebuffPct
-EnemyMountedDefensePct
-EnemyMountedHPDebuffPct
-EnemyMountedHPPct
-EnemyMountedTroopAttackPct
-EnemyMountedTroopDefensePct
-EnemyMountedTroopHPPct
-EnemyRangedAttackDebuffPct
-EnemyRangedAttackPct
-EnemyRangedDefenseDebuffPct
-EnemyRangedDefensePct
-EnemyRangedHPDebuffPct
-EnemyRangedHPPct
-EnemyRangedTroopAndSiegeMachineHPPct
-EnemyRangedTroopAttackPct
-EnemyRangedTroopDefensePct
-EnemyRangedTroopHPPct
-EnemySiegeAttackDebuffPct
-EnemySiegeAttackPct
-EnemySiegeDefenseDebuffPct
-EnemySiegeDefensePct
-EnemySiegeHPDebuffPct
-EnemySiegeHPPct
-EnemySiegeMachineAttackPct
-EnemySiegeMachineDefensePct
-EnemySiegeMachineHPPct
-EnemyTroopAttackDebuffPct
-EnemyTroopAttackPct
-EnemyTroopDefensePct
-EnemyTroopHPPct
-EnemyWoundedToDeathWhenAttackingPct
-GoldProductionSpeedSubordinateCityMayorPct
-GroundAndMountedAttackOnMonstersPct
-GroundAndMountedDefenseOnMonstersPct
-GroundAttackPct
-GroundDefensePct
-GroundHPPct
-GroundTroopTrainingCapacityPct
-GroundTroopTrainingSpeedPct
-HealingSpeedPct
-HospitalCapacityPct
-InCityGroundAttackPct
-InCityGroundDefensePct
-InCityGroundHPPct
-InCityGroundTroopAttackPct
-InCityGroundTroopDefensePct
-InCityGroundTroopHPPct
-InCityMountedAttackPct
-InCityMountedDefensePct
-InCityMountedHPPct
-InCityMountedTroopAttackPct
-InCityMountedTroopDefensePct
-InCityMountedTroopHPPct
-InCityRangedAttackPct
-InCityRangedDefensePct
-InCityRangedHPPct
-InCitySiegeAttackPct
-InCitySiegeDefensePct
-InCitySiegeHPPct
-InCitySiegeMachineAttackPct
-InCitySiegeMachineDefensePct
-InCityTroopAttackPct
-InCityTroopsAttackPct
-InCityTroopsDefensePct
-InCityTroopsHPPct
-InRallyMountedAttackPct
-InRallyMountedDefensePct
-InRallyMountedHPPct
-InRallyRangedAttackPct
-InRallyRangedDefensePct
-InRallySiegeMachineAttackPct
-InRallySiegeMachineHPPct
-LeadingEnemyMountedAttackDebuffPct
-LeadingEnemyTroopHPDebuffPct
-LeadingRangedAttackPct
-LeadingRangedDefensePct
-LeadingRangedHPPct
-MainCityTroopDeathToSoulRatePct
-MarchSizeCapacityPct
-MarchSizePct
-MarchSpeedPct
-MayorConstructionSpeedSubordinateCityPct
-MayorDeathToSurvivalRateSubordinateCityPct
-MayorSubCityDeathToSurvivalRatePct
-MayorSubCityTrainingSpeedPct
-MayorSubCityTroopDeathToSurvivalRatePct
-MayorTrainingSpeedSubordinateCityPct
-MayorTroopCapacitySubordinateCityPct
-MonstersAttackPct
-MountedAttackOnMonstersPct
-MountedAttackPct
-MountedDefenseOnMonstersPct
-MountedDefensePct
-MountedHPPct
-MountedTroopAttackPct
-MountedTroopDefensePct
-MountedTroopHPPct
-MountedTroopTrainingCapacityPct
-RallyCapacityPct
-RangedAttackPct
-RangedDefensePct
-RangedDefenseWithDragonOrSpiritualBeastWhenAttacking
-RangedHPPct
-RangedTrainingCapacityPct
-RangedTrainingSpeedPct
-RangedTroopAttackPct
-RangedTroopDefensePct
-RangedTroopHPPct
-ReinforcingRangedAttackPct
-ReinforcingRangedHPPct
-ReinforcingSiegeMachineDefensePct
-SiegeAttackPct
-SiegeDefensePct
-SiegeHPPct
-SiegeMachineAttackPct
-SiegeMachineDefensePct
-SiegeMachineDefenseWithDragonOrSpiritualBeastWhenAttacking
-SiegeMachineHPPct
-SubCityGoldProductionSpeedPct
-SubordinateCityGoldProductionSpeedPct
-TrapTriggeringChancePct
-TroopAttackPct
-TroopDeathIntoTroopSoulRateMainCityPct
-TroopHPPct
-WhenAttackingMonstersEnemyAttackPct
-WhenAttackingMonstersEnemyDefensePct
-WhenAttackingMonstersMountedAttackPct
-WhenAttackingMonstersMountedTroopHPPct
-WhenAttackingMonstersTroopsDefensePct
-WhenAttackingMonstersTroopsHPPct
-WhenGeneralIsTheMayor_SubCityDeathIntoSurvivalRatePct
-WhenGeneralIsTheMayor_SubCityTrainingSpeedPct
-WhenLaunchingAllianceWarRallyCapacityPct
+key                                                         kind     notes                                                                               
+----------------------------------------------------------  -------  ------------------------------------------------------------------------------------
+AllTroopAttackPct                                           percent  added from pending_stat_keys                                                        
+AllTroopHPPct                                               percent  created from pending                                                                
+AllTroopProductionPct                                       percent  All troop production                                                                
+ArcherTowerAttackPct                                        percent  Archer Tower attack                                                                 
+AttackingDefensePct                                         percent  Attacking troops defense                                                            
+AttackingDoubleItemsDropRateFromMonstersPct                 percent  added from pending_stat_keys                                                        
+AttackingEnemyAttackPct                                     percent  added from pending_stat_keys                                                        
+AttackingEnemyDefensePct                                    percent  added from pending_stat_keys                                                        
+AttackingEnemyRangedAttackPct                               percent  added from pending_stat_keys                                                        
+AttackingEnemySiegeMachineAttackPct                         percent  Attacking: enemy siege machine attack debuff                                        
+AttackingGroundAttackPct                                    percent  approved: created from pending                                                      
+AttackingGroundDefensePct                                   percent  added from pending_stat_keys                                                        
+AttackingGroundHPPct                                        percent  added from pending_stat_keys                                                        
+AttackingMarchSizePct                                       percent  approved                                                                            
+AttackingMonstersAttackPct                                  percent  added from pending_stat_keys                                                        
+AttackingMonstersStaminaCostReductionPct                    percent  Attacking monsters: stamina cost reduction                                          
+AttackingMountedAttackPct                                   percent  approved: created from pending                                                      
+AttackingMountedDefensePct                                  percent  approved: created from pending                                                      
+AttackingMountedHPPct                                       percent  approved: created from pending                                                      
+AttackingRangedAttackPct                                    percent  approved                                                                            
+AttackingRangedDefensePct                                   percent  approved                                                                            
+AttackingRangedHPPct                                        percent  approved                                                                            
+AttackingRangedTroopAttackPct                               percent  added from pending_stat_keys                                                        
+AttackingRangedTroopHPPct                                   percent  added from pending_stat_keys                                                        
+AttackingSiegeAttackPct                                     percent  approved                                                                            
+AttackingSiegeDefensePct                                    percent  approved                                                                            
+AttackingSiegeHPPct                                         percent  approved                                                                            
+AttackingSiegeMachineAndRangedTroopAttackPct                percent  approved (composite)                                                                
+AttackingSiegeMachineAttackPct                              percent  approved                                                                            
+AttackingSiegeMachineDefensePct                             percent  added from pending_stat_keys                                                        
+AttackingSiegeMachineHPPct                                  percent  approved                                                                            
+AttackingTroopAttackPct                                     percent  added from pending_stat_keys                                                        
+AttackingTroopDeathToWoundedRatePct                         percent  seeded from pending                                                                 
+AttackingTroopHPPct                                         percent  All troops HP when attacking                                                        
+AttackingTroopsDefensePct                                   percent  approved                                                                            
+ConstructionSpeedPct                                        percent  Main city construction speed                                                        
+DefenseAndHPPct                                             percent  added from pending_stat_keys                                                        
+DoubleItemsDropRateFromMonstersPct                          percent  loot stat                                                                           
+DutyOfficerAttackingRangedAttackPct                         percent  Duty officer: attacking ranged attack                                               
+DutyOfficerAttackingRangedDefensePct                        percent  Duty officer: attacking ranged defense                                              
+DutyOfficerAttackingRangedHPPct                             percent  Duty officer: attacking ranged HP                                                   
+DutyOfficerAttackingSiegeMachineAttackPct                   percent  Duty officer: attacking siege machine attack                                        
+DutyOfficerAttackingSiegeMachineDefensePct                  percent  Duty officer: attacking siege machine defense                                       
+DutyOfficerAttackingSiegeMachineHPPct                       percent  Duty officer: attacking siege machine HP                                            
+DutyOfficerAttackingTroopsAttackPct                         percent  Duty officer: attacking troops attack                                               
+DutyOfficerCraftingSpeedPct                                 percent  Duty officer: crafting speed                                                        
+DutyOfficerDamagedSiegeMachineCapacityPct                   percent  Duty officer: damaged siege machine capacity                                        
+DutyOfficerEnemyDefendingRangedAttackPct                    percent  Duty officer: enemy defending ranged attack (debuff)                                
+DutyOfficerEnemyDefendingSiegeMachineAttackInRallyPct       percent  Duty officer: enemy defending siege machine attack in rally (debuff)                
+DutyOfficerEnemyDefendingSiegeMachineAttackPct              percent  Duty officer: enemy defending siege machine attack (debuff)                         
+DutyOfficerEnemyRangedAttackPct                             percent  Duty officer: enemy ranged attack (debuff)                                          
+DutyOfficerEnemyRangedDefensePct                            percent  Duty officer: enemy ranged defense (debuff)                                         
+DutyOfficerEnemyRangedHPPct                                 percent  Duty officer: enemy ranged HP (debuff)                                              
+DutyOfficerEnemySiegeMachineAttackPct                       percent  Duty officer: enemy siege machine attack (debuff)                                   
+DutyOfficerEnemySiegeMachineDefensePct                      percent  Duty officer: enemy siege machine defense (debuff)                                  
+DutyOfficerEnemySiegeMachineHPPct                           percent  Duty officer: enemy siege machine HP (debuff)                                       
+DutyOfficerEnemyTroopDefensePct                             percent  Duty officer: enemy troop defense debuff                                            
+DutyOfficerEnemyTroopHPPct                                  percent  Duty officer: enemy troop HP (debuff)                                               
+DutyOfficerGroundDefensePct                                 percent  Duty officer: ground defense                                                        
+DutyOfficerGroundHPPct                                      percent  Duty officer: ground HP                                                             
+DutyOfficerInCityGroundAttackPct                            percent  Duty officer (in-city): ground troops attack                                        
+DutyOfficerInCityGroundDefensePct                           percent  Duty officer (in-city): ground troops defense                                       
+DutyOfficerInCityGroundHPPct                                percent  Duty officer (in-city): ground troops HP                                            
+DutyOfficerInCityMountedAttackPct                           percent  Duty officer (in-city): mounted troops attack                                       
+DutyOfficerInCityMountedDefensePct                          percent  Duty officer (in-city): mounted troops defense                                      
+DutyOfficerInCityMountedHPPct                               percent  Duty officer (in-city): mounted troops HP                                           
+DutyOfficerInCityRangedAttackPct                            percent  Duty officer (in-city): ranged troops attack                                        
+DutyOfficerInCityRangedDefensePct                           percent  Duty officer (in-city): ranged troops defense                                       
+DutyOfficerInCityRangedHPPct                                percent  Duty officer (in-city): ranged troops HP                                            
+DutyOfficerInCitySiegeMachineAttackPct                      percent  Duty officer (in-city): siege machines attack                                       
+DutyOfficerInCitySiegeMachineDefensePct                     percent  Duty officer (in-city): siege machines defense                                      
+DutyOfficerInCitySiegeMachineHPPct                          percent  Duty officer (in-city): siege machines HP                                           
+DutyOfficerInCityTroopsAttackPct                            percent  Duty officer (in-city): all troops attack                                           
+DutyOfficerInCityTroopsDefensePct                           percent  Duty officer (in-city): all troops defense                                          
+DutyOfficerInCityTroopsHPPct                                percent  Duty officer (in-city): all troops HP                                               
+DutyOfficerMountedDefensePct                                percent  Duty officer: mounted defense                                                       
+DutyOfficerMountedHPPct                                     percent  Duty officer: mounted HP                                                            
+DutyOfficerRallyCapacityPct                                 percent  Duty officer: rally capacity                                                        
+DutyOfficerRangedAttackPct                                  percent  Duty officer: ranged attack                                                         
+DutyOfficerRangedHPPct                                      percent  Duty officer: ranged HP                                                             
+DutyOfficerResearchSpeedPct                                 percent  Duty officer: research speed                                                        
+DutyOfficerSiegeMachineAttackPct                            percent  Duty officer: siege machine attack                                                  
+DutyOfficerSiegeMachineHPPct                                percent  Duty officer: siege machine HP                                                      
+DutyOfficerTrapBuildingSpeedPct                             percent  Duty officer: trap building speed                                                   
+EnemyDefendingSiegeMachineAttackPct                         percent  Enemy defending: siege machine attack debuff                                        
+EnemyDefendingSiegeMachineDefensePct                        percent  Enemy defending: siege machine defense debuff                                       
+EnemyDefendingSiegeMachineHPPct                             percent  Enemy defending: siege machine HP debuff                                            
+EnemyDefendingTroopsHPPct                                   percent  Enemy defending: troops HP debuff                                                   
+EnemyGroundAttackPct                                        percent  approved: created from pending                                                      
+EnemyGroundDefensePct                                       percent  approved: created from pending                                                      
+EnemyGroundHPPct                                            percent  approved: created from pending                                                      
+EnemyGroundTroopAttackPct                                   percent  approved                                                                            
+EnemyGroundTroopDefensePct                                  percent  approved                                                                            
+EnemyGroundTroopHPPct                                       percent  approved                                                                            
+EnemyInCityTroopWoundedToDeathRatePct                       percent  approved (canonical for Into/To variant)                                            
+EnemyMountedAttackDebuffPct                                 percent  approved                                                                            
+EnemyMountedAttackPct                                       percent  approved: created from pending                                                      
+EnemyMountedDefenseDebuffPct                                percent  approved                                                                            
+EnemyMountedDefensePct                                      percent  approved: created from pending                                                      
+EnemyMountedHPDebuffPct                                     percent  approved                                                                            
+EnemyMountedHPPct                                           percent  approved: created from pending                                                      
+EnemyMountedTroopAttackPct                                  percent  approved                                                                            
+EnemyMountedTroopDefensePct                                 percent  approved                                                                            
+EnemyMountedTroopHPPct                                      percent  approved                                                                            
+EnemyRangedAttackDebuffPct                                  percent  added from pending_stat_keys                                                        
+EnemyRangedAttackPct                                        percent  approved: created from pending                                                      
+EnemyRangedDefenseDebuffPct                                 percent  added from pending_stat_keys                                                        
+EnemyRangedDefensePct                                       percent  approved: created from pending                                                      
+EnemyRangedHPDebuffPct                                      percent  added from pending_stat_keys                                                        
+EnemyRangedHPPct                                            percent  approved: created from pending                                                      
+EnemyRangedTroopAndSiegeMachineAttackPct                    percent  Enemy ranged troop and siege machine attack debuff                                  
+EnemyRangedTroopAndSiegeMachineHPPct                        percent  approved (composite)                                                                
+EnemyRangedTroopAttackPct                                   percent  approved                                                                            
+EnemyRangedTroopDefensePct                                  percent  approved                                                                            
+EnemyRangedTroopHPPct                                       percent  approved                                                                            
+EnemySiegeAttackDebuffPct                                   percent  added from pending_stat_keys                                                        
+EnemySiegeAttackPct                                         percent  approved: created from pending                                                      
+EnemySiegeDefenseDebuffPct                                  percent  added from pending_stat_keys                                                        
+EnemySiegeDefensePct                                        percent  approved: created from pending                                                      
+EnemySiegeHPDebuffPct                                       percent  added from pending_stat_keys                                                        
+EnemySiegeHPPct                                             percent  approved: created from pending                                                      
+EnemySiegeMachineAttackDebuffPct                            percent  Enemy siege machine attack debuff                                                   
+EnemySiegeMachineAttackPct                                  percent  approved                                                                            
+EnemySiegeMachineDefenseDebuffPct                           percent  Enemy siege machine defense debuff                                                  
+EnemySiegeMachineDefensePct                                 percent  approved                                                                            
+EnemySiegeMachineHPDebuffPct                                percent  Enemy siege machine HP debuff                                                       
+EnemySiegeMachineHPPct                                      percent  approved                                                                            
+EnemyTroopAttackDebuffPct                                   percent  added from pending_stat_keys                                                        
+EnemyTroopAttackPct                                         percent  approved: created from pending                                                      
+EnemyTroopDefensePct                                        percent  created from pending                                                                
+EnemyTroopHPDebuffPct                                       percent  Enemy troops HP debuff                                                              
+EnemyTroopHPPct                                             percent  created from pending                                                                
+EnemyWoundedToDeathWhenAttackingPct                         percent  approved                                                                            
+ExtraResourcesFromGatheringPct                              percent  Extra resources gained from gathering                                               
+FreeConstructionSpeedUpTimeFlat                             flat     Free construction speed-up time                                                     
+GoldProductionSpeedSubordinateCityMayorPct                  percent  approved: created from pending                                                      
+GroundAndMountedAttackOnMonstersPct                         percent  monster context                                                                     
+GroundAndMountedDefenseOnMonstersPct                        percent  monster context                                                                     
+GroundAttackPct                                             percent  seeded from pending                                                                 
+GroundDefensePct                                            percent  seeded from pending                                                                 
+GroundHPPct                                                 percent  seeded from pending                                                                 
+GroundTroopTrainingCapacityPct                              percent  added from pending_stat_keys                                                        
+GroundTroopTrainingSpeedPct                                 percent  added from pending_stat_keys                                                        
+HealingSpeedPct                                             percent  added from pending_stat_keys                                                        
+HolyPalaceDeserterCapacityPct                               percent  Holy Palace: deserter capacity                                                      
+HospitalCapacityPct                                         percent  approved: created from pending                                                      
+InCityGroundAttackPct                                       percent  approved: created from pending                                                      
+InCityGroundDefensePct                                      percent  added from pending_stat_keys                                                        
+InCityGroundHPPct                                           percent  created from pending                                                                
+InCityGroundTroopAttackPct                                  percent  approved                                                                            
+InCityGroundTroopDefensePct                                 percent  approved                                                                            
+InCityGroundTroopHPPct                                      percent  approved                                                                            
+InCityMountedAttackPct                                      percent  approved: created from pending                                                      
+InCityMountedDefensePct                                     percent  added from pending_stat_keys                                                        
+InCityMountedHPPct                                          percent  created from pending                                                                
+InCityMountedTroopAttackPct                                 percent  approved                                                                            
+InCityMountedTroopDefensePct                                percent  approved                                                                            
+InCityMountedTroopHPPct                                     percent  approved                                                                            
+InCityRangedAttackPct                                       percent  approved                                                                            
+InCityRangedDefensePct                                      percent  approved                                                                            
+InCityRangedHPPct                                           percent  approved                                                                            
+InCitySiegeAttackPct                                        percent  approved                                                                            
+InCitySiegeDefensePct                                       percent  approved                                                                            
+InCitySiegeHPPct                                            percent  approved                                                                            
+InCitySiegeMachineAttackPct                                 percent  approved                                                                            
+InCitySiegeMachineDefensePct                                percent  added from pending_stat_keys                                                        
+InCityTroopAttackPct                                        percent  created from pending                                                                
+InCityTroopsDefensePct                                      percent  added from pending_stat_keys                                                        
+InCityTroopsHPPct                                           percent  added from pending_stat_keys                                                        
+InRallyGroundAttackPct                                      percent  In rally: ground attack                                                             
+InRallyGroundDefensePct                                     percent  In rally: ground defense                                                            
+InRallyGroundHPPct                                          percent  In-rally ground troops HP                                                           
+InRallyMountedAttackPct                                     percent  added from pending_stat_keys                                                        
+InRallyMountedDefensePct                                    percent  added from pending_stat_keys                                                        
+InRallyMountedHPPct                                         percent  added from pending_stat_keys                                                        
+InRallyRangedAttackPct                                      percent  added from pending_stat_keys                                                        
+InRallyRangedDefensePct                                     percent  added from pending_stat_keys                                                        
+InRallyRangedHPPct                                          percent  In-rally ranged troops HP                                                           
+InRallySiegeMachineAttackPct                                percent  added from pending_stat_keys                                                        
+InRallySiegeMachineDefensePct                               percent  In-rally siege machines defense                                                     
+InRallySiegeMachineHPPct                                    percent  added from pending_stat_keys                                                        
+InRallyTroopsAttackPct                                      percent  In-rally all troops attack                                                          
+InRallyTroopsDefensePct                                     percent  In-rally all troops defense                                                         
+InRallyTroopsHPPct                                          percent  In-rally all troops HP                                                              
+MainCityTroopDeathToSoulRatePct                             percent  approved                                                                            
+MarchSizeCapacityPct                                        percent  approved: created from pending                                                      
+MarchSizePct                                                percent  seeded from pending                                                                 
+MarchSpeedPct                                               percent  added from pending_stat_keys                                                        
+MayorConstructionSpeedSubordinateCityPct                    percent  approved: created from pending                                                      
+MayorSiegeMachineAttackPct                                  percent  When general is sub-city mayor: siege machine attack                                
+MayorSiegeMachineDefensePct                                 percent  When general is sub-city mayor: siege machine defense                               
+MayorSiegeMachineTrainingCapacityPct                        percent  When general is sub-city mayor: siege machine training capacity                     
+MayorSiegeMachineTrainingSpeedPct                           percent  When general is sub-city mayor: siege machine training speed                        
+MayorSubCityDeathToSurvivalRatePct                          percent  approved: created from pending                                                      
+MayorSubCityTrainingSpeedPct                                percent  approved: created from pending                                                      
+MayorSubCityTroopDeathToSurvivalRatePct                     percent  approved: created from pending                                                      
+MayorTroopCapacitySubordinateCityPct                        percent  approved: created from pending                                                      
+MonsterAttackDebuffPct                                      percent  Debuff to monster attack                                                            
+MonsterAttackPct                                            percent  Monster attack modifier (often negative); commonly shown as when attacking monsters 
+MonsterDefenseDebuffPct                                     percent  Debuff to monster defense                                                           
+MonsterDefensePct                                           percent  Monster defense modifier (often negative); commonly shown as when attacking monsters
+MonsterGroundAttackPct                                      percent  Ground attack when attacking monsters                                               
+MonsterGroundDefensePct                                     percent  Ground defense when attacking monsters                                              
+MonsterGroundHPPct                                          percent  Ground HP when attacking monsters                                                   
+MonsterHPDebuffPct                                          percent  Debuff to monster HP                                                                
+MonsterMarchSpeedPct                                        percent  March speed when marching to/against monsters                                       
+MonsterMountedAttackPct                                     percent  Mounted attack when attacking monsters                                              
+MonsterMountedDefensePct                                    percent  Mounted defense when attacking monsters                                             
+MonsterMountedHPPct                                         percent  Mounted HP when attacking monsters                                                  
+MonsterRangedAttackPct                                      percent  Ranged attack when attacking monsters                                               
+MonsterRangedDefensePct                                     percent  Ranged defense when attacking monsters                                              
+MonsterRangedHPPct                                          percent  Ranged HP when attacking monsters                                                   
+MonsterSiegeMachineAttackPct                                percent  Siege machine attack when attacking monsters                                        
+MonsterSiegeMachineDefensePct                               percent  Siege machine defense when attacking monsters                                       
+MonsterSiegeMachineHPPct                                    percent  Siege machine HP when attacking monsters                                            
+MonsterTroopsAttackPct                                      percent  Troops attack when attacking monsters                                               
+MonsterTroopsDefensePct                                     percent  Troops defense when attacking monsters                                              
+MonsterTroopsHPPct                                          percent  Troops HP when attacking monsters                                                   
+MonstersAttackPct                                           percent  monster stat                                                                        
+MountedAttackOnMonstersPct                                  percent  monster context                                                                     
+MountedAttackPct                                            percent  seeded from pending                                                                 
+MountedDefenseOnMonstersPct                                 percent  monster context                                                                     
+MountedDefensePct                                           percent  seeded from pending                                                                 
+MountedHPPct                                                percent  seeded from pending                                                                 
+MountedTroopAttackPct                                       percent  approved                                                                            
+MountedTroopDefensePct                                      percent  approved                                                                            
+MountedTroopHPPct                                           percent  approved                                                                            
+MountedTroopTrainingCapacityPct                             percent  added from pending_stat_keys                                                        
+MountedTroopTrainingSpeedPct                                percent  Mounted troop training speed                                                        
+RallyCapacityPct                                            percent  approved                                                                            
+RangedAttackPct                                             percent  approved                                                                            
+RangedDefensePct                                            percent  approved                                                                            
+RangedDefenseWithDragonOrSpiritualBeastWhenAttacking        percent  added from pending_stat_keys                                                        
+RangedHPPct                                                 percent  approved                                                                            
+RangedTrainingCapacityPct                                   percent  approved                                                                            
+RangedTrainingSpeedPct                                      percent  approved                                                                            
+RangedTroopAttackPct                                        percent  created from pending                                                                
+RangedTroopDefensePct                                       percent  added from pending_stat_keys                                                        
+RangedTroopHPPct                                            percent  created from pending                                                                
+ReinforcementCapacityPct                                    percent  Reinforcement capacity                                                              
+ReinforcingGroundAttackPct                                  percent  Reinforcing ground troops attack                                                    
+ReinforcingGroundDefensePct                                 percent  Reinforcing ground troops defense                                                   
+ReinforcingGroundHPPct                                      percent  Reinforcing ground troops HP                                                        
+ReinforcingMountedAttackPct                                 percent  Reinforcing mounted troops attack                                                   
+ReinforcingMountedDefensePct                                percent  Reinforcing mounted troops defense                                                  
+ReinforcingMountedHPPct                                     percent  Reinforcing mounted troops HP                                                       
+ReinforcingRangedAttackPct                                  percent  added from pending_stat_keys                                                        
+ReinforcingRangedDefensePct                                 percent  Reinforcing ranged troops defense                                                   
+ReinforcingRangedHPPct                                      percent  added from pending_stat_keys                                                        
+ReinforcingSiegeMachineAttackPct                            percent  Reinforcing siege machines attack                                                   
+ReinforcingSiegeMachineDefensePct                           percent  added from pending_stat_keys                                                        
+ReinforcingSiegeMachineHPPct                                percent  Reinforcing siege machines HP                                                       
+ReinforcingTroopAttackPct                                   percent  When reinforcing: troop attack                                                      
+ReinforcingTroopDefensePct                                  percent  When reinforcing: troop defense                                                     
+ReinforcingTroopsAttackPct                                  percent  Reinforcing all troops attack                                                       
+ReinforcingTroopsDefensePct                                 percent  Reinforcing all troops defense                                                      
+ReinforcingTroopsHPPct                                      percent  Reinforcing all troops HP                                                           
+ResearchSpeedPct                                            percent  Main city research speed                                                            
+ResearchTimeReductionMinutesFlat                            flat     Research time reduction (minutes)                                                   
+ResourceTaxAmountPct                                        percent  Resource tax amount                                                                 
+ResourcesGatheringSpeedPct                                  percent  Resource gathering speed                                                            
+SiegeAttackPct                                              percent  approved                                                                            
+SiegeDefensePct                                             percent  created from pending                                                                
+SiegeHPPct                                                  percent  approved                                                                            
+SiegeMachineAttackPct                                       percent  approved: created from pending                                                      
+SiegeMachineDefensePct                                      percent  approved: created from pending                                                      
+SiegeMachineDefenseWithDragonOrSpiritualBeastWhenAttacking  percent  added from pending_stat_keys                                                        
+SiegeMachineHPPct                                           percent  approved: created from pending                                                      
+SiegeMachineRepairingCostPct                                percent  Siege machine repairing cost (often negative)                                       
+SiegeMachineTrainingCapacityPct                             percent  Siege machine training capacity                                                     
+SiegeMachineTrainingSpeedPct                                percent  Siege machine training speed                                                        
+SubCityGoldProductionSpeedPct                               percent  approved                                                                            
+SubordinateCityGoldProductionSpeedPct                       percent  added from pending_stat_keys                                                        
+TrapBuildingSpeedPct                                        percent  Trap building speed                                                                 
+TrapTriggeringChancePct                                     percent  added from pending_stat_keys                                                        
+TroopAttackPct                                              percent  approved                                                                            
+TroopDeathIntoTroopSoulRateMainCityPct                      percent  added from pending_stat_keys                                                        
+TroopDefensePct                                             percent  All troops defense                                                                  
+TroopHPPct                                                  percent  created from pending                                                                
+TroopLoadPct                                                percent  Troop load                                                                          
+WhenAttackingMonstersEnemyAttackPct                         percent  monster context                                                                     
+WhenAttackingMonstersEnemyDefensePct                        percent  monster context                                                                     
+WhenAttackingMonstersMountedAttackPct                       percent  monster context                                                                     
+WhenAttackingMonstersMountedTroopHPPct                      percent  monster context                                                                     
+WhenAttackingMonstersTroopsDefensePct                       percent  monster context                                                                     
+WhenAttackingMonstersTroopsHPPct                            percent  monster context                                                                     
+WhenGeneralIsTheMayor_SubCityDeathIntoSurvivalRatePct       percent  added from pending_stat_keys                                                        
+WhenGeneralIsTheMayor_SubCityTrainingSpeedPct               percent  added from pending_stat_keys                                                        
+WhenLaunchingAllianceWarRallyCapacityPct                    percent  approved                                                                            

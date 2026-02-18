@@ -44,7 +44,7 @@ COVENANTS
 
 # None available (locked)
 
-InTavern=false
+IN_TAVERN: false
 
 ==============================
 # NEW STAT KEYS NOTE
@@ -61,7 +61,7 @@ InTavern=false
 
 # BASE_SKILL_TEXT:
 Holy Ruler
-Increases research speed by 10% and in-city troops' defense and HP by 15% 
+Increases research speed by 10% and in-city troops' defense and HP by 15%
 when General is the Research Factory Officer.
 
 # SPECIALTY_1_MAX_TEXT:

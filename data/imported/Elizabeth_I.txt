@@ -110,7 +110,7 @@ COVENANTS
 # NEW_STAT_KEYS:
 # - MarchSizeCapacityPct
 
-InTavern=false
+IN_TAVERN: false
 
 ==============================
 # SOURCE TEXT (VERBATIM)

@@ -71,4 +71,4 @@ COVENANTS
 # - EnemyInCityTroopWoundedIntoDeathRatePct
 # - RallyCapacityPct
 
-InTavern=false
+IN_TAVERN: false

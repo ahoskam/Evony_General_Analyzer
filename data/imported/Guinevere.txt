@@ -2,7 +2,6 @@ GENERAL: Guinevere (Awakened)
 ROLE: Duty
 IN_TAVERN: false
 
-
 Leadership: 111 (8.75)
 Attack: 118 (9.04)
 Defense: 118 (9.03)

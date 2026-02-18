@@ -53,23 +53,23 @@ SPECIALTIES
 ==============================
 
 # SPECIALTY 1 | Siege Machine Assault
-SPECIALTY 1 L5CompletedTotal:
+SPECIALTY 1 L5:
 SiegeAttackPct +10
 SiegeHPPct +10
 
 # SPECIALTY 2 | Bash
-SPECIALTY 2 L5CompletedTotal:
+SPECIALTY 2 L5:
 RangedAttackPct +10
 SiegeAttackPct +10
 
 # SPECIALTY 3 | Siege Machine Ares
-SPECIALTY 3 L5CompletedTotal:
+SPECIALTY 3 L5:
 SiegeAttackPct +10
 SiegeHPPct +10
 SiegeDefensePct +10
 
 # SPECIALTY 4 | King of the Black Army
-SPECIALTY 4 L5CompletedTotal:
+SPECIALTY 4 L5:
 RangedAttackPct +20
 SiegeAttackPct +20
 
@@ -89,4 +89,4 @@ COVENANTS
 # - EnemyInCityTroopWoundedToDeathRatePct
 # - RallyCapacityPct
 
-InTavern=true
+IN_TAVERN: true

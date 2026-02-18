@@ -44,22 +44,22 @@ SPECIALTIES
 ==============================
 
 # SPECIALTY 1 | Ground Troop Assault
-SPECIALTY 1 L5CompletedTotal:
+SPECIALTY 1 L5:
 GroundAttackPct +10
 GroundHPPct +10
 
 # SPECIALTY 2 | Annihilation
-SPECIALTY 2 L5CompletedTotal:
+SPECIALTY 2 L5:
 MarchSizeCapacityPct +6
 AttackingMountedAttackPct +10
 AttackingGroundAttackPct +10
 
 # SPECIALTY 3 | War God
-SPECIALTY 3 L5CompletedTotal:
+SPECIALTY 3 L5:
 AllTroopAttackPct +6
 
 # SPECIALTY 4 | Persicus Maximus
-SPECIALTY 4 L5CompletedTotal:
+SPECIALTY 4 L5:
 AttackingMountedAttackPct +20
 AttackingGroundAttackPct +20
 AttackingMountedDefensePct +20
@@ -78,7 +78,7 @@ COVENANTS
 # - RallyCapacityPct | Rally Capacity
 # - MarchSizeCapacityPct | March Size Capacity
 
-InTavern=false
+IN_TAVERN: false
 
 ==============================
 # SOURCE TEXT (VERBATIM)

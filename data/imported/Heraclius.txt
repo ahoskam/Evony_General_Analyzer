@@ -2,7 +2,6 @@ GENERAL: Heraclius
 ROLE: Duty
 IN_TAVERN: false
 
-
 Leadership: 115 (8.74)
 Attack: 115 (9.02)
 Defense: 115 (9.01)

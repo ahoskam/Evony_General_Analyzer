@@ -13,8 +13,10 @@ EnemyGroundTroopDefensePct -40
 EnemyMountedTroopDefensePct -40
 
 ASCENSION 1
-EnemyGroundTroopAndMountedTroopDefensePct -10
-EnemyRangedTroopAndSiegeMachineHPPct -20
+EnemyGroundTroopDefensePct -10
+EnemyMountedTroopDefensePct -10
+EnemyRangedTroopHPPct -20
+EnemySiegeMachineHPPct -20
 
 ASCENSION 2
 EnemyGroundTroopDefensePct -20
@@ -55,9 +57,6 @@ EnemyGroundTroopHPPct -25
 EnemyMountedTroopHPPct -25
 
 # None available (locked or not shown)
-
-NEW STAT KEYS NOTE:
-- EnemyGroundTroopAndMountedTroopDefensePct
 
 ==============================
 # SOURCE TEXT (VERBATIM)

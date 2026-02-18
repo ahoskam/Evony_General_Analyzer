@@ -72,7 +72,7 @@ InRallyGroundAttackPct +5
 AttackingGroundAttackPct +10
 MarchSizeCapacityPct +5
 
-InTavern=false
+IN_TAVERN: false
 
 ==============================
 # SOURCE TEXT (VERBATIM)

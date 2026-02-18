@@ -47,21 +47,21 @@ SPECIALTIES
 ==============================
 
 # SPECIALTY 1 | Mounted Troop Formation
-SPECIALTY 1 L5CompletedTotal:
+SPECIALTY 1 L5:
 MountedAttackPct +10
 MountedDefensePct +10
 
 # SPECIALTY 2 | Trapping
-SPECIALTY 2 L5CompletedTotal:
+SPECIALTY 2 L5:
 MayorTrainingSpeedSubordinateCityPct +20
 MayorDeathToSurvivalRateSubordinateCityPct +6
 
 # SPECIALTY 3 | Ruler
-SPECIALTY 3 L5CompletedTotal:
+SPECIALTY 3 L5:
 MayorTroopCapacitySubordinateCityPct +36
 
 # SPECIALTY 4 | Empire Founder
-SPECIALTY 4 L5CompletedTotal:
+SPECIALTY 4 L5:
 MayorConstructionSpeedSubordinateCityPct +80
 
 ==============================
@@ -79,4 +79,4 @@ COVENANTS
 # - MayorTroopCapacitySubordinateCityPct
 # - MayorConstructionSpeedSubordinateCityPct
 
-InTavern=true
+IN_TAVERN: true

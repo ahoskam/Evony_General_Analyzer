@@ -1,24 +1,25 @@
 #pragma once
-#include <string>
-#include <optional>
+
 #include <sqlite3.h>
+#include <optional>
+#include <string>
+
+struct PendingInfo {
+    int  pending_id = 0;
+    bool was_new = false;
+};
 
 class DbImportV2 {
 public:
-    struct PendingInfo {
-        int pending_id = 0;
-        bool was_new = false;
-    };
-
     DbImportV2() = default;
     ~DbImportV2();
 
-    DbImportV2(const DbImportV2&) = delete;
-    DbImportV2& operator=(const DbImportV2&) = delete;
-
     bool open(const std::string& path);
     void close();
-    sqlite3* raw() const { return db_; }
+
+    bool begin();
+    bool commit();
+    bool rollback();
 
     bool upsert_general(
         const std::string& name,
@@ -53,6 +54,12 @@ public:
         int line_number,
         const std::string& raw_line);
 
+    // Old behavior (kept for compatibility; NOT recommended for idempotent import)
+    bool delete_occurrences_for_general_file(int general_id, const std::string& file_path);
+
+    // NEW: Correct behavior (prevents duplicates across data/import vs data/imported)
+    bool delete_occurrences_for_general(int general_id);
+
     bool insert_stat_occurrence(
         int general_id,
         int stat_key_id,
@@ -65,17 +72,17 @@ public:
         int line_number,
         const std::string& raw_line);
 
-    bool delete_occurrences_for_general_file(int general_id, const std::string& file_path);
-
-    bool begin();
-    bool commit();
-    bool rollback();
-
 private:
     sqlite3* db_ = nullptr;
 
     bool exec_sql(const char* sql);
-
-    bool ensure_v2_migrations();
     bool column_exists(const char* table, const char* column);
+    bool ensure_v2_migrations();
+
+    // NEW: used internally by upsert_general() to enforce "locked means no overwrite"
+    bool get_general_lock_status(
+        const std::string& name,
+        bool& found,
+        int& general_id,
+        bool& locked);
 };

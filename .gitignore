@@ -49,3 +49,14 @@ build/
 /data/*.db
 /data/*.db-wal
 /data/*.db-shm
+
+
+data/import/
+data/imported/
+data/_invalid/
+exports/
+build_cmake/
+imgui.ini
+data/*.db
+data/*.bak_*
+

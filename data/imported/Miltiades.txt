@@ -156,7 +156,7 @@ ReinforcingGroundDefensePct +10
 GroundDefensePct +5
 GroundHPPct +5
 
-InTavern=false
+IN_TAVERN: false
 
 ==============================
 # SOURCE TEXT (VERBATIM)

@@ -49,24 +49,24 @@ SPECIALTIES
 ==============================
 
 # SPECIALTY 1 | Mounted Troop Assault
-SPECIALTY 1 L5CompletedTotal:
+SPECIALTY 1 L5:
 MountedAttackPct +10
 MountedHPPct +10
 
 # SPECIALTY 2 | Annihilation
-SPECIALTY 2 L5CompletedTotal:
+SPECIALTY 2 L5:
 MarchSizePct +6
 MountedAttackPct +10
 GroundAttackPct +10
 
 # SPECIALTY 3 | Mounted Troop Ares
-SPECIALTY 3 L5CompletedTotal:
+SPECIALTY 3 L5:
 MountedAttackPct +10
 MountedHPPct +10
 MountedDefensePct +10
 
 # SPECIALTY 4 | Battle of Dyrrhachium
-SPECIALTY 4 L5CompletedTotal:
+SPECIALTY 4 L5:
 GroundAttackPct +10
 MountedAttackPct +10
 GroundDefensePct +10
@@ -87,4 +87,4 @@ COVENANTS
 # - EnemyMountedDefensePct | Reduces enemy mounted troops' defense
 # - AttackingTroopDeathToWoundedRatePct | Attacking Troop Death into Wounded Rate
 
-InTavern=true
+IN_TAVERN: true

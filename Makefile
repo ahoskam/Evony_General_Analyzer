@@ -1,196 +1,91 @@
-# Makefile (v2: GUI + Importer v2 + optional legacy CLI)
-# ======================================================
-
-# =========================
-# Project
-# =========================
-APP := evony_generals
-
 CXX := g++
-CXXSTD := -std=c++20
-WARN := -Wall -Wextra -Wpedantic
-OPT  := -O0
+CXXFLAGS := -std=c++20 -Wall -Wextra -Wpedantic -O0 -MMD -MP
 
-# =========================
-# Folders
-# =========================
-SRC_DIR := src
-INC_DIR := include
+BUILD := build
+OBJ := $(BUILD)/obj
 
-IMGUI_DIR := external/imgui
-IMGUI_BACKEND_DIR := $(IMGUI_DIR)/backends
+INC := -Iinclude -Isrc -Iexternal/imgui -Iexternal/imgui/backends -Iexternal/imgui/misc/cpp
 
-BUILD_DIR := build
-OBJ_DIR := $(BUILD_DIR)/obj
+GLFW_CFLAGS := $(shell pkg-config --cflags glfw3 2>/dev/null)
+GLFW_LIBS   := $(shell pkg-config --libs glfw3 2>/dev/null)
 
-# =========================
-# pkg-config
-# =========================
-PKG_CFLAGS_GLFW := $(shell pkg-config --cflags glfw3 2>/dev/null)
-PKG_LIBS_GLFW   := $(shell pkg-config --libs glfw3 2>/dev/null)
+SQL_CFLAGS := $(shell pkg-config --cflags sqlite3 2>/dev/null)
+SQL_LIBS   := $(shell pkg-config --libs sqlite3 2>/dev/null)
 
-PKG_CFLAGS_SQL  := $(shell pkg-config --cflags sqlite3 2>/dev/null)
-PKG_LIBS_SQL    := $(shell pkg-config --libs sqlite3 2>/dev/null)
+GUI_CXXFLAGS := $(CXXFLAGS) $(INC) $(GLFW_CFLAGS) $(SQL_CFLAGS)
+IMP_CXXFLAGS := $(CXXFLAGS) -Iinclude -Isrc $(SQL_CFLAGS)
 
-# =========================
-# Includes
-# =========================
-INCLUDES_COMMON := -I$(INC_DIR)
+GUI_LIBS := $(GLFW_LIBS) $(SQL_LIBS) -lGL -ldl -lpthread
+IMP_LIBS := $(SQL_LIBS)
 
-INCLUDES_GUI := \
-	$(INCLUDES_COMMON) \
-	-I$(IMGUI_DIR) \
-	-I$(IMGUI_BACKEND_DIR) \
-	$(PKG_CFLAGS_GLFW) \
-	$(PKG_CFLAGS_SQL)
+# -----------------------
+# GUI v2 sources (ONLY)
+# -----------------------
+GUI_SRCS := \
+  src/main_gui.cpp \
+  src/ui.cpp \
+  src/model.cpp \
+  src/db.cpp
 
-INCLUDES_IMPORTER := \
-	$(INCLUDES_COMMON) \
-	$(PKG_CFLAGS_SQL)
+IMGUI_SRCS := \
+  external/imgui/imgui.cpp \
+  external/imgui/imgui_draw.cpp \
+  external/imgui/imgui_tables.cpp \
+  external/imgui/imgui_widgets.cpp \
+  external/imgui/imgui_demo.cpp \
+  external/imgui/backends/imgui_impl_glfw.cpp \
+  external/imgui/backends/imgui_impl_opengl3.cpp \
+  external/imgui/misc/cpp/imgui_stdlib.cpp
 
-INCLUDES_CLI := \
-	$(INCLUDES_COMMON) \
-	$(PKG_CFLAGS_SQL)
+GUI_OBJS := $(patsubst %.cpp,$(OBJ)/%.o,$(GUI_SRCS) $(IMGUI_SRCS))
 
-# =========================
-# Link libs (Manjaro/Linux)
-# =========================
-LIBS_GUI := $(PKG_LIBS_GLFW) $(PKG_LIBS_SQL) -lGL -ldl -lpthread
-LIBS_IMPORTER := $(PKG_LIBS_SQL)
-LIBS_CLI := $(PKG_LIBS_SQL)
+# -----------------------
+# Importer v2 sources (ONLY)
+# -----------------------
+IMP_SRCS := \
+  src/importer/main_importer.cpp \
+  src/importer/DbImportV2.cpp \
+  src/importer/GeneralLoaderV2.cpp
 
-# =========================
-# Flags
-# =========================
-CXXFLAGS_COMMON := $(CXXSTD) $(WARN) $(OPT) -MMD -MP
-CXXFLAGS_GUI := $(CXXFLAGS_COMMON) $(INCLUDES_GUI)
-CXXFLAGS_IMPORTER := $(CXXFLAGS_COMMON) $(INCLUDES_IMPORTER)
-CXXFLAGS_CLI := $(CXXFLAGS_COMMON) $(INCLUDES_CLI)
+IMP_OBJS := $(patsubst %.cpp,$(OBJ)/%.o,$(IMP_SRCS))
 
-# =========================
-# Sources
-# =========================
-ALL_SRC := $(shell find $(SRC_DIR) -name '*.cpp')
-
-GUI_MAIN := $(SRC_DIR)/gui/main.cpp
-IMPORTER_MAIN := $(SRC_DIR)/importer/main_importer.cpp
-CLI_MAIN := $(SRC_DIR)/main.cpp
-
-# ImGui sources (explicit)
-IMGUI_SRC := \
-	$(IMGUI_DIR)/imgui.cpp \
-	$(IMGUI_DIR)/imgui_demo.cpp \
-	$(IMGUI_DIR)/imgui_draw.cpp \
-	$(IMGUI_DIR)/imgui_tables.cpp \
-	$(IMGUI_DIR)/imgui_widgets.cpp \
-	$(IMGUI_BACKEND_DIR)/imgui_impl_glfw.cpp \
-	$(IMGUI_BACKEND_DIR)/imgui_impl_opengl3.cpp
-
-# Importer v2: ONLY src/importer/*
-IMPORTER_SRCS := $(filter $(SRC_DIR)/importer/%,$(ALL_SRC))
-
-# GUI: everything under src except src/importer/* AND except legacy CLI main (src/main.cpp), plus ImGui
-GUI_SRCS := $(filter-out $(SRC_DIR)/importer/%,$(ALL_SRC))
-GUI_SRCS := $(filter-out $(CLI_MAIN),$(GUI_SRCS))
-GUI_SRCS := $(GUI_SRCS) $(IMGUI_SRC)
-
-# Optional legacy CLI: everything except gui/* and importer/*
-CLI_SRCS := $(filter-out $(SRC_DIR)/gui/%,$(ALL_SRC))
-CLI_SRCS := $(filter-out $(SRC_DIR)/importer/%,$(CLI_SRCS))
-
-# =========================
-# Object mapping helpers
-# =========================
-# Map "path/to/file.cpp" -> "build/obj/path/to/file.o"
-to_obj = $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(1))
-
-GUI_OBJS := $(call to_obj,$(GUI_SRCS))
-IMPORTER_OBJS := $(call to_obj,$(IMPORTER_SRCS))
-CLI_OBJS := $(call to_obj,$(CLI_SRCS))
-
-ALL_OBJS := $(GUI_OBJS) $(IMPORTER_OBJS) $(CLI_OBJS)
-
-# =========================
+# -----------------------
 # Targets
-# =========================
-.PHONY: all clean gui importer cli run_gui run_importer run_cli
+# -----------------------
+.PHONY: all clean gui importer run_gui run_importer
 
-# Build BOTH by default (this is the main usability fix)
 all: gui importer
 
-# --- GUI ---
-gui: $(BUILD_DIR)/$(APP)_gui
+gui: $(BUILD)/evony_gui_v2
+importer: $(BUILD)/importer_v2
 
-$(BUILD_DIR)/$(APP)_gui: $(GUI_OBJS)
-	@mkdir -p $(BUILD_DIR)
-	$(CXX) $^ -o $@ $(LIBS_GUI)
+run_gui: gui
+	./$(BUILD)/evony_gui_v2 --db data/evony_v2.db
 
-run_gui: $(BUILD_DIR)/$(APP)_gui
-	env GLFW_PLATFORM=x11 ./$(BUILD_DIR)/$(APP)_gui
+run_importer: importer
+	./$(BUILD)/importer_v2 --db data/evony_v2.db --path data/import
 
-# --- Importer v2 ---
-importer: $(BUILD_DIR)/importer_v2
+$(BUILD)/evony_gui_v2: $(GUI_OBJS)
+	@mkdir -p $(BUILD)
+	$(CXX) $^ -o $@ $(GUI_LIBS)
 
-$(BUILD_DIR)/importer_v2: $(IMPORTER_OBJS)
-	@mkdir -p $(BUILD_DIR)
-	$(CXX) $^ -o $@ $(LIBS_IMPORTER)
+$(BUILD)/importer_v2: $(IMP_OBJS)
+	@mkdir -p $(BUILD)
+	$(CXX) $^ -o $@ $(IMP_LIBS)
 
-run_importer: $(BUILD_DIR)/importer_v2
-	./$(BUILD_DIR)/importer_v2 --db data/evony_v2.db --path data/import
-
-# --- Optional legacy CLI ---
-# Only build if src/main.cpp exists (prevents accidental "no input files" behavior)
-ifeq ($(wildcard $(CLI_MAIN)),)
-cli:
-	@echo "No legacy CLI main found at $(CLI_MAIN); skipping."
-run_cli: cli
-else
-cli: $(BUILD_DIR)/$(APP)_cli
-
-$(BUILD_DIR)/$(APP)_cli: $(CLI_OBJS)
-	@mkdir -p $(BUILD_DIR)
-	$(CXX) $^ -o $@ $(LIBS_CLI)
-
-run_cli: $(BUILD_DIR)/$(APP)_cli
-	./$(BUILD_DIR)/$(APP)_cli
-endif
-
-# =========================
-# Compile rules (deterministic)
-# =========================
-# We compile GUI objects with GUI flags, importer with importer flags, cli with cli flags.
-# This avoids pattern-rule precedence surprises.
-
-# GUI objects
-$(OBJ_DIR)/$(SRC_DIR)/gui/%.o: $(SRC_DIR)/gui/%.cpp
+# -----------------------
+# Compile rules (SEPARATE FLAGS!)
+# -----------------------
+$(OBJ)/src/importer/%.o: src/importer/%.cpp
 	@mkdir -p $(dir $@)
-	$(CXX) $(CXXFLAGS_GUI) -c $< -o $@
+	$(CXX) $(IMP_CXXFLAGS) -c $< -o $@
 
-# ImGui objects
-$(OBJ_DIR)/external/imgui/%.o: external/imgui/%.cpp
+$(OBJ)/%.o: %.cpp
 	@mkdir -p $(dir $@)
-	$(CXX) $(CXXFLAGS_GUI) -c $< -o $@
+	$(CXX) $(GUI_CXXFLAGS) -c $< -o $@
 
-$(OBJ_DIR)/external/imgui/backends/%.o: external/imgui/backends/%.cpp
-	@mkdir -p $(dir $@)
-	$(CXX) $(CXXFLAGS_GUI) -c $< -o $@
-
-# Importer objects
-$(OBJ_DIR)/$(SRC_DIR)/importer/%.o: $(SRC_DIR)/importer/%.cpp
-	@mkdir -p $(dir $@)
-	$(CXX) $(CXXFLAGS_IMPORTER) -c $< -o $@
-
-# Everything else (core sources used by GUI/CLI) compiled with CLI flags.
-# NOTE: GUI still links its own objects built with GUI flags above; this rule is only for non-gui/non-importer paths.
-$(OBJ_DIR)/%.o: %.cpp
-	@mkdir -p $(dir $@)
-	$(CXX) $(CXXFLAGS_CLI) -c $< -o $@
-
-# =========================
-# Housekeeping
-# =========================
 clean:
-	rm -rf $(BUILD_DIR)
+	rm -rf $(BUILD)
 
-# Auto-deps
--include $(ALL_OBJS:.o=.d)
+-include $(GUI_OBJS:.o=.d)
+-include $(IMP_OBJS:.o=.d)

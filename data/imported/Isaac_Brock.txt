@@ -2,7 +2,6 @@ GENERAL: Isaac Brock
 ROLE: Defense
 IN_TAVERN: false
 
-
 Leadership: 118 (8.92)
 Attack: 112 (8.52)
 Defense: 118 (8.92)

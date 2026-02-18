@@ -79,7 +79,7 @@ COVENANTS
 # NEW_STAT_KEYS:
 # - AttackingMonstersStaminaCostReductionPct | Stamina cost reduction when attacking Monsters
 
-InTavern=false
+IN_TAVERN: false
 
 ==============================
 # SOURCE TEXT (VERBATIM)

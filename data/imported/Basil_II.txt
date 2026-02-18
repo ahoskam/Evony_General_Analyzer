@@ -66,20 +66,20 @@ SPECIALTIES
 ==============================
 
 # SPECIALTY 1 | Ground Troop Defense
-SPECIALTY 1 L5CompletedTotal:
+SPECIALTY 1 L5:
 GroundHPPct +10
 GroundDefensePct +10
 
 # SPECIALTY 2 | Snipe
-SPECIALTY 2 L5CompletedTotal:
+SPECIALTY 2 L5:
 EnemyTroopAttackPct -10
 
 # SPECIALTY 3 | War God
-SPECIALTY 3 L5CompletedTotal:
+SPECIALTY 3 L5:
 AllTroopsAttackPct +6
 
 # SPECIALTY 4 | Battle of Kleidion
-SPECIALTY 4 L5CompletedTotal:
+SPECIALTY 4 L5:
 GroundAttackPct +20
 MountedAttackPct +20
 GroundHPPct +10
@@ -99,4 +99,4 @@ COVENANTS
 # - EnemyTroopAttackPct
 # - AllTroopsAttackPct
 
-InTavern=false
+IN_TAVERN: false

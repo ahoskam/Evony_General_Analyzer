@@ -2,7 +2,6 @@ GENERAL: Clovis I
 ROLE: Duty
 IN_TAVERN: false
 
-
 Leadership: 115 (8.69)
 Attack: 122 (8.91)
 Defense: 119 (9.04)

@@ -159,7 +159,7 @@ AttackingRangedTroopAttackPct +15
 # NEW_STAT_KEYS:
 # - AllTroopProductionPct | All Resources Production
 
-InTavern=false
+IN_TAVERN: false
 
 ==============================
 # SOURCE TEXT (VERBATIM)

@@ -59,22 +59,22 @@ SPECIALTIES
 ==============================
 
 # SPECIALTY 1 | Ranged Troop Formation
-SPECIALTY 1 L5CompletedTotal:
+SPECIALTY 1 L5:
 RangedAttackPct +10
 RangedDefensePct +10
 
 # SPECIALTY 2 | Pacify
-SPECIALTY 2 L5CompletedTotal:
+SPECIALTY 2 L5:
 SubCityGoldProductionSpeedPct +36
 SubCityConstructionSpeedPct +36
 
 # SPECIALTY 3 | Sage
-SPECIALTY 3 L5CompletedTotal:
+SPECIALTY 3 L5:
 RangedTrainingSpeedPct +20
 RangedTrainingCapacityPct +20
 
 # SPECIALTY 4 | Ocean Expansion
-SPECIALTY 4 L5CompletedTotal:
+SPECIALTY 4 L5:
 RangedTrainingSpeedPct +26
 RangedTrainingCapacityPct +20
 
@@ -96,4 +96,4 @@ COVENANTS
 # - SubCityGoldProductionSpeedPct
 # - SubCityConstructionSpeedPct
 
-InTavern=true
+IN_TAVERN: true

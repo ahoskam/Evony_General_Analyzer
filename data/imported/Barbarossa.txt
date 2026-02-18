@@ -1,6 +1,6 @@
 GENERAL: Barbarossa
 ROLE: Unknown
-InTavern=true
+IN_TAVERN: true
 
 Leadership: 115 (9.15)
 Attack: 107 (8.43)

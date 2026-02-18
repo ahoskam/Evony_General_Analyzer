@@ -121,6 +121,50 @@ bool DbImportV2::begin()    { return exec_sql("BEGIN;"); }
 bool DbImportV2::commit()   { return exec_sql("COMMIT;"); }
 bool DbImportV2::rollback() { return exec_sql("ROLLBACK;"); }
 
+// -----------------------------------------------------------------------------
+// General locking / policy enforcement
+// -----------------------------------------------------------------------------
+
+// Returns:
+//  - found=false if general doesn't exist yet
+//  - if found=true, provides id and locked (double_checked_in_game==1)
+bool DbImportV2::get_general_lock_status(
+    const std::string& name,
+    bool& found,
+    int& general_id,
+    bool& locked)
+{
+    found = false;
+    general_id = 0;
+    locked = false;
+
+    if (!db_) return false;
+
+    const char* sql = R"SQL(
+        SELECT id, double_checked_in_game
+        FROM generals
+        WHERE name=?1;
+    )SQL";
+
+    sqlite3_stmt* stmt = nullptr;
+    if (sqlite3_prepare_v2(db_, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        std::cerr << "prepare get_general_lock_status failed: " << sqlite3_errmsg(db_) << "\n";
+        return false;
+    }
+
+    sqlite3_bind_text(stmt, 1, name.c_str(), -1, SQLITE_TRANSIENT);
+
+    int rc = sqlite3_step(stmt);
+    if (rc == SQLITE_ROW) {
+        found = true;
+        general_id = sqlite3_column_int(stmt, 0);
+        locked = (sqlite3_column_int(stmt, 1) == 1);
+    }
+
+    sqlite3_finalize(stmt);
+    return true;
+}
+
 bool DbImportV2::upsert_general(
     const std::string& name,
     const std::string& role,
@@ -132,10 +176,28 @@ bool DbImportV2::upsert_general(
     int defense, double defense_green,
     int politics, double politics_green,
     const std::string& source_text_verbatim,
-    bool double_checked_in_game,
+    bool /*double_checked_in_game_from_file_ignored*/,
     int& out_general_id)
 {
     if (!db_) return false;
+
+    // Enforce project rule:
+    // - If general is locked (double_checked_in_game==1), importer MUST skip all updates.
+    // - If general is unlocked, importer MUST set double_checked_in_game=0 unconditionally.
+    bool found = false;
+    bool locked = false;
+    int existing_id = 0;
+
+    if (!get_general_lock_status(name, found, existing_id, locked)) return false;
+
+    if (found && locked) {
+        out_general_id = existing_id;
+        return true; // Skip updates.
+    }
+
+    // IMPORTANT:
+    // We never set double_checked_in_game=1 from file. Always 0 on insert/update by importer.
+    const int importer_sets_double_checked = 0;
 
     const char* sql = R"SQL(
         INSERT INTO generals(
@@ -197,7 +259,7 @@ bool DbImportV2::upsert_general(
     sqlite3_bind_double(stmt, 13, politics_green);
 
     sqlite3_bind_text(stmt, 14, source_text_verbatim.c_str(), -1, SQLITE_TRANSIENT);
-    sqlite3_bind_int (stmt, 15, double_checked_in_game ? 1 : 0);
+    sqlite3_bind_int (stmt, 15, importer_sets_double_checked);
 
     bool ok = (sqlite3_step(stmt) == SQLITE_DONE);
     if (!ok) std::cerr << "upsert_general failed: " << sqlite3_errmsg(db_) << "\n";
@@ -374,6 +436,32 @@ bool DbImportV2::add_pending_example(
     return ok;
 }
 
+// -----------------------------------------------------------------------------
+// IMPORTANT FIX: delete by general_id (NOT by file_path)
+// This prevents duplicates when a general is imported from data/import and
+// later from data/imported (or any other path).
+// -----------------------------------------------------------------------------
+bool DbImportV2::delete_occurrences_for_general(int general_id)
+{
+    if (!db_) return false;
+
+    const char* sql = "DELETE FROM stat_occurrences WHERE general_id=?1;";
+    sqlite3_stmt* stmt = nullptr;
+
+    if (sqlite3_prepare_v2(db_, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        std::cerr << "prepare delete_occurrences_for_general failed: " << sqlite3_errmsg(db_) << "\n";
+        return false;
+    }
+
+    sqlite3_bind_int(stmt, 1, general_id);
+
+    bool ok = (sqlite3_step(stmt) == SQLITE_DONE);
+    if (!ok) std::cerr << "delete_occurrences_for_general failed: " << sqlite3_errmsg(db_) << "\n";
+    sqlite3_finalize(stmt);
+    return ok;
+}
+
+// Keep the old helper if you still want it, but do NOT use it for idempotent imports.
 bool DbImportV2::delete_occurrences_for_general_file(int general_id, const std::string& file_path)
 {
     if (!db_) return false;

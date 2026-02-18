@@ -7,7 +7,7 @@ Attack: 112 (8.52)
 Defense: 113 (8.84)
 Politics: 111 (8.61)
 
-InTavern=false
+IN_TAVERN: false
 
 ==============================
 BASE SKILL | Dictator

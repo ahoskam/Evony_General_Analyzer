@@ -86,4 +86,4 @@ COVENANTS
 # - InCityMountedHPPct | In-city Mounted Troop HP
 # - AllTroopsAttackPct | All Troops Attack
 
-InTavern=true
+IN_TAVERN: true

@@ -285,12 +285,13 @@ int main(int argc, char** argv)
             }
 
             // idempotent per file path (as originally imported)
-            db.delete_occurrences_for_general_file(general_id, p.string());
+            db.delete_occurrences_for_general(general_id);
+
 
             for (auto const& o : g.occurrences) {
                 auto stat_id = db.resolve_stat_key_id(o.raw_key);
                 if (!stat_id) {
-                    DbImportV2::PendingInfo pi;
+                    PendingInfo pi;
                     if (db.ensure_pending_key(o.raw_key, o.file_path, o.line_number, pi)) {
                         db.add_pending_example(
                             pi.pending_id,

@@ -63,17 +63,17 @@ MountedAttackPct +4
 MountedHPPct +4
 
 # SPECIALTY 2 | Annihilation
-SPECIALTY 2 L5CompletedTotal:
+SPECIALTY 2 L5:
 MarchSizeCapacityPct +6
 AttackingMountedAttackPct +10
 AttackingGroundAttackPct +10
 
 # SPECIALTY 3 | War God
-SPECIALTY 3 L5CompletedTotal:
+SPECIALTY 3 L5:
 AllTroopsAttackPct +6
 
 # SPECIALTY 4 | Battle of Actium
-SPECIALTY 4 L5CompletedTotal:
+SPECIALTY 4 L5:
 MountedAttackPct +30
 MountedHPPct +20
 
@@ -89,7 +89,7 @@ COVENANTS
 # - EnemyInCityTroopWoundedIntoDeathRatePct
 # - DefenseAndHPPct
 
-InTavern=false
+IN_TAVERN: false
 
 ==============================
 # SOURCE TEXT (VERBATIM)

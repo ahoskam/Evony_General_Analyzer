@@ -55,22 +55,22 @@ SPECIALTIES
 ==============================
 
 # SPECIALTY 1 | Mounted Troop Defense
-SPECIALTY 1 L5CompletedTotal:
+SPECIALTY 1 L5:
 MountedTroopHPPct +10
 MountedTroopDefensePct +10
 
 # SPECIALTY 2 | Defensive
-SPECIALTY 2 L5CompletedTotal:
+SPECIALTY 2 L5:
 HospitalCapacityPct +10
 InCityGroundTroopAttackPct +10
 InCityMountedTroopAttackPct +10
 
 # SPECIALTY 3 | War God
-SPECIALTY 3 L5CompletedTotal:
+SPECIALTY 3 L5:
 AllTroopsAttackPct +6
 
 # SPECIALTY 4 | Battle of Watling Street
-SPECIALTY 4 L5CompletedTotal:
+SPECIALTY 4 L5:
 InCityMountedTroopAttackPct +46
 InCityMountedTroopHPPct +46
 Condition: Applied to Main City Defense General
@@ -91,4 +91,4 @@ COVENANTS
 # - InCityGroundTroopDefensePct
 # - InCityGroundTroopAttackPct
 
-InTavern=true
+IN_TAVERN: true

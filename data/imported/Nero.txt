@@ -43,20 +43,20 @@ SPECIALTIES
 ==============================
 
 # SPECIALTY 1 | Mounted Troop Defense
-SPECIALTY 1 L5CompletedTotal:
+SPECIALTY 1 L5:
 MountedHPPct +10
 MountedDefensePct +10
 
 # SPECIALTY 2 | Sabotage
-SPECIALTY 2 L5CompletedTotal:
+SPECIALTY 2 L5:
 EnemyTroopDefensePct -10
 
 # SPECIALTY 3 | Ruler
-SPECIALTY 3 L5CompletedTotal:
+SPECIALTY 3 L5:
 TroopCapacityInSubordinateCityPct +36
 
 # SPECIALTY 4 | Bloody Emperor
-SPECIALTY 4 L5CompletedTotal:
+SPECIALTY 4 L5:
 EnemyTroopHPPct -16
 
 ==============================
@@ -75,4 +75,4 @@ COVENANTS
 # - EnemyTroopDefensePct
 # - TroopCapacityInSubordinateCityPct
 
-InTavern=true
+IN_TAVERN: true

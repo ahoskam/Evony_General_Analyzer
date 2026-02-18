@@ -57,24 +57,24 @@ SPECIALTIES
 ==============================
 
 # SPECIALTY 1 | Ground Troop Assault
-SPECIALTY 1 L5CompletedTotal:
+SPECIALTY 1 L5:
 GroundAttackPct +10
 GroundHPPct +10
 
 # SPECIALTY 2 | Annihilation
-SPECIALTY 2 L5CompletedTotal:
+SPECIALTY 2 L5:
 MarchSizePct +6
 MountedAttackPct +10
 GroundAttackPct +10
 
 # SPECIALTY 3 | Ground Troop Ares
-SPECIALTY 3 L5CompletedTotal:
+SPECIALTY 3 L5:
 GroundAttackPct +10
 GroundHPPct +10
 GroundDefensePct +10
 
 # SPECIALTY 4 | Battle of Zama
-SPECIALTY 4 L5CompletedTotal:
+SPECIALTY 4 L5:
 GroundHPPct +26
 GroundDefensePct +26
 AttackingTroopDeathToWoundedRatePct +10
@@ -90,4 +90,4 @@ COVENANTS
 # NEW_STAT_KEYS:
 # - RallyCapacityPct | Rally Capacity
 
-InTavern=false
+IN_TAVERN: false

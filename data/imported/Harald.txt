@@ -44,20 +44,20 @@ SPECIALTIES
 ==============================
 
 # SPECIALTY 1 | Siege Machine Assault
-SPECIALTY 1 L5CompletedTotal:
+SPECIALTY 1 L5:
 SiegeMachineAttackPct +10
 SiegeMachineHPPct +10
 
 # SPECIALTY 2 | Sabotage
-SPECIALTY 2 L5CompletedTotal:
+SPECIALTY 2 L5:
 EnemyTroopDefensePct -10
 
 # SPECIALTY 3 | King's Ambition
-SPECIALTY 3 L5CompletedTotal:
+SPECIALTY 3 L5:
 TroopDeathIntoTroopSoulRateMainCityPct +10
 
 # SPECIALTY 4 | Harald Bluetooth
-SPECIALTY 4 L5CompletedTotal:
+SPECIALTY 4 L5:
 EnemyWoundedToDeathWhenAttackingPct +10
 EnemyTroopDefensePct -10
 
@@ -73,4 +73,4 @@ COVENANTS
 # - TroopDeathIntoTroopSoulRateMainCityPct | Troop death into troop soul rate in the main city
 # - SubordinateCityDeathIntoSurvivalRatePct | Death into Survival Rate in this Subordinate City
 
-InTavern=true
+IN_TAVERN: true

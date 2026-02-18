@@ -156,7 +156,7 @@ InRallySiegeMachineAttackPct +10
 # Civilization
 AttackingSiegeMachineAttackPct +15
 
-InTavern=false
+IN_TAVERN: false
 
 ==============================
 # NEW STAT KEYS NOTE

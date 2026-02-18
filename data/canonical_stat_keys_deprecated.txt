@@ -1,0 +1,14 @@
+key                                         kind     is_active  notes                                                                                                
+------------------------------------------  -------  ---------  -----------------------------------------------------------------------------------------------------
+AllTroopsAttackPct                          percent  0          approved: created from pending                                                                       
+AttackingTroopsAttackPct                    percent  0          approved                                                                                             
+InCityTroopsAttackPct                       percent  0          added from pending_stat_keys                                                                         
+LeadingEnemyMountedAttackDebuffPct          percent  0          approved [DEPRECATED: do not use Leading* canon; mapped via alias]                                   
+LeadingEnemySiegeMachineDefenseDebuffPct    percent  0          Leading: enemy siege machine defense debuff [DEPRECATED: do not use Leading* canon; mapped via alias]
+LeadingEnemySiegeMachineHPDebuffPct         percent  0          Leading: enemy siege machine HP debuff [DEPRECATED: do not use Leading* canon; mapped via alias]     
+LeadingEnemyTroopHPDebuffPct                percent  0          approved [DEPRECATED: do not use Leading* canon; mapped via alias]                                   
+LeadingRangedAttackPct                      percent  0          approved [DEPRECATED: do not use Leading* canon; mapped via alias]                                   
+LeadingRangedDefensePct                     percent  0          approved [DEPRECATED: do not use Leading* canon; mapped via alias]                                   
+LeadingRangedHPPct                          percent  0          approved [DEPRECATED: do not use Leading* canon; mapped via alias]                                   
+MayorDeathToSurvivalRateSubordinateCityPct  percent  0          approved: created from pending [Merged into MayorSubCityDeathToSurvivalRatePct]                      
+MayorTrainingSpeedSubordinateCityPct        percent  0          approved: created from pending [Merged into MayorSubCityTrainingSpeedPct]                            

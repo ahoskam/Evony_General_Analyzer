@@ -101,7 +101,7 @@ COVENANTS
 # - InCityMountedAttackPct
 # - EnemyMountedAttackPct
 
-InTavern=false
+IN_TAVERN: false
 
 ==============================
 # SOURCE TEXT (VERBATIM)

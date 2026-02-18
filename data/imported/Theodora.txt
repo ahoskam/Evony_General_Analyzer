@@ -121,4 +121,4 @@ COVENANTS
 # - AttackingMonstersAttackPct | Monsters Attack when attacking
 # - AttackingTroopDeathToWoundedRatePct | Death-turning-wounded rate when attacking
 
-InTavern=false
+IN_TAVERN: false

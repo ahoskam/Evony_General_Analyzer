@@ -8,8 +8,8 @@ Defense: 118 (8.95)
 Politics: 102 (8.51)
 
 BASE SKILL | Severan Dynasty
-LeadingSiegeMachineAttackPct +35
-LeadingSiegeMachineHPPct +20
+SiegeMachineAttackPct +35
+SiegeMachineHPPct +20
 
 ASCENSION 1
 SiegeMachineAttackPct +5

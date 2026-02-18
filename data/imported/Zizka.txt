@@ -44,7 +44,7 @@ COVENANTS
 
 # None available (locked)
 
-InTavern=false
+IN_TAVERN: false
 
 ==============================
 # SOURCE TEXT (VERBATIM)

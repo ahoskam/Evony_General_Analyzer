@@ -76,4 +76,4 @@ COVENANTS
 # - AttackingTroopDeathToWoundedRatePct | Attacking Troop Death into Wounded Rate
 # - EnemyWoundedToDeathWhenAttackingPct | Enemy Wounded into Death when attacking
 
-InTavern=true
+IN_TAVERN: true

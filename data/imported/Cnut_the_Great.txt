@@ -93,4 +93,4 @@ COVENANTS
 # - WhenGeneralIsMayorTrainingSpeedInThisSubordinateCityPct
 # - WhenGeneralIsMayorDeathIntoSurvivalRateInThisSubordinateCityPct
 
-InTavern=false
+IN_TAVERN: false

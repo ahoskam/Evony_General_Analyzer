@@ -161,7 +161,7 @@ InRallyMountedDefensePct +10
 # - InRallyMountedAttackPct | In-Rally Mounted Troop Attack
 # - InRallyMountedDefensePct | In-Rally Mounted Troop Defense
 
-InTavern=false
+IN_TAVERN: false
 
 ==============================
 # SOURCE TEXT (VERBATIM)

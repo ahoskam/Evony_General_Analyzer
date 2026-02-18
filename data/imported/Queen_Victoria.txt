@@ -60,7 +60,7 @@ GroundAttackPct +4
 GroundDefensePct +4
 
 # SPECIALTY 2 | Fortification
-SPECIALTY 2 L5CompletedTotal:
+SPECIALTY 2 L5:
 InCityTroopAttackPct +6
 
 # SPECIALTY 3 | King’s Ambition
@@ -102,4 +102,4 @@ COVENANTS
 # - MainCityTroopDeathToSoulRatePct
 # - AllTroopHPPct
 
-InTavern=true
+IN_TAVERN: true

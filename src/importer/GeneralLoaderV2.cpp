@@ -19,6 +19,16 @@ static bool starts_with(const std::string& s, const std::string& p)
     return s.size() >= p.size() && s.compare(0, p.size(), p) == 0;
 }
 
+// Case-insensitive starts_with
+static bool istarts_with(const std::string& s, const std::string& p)
+{
+    if (s.size() < p.size()) return false;
+    for (size_t i = 0; i < p.size(); ++i) {
+        if (std::tolower((unsigned char)s[i]) != std::tolower((unsigned char)p[i])) return false;
+    }
+    return true;
+}
+
 static std::optional<int> parse_int_after(const std::string& s, const std::string& key)
 {
     auto pos = s.find(key);
@@ -60,12 +70,10 @@ static std::optional<double> parse_double_after(const std::string& s, const std:
 static bool is_stat_line(const std::string& line)
 {
     // e.g. Key +10.0 or Key -35
-    // We'll treat as: first token is key, second token is numeric with sign
     std::istringstream iss(line);
     std::string k, v;
     if (!(iss >> k >> v)) return false;
-    if (k.empty()) return false;
-    if (v.empty()) return false;
+    if (k.empty() || v.empty()) return false;
     char c0 = v[0];
     return (c0 == '+' || c0 == '-' || std::isdigit((unsigned char)c0));
 }
@@ -85,15 +93,6 @@ static std::pair<std::string, double> parse_stat_kv(const std::string& line)
 // ------------------------------
 static std::optional<std::vector<int>> split_total_abs_to_increments(double abs_total)
 {
-    // Match by integer totals. Your patterns:
-    // 10 => 1,1,2,2,4
-    // 6  => 1,1,1,1,2
-    // 50 => 5,5,10,10,20
-    // 16 => 2,2,3,3,6
-    // 26 => 3,3,5,5,10
-    // 35 => 3,4,6,7,15
-    // 46 => 5,5,9,9,18
-    // Extend here as you discover more.
     static const std::unordered_map<int, std::vector<int>> patterns = {
         { 10, {1,1,2,2,4} },
         {  6, {1,1,1,1,2} },
@@ -112,12 +111,6 @@ static std::optional<std::vector<int>> split_total_abs_to_increments(double abs_
 
 static void expand_specialty_totals_in_place(std::vector<StatOccurrenceV2>& occ)
 {
-    // Group by context_name within Specialty.
-    // Only expand when:
-    // - there exists at least one (level=5, is_total=1) row in that specialty
-    // - and there are zero rows for levels 1..4 in that specialty (any stat)
-    //
-    // Add generated L1..L5 increment rows (is_total=0), keep original totals.
     struct Key {
         std::string name;
         bool operator==(const Key& o) const { return name == o.name; }
@@ -142,12 +135,12 @@ static void expand_specialty_totals_in_place(std::vector<StatOccurrenceV2>& occ)
 
         bool has_l1_4 = false;
         std::vector<size_t> l5_totals;
+
         for (size_t idx : indices) {
-            if (occ[idx].level.has_value()) {
-                int lv = *occ[idx].level;
-                if (lv >= 1 && lv <= 4) { has_l1_4 = true; break; }
-                if (lv == 5 && occ[idx].is_total) l5_totals.push_back(idx);
-            }
+            if (!occ[idx].level.has_value()) continue;
+            int lv = *occ[idx].level;
+            if (lv >= 1 && lv <= 4) { has_l1_4 = true; break; }
+            if (lv == 5 && occ[idx].is_total) l5_totals.push_back(idx);
         }
         if (has_l1_4) continue;
         if (l5_totals.empty()) continue;
@@ -158,15 +151,17 @@ static void expand_specialty_totals_in_place(std::vector<StatOccurrenceV2>& occ)
             double v = o.value;
             double abs_total = std::fabs(v);
             auto inc_opt = split_total_abs_to_increments(abs_total);
-            if (!inc_opt) continue; // unknown total; leave as-is
+            if (!inc_opt) continue;
 
-            const auto& inc = *inc_opt; // 5 ints
+            const auto& inc = *inc_opt;
             double sign = (v < 0) ? -1.0 : 1.0;
 
+            // Create L1..L5 increment rows (is_total=0).
+            // Keep the original L5 total row (is_total=1).
             for (int lv = 1; lv <= 5; lv++) {
                 StatOccurrenceV2 g = o;
                 g.level = lv;
-                g.is_total = false; // these are increments
+                g.is_total = false;
                 g.value = sign * (double)inc[lv - 1];
                 g.raw_line = "# AUTO_EXPANDED_FROM_L5_TOTAL: " + o.raw_line;
                 to_add.push_back(std::move(g));
@@ -174,12 +169,84 @@ static void expand_specialty_totals_in_place(std::vector<StatOccurrenceV2>& occ)
         }
     }
 
-    if (!to_add.empty()) {
-        occ.insert(occ.end(), to_add.begin(), to_add.end());
-    }
+    if (!to_add.empty()) occ.insert(occ.end(), to_add.begin(), to_add.end());
 }
 
 // ------------------------------
+// Helpers for Specialty header parsing
+// ------------------------------
+static bool icontains(const std::string& hay, const std::string& needle)
+{
+    if (needle.empty()) return true;
+    auto tolow = [](unsigned char c){ return (char)std::tolower(c); };
+
+    for (size_t i = 0; i + needle.size() <= hay.size(); ++i) {
+        bool ok = true;
+        for (size_t j = 0; j < needle.size(); ++j) {
+            if (tolow((unsigned char)hay[i + j]) != tolow((unsigned char)needle[j])) {
+                ok = false;
+                break;
+            }
+        }
+        if (ok) return true;
+    }
+    return false;
+}
+
+static void parse_specialty_header(
+    const std::string& t,
+    std::string& out_context_name,
+    std::optional<int>& out_level,
+    bool& out_is_total)
+{
+    // Accept:
+    // - "SPECIALTY 1 L5:"
+    // - "SPECIALTY 1 L5CompletedTotal:"
+    // - "Specialty 1 L5 (TOTAL)"
+    // - "Specialty 4 | blah L5 (TOTAL)"
+    out_level.reset();
+    out_is_total = false;
+
+    // Parse "SPECIALTY <n>" (case-insensitive)
+    int spec_n = 0;
+    {
+        std::istringstream iss(t);
+        std::string word;
+        iss >> word;     // SPECIALTY/Specialty
+        iss >> spec_n;   // number if present
+    }
+    if (spec_n > 0) out_context_name = "Specialty " + std::to_string(spec_n);
+    else            out_context_name = "Specialty";
+
+    // Parse level: find 'L' followed by digits
+    size_t lpos = std::string::npos;
+    for (size_t i = 0; i < t.size(); ++i) {
+        if (t[i] == 'L' && i + 1 < t.size() && std::isdigit((unsigned char)t[i + 1])) {
+            lpos = i;
+            break;
+        }
+    }
+
+    if (lpos != std::string::npos) {
+        int lv = 0;
+        size_t p = lpos + 1;
+        while (p < t.size() && std::isdigit((unsigned char)t[p])) {
+            lv = lv * 10 + (t[p] - '0');
+            p++;
+        }
+        if (lv > 0) out_level = lv;
+
+        if (lv == 5) {
+            // Treat these as TOTAL markers (case-insensitive where relevant)
+            if (icontains(t, "(TOTAL)")) out_is_total = true;
+            if (icontains(t, "L5:")) out_is_total = true;
+            if (icontains(t, "L5CompletedTotal:")) out_is_total = true;
+        }
+    } else {
+        // If no explicit level, still allow explicit (TOTAL)
+        if (icontains(t, "(TOTAL)")) out_is_total = true;
+    }
+}
 
 LoadedGeneralV2 load_general_v2_from_file(const std::string& path)
 {
@@ -220,7 +287,6 @@ LoadedGeneralV2 load_general_v2_from_file(const std::string& path)
     while (std::getline(f, line)) {
         line_no++;
         std::string t = trim(line);
-
         if (t.empty()) continue;
 
         // Capture verbatim source text block (if present)
@@ -231,10 +297,9 @@ LoadedGeneralV2 load_general_v2_from_file(const std::string& path)
             continue;
         }
         if (in_source_text) {
-            // We stop only if another GENERAL starts (or file ends).
             if (starts_with(t, "GENERAL:")) {
                 in_source_text = false;
-                // fallthrough to handle GENERAL
+                // fallthrough
             } else {
                 source_text_buf << line << "\n";
                 continue;
@@ -254,12 +319,20 @@ LoadedGeneralV2 load_general_v2_from_file(const std::string& path)
             out.meta.in_tavern = (v == "true" || v == "1" || v == "yes");
             continue;
         }
+
+        // "BASE SKILL | <name>" sets meta + BaseSkill context for following stat lines.
         if (starts_with(t, "BASE SKILL |")) {
             out.meta.base_skill_name = trim(t.substr(std::string("BASE SKILL |").size()));
+
+            cur_context_type = "BaseSkill";
+            cur_context_name = out.meta.base_skill_name;
+            cur_level.reset();
+            cur_is_total = false;
             continue;
         }
 
-        // Flags (optional)
+        // Flags (present in some older files) — importer must IGNORE double_checked_in_game as a source of truth,
+        // but loader can read it into meta for debugging.
         if (starts_with(t, "double_checked_in_game:")) {
             auto v = trim(t.substr(std::string("double_checked_in_game:").size()));
             out.meta.double_checked_in_game = (v == "1" || v == "true" || v == "yes");
@@ -296,8 +369,8 @@ LoadedGeneralV2 load_general_v2_from_file(const std::string& path)
             continue;
         }
 
-        // Section headers
-        if (starts_with(t, "BASE SKILL STATS")) {
+        // Section headers (legacy support)
+        if (istarts_with(t, "BASE SKILL STATS")) {
             cur_context_type = "BaseSkill";
             cur_context_name = out.meta.base_skill_name;
             cur_level.reset();
@@ -305,15 +378,15 @@ LoadedGeneralV2 load_general_v2_from_file(const std::string& path)
             continue;
         }
 
-        if (starts_with(t, "ASCENSION")) {
+        if (istarts_with(t, "ASCENSION")) {
             cur_context_type = "Ascension";
-            cur_context_name = t; // "ASCENSION 1", etc.
+            cur_context_name = t; // e.g. "ASCENSION 1"
             cur_level.reset();
             cur_is_total = false;
             continue;
         }
 
-        if (starts_with(t, "COVENANT")) {
+        if (istarts_with(t, "COVENANT")) {
             cur_context_type = "Covenant";
             cur_context_name = t;
             cur_level.reset();
@@ -321,30 +394,10 @@ LoadedGeneralV2 load_general_v2_from_file(const std::string& path)
             continue;
         }
 
-        // Specialty headers like:
-        // "Specialty 1 L1"
-        // "Specialty 4 | Queen of Poland L5 (TOTAL)"
-        if (starts_with(t, "Specialty")) {
+        // Specialty header: accept "SPECIALTY ..." in any case, including L5CompletedTotal:
+        if (istarts_with(t, "SPECIALTY")) {
             cur_context_type = "Specialty";
-            cur_context_name = t;
-
-            // Parse level
-            cur_level.reset();
-            cur_is_total = false;
-
-            // crude parse: look for " L<number>"
-            auto lpos = t.find(" L");
-            if (lpos != std::string::npos && lpos + 2 < t.size()) {
-                int lv = 0;
-                size_t p = lpos + 2;
-                while (p < t.size() && std::isdigit((unsigned char)t[p])) {
-                    lv = lv * 10 + (t[p] - '0');
-                    p++;
-                }
-                if (lv > 0) cur_level = lv;
-            }
-
-            if (t.find("(TOTAL)") != std::string::npos) cur_is_total = true;
+            parse_specialty_header(t, cur_context_name, cur_level, cur_is_total);
             continue;
         }
 
@@ -358,15 +411,12 @@ LoadedGeneralV2 load_general_v2_from_file(const std::string& path)
         }
     }
 
-    // save verbatim
     out.meta.source_text_verbatim = source_text_buf.str();
 
-    // ✅ NEW: auto-expand specialty L5 totals using known patterns
+    // Auto-expand specialty totals if present
     expand_specialty_totals_in_place(out.occurrences);
 
-    if (out.meta.name.empty()) {
-        out.errors.push_back("Missing GENERAL: line");
-    }
+    if (out.meta.name.empty()) out.errors.push_back("Missing GENERAL: line");
 
     return out;
 }
