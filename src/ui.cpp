@@ -31,12 +31,9 @@ static void ui_separator(float thickness)
 
 static int parse_first_int(const std::string& s)
 {
-  int v = 0;
-  bool in = false;
   for (size_t i = 0; i < s.size(); ++i) {
     if (std::isdigit((unsigned char)s[i])) {
-      in = true;
-      v = 0;
+      int v = 0;
       while (i < s.size() && std::isdigit((unsigned char)s[i])) {
         v = v * 10 + (s[i] - '0');
         ++i;
@@ -101,7 +98,7 @@ static void add_occurrence(EditorState& st,
   o.stat_key    = st.stat_keys.front().name;
   o.value = 0.0;
 
-  o.origin = "manual";
+  o.origin = "generated";
   o.edited_by_user = 1;
 
   // provenance for manual rows
@@ -190,12 +187,20 @@ static void reload_current(Db& db, EditorState& st)
 
 static bool save_changes(Db& db, EditorState& st)
 {
+  st.last_save_error.clear();
+
   if (st.selected_general_id <= 0) return true;
 
   try {
-    // Save meta
+    db.begin();
+
+    // Save meta (this function returns false on failure, doesn't throw)
     st.meta.id = st.selected_general_id;
-    db_update_general_meta(db, st.selected_general_id, st.meta);
+    if (!db_update_general_meta(db, st.selected_general_id, st.meta)) {
+      db.rollback();
+      st.last_save_error = "db_update_general_meta failed (see model.cpp logging)";
+      return false;
+    }
 
     // Delete any rows the user deleted
     for (int id : st.deleted_occurrence_ids) {
@@ -206,25 +211,39 @@ static bool save_changes(Db& db, EditorState& st)
     // Upsert occurrences
     for (auto& o : st.occ) {
       if (o.id < 0) continue; // already removed
+
       o.general_id = st.selected_general_id;
-      o.edited_by_user = 1;
-      o.origin = "manual";
+            o.edited_by_user = 1;
+
+      // Don't force origin to an invalid value.
+      // Keep whatever it already is (imported/generated).
+      // If the row is new or blank, use generated.
+      if (o.origin.empty()) o.origin = "generated";
+
 
       if (o.id == 0) {
-        int new_id = db_insert_occurrence(db, o);
-        if (new_id <= 0) return false;
+        int new_id = db_insert_occurrence(db, o); // may throw
+        if (new_id <= 0) {
+          db.rollback();
+          st.last_save_error = "db_insert_occurrence returned invalid id";
+          return false;
+        }
         o.id = new_id;
       } else {
-        db_update_occurrence(db, o);
+        db_update_occurrence(db, o); // may throw
       }
     }
 
+    db.commit();
     st.dirty = false;
     return true;
-  } catch (const std::exception&) {
+  } catch (const std::exception& e) {
+    try { db.rollback(); } catch (...) {}
+    st.last_save_error = e.what();
     return false;
   }
 }
+
 
 static const char* kRolesAll[] = {
   "All",
@@ -313,25 +332,77 @@ static void draw_meta_contents(Db& db, EditorState& st)
 
   // Save / Reload row
   {
-    if (ImGui::Button("Save Changes")) {
-      if (!locked) {
-        if (save_changes(db, st)) {
-          clear_current_selection(st);
-          st.list = db_load_general_list(db, st.filter_role, st.filter_name);
-          return;
-        }
-      }
-    }
+    const bool can_save = (!st.pretty_view);
+    if (!can_save) ImGui::BeginDisabled();
+    static bool last_save_failed = false;
+
+if (ImGui::Button("Save Changes")) {
+  last_save_failed = false;
+  if (save_changes(db, st)) {
+    // Keep selection and reload from DB so user immediately sees what actually saved.
+    reload_current(db, st);
+    st.list = db_load_general_list(db, st.filter_role, st.filter_name);
+  } else {
+    last_save_failed = true;
+  }
+}
+
+if (last_save_failed) {
+  ImGui::Spacing();
+  ImGui::TextColored(ImVec4(1,0.4f,0.4f,1), "Save failed:");
+  if (!st.last_save_error.empty())
+    ImGui::TextWrapped("%s", st.last_save_error.c_str());
+  else
+    ImGui::TextWrapped("(no details)");
+}
+
+
+    if (!can_save) ImGui::EndDisabled();
+
     ImGui::SameLine();
     if (ImGui::Button("Reload")) {
       reload_current(db, st);
     }
     ImGui::SameLine();
     ImGui::TextDisabled(st.dirty ? "(unsaved)" : "(saved)");
+
+    // Right-aligned view toggle
+    const char* toggle_label = st.pretty_view ? "Edit View" : "Pretty View";
+    float btn_w = ImGui::CalcTextSize(toggle_label).x + ImGui::GetStyle().FramePadding.x * 2.0f;
+    float right_x = ImGui::GetWindowContentRegionMax().x - btn_w;
+    ImGui::SameLine();
+    ImGui::SetCursorPosX(right_x);
+    if (ImGui::Button(toggle_label)) {
+      st.pretty_view = !st.pretty_view;
+    }
   }
 
   ImGui::Separator();
   ImGui::Text("Name: %s", st.meta.name.c_str());
+
+  // Pretty view is intentionally read-only (for easy in-game verification)
+  if (st.pretty_view) {
+    ImGui::Text("Role: %s", st.meta.role.c_str());
+    ImGui::Text("Role Confirmed: %s", st.meta.role_confirmed ? "Yes" : "No");
+    ImGui::Text("In Tavern: %s", st.meta.in_tavern ? "Yes" : "No");
+    ImGui::Text("Double Checked In-Game (LOCK): %s", st.meta.double_checked_in_game ? "Yes" : "No");
+
+    ImGui::Separator();
+    ImGui::Text("Leadership: %d  (Green %.3f)", st.meta.leadership, st.meta.leadership_green);
+    ImGui::Text("Attack:     %d  (Green %.3f)", st.meta.attack, st.meta.attack_green);
+    ImGui::Text("Defense:    %d  (Green %.3f)", st.meta.defense, st.meta.defense_green);
+    ImGui::Text("Politics:   %d  (Green %.3f)", st.meta.politics, st.meta.politics_green);
+
+    ImGui::Separator();
+    ImGui::Text("Base Skill Name: %s", st.meta.base_skill_name.c_str());
+
+    ImGui::Separator();
+    ImGui::TextUnformatted("SOURCE TEXT (VERBATIM):");
+    ImGui::BeginDisabled();
+    ImGui::InputTextMultiline("##source", &st.meta.source_text_verbatim, ImVec2(-1, 140));
+    ImGui::EndDisabled();
+    return;
+  }
 
   // lock toggle
   {
@@ -343,6 +414,7 @@ static void draw_meta_contents(Db& db, EditorState& st)
   }
 
   // Role
+  if (locked) ImGui::BeginDisabled();
   if (ImGui::BeginCombo("Role", st.meta.role.c_str())) {
     for (auto r : kRolesAll) {
       if (std::string(r) == "All") continue;
@@ -361,11 +433,24 @@ static void draw_meta_contents(Db& db, EditorState& st)
     if (ImGui::Checkbox("In Tavern", &it)) { st.meta.in_tavern = it ? 1 : 0; mark_dirty(st); }
   }
 
+  if (locked) ImGui::EndDisabled();
+  
   ImGui::Separator();
-  ImGui::InputInt("Leadership", &st.meta.leadership); ImGui::SameLine(); ImGui::InputDouble("L Green", &st.meta.leadership_green);
-  ImGui::InputInt("Attack", &st.meta.attack);         ImGui::SameLine(); ImGui::InputDouble("A Green", &st.meta.attack_green);
-  ImGui::InputInt("Defense", &st.meta.defense);       ImGui::SameLine(); ImGui::InputDouble("D Green", &st.meta.defense_green);
-  ImGui::InputInt("Politics", &st.meta.politics);     ImGui::SameLine(); ImGui::InputDouble("P Green", &st.meta.politics_green);
+ if (ImGui::InputInt("Leadership", &st.meta.leadership)) mark_dirty(st);
+ImGui::SameLine();
+if (ImGui::InputDouble("L Green", &st.meta.leadership_green)) mark_dirty(st);
+
+if (ImGui::InputInt("Attack", &st.meta.attack)) mark_dirty(st);
+ImGui::SameLine();
+if (ImGui::InputDouble("A Green", &st.meta.attack_green)) mark_dirty(st);
+
+if (ImGui::InputInt("Defense", &st.meta.defense)) mark_dirty(st);
+ImGui::SameLine();
+if (ImGui::InputDouble("D Green", &st.meta.defense_green)) mark_dirty(st);
+
+if (ImGui::InputInt("Politics", &st.meta.politics)) mark_dirty(st);
+ImGui::SameLine();
+if (ImGui::InputDouble("P Green", &st.meta.politics_green)) mark_dirty(st);
 
   // Source text
   ImGui::Separator();
@@ -426,6 +511,17 @@ static void draw_stat_row(EditorState& st, Occurrence& o)
 }
 
 // ---------------------------
+// PRETTY (READ-ONLY) STAT ROW
+// ---------------------------
+static void draw_stat_row_pretty(const Occurrence& o)
+{
+  // Display value with up to 6 decimals.
+  char buf[64];
+  std::snprintf(buf, sizeof(buf), "%.6f", o.value);
+  ImGui::Text("%s: %s", o.stat_key.c_str(), buf);
+}
+
+// ---------------------------
 // STATS PANEL (contents only)
 // ---------------------------
 static void draw_occurrences_contents(EditorState& st)
@@ -439,20 +535,28 @@ static void draw_occurrences_contents(EditorState& st)
   st.occ.erase(std::remove_if(st.occ.begin(), st.occ.end(),
     [](const Occurrence& o){ return o.id == -1; }), st.occ.end());
 
+  const bool pretty = st.pretty_view;
+  const bool locked = is_locked(st);
+
   // ---------------------------
-  // 1) Base Skill (single section)
+  // 1) Base Skill
   // ---------------------------
   ImGui::TextUnformatted("Base Skill");
   ui_separator(3.0f);
 
   for (auto& o : st.occ) {
     if (o.context_type == "BaseSkill") {
-      draw_stat_row(st, o);
+      if (pretty) draw_stat_row_pretty(o);
+      else        draw_stat_row(st, o);
     }
   }
 
-  if (ImGui::Button("Add Base Skill")) {
-    add_occurrence(st, "BaseSkill", st.meta.base_skill_name, std::nullopt, 0);
+  if (!pretty) {
+    if (locked) ImGui::BeginDisabled();
+    if (ImGui::Button("Add Base Skill")) {
+      add_occurrence(st, "BaseSkill", st.meta.base_skill_name, std::nullopt, 0);
+    }
+    if (locked) ImGui::EndDisabled();
   }
 
   ui_separator(3.0f);
@@ -467,13 +571,18 @@ static void draw_occurrences_contents(EditorState& st)
     std::string ctx = make_ascension_name(asc);
     for (auto& o : st.occ) {
       if (o.context_type == "Ascension" && o.context_name == ctx) {
-        draw_stat_row(st, o);
+        if (pretty) draw_stat_row_pretty(o);
+        else        draw_stat_row(st, o);
       }
     }
 
-    std::string btn = "Add Ascension " + std::to_string(asc) + " Skill";
-    if (ImGui::Button(btn.c_str())) {
-      add_occurrence(st, "Ascension", ctx, std::nullopt, 0);
+    if (!pretty) {
+      if (locked) ImGui::BeginDisabled();
+      std::string btn = "Add Ascension " + std::to_string(asc) + " Skill";
+      if (ImGui::Button(btn.c_str())) {
+        add_occurrence(st, "Ascension", ctx, std::nullopt, 0);
+      }
+      if (locked) ImGui::EndDisabled();
     }
 
     ui_separator(1.0f);
@@ -481,8 +590,8 @@ static void draw_occurrences_contents(EditorState& st)
 
   ui_separator(3.0f);
 
-    // ---------------------------
-  // 3) Specialties (group by specialty #)
+  // ---------------------------
+  // 3) Specialties
   // ---------------------------
   std::map<int, bool> specs;
   for (const auto& o : st.occ) {
@@ -501,27 +610,29 @@ static void draw_occurrences_contents(EditorState& st)
       if (specialty_index(total) != spec_n) continue;
       if (!total.is_total) continue;
 
-      // Unique ID scope for everything related to this TOTAL row
       ImGui::PushID(total.id ? total.id : (int)(intptr_t)&total);
 
-      // Highlight total
-      ImGui::PushStyleColor(ImGuiCol_FrameBg, IM_COL32(160, 40, 40, 255));
-      draw_stat_row(st, total);
-      ImGui::PopStyleColor();
+      if (!pretty) {
+        ImGui::PushStyleColor(ImGuiCol_FrameBg, IM_COL32(160, 40, 40, 255));
+        draw_stat_row(st, total);
+        ImGui::PopStyleColor();
+      } else {
+        ImGui::TextUnformatted("TOTAL");
+        draw_stat_row_pretty(total);
+      }
 
-      // Collapsible “Levels” like Provenance
-      // (Use a stable label; ID comes from PushID)
       bool open = ImGui::TreeNodeEx("Levels", ImGuiTreeNodeFlags_SpanAvailWidth);
 
-      // Put buttons on same line as the tree label (optional)
-      // If you'd rather not, remove these SameLine calls.
-      ImGui::SameLine();
-      if (ImGui::SmallButton("Expand (create missing)")) {
-        expand_specialty_total(st, total);
+      if (!pretty) {
+        ImGui::SameLine();
+        if (locked) ImGui::BeginDisabled();
+        if (ImGui::SmallButton("Expand (create missing)")) {
+          expand_specialty_total(st, total);
+        }
+        if (locked) ImGui::EndDisabled();
       }
 
       if (open) {
-        // Show L1..L5 rows ONLY when expanded
         for (int lv = 1; lv <= 5; ++lv) {
           bool any = false;
           for (const auto& o : st.occ) {
@@ -530,11 +641,10 @@ static void draw_occurrences_contents(EditorState& st)
             if (o.is_total) continue;
             if (!o.level.has_value()) continue;
             if (*o.level != lv) continue;
-            if (o.stat_key_id != total.stat_key_id) continue; // tie to this TOTAL row's stat
+            if (o.stat_key_id != total.stat_key_id) continue;
             any = true;
             break;
           }
-
           if (!any) continue;
 
           ImGui::Text("L%d", lv);
@@ -547,10 +657,11 @@ static void draw_occurrences_contents(EditorState& st)
             if (!o.level.has_value()) continue;
             if (*o.level != lv) continue;
             if (o.stat_key_id != total.stat_key_id) continue;
-            draw_stat_row(st, o);
+
+            if (pretty) draw_stat_row_pretty(o);
+            else        draw_stat_row(st, o);
           }
         }
-
         ImGui::TreePop();
       }
 
@@ -558,18 +669,20 @@ static void draw_occurrences_contents(EditorState& st)
       ui_separator(1.0f);
     }
 
-    // Add specialty TOTAL stat
-    std::string add = "Add Specialty " + std::to_string(spec_n) + " Stat (TOTAL)";
-    if (ImGui::Button(add.c_str())) {
-      add_occurrence(st, "Specialty", make_specialty_name(spec_n, 5, true), 5, 1);
+    if (!pretty) {
+      if (locked) ImGui::BeginDisabled();
+      std::string add = "Add Specialty " + std::to_string(spec_n) + " Stat (TOTAL)";
+      if (ImGui::Button(add.c_str())) {
+        add_occurrence(st, "Specialty", make_specialty_name(spec_n, 5, true), 5, 1);
+      }
+      if (locked) ImGui::EndDisabled();
     }
 
     ui_separator(3.0f);
   }
 
-
   // ---------------------------
-  // 4) Covenants (group by covenant #)
+  // 4) Covenants
   // ---------------------------
   std::map<int, bool> covs;
   for (const auto& o : st.occ) {
@@ -590,18 +703,24 @@ static void draw_occurrences_contents(EditorState& st)
     std::string ctx = make_covenant_name(c_n);
     for (auto& o : st.occ) {
       if (o.context_type == "Covenant" && o.context_name == ctx) {
-        draw_stat_row(st, o);
+        if (pretty) draw_stat_row_pretty(o);
+        else        draw_stat_row(st, o);
       }
     }
 
-    std::string btn = "Add Covenant " + std::to_string(c_n) + " Stat";
-    if (ImGui::Button(btn.c_str())) {
-      add_occurrence(st, "Covenant", ctx, std::nullopt, 0);
+    if (!pretty) {
+      if (locked) ImGui::BeginDisabled();
+      std::string btn = "Add Covenant " + std::to_string(c_n) + " Stat";
+      if (ImGui::Button(btn.c_str())) {
+        add_occurrence(st, "Covenant", ctx, std::nullopt, 0);
+      }
+      if (locked) ImGui::EndDisabled();
     }
 
     ui_separator(3.0f);
   }
 }
+
 
 
 // ---------------------------

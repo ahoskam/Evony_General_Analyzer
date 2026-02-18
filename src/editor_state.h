@@ -36,6 +36,13 @@ struct EditorState {
   // modal state
   bool show_dirty_modal = false;
 
+  // UI mode
+  // pretty_view = true: read-only, compact verification view
+  // pretty_view = false: full edit view (current editor)
+  bool pretty_view = true;
+
   // validation errors
   std::vector<std::string> save_block_errors;
+   // last save failure message (shown in UI)
+  std::string last_save_error;
 };

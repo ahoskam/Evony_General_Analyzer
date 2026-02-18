@@ -63,8 +63,10 @@ MountedDefensePct +10
 
 # SPECIALTY 4 | War of Succession
 SPECIALTY 4 L5:
-GroundAndMountedAttackOnMonstersPct +25
-GroundAndMountedDefenseOnMonstersPct +25
+GroundAttackOnMonstersPct +25
+MountedAttackOnMonstersPct +25
+GroundDefenseOnMonstersPct +25
+MountedDefenseOnMonstersPct +25
 MarchSpeedPct +30
 
 ==============================

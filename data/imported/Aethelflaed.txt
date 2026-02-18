@@ -62,8 +62,11 @@ MountedDefensePct +10
 
 # SPECIALTY 4 | Lord of the Mercians
 SPECIALTY 4 L5:
-GroundAndMountedAttackOnMonstersPct +30
-GroundAndMountedDefenseOnMonstersPct +30
+GroundAttackOnMonstersPct +30
+MountedAttackOnMonstersPct +30
+GroundDefenseOnMonstersPct +30
+MountedDefenseOnMonstersPct +30
+
 
 ==============================
 COVENANTS
@@ -83,7 +86,6 @@ COVENANTS
 # - WhenAttackingMonstersEnemyAttackPct
 # - WhenAttackingMonstersMountedAttackPct
 # - DoubleItemsDropRateFromMonstersPct
-# - GroundAndMountedAttackOnMonstersPct
-# - GroundAndMountedDefenseOnMonstersPct
+
 
 IN_TAVERN: false
