@@ -1,94 +1,98 @@
 GENERAL: Alfred the Great
-ROLE: Unknown
+ROLE: Ranged
+IN_TAVERN: true
+
 Leadership: 117 (9.03)
 Attack: 112 (8.64)
 Defense: 116 (8.87)
 Politics: 112 (8.56)
 
-==============================
 BASE SKILL | Great King
-==============================
-RangedAttackPct +30
-SiegeAttackPct +20
-# Condition:
-# When General is leading the army to attack.
+AttackingRangedAttackPct +30
+AttackingSiegeMachineAttackPct +20
 
-==============================
 ASCENSION 1
-==============================
 AttackingRangedDefensePct +10
-AttackingSiegeDefensePct +10
+AttackingSiegeMachineDefensePct +10
 AttackingRangedHPPct +15
-AttackingSiegeHPPct +15
+AttackingSiegeMachineHPPct +15
 
-==============================
 ASCENSION 2
-==============================
-EnemyInCityTroopWoundedToDeathRatePct +10
+EnemyInCityTroopWoundedIntoDeathRatePct +10
 
-==============================
 ASCENSION 3
-==============================
 RallyCapacityPct +8
-# Condition:
-# When General is launching Alliance War.
 
-==============================
 ASCENSION 4
-==============================
 AttackingRangedAttackPct +10
-AttackingSiegeAttackPct +10
+AttackingSiegeMachineAttackPct +10
 AttackingRangedHPPct +15
-AttackingSiegeHPPct +15
+AttackingSiegeMachineHPPct +15
 
-==============================
 ASCENSION 5
-==============================
 AttackingRangedAttackPct +15
-AttackingSiegeAttackPct +15
+AttackingSiegeMachineAttackPct +15
 AttackingRangedDefensePct +10
-AttackingSiegeDefensePct +10
+AttackingSiegeMachineDefensePct +10
 
-==============================
-SPECIALTIES
-==============================
-
-# SPECIALTY 1 | Ranged Troop Formation
 SPECIALTY 1 L5:
 RangedAttackPct +10
 RangedDefensePct +10
 
-# SPECIALTY 2 | Siege
 SPECIALTY 2 L5:
 MarchSizeCapacityPct +6
-AttackingSiegeAttackPct +10
+AttackingSiegeMachineAttackPct +10
 AttackingRangedAttackPct +10
 
-# SPECIALTY 3 | Ranged Troop Ares
 SPECIALTY 3 L5:
 RangedAttackPct +10
 RangedHPPct +10
 RangedDefensePct +10
 
-# SPECIALTY 4 | Battle of Edington
 SPECIALTY 4 L5:
 RangedAttackPct +35
 
-==============================
-COVENANTS
-==============================
-# None available (locked)
+# None available (locked or not shown)
 
 ==============================
-# NEW STAT KEYS NOTE
+# SOURCE TEXT (VERBATIM)
 ==============================
-# NEW_STAT_KEYS:
-# - AttackingRangedDefensePct
-# - AttackingSiegeDefensePct
-# - AttackingRangedHPPct
-# - AttackingSiegeHPPct
-# - EnemyInCityTroopWoundedToDeathRatePct
-# - RallyCapacityPct
-# - MarchSizeCapacityPct
 
-IN_TAVERN: true
+# BASE_SKILL_TEXT:
+Great King
+Increases the ranged troops' attack by 30% and siege machines' attack by 20% when General is leading the army to attack.
+
+# ASCENSION_1_TEXT:
+Attacking Ranged Troop and Siege Machine Defense +10% and HP +15%
+
+# ASCENSION_2_TEXT:
+Enemy In-city Troop Wounded into Death rate +10%
+
+# ASCENSION_3_TEXT:
+When General is launching Alliance War, Rally Capacity +8%
+
+# ASCENSION_4_TEXT:
+Attacking Ranged Troop and Siege Machine Attack +10% and HP +15%
+
+# ASCENSION_5_TEXT:
+Attacking Ranged Troop and Siege Machine Attack +15% and Defense +10%
+
+# SPECIALTY_1_L5_TEXT:
+Ranged Troop Formation(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+Siege(Max Level Attributes)
+March Size Capacity +6%
+Attacking Siege Machine and Ranged Troop Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Ranged Troop Ares(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop HP +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Battle of Edington(Max Level Attributes)
+Ranged Troop Attack +35%

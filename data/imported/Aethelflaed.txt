@@ -8,48 +8,58 @@ Defense: 115 (9.12)
 Politics: 113 (8.44)
 
 BASE SKILL | Lady of the Mercians
-MonsterMountedAttackPct +55
-MonsterMountedDefensePct +55
+AttackingMountedAttackPct +55
+AttackingMountedDefensePct +55
 
 ASCENSION 1
-MonsterMountedHPPct +30
-MonsterTroopDefensePct +10
+AttackingMonstersMountedHPPct +30
+AttackingMonstersTroopDefensePct +10
 
 ASCENSION 2
-MonsterDefenseDebuffPct -10
-MonsterTroopHPPct +15
+AttackingMonstersEnemyDefenseDebuffPct -10
+AttackingMonstersTroopHPPct +15
 
 ASCENSION 3
-MonsterAttackDebuffPct -10
-MonsterTroopDefensePct +20
+AttackingMonstersEnemyAttackDebuffPct -10
+AttackingMonstersTroopDefensePct +20
 
 ASCENSION 4
-MonsterMountedAttackPct +15
-MonsterTroopHPPct +20
+AttackingMonstersMountedAttackPct +15
+AttackingMonstersTroopHPPct +20
 
 ASCENSION 5
-MonsterMountedAttackPct +20
-MonsterTroopDefensePct +10
-MonsterTroopHPPct +10
+AttackingMonstersMountedAttackPct +20
+AttackingMonstersTroopDefensePct +10
+AttackingMonstersTroopHPPct +10
 
 SPECIALTY 1 L5:
-MonsterMountedHPPct +30
-MonsterTroopDefensePct +10
+MonstersAttackDebuffPct -15
 
 SPECIALTY 2 L5:
-MonsterDefenseDebuffPct -10
-MonsterTroopHPPct +15
+DoubleItemsDropRateFromMonstersPct +15
 
 SPECIALTY 3 L5:
-MonsterAttackDebuffPct -15
+MountedAttackPct +10
+MountedHPPct +10
+MountedDefensePct +10
 
 SPECIALTY 4 L5:
-MonsterGroundAttackPct +30
-MonsterMountedAttackPct +30
-MonsterGroundDefensePct +30
-MonsterMountedDefensePct +30
+AttackingMonstersGroundAttackPct +30
+AttackingMonstersMountedAttackPct +30
+AttackingMonstersGroundDefensePct +30
+AttackingMonstersMountedDefensePct +30
 
 # None available (locked or not shown)
+
+NEW STAT KEYS NOTE:
+- AttackingMonstersMountedAttackPct
+- AttackingMonstersMountedDefensePct
+- AttackingMonstersMountedHPPct
+- AttackingMonstersTroopDefensePct
+- AttackingMonstersTroopHPPct
+- AttackingMonstersEnemyDefenseDebuffPct
+- AttackingMonstersEnemyAttackDebuffPct
+- DoubleItemsDropRateFromMonstersPct
 
 ==============================
 # SOURCE TEXT (VERBATIM)
@@ -75,19 +85,20 @@ When attacking Monsters, Mounted Troop Attack +15%, Troops HP +20%
 When attacking Monsters, Mounted Troop Attack +20%, Troops Defense and HP +10%
 
 # SPECIALTY_1_L5_TEXT:
-When attacking Monsters, Mounted Troop HP +30%, Troops Defense +10%
-
-# SPECIALTY_2_L5_TEXT:
-When attacking Monsters, Monsters Defense -10%, Troops HP +15%
-
-# SPECIALTY_3_MAX_TEXT:
 Hunter(Max Level Attributes)
 Monsters Attack -15%
 
-# SPECIALTY_4_MAX_TEXT:
+# SPECIALTY_2_L5_TEXT:
+Fortune(Max Level Attributes)
+Double Items Drop Rate from Monsters. +15%
+
+# SPECIALTY_3_L5_TEXT:
+Mounted Troop Ares(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop HP +10%
+Mounted Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
 Lord of the Mercians(Max Level Attributes)
 Ground and Mounted Troop Attack on Monsters +30%
 Ground and Mounted Troop Defense on Monsters +30%
-
-# COVENANT_TEXT:
-Not available

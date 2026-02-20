@@ -1,6 +1,5 @@
-xAlessandra
-xAlfred the Great
-xAmr ibn al-As
+Alfred the Great
+Amr ibn al-As
 Andrew Jackson
 André Masséna
 Arminius
@@ -76,3 +75,4 @@ Wallenstein
 William Wallace
 Yeon Gaesomun
 Zhao Yun
+xAlessandra
