@@ -1,0 +1,103 @@
+Alessandra | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Alessandra.txt | 22 | EnemyInCityTroopWoundedToDeathRatePct +10
+Alfred the Great | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Alfred_the_Great.txt | 27 | EnemyInCityTroopWoundedToDeathRatePct +10
+Amr ibn al-As | MayorDeathToSurvivalRatePct | 15.0 | Ascension | ASCENSION 3 |  | data/import/Amr_ibn_al-As.txt | 25 | MayorDeathToSurvivalRatePct +15
+Amr ibn al-As | MayorSubCityDeathToSurvivalRatePct | 10.0 | Specialty | SPECIALTY 1 | 5 | data/import/Amr_ibn_al-As.txt | 41 | SubCityDeathToSurvivalRatePct +10
+Andrew Jackson | MayorDeathToSurvivalRatePct | 10.0 | Ascension | ASCENSION 3 |  | data/import/Andrew_Jackson.txt | 26 | MayorSubCityDeathToSurvivalRatePct +10
+André Masséna | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/André_Masséna.txt | 19 | EnemyInCityTroopWoundedToDeathRatePct +10
+Arminius | EnemyWoundedToDeathWhenAttackingPct | 10.0 | Specialty | SPECIALTY 3 | 5 | data/import/Arminius.txt | 72 | EnemyWoundedToDeathWhenAttackingPct +10
+Arminius | MayorSubCityDeathToSurvivalRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Arminius.txt | 31 | SubCityDeathToSurvivalRatePct +10
+Aurelian | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Aurelian.txt | 22 | EnemyInCityTroopWoundedToDeathRatePct +10
+Baldwin IV | MayorDeathToSurvivalRatePct | 10.0 | Ascension | Ascension 3 | 3 | data/import/Baldwin_IV.txt | 35 | WhenGeneralIsTheMayor_SubCityDeathIntoSurvivalRatePct +10
+Barbarossa | EnemyWoundedToDeathWhenAttackingPct | 10.0 | Specialty | SPECIALTIES |  | data/import/Barbarossa.txt | 59 | EnemyWoundedToDeathWhenAttackingPct +10
+Bertrand du Guesclin | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | Ascension 2 | 2 | data/import/Bertrand_du_Guesclin.txt | 25 | EnemyInCityTroopWoundedToDeathRatePct +10
+Carus | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Carus.txt | 23 | EnemyInCityTroopWoundedIntoDeathRatePct +10
+Casimir Pulaski | EnemyInCityTroopWoundedToDeathRatePct | 8.0 | Ascension | ASCENSION 2 |  | data/import/Casimir_Pulaski.txt | 17 | EnemyInCityTroopWoundedToDeathRatePct +8
+Catherine II | MayorDeathToSurvivalRatePct | 10.0 | Ascension | ASCENSION 3 |  | data/import/Catherine_II.txt | 28 | MayorDeathToSurvivalRatePct +10
+Charles Martel | MayorDeathToSurvivalRatePct | 10.0 | Ascension | Ascension 3 | 3 | data/import/Charles_Martel.txt | 36 | SubordinateCityDeathToSurvivalRatePct +10 (when General is the Mayor)
+Charles Martel | MayorDeathToSurvivalRatePct | 1.0 | Specialty | Specialty 2 | Trapping | 1 | data/import/Charles_Martel.txt | 74 | SubordinateCityDeathToSurvivalRatePct +1
+Charles Martel | MayorDeathToSurvivalRatePct | 1.0 | Specialty | Specialty 2 | Trapping | 2 | data/import/Charles_Martel.txt | 77 | SubordinateCityDeathToSurvivalRatePct +1
+Charles Martel | MayorDeathToSurvivalRatePct | 1.0 | Specialty | Specialty 2 | Trapping | 3 | data/import/Charles_Martel.txt | 80 | SubordinateCityDeathToSurvivalRatePct +1
+Charles Martel | MayorDeathToSurvivalRatePct | 2.0 | Specialty | Specialty 2 | Trapping | 4 | data/import/Charles_Martel.txt | 83 | SubordinateCityDeathToSurvivalRatePct +2
+Charles Martel | MayorDeathToSurvivalRatePct | 1.0 | Specialty | Specialty 2 | Trapping | 5 | data/import/Charles_Martel.txt | 86 | SubordinateCityDeathToSurvivalRatePct +1
+Charles Martel | MayorDeathToSurvivalRatePct | 2.0 | Specialty | Specialty 4 | Battle of Tours | 1 | data/import/Charles_Martel.txt | 103 | SubordinateCityDeathToSurvivalRatePct +2
+Charles Martel | MayorDeathToSurvivalRatePct | 2.0 | Specialty | Specialty 4 | Battle of Tours | 2 | data/import/Charles_Martel.txt | 106 | SubordinateCityDeathToSurvivalRatePct +2
+Charles Martel | MayorDeathToSurvivalRatePct | 2.0 | Specialty | Specialty 4 | Battle of Tours | 3 | data/import/Charles_Martel.txt | 109 | SubordinateCityDeathToSurvivalRatePct +2
+Charles Martel | MayorDeathToSurvivalRatePct | 2.0 | Specialty | Specialty 4 | Battle of Tours | 4 | data/import/Charles_Martel.txt | 112 | SubordinateCityDeathToSurvivalRatePct +2
+Charles Martel | MayorDeathToSurvivalRatePct | 2.0 | Specialty | Specialty 4 | Battle of Tours | 5 | data/import/Charles_Martel.txt | 115 | SubordinateCityDeathToSurvivalRatePct +2
+Charles XII | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Charles_XII.txt | 23 | EnemyInCityTroopWoundedToDeathRatePct +10
+Charles the Great | MayorDeathToSurvivalRatePct | 20.0 | Ascension | ASCENSION 3 |  | data/import/Charles_the_Great_Awakened.txt | 31 | MayorDeathToSurvivalRateSubordinateCityPct +20
+Charles the Great | MayorDeathToSurvivalRatePct | 6.0 | Specialty | SPECIALTY 2 | 5 | data/import/Charles_the_Great_Awakened.txt | 57 | MayorDeathToSurvivalRateSubordinateCityPct +6
+Cheng Yaojin | EnemyWoundedToDeathWhenAttackingPct | 10.0 | Covenant | COVENANT 2 |  | data/import/Cheng_Yaojin.txt | 64 | EnemyWoundedIntoDeathWhenAttackingPct +10
+Cimon | MayorDeathToSurvivalRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Cimon.txt | 28 | WhenGeneralIsTheMayor_SubCityDeathIntoSurvivalRatePct +10
+Cnut the Great | MayorSubCityDeathToSurvivalRatePct | 15.0 | Ascension | ASCENSION 3 |  | data/import/Cnut_the_Great.txt | 35 | WhenGeneralIsMayorDeathIntoSurvivalRateInThisSubordinateCityPct +15
+Constantine the Great | MayorDeathToSurvivalRatePct | 10.0 | BaseSkill | Roman Emperor |  | data/import/Constantine.txt | 13 | MayorSubCityTroopDeathToSurvivalRatePct +10
+Constantine the Great | MayorDeathToSurvivalRatePct | 10.0 | Ascension | Ascension 3 | 3 | data/import/Constantine.txt | 35 | MayorSubCityDeathToSurvivalRatePct +10
+Darius I | MayorDeathToSurvivalRatePct | 15.0 | Ascension | ASCENSION 3 |  | data/import/Darius_I.txt | 29 | MayorDeathToSurvivalRatePct +15
+David Farragut | MayorDeathToSurvivalRatePct | 10.0 | Ascension | ASCENSION 3 |  | data/import/David_Farragut.txt | 28 | MayorSubCityDeathToSurvivalRatePct +10
+Douglas | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Douglas.txt | 25 | EnemyInCityTroopWoundedIntoDeathRatePct +10
+Edward the Black Prince | EnemyInCityTroopWoundedToDeathRatePct | 8.0 | Ascension | ASCENSION 2 |  | data/import/Edward_the_Black_Prince.txt | 23 | EnemyInCityTroopWoundedIntoDeathRatePct +8
+Eleanor | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Eleanor.txt | 22 | EnemyInCityTroopWoundedIntoDeathRatePct +10
+Empress Dowager Cixi | MayorDeathToSurvivalRatePct | 10.0 | Ascension | ASCENSION 3 |  | data/import/Empress_Dowager_Cixi.txt | 25 | MayorDeathToSurvivalRatePct +10
+Epaminondas | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Epaminondas.txt | 22 | EnemyInCityTroopWoundedIntoDeathRatePct +10
+Gaius Octavius | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Gaius_Octavius.txt | 25 | EnemyInCityTroopWoundedIntoDeathRatePct +10
+Genghis Khan | EnemyInCityTroopWoundedToDeathRatePct | 8.0 | Ascension | ASCENSION 2 |  | data/import/Genghis_Khan.txt | 17 | EnemyInCityTroopWoundedIntoDeathRatePct +8
+George A. Custer | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/George_A_Custer.txt | 21 | EnemyInCityTroopWoundedToDeathRatePct +10
+Gilgamesh | MayorDeathToSurvivalRatePct | 20.0 | Ascension | ASCENSION 3 |  | data/import/Gilgamesh.txt | 29 | MayorDeathToSurvivalRatePct +20
+Guan Yu | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Guan_Yu.txt | 21 | EnemyInCityTroopWoundedIntoDeathRatePct +10
+Gwon Ryul | MayorDeathToSurvivalRatePct | 6.0 | Specialty | SPECIALTY 2 | 5 | data/import/Gwon_Ryul.txt | 47 | MayorSubCityDeathToSurvivalRatePct +6
+Harald | EnemyWoundedToDeathWhenAttackingPct | 10.0 | Specialty | SPECIALTY 4 | 5 | data/import/Harald.txt | 61 | EnemyWoundedToDeathWhenAttackingPct +10
+Harald | MayorSubCityDeathToSurvivalRatePct | 15.0 | Ascension | ASCENSION 3 |  | data/import/Harald.txt | 30 | SubordinateCityDeathIntoSurvivalRatePct +15
+Himiko | EnemyWoundedToDeathWhenAttackingPct | 10.0 | Specialty | SPECIALTY 3 | 5 | data/import/Himiko.txt | 42 | EnemyWoundedToDeathWhenAttackingPct +10
+Hōjō Ujiyasu | MayorDeathToSurvivalRatePct | 15.0 | Ascension | ASCENSION 3 |  | data/import/HoJo_Ujiyasu.txt | 26 | WhenGeneralIsTheMayor_SubCityDeathIntoSurvivalRatePct +15
+Ii Naomasa | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Ii_Naomasa.txt | 18 | EnemyInCityTroopWoundedToDeathRatePct +10
+James Conrad | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/James_Conrad.txt | 22 | EnemyInCityTroopWoundedIntoDeathRatePct +10
+Jan Karol Chodkiewicz | MayorDeathToSurvivalRatePct | 15.0 | Ascension | ASCENSION 2 |  | data/import/Jan_Karol_Chodkiewicz.txt | 20 | WhenGeneralIsTheMayor_SubCityDeathIntoSurvivalRatePct +15
+Jester | MayorDeathToSurvivalRatePct | 10.0 | Ascension | ASCENSION 3 |  | data/import/Jester.txt | 23 | MayorDeathToSurvivalRatePct +10
+Jumong | EnemyWoundedToDeathWhenAttackingPct | 6.0 | Specialty | SPECIALTY 4 | 5 | data/import/Jumong.txt | 44 | EnemyWoundedToDeathWhenAttackingPct +6
+King Sejong | MayorDeathToSurvivalRatePct | 20.0 | Ascension | ASCENSION 3 |  | data/import/King_Sejong.txt | 22 | MayorSubCityDeathToSurvivalRatePct +20
+Lincoln | MayorDeathToSurvivalRatePct | 10.0 | Ascension | ASCENSION 3 |  | data/import/Lincoln.txt | 23 | MayorSubCityDeathToSurvivalRatePct +10
+Lincoln | MayorDeathToSurvivalRatePct | 10.0 | Specialty | SPECIALTY 4 | 5 | data/import/Lincoln.txt | 48 | MayorSubCityDeathToSurvivalRatePct +10
+Ludwig | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Ludwig.txt | 23 | EnemyInCityTroopWoundedIntoDeathRatePct +10
+Margaret I | MayorDeathToSurvivalRatePct | 10.0 | Ascension | Ascension 3 | 3 | data/import/Margaret_I.txt | 36 | SubordinateCityDeathToSurvivalRatePct +10
+Mark Antony | EnemyWoundedToDeathWhenAttackingPct | 1.0 | Specialty | Specialty 3 | 1 | data/import/Mark_Anthony.txt | 76 | EnemyWoundedToDeathWhenAttackingPct 1
+Mark Antony | EnemyWoundedToDeathWhenAttackingPct | 1.0 | Specialty | Specialty 3 | 2 | data/import/Mark_Anthony.txt | 79 | EnemyWoundedToDeathWhenAttackingPct 1
+Mark Antony | EnemyWoundedToDeathWhenAttackingPct | 2.0 | Specialty | Specialty 3 | 3 | data/import/Mark_Anthony.txt | 82 | EnemyWoundedToDeathWhenAttackingPct 2
+Mark Antony | EnemyWoundedToDeathWhenAttackingPct | 2.0 | Specialty | Specialty 3 | 4 | data/import/Mark_Anthony.txt | 85 | EnemyWoundedToDeathWhenAttackingPct 2
+Mark Antony | EnemyWoundedToDeathWhenAttackingPct | 4.0 | Specialty | Specialty 3 | 5 | data/import/Mark_Anthony.txt | 88 | EnemyWoundedToDeathWhenAttackingPct 4
+Mark Antony | MayorDeathToSurvivalRatePct | 10.0 | Ascension | Ascension 3 | 3 | data/import/Mark_Anthony.txt | 28 | MayorSubCityDeathToSurvivalRatePct +10
+Matthias I | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Matthaias_I.txt | 27 | EnemyInCityTroopWoundedToDeathRatePct +10
+Maximilian II | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Maximilian_II.txt | 26 | EnemyInCityTroopWoundedIntoDeathRatePct +10
+Montezuma I | MayorDeathToSurvivalRatePct | 15.0 | Ascension | ASCENSION 3 |  | data/import/Montezuma_I.txt | 29 | MayorDeathToSurvivalRatePct +15
+Montezuma I | MayorDeathToSurvivalRatePct | 15.0 | Ascension | ASCENSION 3 |  | data/import/Montezuma_I_20260217_232744.txt | 29 | MayorDeathToSurvivalRatePct +15
+Napoleon | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | Ascension 2 | 2 | data/import/Napoleon.txt | 25 | EnemyInCityTroopWoundedIntoDeathRatePct +10
+Narcissus | EnemyWoundedToDeathWhenAttackingPct | 10.0 | Covenant | S |  | data/import/Narcissus.txt | 142 | EnemyWoundedToDeathWhenAttackingPct +10
+Narses (Awakened) | MayorDeathToSurvivalRatePct | 15.0 | Ascension | ASCENSION 2 |  | data/import/Narses.txt | 23 | WhenGeneralIsTheMayor_SubCityDeathIntoSurvivalRatePct +15
+Nero | MayorSubCityDeathToSurvivalRatePct | 10.0 | Ascension | ASCENSION 3 |  | data/import/Nero.txt | 28 | DeathIntoSurvivalRateInSubordinateCityPct +10
+Nordic Barbarian King | MayorDeathToSurvivalRatePct | 15.0 | Ascension | ASCENSION 3 |  | data/import/Nordic_Barbarian_King.txt | 25 | MayorDeathToSurvivalRatePct +15
+Pachacuti | MayorDeathToSurvivalRatePct | 20.0 | Ascension | ASCENSION 3 |  | data/import/Pachacuti.txt | 29 | MayorSubCityDeathToSurvivalRatePct +20
+Peter the Great | EnemyInCityTroopWoundedToDeathRatePct | 8.0 | Ascension | ASCENSION 2 |  | data/import/Peter_the_Great.txt | 17 | EnemyInCityTroopWoundedIntoDeathRatePct +8
+Petronas | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | Ascension 2 | 2 | data/import/Petronas.txt | 21 | EnemyInCityTroopWoundedToDeathRatePct +10
+Philip II | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | Ascension 2 | 2 | data/import/Philip_II.txt | 23 | EnemyInCityTroopWoundedIntoDeathRatePct +10
+Philip Sheridan | EnemyWoundedToDeathWhenAttackingPct | 10.0 | Specialty | SPECIALTY 3 | 5 | data/import/Philip_Sheridan.txt | 23 | EnemyWoundedToDeathWhenAttackingPct +10
+Poligenus | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Poligenus.txt | 25 | EnemyInCityTroopWoundedIntoDeathRatePct +10
+Pompey | MayorDeathToSurvivalRatePct | 10.0 | Ascension | ASCENSION 3 |  | data/import/Pompey.txt | 25 | MayorDeathToSurvivalRatePct +10
+Pompey | MayorSubCityDeathToSurvivalRatePct | 16.0 | Specialty | SPECIALTY 1 | 5 | data/import/Pompey.txt | 38 | SubCityDeathToSurvivalRatePct +16
+Princess Kaguya | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Princess_Kaguya.txt | 22 | EnemyInCityTroopWoundedToDeathRatePct +10
+Sherman | EnemyInCityTroopWoundedToDeathRatePct | 8.0 | Ascension | ASCENSION 2 |  | data/import/Sherman.txt | 20 | EnemyInCityTroopWoundedToDeathRatePct +8
+Sherman | EnemyWoundedToDeathWhenAttackingPct | 10.0 | Specialty | SPECIALTY 3 | 5 | data/import/Sherman.txt | 44 | EnemyWoundedToDeathWhenAttackingPct +10
+Simeon the Great | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Simeon_the_Great.txt | 25 | EnemyInCityTroopWoundedToDeathRatePct +10
+Soult | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Soult.txt | 22 | EnemyInCityTroopWoundedToDeathRatePct +10
+Surena | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Surena.txt | 20 | EnemyInCityTroopWoundedIntoDeathRatePct +10
+Tachibana Ginchiyo | EnemyWoundedToDeathWhenAttackingPct | 10.0 | Covenant | COVENANT 2 |  | data/import/Tachibana_Ginchiyo.txt | 65 | EnemyWoundedToDeathWhenAttackingPct +10
+Takeda Shingen | EnemyInCityTroopWoundedToDeathRatePct | 8.0 | Ascension | ASCENSION 2 |  | data/import/Takeda_Shingen.txt | 19 | EnemyInCityTroopWoundedToDeathRatePct +8
+Tokugawa Ieyasu | MayorDeathToSurvivalRatePct | 20.0 | Ascension | ASCENSION 3 |  | data/import/Tokugawa_Ieyasu.txt | 25 | MayorSubCityDeathToSurvivalRatePct +20
+Tokugawa Ieyasu | MayorDeathToSurvivalRatePct | 6.0 | Specialty | SPECIALTY 2 | 5 | data/import/Tokugawa_Ieyasu.txt | 42 | MayorSubCityDeathToSurvivalRatePct +6
+Tomyris | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Tomyris.txt | 21 | EnemyInCityTroopWoundedIntoDeathRatePct +10
+Toyotomi Hideyori | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Toyotomi_Hideyori.txt | 22 | EnemyInCityTroopWoundedToDeathRatePct +10
+Trajan | EnemyInCityTroopWoundedToDeathRatePct | 8.0 | Ascension | ASCENSION 2 |  | data/import/Trajan.txt | 20 | EnemyInCityTroopWoundedToDeathRatePct +8
+Uesugi Kenshin | MayorDeathToSurvivalRatePct | 6.0 | Specialty | SPECIALTY 2 | 5 | data/import/Uesugi_Kenshin.txt | 19 | MayorSubCityDeathToSurvivalRatePct +6
+Ulysses S. Grant | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Ulysses_S_Grant.txt | 23 | EnemyInCityTroopWoundedIntoDeathRatePct +10
+Wallenstein | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | Ascension 2 | 2 | data/import/Wallenstein.txt | 23 | EnemyInCityTroopWoundedToDeathRatePct +10
+William Wallace | EnemyWoundedToDeathWhenAttackingPct | 10.0 | Specialty | SPECIALTY 3 | 5 | data/import/William_Wallace.txt | 58 | EnemyWoundedToDeathWhenAttackingPct +10
+Yeon Gaesomun | MayorDeathToSurvivalRatePct | 10.0 | Ascension | ASCENSION 3 |  | data/import/Yeon_Gaesomun.txt | 28 | MayorDeathToSurvivalRatePct +10
+Zhao Yun | EnemyInCityTroopWoundedToDeathRatePct | 10.0 | Ascension | ASCENSION 2 |  | data/import/Zhao_Yun.txt | 20 | EnemyInCityTroopWoundedIntoDeathRatePct +10

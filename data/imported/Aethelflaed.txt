@@ -1,91 +1,93 @@
 GENERAL: Aethelflaed
-ROLE: Unknown
+ROLE: Administration
+IN_TAVERN: false
+
 Leadership: 112 (8.94)
 Attack: 107 (8.78)
 Defense: 115 (9.12)
 Politics: 113 (8.44)
 
-==============================
 BASE SKILL | Lady of the Mercians
-==============================
-MountedAttackOnMonstersPct +55
-MountedDefenseOnMonstersPct +55
+MonsterMountedAttackPct +55
+MonsterMountedDefensePct +55
 
-==============================
 ASCENSION 1
-==============================
-WhenAttackingMonstersMountedTroopHPPct +30
-WhenAttackingMonstersTroopsDefensePct +10
+MonsterMountedHPPct +30
+MonsterTroopDefensePct +10
 
-==============================
 ASCENSION 2
-==============================
-WhenAttackingMonstersEnemyDefensePct -10
-WhenAttackingMonstersTroopsHPPct +15
+MonsterDefenseDebuffPct -10
+MonsterTroopHPPct +15
 
-==============================
 ASCENSION 3
-==============================
-WhenAttackingMonstersEnemyAttackPct -10
-WhenAttackingMonstersTroopsDefensePct +20
+MonsterAttackDebuffPct -10
+MonsterTroopDefensePct +20
 
-==============================
 ASCENSION 4
-==============================
-WhenAttackingMonstersMountedAttackPct +15
-WhenAttackingMonstersTroopsHPPct +20
+MonsterMountedAttackPct +15
+MonsterTroopHPPct +20
 
-==============================
 ASCENSION 5
-==============================
-WhenAttackingMonstersMountedAttackPct +20
-WhenAttackingMonstersTroopsDefensePct +10
-WhenAttackingMonstersTroopsHPPct +10
+MonsterMountedAttackPct +20
+MonsterTroopDefensePct +10
+MonsterTroopHPPct +10
 
-==============================
-SPECIALTIES
-==============================
-
-# SPECIALTY 1 | Hunter
 SPECIALTY 1 L5:
-MonstersAttackPct -15
+MonsterMountedHPPct +30
+MonsterTroopDefensePct +10
 
-# SPECIALTY 2 | Fortune
 SPECIALTY 2 L5:
-DoubleItemsDropRateFromMonstersPct +15
+MonsterDefenseDebuffPct -10
+MonsterTroopHPPct +15
 
-# SPECIALTY 3 | Mounted Troop Ares
 SPECIALTY 3 L5:
-MountedAttackPct +10
-MountedHPPct +10
-MountedDefensePct +10
+MonsterAttackDebuffPct -15
 
-# SPECIALTY 4 | Lord of the Mercians
 SPECIALTY 4 L5:
-GroundAttackOnMonstersPct +30
-MountedAttackOnMonstersPct +30
-GroundDefenseOnMonstersPct +30
-MountedDefenseOnMonstersPct +30
+MonsterGroundAttackPct +30
+MonsterMountedAttackPct +30
+MonsterGroundDefensePct +30
+MonsterMountedDefensePct +30
 
-
-==============================
-COVENANTS
-==============================
-# None available (locked)
+# None available (locked or not shown)
 
 ==============================
-# NEW STAT KEYS NOTE
+# SOURCE TEXT (VERBATIM)
 ==============================
-# NEW_STAT_KEYS:
-# - MountedAttackOnMonstersPct
-# - MountedDefenseOnMonstersPct
-# - WhenAttackingMonstersMountedTroopHPPct
-# - WhenAttackingMonstersTroopsDefensePct
-# - WhenAttackingMonstersEnemyDefensePct
-# - WhenAttackingMonstersTroopsHPPct
-# - WhenAttackingMonstersEnemyAttackPct
-# - WhenAttackingMonstersMountedAttackPct
-# - DoubleItemsDropRateFromMonstersPct
 
+# BASE_SKILL_TEXT:
+Lady of the Mercians
+Increases mounted troops' attack and defense by 55% when General is leading the army to attack Monsters.
 
-IN_TAVERN: false
+# ASCENSION_1_TEXT:
+When attacking Monsters, Mounted Troop HP +30%, Troops Defense +10%
+
+# ASCENSION_2_TEXT:
+When attacking Monsters, Monsters Defense -10%, Troops HP +15%
+
+# ASCENSION_3_TEXT:
+When attacking Monsters, Monsters Attack -10%, Troops Defense +20%
+
+# ASCENSION_4_TEXT:
+When attacking Monsters, Mounted Troop Attack +15%, Troops HP +20%
+
+# ASCENSION_5_TEXT:
+When attacking Monsters, Mounted Troop Attack +20%, Troops Defense and HP +10%
+
+# SPECIALTY_1_L5_TEXT:
+When attacking Monsters, Mounted Troop HP +30%, Troops Defense +10%
+
+# SPECIALTY_2_L5_TEXT:
+When attacking Monsters, Monsters Defense -10%, Troops HP +15%
+
+# SPECIALTY_3_MAX_TEXT:
+Hunter(Max Level Attributes)
+Monsters Attack -15%
+
+# SPECIALTY_4_MAX_TEXT:
+Lord of the Mercians(Max Level Attributes)
+Ground and Mounted Troop Attack on Monsters +30%
+Ground and Mounted Troop Defense on Monsters +30%
+
+# COVENANT_TEXT:
+Not available

@@ -1,50 +1,66 @@
 GENERAL: Zizka
-ROLE: Unknown
+ROLE: Mayor
+IN_TAVERN: false
+
 Leadership: 114 (8.89)
 Attack: 115 (8.82)
 Defense: 109 (8.85)
 Politics: 122 (8.82)
 
-==============================
 BASE SKILL | Battle of Kutna Hora
-==============================
-EnemyRangedTroopAttackPct -40
-EnemyRangedTroopDefensePct -15
-EnemyRangedTroopHPPct -15
-EnemySiegeMachineDefensePct -15
-EnemySiegeMachineHPPct -15
+EnemyRangedAttackDebuffPct -40
+EnemyRangedDefenseDebuffPct -15
+EnemyRangedHPDebuffPct -15
+EnemySiegeMachineDefenseDebuffPct -15
+EnemySiegeMachineHPDebuffPct -15
 
-==============================
-SPECIALTIES
-==============================
+ASCENSION 1
+EnemyRangedAttackDebuffPct -10
+EnemyRangedDefenseDebuffPct -10
+EnemyRangedHPDebuffPct -10
+EnemySiegeMachineDefenseDebuffPct -10
+EnemySiegeMachineHPDebuffPct -10
 
-# SPECIALTY 1 | Siege Machine Defense
+ASCENSION 2
+EnemyRangedDefenseDebuffPct -20
+MayorTroopDeathToSurvivalRatePct +15
+
+ASCENSION 3
+EnemyRangedHPDebuffPct -20
+MayorTroopTrainingSpeedPct +20
+
+ASCENSION 4
+EnemyGroundAttackDebuffPct -35
+EnemyTroopDefenseDebuffPct -10
+EnemyTroopHPDebuffPct -10
+
+ASCENSION 5
+EnemyRangedAttackDebuffPct -40
+EnemyRangedDefenseDebuffPct -25
+EnemyRangedHPDebuffPct -25
+
 SPECIALTY 1 L5:
 SiegeMachineHPPct +10
 SiegeMachineDefensePct +10
 
-# SPECIALTY 2 | Sabotage
 SPECIALTY 2 L5:
-EnemyTroopDefensePct -10
+EnemyTroopDefenseDebuffPct -10
 
-# SPECIALTY 3 | War God
 SPECIALTY 3 L5:
-AllTroopsAttackPct +6
+TroopAttackPct +6
 
-# SPECIALTY 4 | Wagenburg Tactics
 SPECIALTY 4 L5:
-EnemyRangedTroopAttackPct -30
-EnemySiegeMachineAttackPct -30
-EnemyRangedTroopDefensePct -20
-EnemyRangedTroopHPPct -20
+EnemyRangedAttackDebuffPct -30
+EnemySiegeMachineAttackDebuffPct -30
+EnemyRangedDefenseDebuffPct -20
+EnemyRangedHPDebuffPct -20
 
-==============================
-COVENANTS
-==============================
+# None available (locked or not shown)
 
-# None available (locked)
-
-IN_TAVERN: false
+NEW STAT KEYS NOTE:
+- MayorTroopDeathToSurvivalRatePct
+- MayorTroopTrainingSpeedPct
+- EnemyGroundAttackDebuffPct
 
 ==============================
 # SOURCE TEXT (VERBATIM)
@@ -54,20 +70,35 @@ IN_TAVERN: false
 Battle of Kutna Hora
 Reduces enemy ranged troops' attack by 40%, enemy ranged troops and siege machines' defense and HP by 15% when General is leading the army.
 
-# SPECIALTY_1_MAX_TEXT:
+# ASCENSION_1_TEXT:
+Enemy Ranged Troop Attack -10%, Enemy Ranged Troop and Siege Machine Defense and HP -10%
+
+# ASCENSION_2_TEXT:
+Enemy Ranged Troop Defense -20%; when General is the Mayor, Death into Survival Rate in this Subordinate City +15%
+
+# ASCENSION_3_TEXT:
+Enemy Ranged Troop HP -20%; when General is the Mayor, Training Speed in this Subordinate City +20%
+
+# ASCENSION_4_TEXT:
+Enemy Ground Troop Attack -35%, Enemy Troop Defense and HP -10%
+
+# ASCENSION_5_TEXT:
+Enemy Ranged Troop Attack -40%, Defense and HP -25%
+
+# SPECIALTY_1_L5_TEXT:
 Siege Machine Defense(Max Level Attributes)
 Siege Machine HP +10%
 Siege Machine Defense +10%
 
-# SPECIALTY_2_MAX_TEXT:
+# SPECIALTY_2_L5_TEXT:
 Sabotage(Max Level Attributes)
 Enemy Troop Defense -10%
 
-# SPECIALTY_3_MAX_TEXT:
+# SPECIALTY_3_L5_TEXT:
 War God(Max Level Attributes)
 All Troops Attack +6%
 
-# SPECIALTY_4_MAX_TEXT:
+# SPECIALTY_4_L5_TEXT:
 Wagenburg Tactics(Max Level Attributes)
 Enemy Ranged Troop and Siege Machine Attack -30%
 Enemy Ranged Troop Defense -20%

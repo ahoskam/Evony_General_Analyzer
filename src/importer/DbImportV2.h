@@ -1,88 +1,72 @@
 #pragma once
-
-#include <sqlite3.h>
 #include <optional>
+#include <sqlite3.h>
 #include <string>
-
-struct PendingInfo {
-    int  pending_id = 0;
-    bool was_new = false;
-};
 
 class DbImportV2 {
 public:
-    DbImportV2() = default;
-    ~DbImportV2();
+  struct PendingInfo {
+    int pending_id = 0;
+    bool was_new = false;
+  };
 
-    bool open(const std::string& path);
-    void close();
+  DbImportV2() = default;
+  ~DbImportV2();
 
-    bool begin();
-    bool commit();
-    bool rollback();
+  DbImportV2(const DbImportV2 &) = delete;
+  DbImportV2 &operator=(const DbImportV2 &) = delete;
 
-    bool upsert_general(
-        const std::string& name,
-        const std::string& role,
-        bool role_confirmed,
-        bool in_tavern,
-        const std::string& base_skill_name,
-        int leadership, double leadership_green,
-        int attack, double attack_green,
-        int defense, double defense_green,
-        int politics, double politics_green,
-        const std::string& source_text_verbatim,
-        bool double_checked_in_game,
-        int& out_general_id);
+  bool open(const std::string &path);
+  void close();
+  sqlite3 *raw() const { return db_; }
 
-    std::optional<int> resolve_stat_key_id(const std::string& raw_key);
+  bool begin();
+  bool commit();
+  bool rollback();
 
-    bool ensure_pending_key(
-        const std::string& raw_key,
-        const std::string& first_seen_file,
-        int first_seen_line,
-        PendingInfo& out);
+  // NOTE: importer rules say importer must not set double_checked_in_game=1
+  // from file input; only GUI can. This parameter is accepted but should not
+  // force lock = true.
+  bool upsert_general(const std::string &name, const std::string &role,
+                      bool role_confirmed, bool in_tavern,
+                      const std::string &base_skill_name, int leadership,
+                      double leadership_green, int attack, double attack_green,
+                      int defense, double defense_green, int politics,
+                      double politics_green,
+                      const std::string &source_text_verbatim,
+                      bool double_checked_in_game, int &out_general_id);
 
-    bool add_pending_example(
-        int pending_id,
-        const std::string& general_name,
-        const std::string& context_type,
-        const std::string& context_name,
-        const std::optional<int>& level,
-        double value,
-        const std::string& file_path,
-        int line_number,
-        const std::string& raw_line);
+  std::optional<int> resolve_stat_key_id(const std::string &raw_key);
 
-    // Old behavior (kept for compatibility; NOT recommended for idempotent import)
-    bool delete_occurrences_for_general_file(int general_id, const std::string& file_path);
+  bool ensure_pending_key(const std::string &raw_key,
+                          const std::string &first_seen_file,
+                          int first_seen_line, PendingInfo &out);
 
-    // NEW: Correct behavior (prevents duplicates across data/import vs data/imported)
-    bool delete_occurrences_for_general(int general_id);
+  bool add_pending_example(int pending_id, const std::string &general_name,
+                           const std::string &context_type,
+                           const std::string &context_name,
+                           const std::optional<int> &level, double value,
+                           const std::string &file_path, int line_number,
+                           const std::string &raw_line);
 
-    bool insert_stat_occurrence(
-        int general_id,
-        int stat_key_id,
-        double value,
-        const std::string& context_type,
-        const std::string& context_name,
-        const std::optional<int>& level,
-        bool is_total,
-        const std::string& file_path,
-        int line_number,
-        const std::string& raw_line);
+  bool insert_stat_occurrence(int general_id, int stat_key_id, double value,
+                              const std::string &context_type,
+                              const std::string &context_name,
+                              const std::optional<int> &level, bool is_total,
+                              const std::string &file_path, int line_number,
+                              const std::string &raw_line);
+
+  bool delete_occurrences_for_general(int general_id);
+  bool delete_occurrences_for_general_file(int general_id,
+                                           const std::string &file_path);
 
 private:
-    sqlite3* db_ = nullptr;
+  sqlite3 *db_ = nullptr;
 
-    bool exec_sql(const char* sql);
-    bool column_exists(const char* table, const char* column);
-    bool ensure_v2_migrations();
+  bool exec_sql(const char *sql);
+  bool ensure_v2_migrations();
+  bool column_exists(const char *table, const char *column);
 
-    // NEW: used internally by upsert_general() to enforce "locked means no overwrite"
-    bool get_general_lock_status(
-        const std::string& name,
-        bool& found,
-        int& general_id,
-        bool& locked);
+  bool get_general_lock_status(const std::string &name, bool &found,
+                               int &general_id, bool &locked);
 };
