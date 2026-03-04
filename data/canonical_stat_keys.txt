@@ -2,7 +2,7 @@ key                                                         kind     notes
 ----------------------------------------------------------  -------  ------------------------------------------------------------------------------------
 AllTroopAttackPct                                           percent  added from pending_stat_keys                                                        
 AllTroopHPPct                                               percent  created from pending                                                                
-AllTroopProductionPct                                       percent  All troop production                                                                
+AllResourceProductionPct                                   percent  All resource production                                                             
 ArcherTowerAttackPct                                        percent  Archer Tower attack                                                                 
 AttackingDefensePct                                         percent  Attacking troops defense                                                            
 AttackingDoubleItemsDropRateFromMonstersPct                 percent  added from pending_stat_keys                                                        

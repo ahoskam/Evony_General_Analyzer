@@ -123,7 +123,7 @@ Some Makefile or project adjustments may be necessary.
 
 ## Data Model Overview
 
-- SQLite database (`evony.db`)
+- SQLite database (`data/evony_v2.db`)
 - Tables:
   - `generals`
   - `stat_keys`

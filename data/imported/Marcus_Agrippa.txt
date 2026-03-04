@@ -132,7 +132,7 @@ COVENANTS
 ==============================
 
 # War Covenant
-AllTroopProductionPct +5
+AllResourceProductionPct +5
 
 # Cooperation Covenant
 RangedTroopHPPct +5
@@ -157,7 +157,7 @@ AttackingRangedTroopAttackPct +15
 # NEW STAT KEYS NOTE
 ==============================
 # NEW_STAT_KEYS:
-# - AllTroopProductionPct | All Resources Production
+# - AllResourceProductionPct | All Resources Production
 
 IN_TAVERN: false
 

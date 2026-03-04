@@ -7,125 +7,89 @@ Attack: 118 (8.69)
 Defense: 116 (9.01)
 Politics: 112 (8.51)
 
-==============================
 BASE SKILL | The Heartless
+AttackingRangedAttackPct +30
+AttackingGroundDefensePct +25
+
+ASCENSION 1
+RangedAttackPct +10
+GroundDefensePct +10
+
+ASCENSION 2
+AttackingTroopDeathIntoWoundedRatePct +10
+
+ASCENSION 3
+InRallyMarchSizeCapacityPct +8
+
+ASCENSION 4
+RangedAttackPct +10
+GroundHPPct +10
+
+ASCENSION 5
+RangedAttackPct +10
+GroundDefensePct +10
+GroundHPPct +10
+
+SPECIALTY 1 L5:
+RangedHPPct +10
+RangedDefensePct +10
+
+SPECIALTY 2 L5:
+EnemyTroopAttackPct -10
+
+SPECIALTY 3 L5:
+RangedAttackPct +10
+RangedHPPct +10
+RangedDefensePct +10
+
+SPECIALTY 4 L5:
+RangedAttackPct +20
+GroundHPPct +20
+
+# None available (locked or not shown)
+
+NEW STAT KEYS NOTE:
+- AttackingTroopDeathIntoWoundedRatePct
+
 ==============================
+# SOURCE TEXT (VERBATIM)
+==============================
+
+# BASE_SKILL_TEXT:
+The Heartless
 Increases ranged troops' attack by 30% and ground troops' defense by 25% when General is leading the army.
 
-==============================
-ASCENSION 1
-==============================
-RangedAttackPct +10
-GroundDefensePct +10
+# ASCENSION_1_TEXT:
+Ranged Troop Attack +10%, Ground Troop Defense +10%
 
-==============================
-ASCENSION 2
-==============================
-AttackingTroopDeathToWoundedRatePct +10
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +10%
 
-==============================
-ASCENSION 3
-==============================
-When General is launching Alliance War, RallyCapacityPct +8
+# ASCENSION_3_TEXT:
+When General is launching Alliance War, Rally Capacity +8%
 
-==============================
-ASCENSION 4
-==============================
-RangedAttackPct +10
-GroundHPPct +10
+# ASCENSION_4_TEXT:
+Ranged Troop Attack +10%, Ground Troop HP +10%
 
-==============================
-ASCENSION 5
-==============================
-RangedAttackPct +10
-GroundDefensePct +10
-GroundHPPct +10
+# ASCENSION_5_TEXT:
+Ranged Troop Attack +10%, Ground Troop Defense and HP +10%
 
-==============================
-# SPECIALTY 1 | Ranged Troop Defense
-==============================
-SPECIALTY 1 L1:
-RangedHPPct +1
-RangedDefensePct +1
-SPECIALTY 1 L2:
-RangedHPPct +1
-RangedDefensePct +1
-SPECIALTY 1 L3:
-RangedHPPct +2
-RangedDefensePct +2
-SPECIALTY 1 L4:
-RangedHPPct +2
-RangedDefensePct +2
-SPECIALTY 1 L5:
-RangedHPPct +4
-RangedDefensePct +4
+# SPECIALTY_1_L5_TEXT:
+Ranged Troop Defense(Max Level Attributes)
+Ranged Troop HP +10%
+Ranged Troop Defense +10%
 
-==============================
-# SPECIALTY 2 | Snipe
-==============================
-SPECIALTY 2 L1:
-EnemyAttackPct -1
-SPECIALTY 2 L2:
-EnemyAttackPct -1
-SPECIALTY 2 L3:
-EnemyAttackPct -2
-SPECIALTY 2 L4:
-EnemyAttackPct -2
-SPECIALTY 2 L5:
-EnemyAttackPct -4
+# SPECIALTY_2_L5_TEXT:
+Snipe(Max Level Attributes)
+Enemy Troop Attack -10%
 
-==============================
-# SPECIALTY 3 | Ranged Troop Ares
-==============================
-SPECIALTY 3 L1:
-RangedAttackPct +1
-RangedHPPct +1
-RangedDefensePct +1
-SPECIALTY 3 L2:
-RangedAttackPct +1
-RangedHPPct +1
-RangedDefensePct +1
-SPECIALTY 3 L3:
-RangedAttackPct +2
-RangedHPPct +2
-RangedDefensePct +2
-SPECIALTY 3 L4:
-RangedAttackPct +2
-RangedHPPct +2
-RangedDefensePct +2
-SPECIALTY 3 L5:
-RangedAttackPct +4
-RangedHPPct +4
-RangedDefensePct +4
+# SPECIALTY_3_L5_TEXT:
+Ranged Troop Ares(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop HP +10%
+Ranged Troop Defense +10%
 
-==============================
-# SPECIALTY 4 | Viking Spirit
-==============================
-SPECIALTY 4 L1:
-RangedAttackPct +2
-GroundHPPct +2
-SPECIALTY 4 L2:
-RangedAttackPct +2
-GroundHPPct +2
-SPECIALTY 4 L3:
-RangedAttackPct +4
-GroundHPPct +4
-SPECIALTY 4 L4:
-RangedAttackPct +4
-GroundHPPct +4
-SPECIALTY 4 L5:
-RangedAttackPct +8
-GroundHPPct +8
-
-==============================
-COVENANTS
-==============================
-# None available (locked)
-
-==============================
-# NEW STAT KEYS NOTE
-==============================
-# NEW_STAT_KEYS:
-# - AttackingTroopDeathToWoundedRatePct | Attacking Troop Death into Wounded Rate
-# - RallyCapacityPct | Rally Capacity
-# - EnemyAttackPct | Enemy Troop Attack
+# SPECIALTY_4_L5_TEXT:
+Viking Spirit(Max Level Attributes)
+Ranged Troop Attack +20%
+Ground Troop HP +20%

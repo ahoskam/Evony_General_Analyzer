@@ -1,5 +1,5 @@
 GENERAL: Barbarossa
-ROLE: Unknown
+ROLE: Mounted
 IN_TAVERN: true
 
 Leadership: 115 (9.15)
@@ -7,73 +7,89 @@ Attack: 107 (8.43)
 Defense: 109 (8.47)
 Politics: 112 (8.63)
 
-==============================
 BASE SKILL | Bloody Leader
-==============================
-MarchSizePct +10
-MountedAttackPct +15
+MarchSizeCapacityPct +10
+AttackingMountedAttackPct +15
 
-==============================
 ASCENSION 1
-==============================
 AttackingMountedDefensePct +15
 AttackingMountedHPPct +15
 
-==============================
 ASCENSION 2
-==============================
 AttackingTroopDeathToWoundedRatePct +8
 
-==============================
 ASCENSION 3
-==============================
-RallyCapacityPct +6
+InRallyMarchSizeCapacityPct +6
+
+ASCENSION 4
 AttackingMountedAttackPct +15
 AttackingMountedDefensePct +20
 
-==============================
-ASCENSION 4
-==============================
+ASCENSION 5
 AttackingMountedAttackPct +20
 AttackingMountedHPPct +20
 
-==============================
-ASCENSION 5
-==============================
-# Not visible in provided file
-
-==============================
-SPECIALTIES
-==============================
-
-# SPECIALTY 1 | Mounted Troop Assault
+SPECIALTY 1 L5:
 MountedAttackPct +10
 MountedHPPct +10
 
-# SPECIALTY 2 | Annihilation
-MarchSizePct +6
+SPECIALTY 2 L5:
+MarchSizeCapacityPct +6
 AttackingMountedAttackPct +10
 AttackingGroundAttackPct +10
 
-# SPECIALTY 3 | Iron Warrior
-EnemyWoundedToDeathWhenAttackingPct +10
+SPECIALTY 3 L5:
+EnemyWoundedToDeathPct +10
 
-# SPECIALTY 4 | Crusaders
+SPECIALTY 4 L5:
 AttackingMountedAttackPct +26
 AttackingMountedDefensePct +26
 AttackingMountedHPPct +26
 
-==============================
-COVENANTS
-==============================
-# None available (locked)
+# None available (locked or not shown)
+
+NEW STAT KEYS NOTE:
+- EnemyWoundedToDeathPct
 
 ==============================
-NEW STAT KEYS NOTE
+# SOURCE TEXT (VERBATIM)
 ==============================
-NEW_STAT_KEYS:
-- AttackingMountedDefensePct
-- AttackingMountedHPPct
-- AttackingMountedAttackPct
-- AttackingGroundAttackPct
-- EnemyWoundedToDeathWhenAttackingPct
+
+# BASE_SKILL_TEXT:
+Bloody Leader
+Increases the March Size by 10% and mounted troops' attack by 15% when General is leading the army to attack.
+
+# ASCENSION_1_TEXT:
+Attacking Mounted Troop Defense +15% and HP +15%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+When General is launching Alliance War, Rally Capacity +6%
+
+# ASCENSION_4_TEXT:
+Attacking Mounted Troop Attack +15% and Defense +20%
+
+# ASCENSION_5_TEXT:
+Attacking Mounted Troop Attack +20% and HP +20%
+
+# SPECIALTY_1_L5_TEXT:
+Mounted Troop Assault(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop HP +10%
+
+# SPECIALTY_2_L5_TEXT:
+Annihilation(Max Level Attributes)
+March Size Capacity +6%
+Attacking Mounted Troop and Ground Troop Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Iron Warrior(Max Level Attributes)
+Enemy Wounded into Death when attacking +10%
+
+# SPECIALTY_4_L5_TEXT:
+Crusaders(Max Level Attributes)
+Attacking Mounted Troop Attack +26%
+Attacking Mounted Troop Defense +26%
+Attacking Mounted Troop HP +26%

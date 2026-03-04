@@ -55,9 +55,10 @@ struct Occurrence {
   std::string raw_line;
 
   // v2 columns
-  std::string origin;                 // imported/generated/manual
+  std::string origin;                 // imported/generated/gui
   std::optional<int> generated_from_total_id;
   int edited_by_user = 0;
+  int stat_checked_in_game = 0;
 };
 
 struct StatKey {
@@ -66,6 +67,7 @@ struct StatKey {
 };
 
 struct PendingExample {
+  int id = 0;
   int pending_id = 0;
   std::string raw_key;
   double value = 0;

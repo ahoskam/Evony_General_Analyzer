@@ -1,129 +1,93 @@
-# CHAT_TITLE: Caesar data
-
 GENERAL: Caesar
-ROLE: Unknown
+ROLE: Mounted
+IN_TAVERN: false
+
 Leadership: 119 (9.45)
 Attack: 112 (8.52)
 Defense: 113 (8.84)
 Politics: 111 (8.61)
 
-IN_TAVERN: false
-
-==============================
 BASE SKILL | Dictator
-==============================
-MountedAttackPct +45 (when General is leading the army to attack Monsters)
-GroundAttackPct +15 (when General brings any dragon)
-MountedAttackPct +15 (when General brings any dragon)
+AttackingMonsterMountedAttackPct +45
+DragonMountedAttackPct +15
+DragonGroundAttackPct +15
 
-==============================
 ASCENSION 1
-==============================
-AttackingTroopAttackPct +5 (when attacking Monsters)
-AttackingTroopDefensePct +10 (when attacking Monsters)
+AttackingMonsterTroopAttackPct +5
+AttackingMonsterTroopDefensePct +10
 
-==============================
 ASCENSION 2
-==============================
-MonsterDefensePct -10 (when attacking Monsters)
-AttackingTroopHPPct +15 (when attacking Monsters)
+AttackingMonsterDefenseDebuffPct -10
+AttackingMonsterTroopHPPct +15
 
-==============================
 ASCENSION 3
-==============================
-MonsterAttackPct -10 (when attacking Monsters)
-AttackingTroopDefensePct +20 (when attacking Monsters)
+AttackingMonsterAttackDebuffPct -10
+AttackingMonsterTroopDefensePct +20
 
-==============================
 ASCENSION 4
-==============================
-AttackingTroopAttackPct +10 (when attacking Monsters)
-AttackingTroopHPPct +20 (when attacking Monsters)
+AttackingMonsterTroopAttackPct +10
+AttackingMonsterTroopHPPct +20
 
-==============================
 ASCENSION 5
-==============================
-AttackingTroopAttackPct +15 (when attacking Monsters)
-AttackingTroopDefensePct +10 (when attacking Monsters)
-AttackingTroopHPPct +10 (when attacking Monsters)
+AttackingMonsterTroopAttackPct +15
+AttackingMonsterTroopDefensePct +10
+AttackingMonsterTroopHPPct +10
 
-==============================
-SPECIALTIES
-==============================
-
-# SPECIALTY 1 | Mounted Troop Assault
-SPECIALTY 1 L1:
-MountedAttackPct +1
-MountedHPPct +1
-SPECIALTY 1 L2:
-MountedAttackPct +1
-MountedHPPct +1
-SPECIALTY 1 L3:
-MountedAttackPct +2
-MountedHPPct +2
-SPECIALTY 1 L4:
-MountedAttackPct +2
-MountedHPPct +2
 SPECIALTY 1 L5:
-MountedAttackPct +4
-MountedHPPct +4
+MountedAttackPct +10
+MountedHPPct +10
 
-# SPECIALTY 2 | Fortune
-SPECIALTY 2 L1:
-DoubleItemsDropRateFromMonstersPct +1
-SPECIALTY 2 L2:
-DoubleItemsDropRateFromMonstersPct +2
-SPECIALTY 2 L3:
-DoubleItemsDropRateFromMonstersPct +3
-SPECIALTY 2 L4:
-DoubleItemsDropRateFromMonstersPct +3
 SPECIALTY 2 L5:
-DoubleItemsDropRateFromMonstersPct +6
+MonsterDoubleItemsDropRatePct +15
 
-# SPECIALTY 3 | War God
-SPECIALTY 3 L1:
-TroopAttackPct +1
-SPECIALTY 3 L2:
-TroopAttackPct +1
-SPECIALTY 3 L3:
-TroopAttackPct +1
-SPECIALTY 3 L4:
-TroopAttackPct +1
 SPECIALTY 3 L5:
-TroopAttackPct +2
+AllTroopsAttackPct +6
 
-# SPECIALTY 4 | Gallic Wars
-SPECIALTY 4 L1:
-MountedAttackPct +3 (against Monsters)
-MonsterAttackPct -2
-MonsterDefensePct -2
-SPECIALTY 4 L2:
-MountedAttackPct +3 (against Monsters)
-MonsterAttackPct -2
-MonsterDefensePct -2
-SPECIALTY 4 L3:
-MountedAttackPct +6 (against Monsters)
-MonsterAttackPct -4
-MonsterDefensePct -4
-SPECIALTY 4 L4:
-MountedAttackPct +6 (against Monsters)
-MonsterAttackPct -4
-MonsterDefensePct -4
 SPECIALTY 4 L5:
-MountedAttackPct +12 (against Monsters)
-MonsterAttackPct -8
-MonsterDefensePct -8
+MountedAttackAgainstMonsterPct +30
+MonsterAttackDebuffPct -20
+MonsterDefenseDebuffPct -20
+
+# None available (locked or not shown)
 
 ==============================
-COVENANTS
+# SOURCE TEXT (VERBATIM)
 ==============================
-# None available (locked)
 
-==============================
-# NEW STAT KEYS NOTE
-==============================
-# NEW_STAT_KEYS:
-# - AttackingTroopAttackPct
-# - AttackingTroopDefensePct
-# - AttackingTroopHPPct
-# - DoubleItemsDropRateFromMonstersPct
+# BASE_SKILL_TEXT:
+Dictator
+Increases mounted troops' attack by 45% when General is leading the army to attack Monsters. Increases ground troops and mounted troops' attack by 15% when General brings any dragon.
+
+# ASCENSION_1_TEXT:
+When attacking Monsters, Troops Attack +5% and Defense +10%
+
+# ASCENSION_2_TEXT:
+When attacking Monsters, Monsters Defense -10%, Troops HP +15%
+
+# ASCENSION_3_TEXT:
+When attacking Monsters, Monsters Attack -10%, Troops Defense +20%
+
+# ASCENSION_4_TEXT:
+When attacking Monsters, Troops Attack +10% and HP +20%
+
+# ASCENSION_5_TEXT:
+When attacking Monsters, Troops Attack +15%, Defense and HP +10%
+
+# SPECIALTY_1_L5_TEXT:
+Mounted Troop Assault(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop HP +10%
+
+# SPECIALTY_2_L5_TEXT:
+Fortune(Max Level Attributes)
+Double Items Drop Rate from Monsters. +15%
+
+# SPECIALTY_3_L5_TEXT:
+War God(Max Level Attributes)
+All Troops Attack +6%
+
+# SPECIALTY_4_L5_TEXT:
+Gallic Wars(Max Level Attributes)
+Mounted Troop Attack on Monsters +30%
+Monsters Attack -20%
+Monsters Defense -20%

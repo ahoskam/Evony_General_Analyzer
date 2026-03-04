@@ -302,6 +302,55 @@ static int covenant_number_from_label_ci(std::string_view label) {
   return 0;
 }
 
+static int first_int_1_to_6(std::string_view text) {
+  int v = 0;
+  bool seen_digit = false;
+  for (char c : text) {
+    unsigned char uc = static_cast<unsigned char>(c);
+    if (!std::isdigit(uc)) {
+      if (seen_digit)
+        break;
+      continue;
+    }
+    seen_digit = true;
+    v = (v * 10) + (c - '0');
+    if (v > 6)
+      return 0;
+  }
+  return (v >= 1 && v <= 6) ? v : 0;
+}
+
+static int covenant_number_from_comment_line_ci(std::string_view raw_line) {
+  // Accept common variants:
+  // "# War Covenant", "# Covenant 1", "# Covenant 1 | War"
+  std::string s = trim(std::string(raw_line));
+  if (s.empty())
+    return 0;
+  if (!s.empty() && s.front() == '#')
+    s = trim(s.substr(1));
+  if (!s.empty() && s.back() == ':')
+    s.pop_back();
+  s = trim(std::move(s));
+  if (s.empty())
+    return 0;
+
+  if (int n = first_int_1_to_6(s); n > 0)
+    return n;
+
+  // Remove trailing " covenant" and map the remaining label.
+  std::string lower = s;
+  std::transform(lower.begin(), lower.end(), lower.begin(),
+                 [](unsigned char c) { return (char)std::tolower(c); });
+  std::string suffix = " covenant";
+  if (lower.size() > suffix.size() &&
+      lower.rfind(suffix) == (lower.size() - suffix.size())) {
+    return covenant_number_from_label_ci(trim(lower.substr(
+        0, static_cast<size_t>(lower.size() - suffix.size()))));
+  }
+
+  return covenant_number_from_label_ci(lower);
+}
+
 static inline std::optional<int>
 parse_specialty_level_from_header(const std::string &t) {
   // Look for 'L1'..'L5' anywhere.
@@ -384,6 +433,13 @@ static inline bool parse_header_context(const std::string &t_raw, Context &ctx,
   }
 
   // Covenant headers ("COVENANT | War", etc.)
+  if (starts_with_ci(t, "COVENANTS")) {
+    // Section header; concrete covenant index usually appears in following
+    // comment headers such as "# War Covenant".
+    set_context(ctx, "Covenant", "COVENANTS");
+    return true;
+  }
+
   if (starts_with_ci(t, "COVENANT")) {
     int n = 0;
 
@@ -392,6 +448,8 @@ static inline bool parse_header_context(const std::string &t_raw, Context &ctx,
       std::string label = trim(t.substr(bar + 1));
       n = covenant_number_from_label_ci(label);
     }
+    if (n <= 0)
+      n = first_int_1_to_6(t);
 
     if (n > 0) {
       set_context(ctx, "Covenant", "COVENANT " + std::to_string(n));
@@ -516,6 +574,17 @@ LoadedGeneralV2 load_general_v2_from_file(const std::string &path) {
 
     // Normal parsing line (trimmed)
     std::string t = trim(line);
+
+    // Legacy covenant files often encode covenant index in comments:
+    // "# War Covenant", "# Covenant 1", etc.
+    if (!t.empty() && t.front() == '#' && ctx.type == "Covenant") {
+      int n = covenant_number_from_comment_line_ci(t);
+      if (n > 0) {
+        set_context(ctx, "Covenant", "COVENANT " + std::to_string(n));
+        continue;
+      }
+    }
+
     if (is_comment_or_blank_or_separator(t))
       continue;
 

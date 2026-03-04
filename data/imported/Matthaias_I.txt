@@ -1,92 +1,99 @@
 GENERAL: Matthias I
-ROLE: Unknown
+ROLE: Mixed
+IN_TAVERN: true
+
 Leadership: 107 (8.79)
 Attack: 117 (8.82)
 Defense: 111 (8.95)
 Politics: 104 (8.75)
 
-==============================
 BASE SKILL | Leader of Mercenaries
-==============================
-RangedAttackPct +20
-SiegeAttackPct +20
-MarchSizePct +5
-Condition: When General is leading the army to attack
+AttackingRangedAttackPct +20
+AttackingSiegeMachineAttackPct +20
+MarchSizeCapacityPct +5
 
-==============================
 ASCENSION 1
-==============================
 AttackingRangedDefensePct +10
-AttackingSiegeDefensePct +10
+AttackingSiegeMachineDefensePct +10
 AttackingRangedHPPct +15
-AttackingSiegeHPPct +15
+AttackingSiegeMachineHPPct +15
 
-==============================
 ASCENSION 2
-==============================
-EnemyInCityTroopWoundedToDeathRatePct +10
+EnemyInCityTroopDeathToWoundedRatePct +10
 
-==============================
 ASCENSION 3
-==============================
-RallyCapacityPct +8
-Condition: When General is launching Alliance War
+InAllianceWarRallyCapacityPct +8
 
-==============================
 ASCENSION 4
-==============================
 AttackingRangedAttackPct +15
-AttackingSiegeAttackPct +15
+AttackingSiegeMachineAttackPct +15
 AttackingRangedHPPct +5
-AttackingSiegeHPPct +5
+AttackingSiegeMachineHPPct +5
 
-==============================
 ASCENSION 5
-==============================
 AttackingRangedAttackPct +15
-AttackingSiegeAttackPct +15
+AttackingSiegeMachineAttackPct +15
 AttackingRangedDefensePct +10
-AttackingSiegeDefensePct +10
+AttackingSiegeMachineDefensePct +10
 
-==============================
-SPECIALTIES
-==============================
-
-# SPECIALTY 1 | Siege Machine Assault
 SPECIALTY 1 L5:
-SiegeAttackPct +10
-SiegeHPPct +10
+SiegeMachineAttackPct +10
+SiegeMachineHPPct +10
 
-# SPECIALTY 2 | Bash
 SPECIALTY 2 L5:
-RangedAttackPct +10
-SiegeAttackPct +10
+AttackingRangedAttackPct +10
+AttackingSiegeMachineAttackPct +10
 
-# SPECIALTY 3 | Siege Machine Ares
 SPECIALTY 3 L5:
-SiegeAttackPct +10
-SiegeHPPct +10
-SiegeDefensePct +10
+SiegeMachineAttackPct +10
+SiegeMachineHPPct +10
+SiegeMachineDefensePct +10
 
-# SPECIALTY 4 | King of the Black Army
 SPECIALTY 4 L5:
 RangedAttackPct +20
-SiegeAttackPct +20
+SiegeMachineAttackPct +20
+
+# None available (locked or not shown)
 
 ==============================
-COVENANTS
+# SOURCE TEXT (VERBATIM)
 ==============================
-# None available (locked)
 
-==============================
-# NEW STAT KEYS NOTE
-==============================
-# NEW_STAT_KEYS:
-# - AttackingRangedDefensePct
-# - AttackingSiegeDefensePct
-# - AttackingRangedHPPct
-# - AttackingSiegeHPPct
-# - EnemyInCityTroopWoundedToDeathRatePct
-# - RallyCapacityPct
+# BASE_SKILL_TEXT:
+Leader of Mercenaries
+Increases ranged troops and siege machines' attack by 20% and March Size by 5% when General is leading the army to attack.
 
-IN_TAVERN: true
+# ASCENSION_1_TEXT:
+Attacking Ranged Troop and Siege Machine Defense +10% and HP +15%
+
+# ASCENSION_2_TEXT:
+Enemy In-city Troop Wounded into Death rate +10%
+
+# ASCENSION_3_TEXT:
+When General is launching Alliance War, Rally Capacity +8%
+
+# ASCENSION_4_TEXT:
+Attacking Ranged Troop and Siege Machine Attack +15% and HP +5%
+
+# ASCENSION_5_TEXT:
+Attacking Ranged Troop and Siege Machine Attack +15% and Defense +10%
+
+# SPECIALTY_1_L5_TEXT:
+Siege Machine Assault(Max Level Attributes)
+Siege Machine Attack +10%
+Siege Machine HP +10%
+
+# SPECIALTY_2_L5_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Siege Machine Ares(Max Level Attributes)
+Siege Machine Attack +10%
+Siege Machine HP +10%
+Siege Machine Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+King of the Black Army(Max Level Attributes)
+Ranged Troop Attack +20%
+Siege Machine Attack +20%

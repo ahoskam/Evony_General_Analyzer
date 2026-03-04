@@ -1,4 +1,5 @@
 #include "DbImportV2.h"
+#include "../role_utils.h"
 #include <iostream>
 #include <string>
 #include <cctype>
@@ -83,6 +84,31 @@ bool DbImportV2::ensure_v2_migrations()
             std::cerr << "Migration failed for generals." << m.col << ": " << msg << "\n";
             return false;
         }
+    }
+
+    if (!exec_sql(
+            "DROP TRIGGER IF EXISTS trg_generals_role_valid_insert;"
+            "DROP TRIGGER IF EXISTS trg_generals_role_valid_update;"
+            "CREATE TRIGGER trg_generals_role_valid_insert "
+            "BEFORE INSERT ON generals "
+            "FOR EACH ROW "
+            "BEGIN "
+            "  SELECT CASE "
+            "    WHEN NEW.role NOT IN ('Ground','Mounted','Ranged','Siege','Defense','Mixed','Admin','Duty','Mayor','Unknown') "
+            "    THEN RAISE(ABORT, 'Invalid generals.role') "
+            "  END; "
+            "END;"
+            "CREATE TRIGGER trg_generals_role_valid_update "
+            "BEFORE UPDATE OF role ON generals "
+            "FOR EACH ROW "
+            "BEGIN "
+            "  SELECT CASE "
+            "    WHEN NEW.role NOT IN ('Ground','Mounted','Ranged','Siege','Defense','Mixed','Admin','Duty','Mayor','Unknown') "
+            "    THEN RAISE(ABORT, 'Invalid generals.role') "
+            "  END; "
+            "END;")) {
+        std::cerr << "Migration failed for generals role validation triggers.\n";
+        return false;
     }
 
     return true;
@@ -180,6 +206,7 @@ bool DbImportV2::upsert_general(
     int& out_general_id)
 {
     if (!db_) return false;
+    const std::string normalized_role = normalize_general_role(role);
 
     // Enforce project rule:
     // - If general is locked (double_checked_in_game==1), importer MUST skip all updates.
@@ -241,7 +268,7 @@ bool DbImportV2::upsert_general(
     }
 
     sqlite3_bind_text(stmt, 1, name.c_str(), -1, SQLITE_TRANSIENT);
-    sqlite3_bind_text(stmt, 2, role.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 2, normalized_role.c_str(), -1, SQLITE_TRANSIENT);
     sqlite3_bind_int (stmt, 3, role_confirmed ? 1 : 0);
     sqlite3_bind_int (stmt, 4, in_tavern ? 1 : 0);
     sqlite3_bind_text(stmt, 5, base_skill_name.c_str(), -1, SQLITE_TRANSIENT);

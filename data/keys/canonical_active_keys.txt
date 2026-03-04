@@ -1,6 +1,6 @@
 AllTroopAttackPct
 AllTroopHPPct
-AllTroopProductionPct
+AllResourceProductionPct
 ArcherTowerAttackPct
 AttackingDefensePct
 AttackingEnemyAttackPct

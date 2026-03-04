@@ -1,74 +1,92 @@
 GENERAL: El Cid
-ROLE: Unknown
+ROLE: Mixed
+IN_TAVERN: false
+
 Leadership: 114 (9.06)
 Attack: 115 (8.65)
 Defense: 120 (8.75)
 Politics: 110 (8.47)
 
-==============================
 BASE SKILL | National Warrior
-==============================
-Increases Troop Attack by 10% when General is leading the army to attack.
-Increases ground troops and mounted troops' attack by 15% when General brings any dragon.
+AttackingTroopAttackPct +10
+AttackingGroundAttackPct +15
+AttackingMountedAttackPct +15
 
-==============================
 ASCENSION 1
-==============================
-Attacking Ground Troop and Mounted Troop Defense +10%
-Attacking Ground Troop and Mounted Troop HP +10%
+AttackingGroundDefensePct +10
+AttackingGroundHPPct +10
+AttackingMountedDefensePct +10
+AttackingMountedHPPct +10
+
+ASCENSION 2
+EnemyInCityTroopDeathToWoundedRatePct +10
+
+ASCENSION 3
+InRallyMarchSizeCapacityPct +8
+
+ASCENSION 4
+AttackingMountedHPPct +20
+AttackingGroundHPPct +20
+
+ASCENSION 5
+AttackingMountedAttackPct +15
+AttackingMountedDefensePct +15
+AttackingGroundAttackPct +15
+AttackingGroundDefensePct +15
+
+SPECIALTY 1 L5:
+MountedAttackPct +10
+MountedDefensePct +10
+
+SPECIALTY 2 L5:
+GroundAttackPct +10
+MountedAttackPct +10
+
+SPECIALTY 3 L5:
+AllTroopsAttackPct +6
+
+SPECIALTY 4 L5:
+AttackingMountedAttackPct +30
+AttackingGroundAttackPct +30
+
+# None available (locked or not shown)
 
 ==============================
-ASCENSION 2
+# SOURCE TEXT (VERBATIM)
 ==============================
+
+# BASE_SKILL_TEXT:
+National Warrior
+Increases Troop Attack by 10% when General is leading the army to attack. Increases ground troops and mounted troops' attack by 15% when General brings any dragon.
+
+# ASCENSION_1_TEXT:
+Attacking Ground Troop and Mounted Troop Defense +10% and HP +10%
+
+# ASCENSION_2_TEXT:
 Enemy In-city Troop Wounded into Death rate +10%
 
-==============================
-ASCENSION 3
-==============================
+# ASCENSION_3_TEXT:
 When General is launching Alliance War, Rally Capacity +8%
 
-==============================
-ASCENSION 4
-==============================
+# ASCENSION_4_TEXT:
 Attacking Mounted Troop and Ground Troop HP +20%
 
-==============================
-ASCENSION 5
-==============================
-Attacking Mounted Troop and Ground Troop Attack +15%
-Attacking Mounted Troop and Ground Troop Defense +15%
+# ASCENSION_5_TEXT:
+Attacking Mounted Troop and Ground Troop Attack +15% and Defense +15%
 
-==============================
-SPECIALTIES
-==============================
-
-# SPECIALTY 1 | Mounted Troop Formation
-SPECIALTY 1 L5:
+# SPECIALTY_1_L5_TEXT:
+Mounted Troop Formation(Max Level Attributes)
 Mounted Troop Attack +10%
 Mounted Troop Defense +10%
 
-# SPECIALTY 2 | Formation
-SPECIALTY 2 L5:
+# SPECIALTY_2_L5_TEXT:
+Formation(Max Level Attributes)
 Ground Troop and Mounted Troop Attack +10%
 
-# SPECIALTY 3 | War God
-SPECIALTY 3 L5:
+# SPECIALTY_3_L5_TEXT:
+War God(Max Level Attributes)
 All Troops Attack +6%
 
-# SPECIALTY 4 | The Poem of the Cid
-SPECIALTY 4 L5:
+# SPECIALTY_4_L5_TEXT:
+The Poem of the Cid(Max Level Attributes)
 Attacking Mounted Troop and Ground Troop Attack +30%
-
-==============================
-COVENANTS
-==============================
-# None available (locked)
-
-==============================
-# NEW STAT KEYS NOTE
-==============================
-# NEW_STAT_KEYS:
-# - EnemyInCityTroopWoundedIntoDeathRatePct
-# - RallyCapacityPct
-
-IN_TAVERN: false

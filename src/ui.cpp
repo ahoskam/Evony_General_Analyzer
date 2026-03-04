@@ -15,6 +15,7 @@
 #include <map>
 #include <sstream>
 #include <unordered_map>
+#include <unordered_set>
 
 static void mark_dirty(EditorState &st) { st.dirty = true; }
 static bool is_locked(const EditorState &st) {
@@ -63,12 +64,33 @@ static int parse_first_int(const std::string &s) {
   return 0;
 }
 
+static int pressed_alpha_key_upper() {
+  for (int i = 0; i < 26; ++i) {
+    ImGuiKey key = static_cast<ImGuiKey>(static_cast<int>(ImGuiKey_A) + i);
+    if (ImGui::IsKeyPressed(key, false))
+      return 'A' + i;
+  }
+  return 0;
+}
+
+static bool starts_with_alpha_ci(const std::string &text, int upper_ch) {
+  if (upper_ch == 0 || text.empty())
+    return false;
+  return std::toupper(static_cast<unsigned char>(text.front())) == upper_ch;
+}
+
 /* static int ascension_index(const Occurrence& o)
 {
   // importer uses context_name like "ASCENSION 1"
   if (o.context_type != "Ascension") return 0;
   return parse_first_int(o.context_name);
 } */
+static int ascension_index(const Occurrence &o) {
+  // Support both "ASCENSION 1" and "Ascension 1"
+  if (o.context_type != "Ascension")
+    return 0;
+  return parse_first_int(o.context_name);
+}
 
 static int covenant_index(const Occurrence &o) {
   // importer uses context_name like "COVENANT 1"
@@ -120,8 +142,9 @@ static void add_occurrence(EditorState &st, const std::string &context_type,
   o.stat_key = st.stat_keys.front().name;
   o.value = 0.0;
 
-  o.origin = "generated";
+  o.origin = "gui";
   o.edited_by_user = 1;
+  o.stat_checked_in_game = 0;
 
   // provenance for manual rows
   o.file_path = "";
@@ -199,6 +222,7 @@ static void expand_specialty_total(EditorState &st,
 
     o.origin = "generated";
     o.edited_by_user = 1;
+    o.stat_checked_in_game = 0;
 
     if (total_row.id > 0)
       o.generated_from_total_id = total_row.id;
@@ -218,6 +242,12 @@ static void clear_current_selection(EditorState &st) {
   st.meta = {};
   st.occ.clear();
   st.pending.clear();
+  st.pending_chosen_stat_key_id.clear();
+  st.show_unmapped_delete_modal = false;
+  st.pending_unmapped_delete_pending_id = 0;
+  st.pending_unmapped_delete_context_type.clear();
+  st.pending_unmapped_delete_context_index = 0;
+  st.pending_unmapped_delete_raw_key.clear();
   st.dirty = false;
 }
 
@@ -228,6 +258,9 @@ static void reload_current(Db &db, EditorState &st) {
   st.meta = std::move(all.meta);
   st.occ = std::move(all.occ);
   st.pending = std::move(all.pending);
+  st.pending_chosen_stat_key_id.assign(st.pending.size(),
+                                       st.stat_keys.empty() ? 0
+                                                            : st.stat_keys.front().id);
   st.dirty = false;
 
   // Ensure base skill name exists for BaseSkill context naming
@@ -268,11 +301,10 @@ static bool save_changes(Db &db, EditorState &st) {
       o.general_id = st.selected_general_id;
       o.edited_by_user = 1;
 
-      // Don't force origin to an invalid value.
-      // Keep whatever it already is (imported/generated).
-      // If the row is new or blank, use generated.
+      // Keep existing provenance where possible.
+      // If row is new or blank, treat it as user-entered.
       if (o.origin.empty())
-        o.origin = "generated";
+        o.origin = "gui";
 
       if (o.id == 0) {
         int new_id = db_insert_occurrence(db, o); // may throw
@@ -356,6 +388,7 @@ static bool save_changes(Db &db, EditorState &st) {
 
         o.origin = "generated";
         o.edited_by_user = 1;
+        o.stat_checked_in_game = 0;
         if (total.id > 0)
           o.generated_from_total_id = total.id;
 
@@ -378,6 +411,105 @@ static bool save_changes(Db &db, EditorState &st) {
       st.occ.push_back(o); // keep UI in sync inside this save call
     }
 
+    // ------------------------------------------------------------
+    // Auto-create missing Specialty L5 (TOTAL) rows from level rows.
+    // This handles imports that have only L1..L5 rows and no explicit TOTAL.
+    // ------------------------------------------------------------
+    struct LevelSumKey {
+      int spec_n = 0;
+      int stat_key_id = 0;
+      bool operator==(const LevelSumKey &r) const {
+        return spec_n == r.spec_n && stat_key_id == r.stat_key_id;
+      }
+    };
+    struct LevelSumKeyHash {
+      std::size_t operator()(const LevelSumKey &k) const {
+        return (std::size_t)k.spec_n * 1315423911u ^ (std::size_t)k.stat_key_id;
+      }
+    };
+    struct LevelSumVal {
+      double sum = 0.0;
+      std::string stat_key;
+      int level_rows = 0;
+    };
+
+    auto has_total_for = [&](int spec_n, int stat_key_id) -> bool {
+      for (const auto &x : st.occ) {
+        if (x.context_type != "Specialty")
+          continue;
+        if (specialty_index(x) != spec_n)
+          continue;
+        if (!x.is_total)
+          continue;
+        if (x.stat_key_id == stat_key_id)
+          return true;
+      }
+      return false;
+    };
+
+    std::unordered_map<LevelSumKey, LevelSumVal, LevelSumKeyHash> level_sums;
+    for (const auto &x : st.occ) {
+      if (x.context_type != "Specialty")
+        continue;
+      if (x.is_total)
+        continue;
+      if (!x.level.has_value())
+        continue;
+      const int lv = *x.level;
+      if (lv < 1 || lv > 5)
+        continue;
+      const int spec_n = specialty_index(x);
+      if (spec_n <= 0)
+        continue;
+
+      LevelSumKey k{spec_n, x.stat_key_id};
+      auto &v = level_sums[k];
+      v.sum += x.value;
+      v.stat_key = x.stat_key;
+      v.level_rows += 1;
+    }
+
+    std::vector<Occurrence> totals_to_add;
+    totals_to_add.reserve(level_sums.size());
+    for (const auto &[k, v] : level_sums) {
+      if (v.level_rows <= 0)
+        continue;
+      if (has_total_for(k.spec_n, k.stat_key_id))
+        continue;
+
+      Occurrence o{};
+      o.id = 0;
+      o.general_id = st.selected_general_id;
+      o.context_type = "Specialty";
+      o.context_name = make_specialty_name(k.spec_n, 5, true);
+      o.level = 5;
+      o.is_total = 1;
+
+      o.stat_key_id = k.stat_key_id;
+      o.stat_key = v.stat_key;
+      o.value = v.sum;
+
+      o.origin = "generated";
+      o.edited_by_user = 1;
+      o.stat_checked_in_game = 0;
+      o.file_path = "";
+      o.line_number = 0;
+      o.raw_line = "";
+
+      totals_to_add.push_back(std::move(o));
+    }
+
+    for (auto &o : totals_to_add) {
+      int new_id = db_insert_occurrence(db, o);
+      if (new_id <= 0) {
+        db.rollback();
+        st.last_save_error = "Auto-total insert failed (invalid id)";
+        return false;
+      }
+      o.id = new_id;
+      st.occ.push_back(o); // keep UI in sync inside this save call
+    }
+
     db.commit();
     st.dirty = false;
     return true;
@@ -391,9 +523,9 @@ static bool save_changes(Db &db, EditorState &st) {
   }
 }
 
-static const char *kRolesAll[] = {"All",    "Unknown", "Ground",  "Mounted",
-                                  "Ranged", "Siege",   "Defense", "Mayor",
-                                  "Duty",   "Mixed"};
+static const char *kRolesAll[] = {"All",    "Ground", "Mounted", "Ranged",
+                                  "Siege",  "Defense", "Mixed",   "Admin",
+                                  "Duty",   "Mayor",   "Unknown"};
 
 void ui_tick(Db &db, EditorState &st) {
   static bool inited = false;
@@ -844,8 +976,8 @@ static void draw_meta_contents(Db &db, EditorState &st) {
 // STAT ROW
 // ---------------------------
 static void draw_stat_row(EditorState &st, Occurrence &o) {
-  bool locked = is_locked(st);
-  if (locked)
+  const bool general_locked = is_locked(st);
+  if (general_locked)
     ImGui::BeginDisabled();
 
   int current = o.stat_key_id;
@@ -858,7 +990,20 @@ static void draw_stat_row(EditorState &st, Occurrence &o) {
 
   ImGui::PushID(o.id ? o.id : (int)(intptr_t)&o);
 
+  bool stat_checked = (o.stat_checked_in_game != 0);
+  if (ImGui::Checkbox("Stat Checked In-Game", &stat_checked)) {
+    o.stat_checked_in_game = stat_checked ? 1 : 0;
+    mark_dirty(st);
+  }
+
+  const bool stat_locked = (o.stat_checked_in_game != 0);
+  if (stat_locked)
+    ImGui::BeginDisabled();
+
   if (ImGui::BeginCombo("Stat Key", preview)) {
+    const int jump_ch = pressed_alpha_key_upper();
+    bool jumped = false;
+
     for (auto &k : st.stat_keys) {
       bool sel = (k.id == current);
       if (ImGui::Selectable(k.name.c_str(), sel)) {
@@ -868,22 +1013,17 @@ static void draw_stat_row(EditorState &st, Occurrence &o) {
       }
       if (sel)
         ImGui::SetItemDefaultFocus();
+      if (!jumped && starts_with_alpha_ci(k.name, jump_ch)) {
+        ImGui::SetScrollHereY(0.15f);
+        ImGui::SetKeyboardFocusHere(-1);
+        jumped = true;
+      }
     }
     ImGui::EndCombo();
   }
 
   if (ImGui::InputDouble("Value", &o.value))
     mark_dirty(st);
-
-  if (ImGui::TreeNode("Provenance")) {
-    ImGui::Text("origin: %s", o.origin.c_str());
-    if (o.generated_from_total_id.has_value())
-      ImGui::Text("generated_from_total_id: %d", *o.generated_from_total_id);
-    ImGui::Text("edited_by_user: %d", o.edited_by_user);
-    ImGui::Text("file: %s:%d", o.file_path.c_str(), o.line_number);
-    ImGui::TextWrapped("raw: %s", o.raw_line.c_str());
-    ImGui::TreePop();
-  }
 
   if (ImGui::Button("Delete")) {
     if (o.id > 0)
@@ -892,9 +1032,23 @@ static void draw_stat_row(EditorState &st, Occurrence &o) {
     mark_dirty(st);
   }
 
+  if (stat_locked)
+    ImGui::EndDisabled();
+
+  if (ImGui::TreeNode("Provenance")) {
+    ImGui::Text("origin: %s", o.origin.c_str());
+    if (o.generated_from_total_id.has_value())
+      ImGui::Text("generated_from_total_id: %d", *o.generated_from_total_id);
+    ImGui::Text("edited_by_user: %d", o.edited_by_user);
+    ImGui::Text("stat_checked_in_game: %d", o.stat_checked_in_game);
+    ImGui::Text("file: %s:%d", o.file_path.c_str(), o.line_number);
+    ImGui::TextWrapped("raw: %s", o.raw_line.c_str());
+    ImGui::TreePop();
+  }
+
   ImGui::PopID();
 
-  if (locked)
+  if (general_locked)
     ImGui::EndDisabled();
 }
 
@@ -905,13 +1059,152 @@ static void draw_stat_row_pretty(const Occurrence &o) {
   // Display value with up to 6 decimals.
   char buf[64];
   std::snprintf(buf, sizeof(buf), "%.6f", o.value);
-  ImGui::Text("%s: %s", o.stat_key.c_str(), buf);
+  if (o.stat_checked_in_game != 0)
+    ImGui::Text("[Checked] %s: %s", o.stat_key.c_str(), buf);
+  else
+    ImGui::Text("%s: %s", o.stat_key.c_str(), buf);
+}
+
+static int infer_is_total_from_pending(const PendingExample &p);
+static bool delete_pending_group_for_context(Db &db, int pending_id,
+                                             const std::string &context_type,
+                                             int context_index);
+static void remove_pending_group_from_state(EditorState &st, int pending_id,
+                                            const std::string &context_type,
+                                            int context_index);
+
+static bool draw_inline_unresolved_rows(Db &db, EditorState &st,
+                                        const std::string &context_type,
+                                        int context_index, bool pretty,
+                                        bool locked) {
+  struct PendingGroup {
+    int pending_id = 0;
+    int display_id = 0;
+    std::string raw_key;
+    double display_value = 0.0;
+  };
+
+  std::vector<PendingGroup> groups;
+  std::unordered_set<long long> seen;
+
+  for (const auto &seed : st.pending) {
+    if (seed.context_type != context_type)
+      continue;
+    const int idx = parse_first_int(seed.context_name);
+    if (idx != context_index)
+      continue;
+
+    const long long dedupe_key =
+        ((long long)seed.pending_id << 32) ^ (long long)(unsigned int)idx;
+    if (!seen.insert(dedupe_key).second)
+      continue;
+
+    PendingGroup g{};
+    g.pending_id = seed.pending_id;
+    g.display_id = seed.id;
+    g.raw_key = seed.raw_key;
+
+    bool has_explicit_total = false;
+    double specialty_sum = 0.0;
+    std::optional<int> max_level;
+    double max_level_value = seed.value;
+
+    for (const auto &p : st.pending) {
+      if (p.pending_id != seed.pending_id)
+        continue;
+      if (p.context_type != context_type)
+        continue;
+      if (parse_first_int(p.context_name) != context_index)
+        continue;
+
+      if (context_type == "Specialty") {
+        specialty_sum += p.value;
+        const int total_like = infer_is_total_from_pending(p);
+        if (total_like == 1) {
+          has_explicit_total = true;
+          g.display_value = p.value;
+          g.display_id = p.id;
+        }
+        if (p.level.has_value() &&
+            (!max_level.has_value() || *p.level > *max_level)) {
+          max_level = *p.level;
+          max_level_value = p.value;
+          g.display_id = p.id;
+        }
+      } else {
+        g.display_value = p.value;
+        g.display_id = p.id;
+      }
+    }
+
+    if (context_type == "Specialty") {
+      if (!has_explicit_total) {
+        if (std::fabs(specialty_sum) > 0.0000001)
+          g.display_value = specialty_sum; // synth-style groups
+        else
+          g.display_value = max_level_value;
+      }
+    }
+
+    groups.push_back(std::move(g));
+  }
+
+  bool any_drawn = false;
+  for (const auto &g : groups) {
+    any_drawn = true;
+    ImGui::PushID(g.display_id ? g.display_id : g.pending_id);
+    ImGui::PushStyleColor(ImGuiCol_ChildBg, IM_COL32(245, 225, 110, 220));
+    ImGui::PushStyleColor(ImGuiCol_Border, IM_COL32(100, 90, 20, 255));
+    ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
+
+    float h = pretty ? 58.0f : 86.0f;
+    ImGui::BeginChild("##inline_unmapped", ImVec2(0, h), true);
+    ImGui::Text("UNMAPPED: %s", g.raw_key.c_str());
+    ImGui::Text("value: %.6f", g.display_value);
+
+    if (!pretty) {
+      if (locked)
+        ImGui::BeginDisabled();
+      if (ImGui::Button("Delete Unmapped Stat")) {
+        bool ok = false;
+        if (st.dirty) {
+          st.pending_unmapped_delete_pending_id = g.pending_id;
+          st.pending_unmapped_delete_context_type = context_type;
+          st.pending_unmapped_delete_context_index = context_index;
+          st.pending_unmapped_delete_raw_key = g.raw_key;
+          st.show_unmapped_delete_modal = true;
+        } else {
+          ok = delete_pending_group_for_context(db, g.pending_id, context_type,
+                                                context_index);
+          if (ok) {
+            remove_pending_group_from_state(st, g.pending_id, context_type,
+                                            context_index);
+          }
+        }
+        if (locked)
+          ImGui::EndDisabled();
+        ImGui::EndChild();
+        ImGui::PopStyleColor(3);
+        ImGui::PopID();
+        return true;
+      }
+      if (locked)
+        ImGui::EndDisabled();
+    }
+
+    ImGui::EndChild();
+    ImGui::PopStyleColor(3);
+    ImGui::PopID();
+    ui_separator(1.0f);
+  }
+
+  return any_drawn;
 }
 
 // ---------------------------
 // STATS PANEL (contents only)
 // ---------------------------
-static void draw_occurrences_contents(EditorState &st) {
+static void draw_occurrences_contents(Db &db, EditorState &st) {
   if (st.selected_general_id <= 0) {
     ImGui::TextUnformatted("Select a general.");
     return;
@@ -940,6 +1233,9 @@ static void draw_occurrences_contents(EditorState &st) {
     }
   }
 
+  // BaseSkill unresolved keys have no numeric index; use 0 bucket.
+  draw_inline_unresolved_rows(db, st, "BaseSkill", 0, pretty, locked);
+
   if (!pretty) {
     if (locked)
       ImGui::BeginDisabled();
@@ -966,13 +1262,15 @@ static void draw_occurrences_contents(EditorState &st) {
 
     std::string ctx = make_ascension_name(asc);
     for (auto &o : st.occ) {
-      if (o.context_type == "Ascension" && o.context_name == ctx) {
+      if (ascension_index(o) == asc) {
         if (pretty)
           draw_stat_row_pretty(o);
         else
           draw_stat_row(st, o);
       }
     }
+
+    draw_inline_unresolved_rows(db, st, "Ascension", asc, pretty, locked);
 
     if (!pretty) {
       if (locked)
@@ -1019,6 +1317,20 @@ static void draw_occurrences_contents(EditorState &st) {
       ui_separator(3.0f);
       continue;
     }
+
+    auto has_total_for_key = [&](int stat_key_id) -> bool {
+      for (const auto &o : st.occ) {
+        if (o.context_type != "Specialty")
+          continue;
+        if (specialty_index(o) != spec_n)
+          continue;
+        if (!o.is_total)
+          continue;
+        if (o.stat_key_id == stat_key_id)
+          return true;
+      }
+      return false;
+    };
 
     // TOTAL rows first
     for (auto &total : st.occ) {
@@ -1106,6 +1418,58 @@ static void draw_occurrences_contents(EditorState &st) {
       ui_separator(1.0f);
     }
 
+    // Rows not anchored by a TOTAL (common in older imported data).
+    bool rendered_orphans_header = false;
+    for (int lv = 1; lv <= 5; ++lv) {
+      bool any = false;
+      for (const auto &o : st.occ) {
+        if (o.context_type != "Specialty")
+          continue;
+        if (specialty_index(o) != spec_n)
+          continue;
+        if (o.is_total)
+          continue;
+        if (!o.level.has_value())
+          continue;
+        if (*o.level != lv)
+          continue;
+        if (has_total_for_key(o.stat_key_id))
+          continue;
+        any = true;
+        break;
+      }
+      if (!any)
+        continue;
+
+      if (!rendered_orphans_header) {
+        ImGui::TextUnformatted("Rows Without TOTAL");
+        rendered_orphans_header = true;
+      }
+
+      ImGui::Text("L%d", lv);
+      ui_separator(1.0f);
+      for (auto &o : st.occ) {
+        if (o.context_type != "Specialty")
+          continue;
+        if (specialty_index(o) != spec_n)
+          continue;
+        if (o.is_total)
+          continue;
+        if (!o.level.has_value())
+          continue;
+        if (*o.level != lv)
+          continue;
+        if (has_total_for_key(o.stat_key_id))
+          continue;
+        if (pretty)
+          draw_stat_row_pretty(o);
+        else
+          draw_stat_row(st, o);
+      }
+    }
+
+    draw_inline_unresolved_rows(db, st, "Specialty", spec_n, pretty, locked);
+
     if (!pretty) {
       if (locked)
         ImGui::BeginDisabled();
@@ -1141,7 +1505,10 @@ static void draw_occurrences_contents(EditorState &st) {
         continue;
       if (covenant_index(o) != c_n)
         continue; // << key change: group by parsed index
-      draw_stat_row(st, o);
+      if (pretty)
+        draw_stat_row_pretty(o);
+      else
+        draw_stat_row(st, o);
       any = true;
     }
 
@@ -1151,41 +1518,223 @@ static void draw_occurrences_contents(EditorState &st) {
 
     std::string ctx = make_covenant_name(c_n); // "COVENANT N"
     std::string btn = "Add Covenant " + std::to_string(c_n) + " Stat";
-    if (ImGui::Button(btn.c_str())) {
-      add_occurrence(st, "Covenant", ctx, std::nullopt, 0);
+    if (!pretty) {
+      if (ImGui::Button(btn.c_str())) {
+        add_occurrence(st, "Covenant", ctx, std::nullopt, 0);
+      }
     }
 
     ui_separator(3.0f);
   }
+
+  // Legacy imports may have non-indexed covenant contexts ("S", "COVENANTS").
+  // Surface them so they can be corrected instead of silently disappearing.
+  bool has_unindexed_covenants = false;
+  for (const auto &o : st.occ) {
+    if (o.context_type == "Covenant" && covenant_index(o) <= 0) {
+      has_unindexed_covenants = true;
+      break;
+    }
+  }
+  if (has_unindexed_covenants) {
+    ui_section_bar("Covenants (Unindexed Legacy Rows)",
+                   IM_COL32(150, 95, 30, 160));
+    ImGui::TextUnformatted(
+        "These rows have non-standard covenant context names and are not tied "
+        "to Covenant 1-6.");
+    ui_separator(1.0f);
+
+    for (auto &o : st.occ) {
+      if (o.context_type != "Covenant")
+        continue;
+      if (covenant_index(o) > 0)
+        continue;
+      ImGui::Text("Context: %s", o.context_name.c_str());
+      if (pretty)
+        draw_stat_row_pretty(o);
+      else
+        draw_stat_row(st, o);
+      ui_separator(1.0f);
+    }
+    ui_separator(3.0f);
+  }
 }
-// ---------------------------
-// PENDING PANEL (contents only)
-// ---------------------------
-static void draw_pending_contents(Db & /*db*/, EditorState &st) {
-  if (st.selected_general_id <= 0) {
-    ImGui::TextUnformatted("Select a general.");
+static int infer_is_total_from_pending(const PendingExample &p) {
+  if (p.context_type != "Specialty" || !p.level.has_value() || *p.level != 5)
+    return 0;
+
+  if (p.raw_line.find("SYNTH_SPECIALTY_L5_INCREMENT") != std::string::npos)
+    return 0;
+  if (p.context_name.find("TOTAL") != std::string::npos)
+    return 1;
+  if (p.raw_line.find("TOTAL") != std::string::npos)
+    return 1;
+  if (p.context_name.find(" L") == std::string::npos)
+    return 1;
+  return 0;
+}
+
+static bool delete_pending_group_for_context(Db &db, int pending_id,
+                                             const std::string &context_type,
+                                             int context_index) {
+  db.begin();
+  try {
+    DbStmt del(
+        db,
+        "DELETE FROM pending_stat_key_examples "
+        "WHERE pending_id=?1 "
+        "  AND context_type=?2 "
+        "  AND CAST(TRIM(SUBSTR(context_name, INSTR(context_name, ' ') + 1)) "
+        "AS INT)=?3;");
+    del.bind_int(1, pending_id);
+    del.bind_text(2, context_type.c_str());
+    del.bind_int(3, context_index);
+    del.st.step_done();
+
+    DbStmt mark(
+        db,
+        "UPDATE pending_stat_keys "
+        "SET status='mapped' "
+        "WHERE id=?1 "
+        "  AND NOT EXISTS(SELECT 1 FROM pending_stat_key_examples WHERE "
+        "pending_id=?1);");
+    mark.bind_int(1, pending_id);
+    mark.st.step_done();
+
+    db.commit();
+    return true;
+  } catch (...) {
+    try {
+      db.rollback();
+    } catch (...) {
+    }
+    return false;
+  }
+}
+
+static void remove_pending_group_from_state(EditorState &st, int pending_id,
+                                            const std::string &context_type,
+                                            int context_index) {
+  st.pending.erase(
+      std::remove_if(st.pending.begin(), st.pending.end(),
+                     [&](const PendingExample &x) {
+                       if (x.pending_id != pending_id)
+                         return false;
+                       if (x.context_type != context_type)
+                         return false;
+                       return parse_first_int(x.context_name) == context_index;
+                     }),
+      st.pending.end());
+}
+
+static void ensure_stat_checked_column(Db &db) {
+  bool has_col = false;
+  DbStmt st(db, "PRAGMA table_info(stat_occurrences);");
+  while (st.step()) {
+    const std::string col_name = st.col_text(1);
+    if (col_name == "stat_checked_in_game") {
+      has_col = true;
+      break;
+    }
+  }
+  if (!has_col) {
+    db.exec("ALTER TABLE stat_occurrences "
+            "ADD COLUMN stat_checked_in_game INTEGER NOT NULL DEFAULT 0;");
+  }
+}
+
+static void ensure_origin_supports_gui(Db &db) {
+  bool has_origin_col = false;
+  {
+    DbStmt st(db, "PRAGMA table_info(stat_occurrences);");
+    while (st.step()) {
+      const std::string col_name = st.col_text(1);
+      if (col_name == "origin") {
+        has_origin_col = true;
+        break;
+      }
+    }
+  }
+  if (!has_origin_col)
     return;
+
+  bool supports_gui = false;
+  {
+    DbStmt st(
+        db,
+        "SELECT sql FROM sqlite_master "
+        "WHERE type='table' AND name='stat_occurrences';");
+    if (st.step()) {
+      const std::string sql = st.col_text(0);
+      supports_gui = (sql.find("'gui'") != std::string::npos);
+    }
+  }
+  if (supports_gui)
+    return;
+
+  db.exec("PRAGMA foreign_keys=OFF;");
+  try {
+    db.begin();
+    db.exec(
+        "CREATE TABLE stat_occurrences_new ("
+        " id INTEGER PRIMARY KEY AUTOINCREMENT,"
+        " general_id INTEGER NOT NULL,"
+        " stat_key_id INTEGER NOT NULL,"
+        " value REAL NOT NULL,"
+        " context_type TEXT NOT NULL CHECK (context_type IN "
+        "('BaseSkill','Ascension','Specialty','Covenant')),"
+        " context_name TEXT NOT NULL,"
+        " level INTEGER,"
+        " is_total INTEGER NOT NULL DEFAULT 0,"
+        " file_path TEXT NOT NULL,"
+        " line_number INTEGER NOT NULL,"
+        " raw_line TEXT NOT NULL,"
+        " origin TEXT NOT NULL DEFAULT 'imported' CHECK (origin IN "
+        "('imported','generated','gui')),"
+        " generated_from_total_id INTEGER,"
+        " edited_by_user INTEGER NOT NULL DEFAULT 0 CHECK (edited_by_user IN "
+        "(0,1)),"
+        " stat_checked_in_game INTEGER NOT NULL DEFAULT 0,"
+        " FOREIGN KEY (general_id) REFERENCES generals(id),"
+        " FOREIGN KEY (stat_key_id) REFERENCES stat_keys(id)"
+        ");");
+
+    db.exec(
+        "INSERT INTO stat_occurrences_new("
+        " id, general_id, stat_key_id, value, context_type, context_name,"
+        " level, is_total, file_path, line_number, raw_line,"
+        " origin, generated_from_total_id, edited_by_user, stat_checked_in_game"
+        ") "
+        "SELECT "
+        " id, general_id, stat_key_id, value, context_type, context_name,"
+        " level, is_total, file_path, line_number, raw_line,"
+        " CASE WHEN origin='manual' THEN 'gui' ELSE origin END,"
+        " generated_from_total_id, edited_by_user, COALESCE(stat_checked_in_game,0)"
+        " FROM stat_occurrences;");
+
+    db.exec("DROP TABLE stat_occurrences;");
+    db.exec("ALTER TABLE stat_occurrences_new RENAME TO stat_occurrences;");
+    db.exec(
+        "CREATE INDEX idx_stat_occ_general ON stat_occurrences(general_id);");
+    db.exec(
+        "CREATE INDEX idx_stat_occ_statkey ON stat_occurrences(stat_key_id);");
+    db.commit();
+  } catch (...) {
+    try {
+      db.rollback();
+    } catch (...) {
+    }
+    db.exec("PRAGMA foreign_keys=ON;");
+    throw;
   }
 
-  if (st.pending.empty()) {
-    ImGui::TextUnformatted("No pending examples for this general.");
-    return;
-  }
-
-  for (auto &p : st.pending) {
-    ImGui::Separator();
-    ImGui::Text("raw_key: %s", p.raw_key.c_str());
-    ImGui::Text("value: %.6f", p.value);
-    ImGui::Text("context: %s / %s", p.context_type.c_str(),
-                p.context_name.c_str());
-    if (p.level.has_value())
-      ImGui::Text("level: %d", *p.level);
-    ImGui::Text("file: %s:%d", p.file_path.c_str(), p.line_number);
-    ImGui::TextWrapped("raw: %s", p.raw_line.c_str());
-  }
+  db.exec("PRAGMA foreign_keys=ON;");
 }
 
 void ui_init(Db &db, EditorState &st) {
+  ensure_stat_checked_column(db);
+  ensure_origin_supports_gui(db);
+  db_normalize_general_roles(db);
   st.filter_role = "All";
   st.list = db_load_general_list(db, st.filter_role, st.filter_name);
   st.stat_keys = db_load_stat_keys(db);
@@ -1234,6 +1783,73 @@ void ui_draw(Db &db, EditorState &st) {
     ImGui::SameLine();
     if (ImGui::Button("Cancel")) {
       st.pending_select_general_id = 0;
+      ImGui::CloseCurrentPopup();
+    }
+
+    ImGui::EndPopup();
+  }
+
+  if (st.show_unmapped_delete_modal) {
+    ImGui::OpenPopup("Delete Unmapped Stat");
+    st.show_unmapped_delete_modal = false;
+  }
+
+  if (ImGui::BeginPopupModal("Delete Unmapped Stat", nullptr,
+                             ImGuiWindowFlags_AlwaysAutoResize)) {
+    ImGui::TextUnformatted(
+        "You have unsaved edits. Deleting an unmapped stat now can lose them.");
+    if (!st.pending_unmapped_delete_raw_key.empty()) {
+      ImGui::Text("Unmapped key: %s",
+                  st.pending_unmapped_delete_raw_key.c_str());
+    }
+    ImGui::Spacing();
+    ImGui::TextUnformatted("Save before deleting?");
+
+    if (ImGui::Button("Save + Delete")) {
+      if (save_changes(db, st)) {
+        if (delete_pending_group_for_context(
+                db, st.pending_unmapped_delete_pending_id,
+                st.pending_unmapped_delete_context_type,
+                st.pending_unmapped_delete_context_index)) {
+          remove_pending_group_from_state(
+              st, st.pending_unmapped_delete_pending_id,
+              st.pending_unmapped_delete_context_type,
+              st.pending_unmapped_delete_context_index);
+          st.list = db_load_general_list(db, st.filter_role, st.filter_name);
+        }
+      }
+      st.pending_unmapped_delete_pending_id = 0;
+      st.pending_unmapped_delete_context_type.clear();
+      st.pending_unmapped_delete_context_index = 0;
+      st.pending_unmapped_delete_raw_key.clear();
+      ImGui::CloseCurrentPopup();
+    }
+
+    ImGui::SameLine();
+    if (ImGui::Button("Delete Without Save")) {
+      if (delete_pending_group_for_context(
+              db, st.pending_unmapped_delete_pending_id,
+              st.pending_unmapped_delete_context_type,
+              st.pending_unmapped_delete_context_index)) {
+        remove_pending_group_from_state(
+            st, st.pending_unmapped_delete_pending_id,
+            st.pending_unmapped_delete_context_type,
+            st.pending_unmapped_delete_context_index);
+        st.list = db_load_general_list(db, st.filter_role, st.filter_name);
+      }
+      st.pending_unmapped_delete_pending_id = 0;
+      st.pending_unmapped_delete_context_type.clear();
+      st.pending_unmapped_delete_context_index = 0;
+      st.pending_unmapped_delete_raw_key.clear();
+      ImGui::CloseCurrentPopup();
+    }
+
+    ImGui::SameLine();
+    if (ImGui::Button("Cancel")) {
+      st.pending_unmapped_delete_pending_id = 0;
+      st.pending_unmapped_delete_context_type.clear();
+      st.pending_unmapped_delete_context_index = 0;
+      st.pending_unmapped_delete_raw_key.clear();
       ImGui::CloseCurrentPopup();
     }
 
@@ -1290,32 +1906,11 @@ void ui_draw(Db &db, EditorState &st) {
     ImGui::Spacing();
 
     ImGui::BeginChild("##bottom", ImVec2(0, 0), false);
-
-    if (ImGui::BeginTable("##bottom_table", 2,
-                          ImGuiTableFlags_Resizable |
-                              ImGuiTableFlags_BordersInnerV)) {
-      ImGui::TableSetupColumn("Stats", ImGuiTableColumnFlags_WidthStretch,
-                              0.75f);
-      ImGui::TableSetupColumn("Pending", ImGuiTableColumnFlags_WidthStretch,
-                              0.25f);
-      ImGui::TableNextRow();
-
-      ImGui::TableSetColumnIndex(0);
-      ImGui::BeginChild("##stats", ImVec2(0, 0), true);
-      ImGui::TextUnformatted("Stats");
-      ImGui::Separator();
-      draw_occurrences_contents(st);
-      ImGui::EndChild();
-
-      ImGui::TableSetColumnIndex(1);
-      ImGui::BeginChild("##pending", ImVec2(0, 0), true);
-      ImGui::TextUnformatted("Pending (Unmapped) Stat Keys");
-      ImGui::Separator();
-      draw_pending_contents(db, st);
-      ImGui::EndChild();
-
-      ImGui::EndTable();
-    }
+    ImGui::BeginChild("##stats", ImVec2(0, 0), true);
+    ImGui::TextUnformatted("Stats");
+    ImGui::Separator();
+    draw_occurrences_contents(db, st);
+    ImGui::EndChild();
 
     ImGui::EndChild(); // bottom
     ImGui::EndChild(); // right

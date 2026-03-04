@@ -1,86 +1,95 @@
 GENERAL: Isabella I
-ROLE: Unknown
+ROLE: Mixed
+IN_TAVERN: true
+
 Leadership: 115 (8.86)
 Attack: 112 (8.27)
 Defense: 113 (8.28)
 Politics: 120 (9.15)
 
-==============================
 BASE SKILL | Queen’s Expansion
-==============================
-MountedAttackPct +10
-SiegeAttackPct +10
-AttackingMarchSizePct +10 (When General brings any Sacred Dragon)
+AttackingMountedAttackPct +10
+AttackingSiegeMachineAttackPct +10
+MarchSizeCapacityPct +10
 
-==============================
 ASCENSION 1
-==============================
 AttackingMountedDefensePct +15
 AttackingMountedHPPct +15
 
-==============================
 ASCENSION 2
-==============================
 AttackingTroopDeathToWoundedRatePct +8
 
-==============================
 ASCENSION 3
-==============================
-RallyCapacityPct +6 (When launching Alliance War)
+InRallyRallyCapacityPct +6
 
-==============================
 ASCENSION 4
-==============================
 AttackingMountedAttackPct +10
 AttackingMountedDefensePct +15
 AttackingMountedHPPct +15
 
-==============================
 ASCENSION 5
-==============================
-AttackingSiegeAttackPct +15
-AttackingSiegeDefensePct +15
-AttackingSiegeHPPct +15
+AttackingSiegeMachineAttackPct +15
+AttackingSiegeMachineDefensePct +15
+AttackingSiegeMachineHPPct +15
 
-==============================
-SPECIALTIES
-==============================
-
-# SPECIALTY 1 | Siege Machine Assault
 SPECIALTY 1 L5:
-SiegeAttackPct +10
-SiegeHPPct +10
+SiegeMachineAttackPct +10
+SiegeMachineHPPct +10
 
-# SPECIALTY 2 | Bash
 SPECIALTY 2 L5:
 RangedAttackPct +10
-SiegeAttackPct +10
+SiegeMachineAttackPct +10
 
-# SPECIALTY 3 | King's Ambition
 SPECIALTY 3 L5:
-MainCityTroopDeathToSoulRatePct +10
+InCityTroopDeathIntoTroopSoulRatePct +10
 
-# SPECIALTY 4 | Age of Discovery
 SPECIALTY 4 L5:
-AttackingSiegeAttackPct +30 (When General brings any dragon)
-MarchSizeCapacityPct +10 (When General brings any dragon)
+AttackingSiegeMachineAttackPct +30
+MarchSizeCapacityPct +10
+
+# None available (locked or not shown)
+
+NEW STAT KEYS NOTE:
+- InRallyRallyCapacityPct
 
 ==============================
-COVENANTS
+# SOURCE TEXT (VERBATIM)
 ==============================
-# None available (locked)
 
-==============================
-# NEW STAT KEYS NOTE
-==============================
-# NEW_STAT_KEYS:
-# - AttackingMountedDefensePct
-# - AttackingMountedHPPct
-# - AttackingMountedAttackPct
-# - AttackingSiegeAttackPct
-# - AttackingSiegeDefensePct
-# - AttackingSiegeHPPct
-# - MainCityTroopDeathToSoulRatePct
-# - MarchSizeCapacityPct
+# BASE_SKILL_TEXT:
+Queen’s Expansion
+Increases mounted troops and siege machines' attack by 10% when General is leading the army to attack. Increases March Size by 10% when the General brings any Sacred Dragon.
 
-IN_TAVERN: true
+# ASCENSION_1_TEXT:
+Attacking Mounted Troop Defense +15% and HP +15%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+When General is launching Alliance War, Rally Capacity +6%
+
+# ASCENSION_4_TEXT:
+Attacking Mounted Troop Attack +10%, Defense and HP +15%
+
+# ASCENSION_5_TEXT:
+Attacking Siege Machine Attack +15%, Defense and HP +15%
+
+# SPECIALTY_1_L5_TEXT:
+Siege Machine Assault(Max Level Attributes)
+Siege Machine Attack +10%
+Siege Machine HP +10%
+
+# SPECIALTY_2_L5_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+King’s Ambition(Max Level Attributes)
+Troop death into troop soul rate in the main city +10%
+
+# SPECIALTY_4_L5_TEXT:
+Age of Discovery(Max Level Attributes)
+When General brings any dragon
+Attacking Siege Machine Attack +30%
+March Size Capacity +10%

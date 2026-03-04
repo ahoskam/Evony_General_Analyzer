@@ -1,124 +1,107 @@
 GENERAL: Theodora
 ROLE: Unknown
+IN_TAVERN: false
+
 Leadership: 105 (8.23)
 Attack: 109 (8.45)
 Defense: 108 (8.63)
 Politics: 110 (8.85)
 
-==============================
 BASE SKILL | Legendary Empress
-==============================
-AttackingGroundAttackPct +30
-AttackingMountedAttackPct +30
-AttackingDoubleItemsDropRateFromMonstersPct +10
+GroundAttackPct +30
+MountedAttackPct +30
+AttackingMonsterDoubleItemsDropRatePct +10
 
-==============================
 ASCENSION 1
-==============================
-AttackingGroundAttackPct +10
-AttackingMountedAttackPct +10
-AttackingGroundDefensePct +20
-AttackingMountedDefensePct +20
-# Condition: When attacking Monsters
+AttackingMonsterGroundAttackPct +10
+AttackingMonsterMountedAttackPct +10
+AttackingMonsterGroundDefensePct +20
+AttackingMonsterMountedDefensePct +20
 
-==============================
 ASCENSION 2
-==============================
-AttackingEnemyDefensePct -10
-AttackingGroundHPPct +25
-AttackingMountedHPPct +25
-# Condition: When attacking Monsters
+AttackingMonsterEnemyDefenseDebuffPct -10
+AttackingMonsterGroundHPPct +25
+AttackingMonsterMountedHPPct +25
 
-==============================
 ASCENSION 3
-==============================
-AttackingEnemyAttackPct -10
-AttackingGroundDefensePct +25
-AttackingMountedDefensePct +25
-# Condition: When attacking Monsters
+AttackingMonsterEnemyAttackDebuffPct -10
+AttackingMonsterGroundDefensePct +25
+AttackingMonsterMountedDefensePct +25
 
-==============================
 ASCENSION 4
-==============================
-AttackingGroundAttackPct +20
-AttackingMountedAttackPct +20
-AttackingGroundHPPct +20
-AttackingMountedHPPct +20
-# Condition: When attacking Monsters
+AttackingMonsterGroundAttackPct +20
+AttackingMonsterMountedAttackPct +20
+AttackingMonsterGroundHPPct +20
+AttackingMonsterMountedHPPct +20
 
-==============================
 ASCENSION 5
-==============================
-AttackingGroundAttackPct +25
-AttackingMountedAttackPct +25
-AttackingGroundDefensePct +15
-AttackingMountedDefensePct +15
-AttackingGroundHPPct +15
-AttackingMountedHPPct +15
-# Condition: When attacking Monsters
+AttackingMonsterGroundAttackPct +25
+AttackingMonsterMountedAttackPct +25
+AttackingMonsterGroundDefensePct +15
+AttackingMonsterMountedDefensePct +15
+AttackingMonsterGroundHPPct +15
+AttackingMonsterMountedHPPct +15
 
-==============================
-SPECIALTIES
-==============================
-
-# SPECIALTY 1 | Inspiration
-SPECIALTY 1 L1:
-AttackingRangedAttackPct +2
-SPECIALTY 1 L2:
-AttackingRangedAttackPct +2
-SPECIALTY 1 L3:
-AttackingRangedAttackPct +4
-SPECIALTY 1 L4:
-AttackingRangedAttackPct +4
 SPECIALTY 1 L5:
-AttackingRangedAttackPct +8
-# Ranged Troop Attack on Monsters +20%
+RangedAttackAgainstMonstersPct +20
 
-# SPECIALTY 2 | Fortune
-SPECIALTY 2 L1:
-AttackingDoubleItemsDropRateFromMonstersPct +1
-SPECIALTY 2 L2:
-AttackingDoubleItemsDropRateFromMonstersPct +1
-SPECIALTY 2 L3:
-AttackingDoubleItemsDropRateFromMonstersPct +1
-SPECIALTY 2 L4:
-AttackingDoubleItemsDropRateFromMonstersPct +2
 SPECIALTY 2 L5:
-AttackingDoubleItemsDropRateFromMonstersPct +3
-# Double Items Drop Rate from Monsters +15%
+DoubleItemsDropRateFromMonstersPct +15
 
-# SPECIALTY 3 | Unparalleled Leader
-SPECIALTY 3 L1:
-AttackingTroopDeathToWoundedRatePct +1
-SPECIALTY 3 L2:
-AttackingTroopDeathToWoundedRatePct +1
-SPECIALTY 3 L3:
-AttackingTroopDeathToWoundedRatePct +2
-SPECIALTY 3 L4:
-AttackingTroopDeathToWoundedRatePct +2
 SPECIALTY 3 L5:
-AttackingTroopDeathToWoundedRatePct +4
-# The death-turning-wounded rate of troops when they are attacking +10%
+AttackingTroopDeathToWoundedRatePct +10
 
-# SPECIALTY 4 | Partner of Justinian
-SPECIALTY 4 L5CompletedTotal: 15
-AttackingGroundAttackPct +15
-AttackingMountedAttackPct +15
-AttackingMonstersAttackPct -15
+SPECIALTY 4 L5:
+GroundAttackPct +15
+MountedAttackPct +15
+EnemyMonsterAttackDebuffPct -15
+
+# None available (locked or not shown)
+
+NEW STAT KEYS NOTE:
+- AttackingMonsterDoubleItemsDropRatePct
+- AttackingMonsterEnemyDefenseDebuffPct
+- AttackingMonsterEnemyAttackDebuffPct
+- RangedAttackAgainstMonstersPct
+- DoubleItemsDropRateFromMonstersPct
+- EnemyMonsterAttackDebuffPct
 
 ==============================
-COVENANTS
+# SOURCE TEXT (VERBATIM)
 ==============================
-# None available (locked)
 
-==============================
-# NEW STAT KEYS NOTE
-==============================
-# NEW_STAT_KEYS:
-# - AttackingDoubleItemsDropRateFromMonstersPct | Double Items Drop Rate from Monsters when attacking
-# - AttackingEnemyDefensePct | Enemy Defense when attacking
-# - AttackingEnemyAttackPct | Enemy Attack when attacking
-# - AttackingMonstersAttackPct | Monsters Attack when attacking
-# - AttackingTroopDeathToWoundedRatePct | Death-turning-wounded rate when attacking
+# BASE_SKILL_TEXT:
+Legendary Empress
+Increases ground troops and mounted troops' attack by 30% and increases 10% Double Items Drop Rate from Monsters when General is leading the army to attack Monster.
 
-IN_TAVERN: false
+# ASCENSION_1_TEXT:
+When attacking Monsters, Ground Troop and Mounted Troop Attack +10% and Defense +20%
+
+# ASCENSION_2_TEXT:
+When attacking Monsters, Monsters Defense -10%, Ground Troop and Mounted Troop HP +25%
+
+# ASCENSION_3_TEXT:
+When attacking Monsters, Monsters Attack -10%, Ground Troop and Mounted Troop Defense +25%
+
+# ASCENSION_4_TEXT:
+When attacking Monsters, Ground Troop and Mounted Troop Attack +20% and HP +20%
+
+# ASCENSION_5_TEXT:
+When attacking Monsters, Ground Troop and Mounted Troop Attack +25%, Defense and HP +15%
+
+# SPECIALTY_1_L5_TEXT:
+Inspiration(Max Level Attributes)
+Ranged Troop Attack on Monsters +20%
+
+# SPECIALTY_2_L5_TEXT:
+Fortune(Max Level Attributes)
+Double Items Drop Rate from Monsters. +15%
+
+# SPECIALTY_3_L5_TEXT:
+Unparalleled Leader(Max Level Attributes)
+The death-turning-wounded rate of troops when they are attacking. +10%
+
+# SPECIALTY_4_L5_TEXT:
+Partner of Justinian(Max Level Attributes)
+Ground Troop and Mounted Troop Attack +15%
+Monsters Attack -15%

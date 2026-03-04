@@ -1,88 +1,100 @@
 GENERAL: Gustavus Adolphus
-ROLE: Unknown
+ROLE: Mixed
+IN_TAVERN: false
+
 Leadership: 106 (8.98)
 Attack: 115 (8.69)
 Defense: 95 (8.28)
 Politics: 110 (8.51)
 
-==============================
 BASE SKILL | Fire Suppression
-==============================
-Reduces enemy ranged troops and siege machines' defense by 15% and increases your ranged troops and siege machines' attack by 15% when General is leading the army.
-EnemyRangedDefensePct -15
-EnemySiegeMachineDefensePct -15
-RangedAttackPct +15
-SiegeMachineAttackPct +15
+EnemyRangedDefenseDebuffPct -15
+EnemySiegeMachineDefenseDebuffPct -15
+AttackingRangedAttackPct +15
+AttackingSiegeMachineAttackPct +15
 
-==============================
 ASCENSION 1
-==============================
-EnemyRangedTroopAndSiegeMachineHPPct -15
+EnemyRangedHPPct -15
+EnemySiegeMachineHPPct -15
 
-==============================
 ASCENSION 2
-==============================
 AttackingTroopDeathToWoundedRatePct +8
 
-==============================
 ASCENSION 3
-==============================
 MarchSizeCapacityPct +10
 
-==============================
 ASCENSION 4
-==============================
 RangedAttackPct +10
 SiegeMachineAttackPct +10
 
-==============================
 ASCENSION 5
-==============================
 RangedAttackPct +15
 SiegeMachineAttackPct +15
 
-==============================
-SPECIALTIES
-==============================
-
-# SPECIALTY 1 | Siege Machine Assault
 SPECIALTY 1 L5:
 SiegeMachineAttackPct +10
 SiegeMachineHPPct +10
 
-# SPECIALTY 2 | Bash
 SPECIALTY 2 L5:
 RangedAttackPct +10
 SiegeMachineAttackPct +10
 
-# SPECIALTY 3 | Siege Machine Ares
 SPECIALTY 3 L5:
 SiegeMachineAttackPct +10
 SiegeMachineHPPct +10
 SiegeMachineDefensePct +10
 
-# SPECIALTY 4 | Battle of Bradfield
 SPECIALTY 4 L5:
 AttackingSiegeMachineAttackPct +16
 AttackingRangedAttackPct +16
 AttackingRangedHPPct +16
 AttackingSiegeMachineHPPct +16
 
-==============================
-COVENANTS
-==============================
-# None available (locked)
+# None available (locked or not shown)
+
+NEW STAT KEYS NOTE:
+- EnemyRangedHPPct
+- EnemySiegeMachineHPPct
 
 ==============================
-# NEW STAT KEYS NOTE
+# SOURCE TEXT (VERBATIM)
 ==============================
-# NEW_STAT_KEYS:
-# - EnemyRangedTroopAndSiegeMachineHPPct | Enemy Ranged Troop and Siege Machine HP
-# - MarchSizeCapacityPct | March Size Capacity
-# - AttackingTroopDeathToWoundedRatePct | Attacking Troop Death into Wounded Rate
-# - AttackingSiegeMachineAttackPct | Attacking Siege Machine Attack
-# - AttackingRangedAttackPct | Attacking Ranged Troop Attack
-# - AttackingRangedHPPct | Attacking Ranged Troop HP
-# - AttackingSiegeMachineHPPct | Attacking Siege Machine HP
 
-IN_TAVERN: true
+# BASE_SKILL_TEXT:
+Fire Suppression
+Reduces enemy ranged troops and siege machines' defense by 15% and increases your ranged troops and siege machines' attack by 15% when General is leading the army.
+
+# ASCENSION_1_TEXT:
+Enemy Ranged Troop and Siege Machine HP -15%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+March Size Capacity +10%
+
+# ASCENSION_4_TEXT:
+Ranged Troop and Siege Machine Attack +10%
+
+# ASCENSION_5_TEXT:
+Ranged Troop and Siege Machine Attack +15%
+
+# SPECIALTY_1_L5_TEXT:
+Siege Machine Assault(Max Level Attributes)
+Siege Machine Attack +10%
+Siege Machine HP +10%
+
+# SPECIALTY_2_L5_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Siege Machine Ares(Max Level Attributes)
+Siege Machine Attack +10%
+Siege Machine HP +10%
+Siege Machine Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Battle of Bradfield(Max Level Attributes)
+Attacking Siege Machine and Ranged Troop Attack +16%
+Attacking Ranged Troop and Siege Machine HP +16%

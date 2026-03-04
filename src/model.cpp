@@ -1,6 +1,7 @@
 #include "model.h"
 #include "model_api.h"
 #include "db.h"
+#include "role_utils.h"
 
 #include <string>
 #include <vector>
@@ -28,8 +29,10 @@ std::vector<GeneralRow> db_load_general_list(Db& db, const std::string& role_fil
     "     WHERE s.general_id = g.id AND s.context_type = 'BaseSkill') AS base_cnt, "
     "  (SELECT COUNT(DISTINCT s.context_name) FROM stat_occurrences s "
     "     WHERE s.general_id = g.id AND s.context_type = 'Ascension') AS asc_cnt, "
-    "  (SELECT COUNT(DISTINCT s.context_name) FROM stat_occurrences s "
-    "     WHERE s.general_id = g.id AND s.context_type = 'Specialty' AND s.is_total = 1) AS spec_cnt, "
+    "  (SELECT COUNT(DISTINCT CAST(TRIM(SUBSTR(s.context_name, INSTR(s.context_name, ' ') + 1)) AS INT)) "
+    "     FROM stat_occurrences s "
+    "     WHERE s.general_id = g.id AND s.context_type = 'Specialty' "
+    "       AND CAST(TRIM(SUBSTR(s.context_name, INSTR(s.context_name, ' ') + 1)) AS INT) > 0) AS spec_cnt, "
     "  COALESCE((SELECT MAX(CAST(TRIM(SUBSTR(s.context_name, 10)) AS INT)) FROM stat_occurrences s "
     "     WHERE s.general_id = g.id AND s.context_type = 'Covenant' "
     "       AND (s.context_name LIKE 'COVENANT %' OR s.context_name LIKE 'Covenant %')), 0) AS cov_max "
@@ -38,6 +41,10 @@ std::vector<GeneralRow> db_load_general_list(Db& db, const std::string& role_fil
 
   int bind = 1;
   bool has_role = (!role_filter.empty() && role_filter != "All");
+  std::string normalized_role_filter;
+  if (has_role) {
+    normalized_role_filter = normalize_general_role(role_filter);
+  }
   bool has_like = (!name_like.empty());
 
   if (has_role) sql += "AND g.role=?1 ";
@@ -45,7 +52,7 @@ std::vector<GeneralRow> db_load_general_list(Db& db, const std::string& role_fil
   sql += "ORDER BY g.name;";
 
   DbStmt st(db, sql.c_str());
-  if (has_role) st.bind_text(bind++, role_filter.c_str());
+  if (has_role) st.bind_text(bind++, normalized_role_filter.c_str());
   if (has_like) {
     std::string like = "%" + name_like + "%";
     st.bind_text(bind++, like.c_str());
@@ -56,7 +63,7 @@ std::vector<GeneralRow> db_load_general_list(Db& db, const std::string& role_fil
     GeneralRow g{};
     g.id = st.col_int(0);
     g.name = st.col_text(1);
-    g.role = st.col_text(2);
+    g.role = normalize_general_role(st.col_text(2));
     g.double_checked_in_game = st.col_int(3);
 
     const int has_source = st.col_int(4);
@@ -107,7 +114,7 @@ GeneralMeta db_load_general_meta(Db& db, int id)
   if (st.step()) {
     m.id = st.col_int(0);
     m.name = st.col_text(1);
-    m.role = st.col_text(2);
+    m.role = normalize_general_role(st.col_text(2));
     m.in_tavern = st.col_int(3);
     m.base_skill_name = st.col_text(4);
 
@@ -134,7 +141,8 @@ std::vector<Occurrence> db_load_occurrences(Db& db, int general_id)
     " o.id, o.general_id, o.stat_key_id, k.key, o.value, "
     " o.context_type, o.context_name, o.level, o.is_total, "
     " o.file_path, o.line_number, o.raw_line, "
-    " o.origin, o.generated_from_total_id, o.edited_by_user "
+    " o.origin, o.generated_from_total_id, o.edited_by_user, "
+    " o.stat_checked_in_game "
     "FROM stat_occurrences o "
     "JOIN stat_keys k ON k.id=o.stat_key_id "
     "WHERE o.general_id=?1 "
@@ -163,6 +171,7 @@ std::vector<Occurrence> db_load_occurrences(Db& db, int general_id)
     o.origin = st.col_text(12);
     if (!st.col_is_null(13)) o.generated_from_total_id = st.col_int(13);
     o.edited_by_user = st.col_int(14);
+    o.stat_checked_in_game = st.col_int(15);
 
     out.push_back(std::move(o));
   }
@@ -173,7 +182,7 @@ std::vector<PendingExample> db_load_pending_examples_for_general(Db& db, const s
 {
   DbStmt st(db,
     "SELECT "
-    " e.pending_id, p.raw_key, e.value, "
+    " e.id, e.pending_id, p.raw_key, e.value, "
     " e.context_type, e.context_name, e.level, "
     " e.file_path, e.line_number, e.raw_line "
     "FROM pending_stat_key_examples e "
@@ -185,15 +194,16 @@ std::vector<PendingExample> db_load_pending_examples_for_general(Db& db, const s
   std::vector<PendingExample> out;
   while (st.step()) {
     PendingExample p{};
-    p.pending_id = st.col_int(0);
-    p.raw_key = st.col_text(1);
-    p.value = st.col_double(2);
-    p.context_type = st.col_text(3);
-    p.context_name = st.col_text(4);
-    if (!st.col_is_null(5)) p.level = st.col_int(5);
-    p.file_path = st.col_text(6);
-    p.line_number = st.col_int(7);
-    p.raw_line = st.col_text(8);
+    p.id = st.col_int(0);
+    p.pending_id = st.col_int(1);
+    p.raw_key = st.col_text(2);
+    p.value = st.col_double(3);
+    p.context_type = st.col_text(4);
+    p.context_name = st.col_text(5);
+    if (!st.col_is_null(6)) p.level = st.col_int(6);
+    p.file_path = st.col_text(7);
+    p.line_number = st.col_int(8);
+    p.raw_line = st.col_text(9);
     out.push_back(std::move(p));
   }
   return out;
@@ -206,6 +216,62 @@ LoadAllResult db_load_all_for_general(Db& db, int general_id)
   r.occ = db_load_occurrences(db, general_id);
   r.pending = db_load_pending_examples_for_general(db, r.meta.name);
   return r;
+}
+
+void db_normalize_general_roles(Db& db)
+{
+  db.exec(
+    "DROP TRIGGER IF EXISTS trg_generals_role_valid_insert;"
+    "DROP TRIGGER IF EXISTS trg_generals_role_valid_update;"
+    "CREATE TRIGGER trg_generals_role_valid_insert "
+    "BEFORE INSERT ON generals "
+    "FOR EACH ROW "
+    "BEGIN "
+    "  SELECT CASE "
+    "    WHEN NEW.role NOT IN ('Ground','Mounted','Ranged','Siege','Defense','Mixed','Admin','Duty','Mayor','Unknown') "
+    "    THEN RAISE(ABORT, 'Invalid generals.role') "
+    "  END; "
+    "END;"
+    "CREATE TRIGGER trg_generals_role_valid_update "
+    "BEFORE UPDATE OF role ON generals "
+    "FOR EACH ROW "
+    "BEGIN "
+    "  SELECT CASE "
+    "    WHEN NEW.role NOT IN ('Ground','Mounted','Ranged','Siege','Defense','Mixed','Admin','Duty','Mayor','Unknown') "
+    "    THEN RAISE(ABORT, 'Invalid generals.role') "
+    "  END; "
+    "END;"
+  );
+
+  db.exec(
+    "UPDATE generals "
+    "SET role = CASE "
+    "  WHEN LOWER(TRIM(role)) LIKE 'admin%' THEN 'Admin' "
+    "  WHEN LOWER(TRIM(role))='ground' THEN 'Ground' "
+    "  WHEN LOWER(TRIM(role))='mounted' THEN 'Mounted' "
+    "  WHEN LOWER(TRIM(role))='ranged' THEN 'Ranged' "
+    "  WHEN LOWER(TRIM(role))='siege' THEN 'Siege' "
+    "  WHEN LOWER(TRIM(role))='defense' THEN 'Defense' "
+    "  WHEN LOWER(TRIM(role))='mixed' THEN 'Mixed' "
+    "  WHEN LOWER(TRIM(role))='duty' THEN 'Duty' "
+    "  WHEN LOWER(TRIM(role))='mayor' THEN 'Mayor' "
+    "  WHEN LOWER(TRIM(role))='unknown' THEN 'Unknown' "
+    "  ELSE 'Unknown' "
+    "END "
+    "WHERE role <> CASE "
+    "  WHEN LOWER(TRIM(role)) LIKE 'admin%' THEN 'Admin' "
+    "  WHEN LOWER(TRIM(role))='ground' THEN 'Ground' "
+    "  WHEN LOWER(TRIM(role))='mounted' THEN 'Mounted' "
+    "  WHEN LOWER(TRIM(role))='ranged' THEN 'Ranged' "
+    "  WHEN LOWER(TRIM(role))='siege' THEN 'Siege' "
+    "  WHEN LOWER(TRIM(role))='defense' THEN 'Defense' "
+    "  WHEN LOWER(TRIM(role))='mixed' THEN 'Mixed' "
+    "  WHEN LOWER(TRIM(role))='duty' THEN 'Duty' "
+    "  WHEN LOWER(TRIM(role))='mayor' THEN 'Mayor' "
+    "  WHEN LOWER(TRIM(role))='unknown' THEN 'Unknown' "
+    "  ELSE 'Unknown' "
+    "END;"
+  );
 }
 // -------------------------
 // WRITE API (needed by UI)
@@ -228,6 +294,7 @@ static void bind_null(sqlite3_stmt* s, int idx) {
 bool db_update_general_meta(Db& db, int general_id, const GeneralMeta& g)
 {
   try {
+    const std::string normalized_role = normalize_general_role(g.role);
     auto st = db.prepare(
       "UPDATE generals SET "
       " role=?1, in_tavern=?2, base_skill_name=?3, "
@@ -239,7 +306,7 @@ bool db_update_general_meta(Db& db, int general_id, const GeneralMeta& g)
       "WHERE id=?15;"
     );
 
-    bind_text(st.stmt, 1, g.role);
+    bind_text(st.stmt, 1, normalized_role);
     bind_int (st.stmt, 2, g.in_tavern);
     bind_text(st.stmt, 3, g.base_skill_name);
 
@@ -283,12 +350,14 @@ int db_insert_occurrence(Db& db, Occurrence& o)
     " general_id, stat_key_id, value, "
     " context_type, context_name, level, is_total, "
     " file_path, line_number, raw_line, "
-    " origin, generated_from_total_id, edited_by_user"
+    " origin, generated_from_total_id, edited_by_user, "
+    " stat_checked_in_game"
     ") VALUES("
     " ?1, ?2, ?3, "
     " ?4, ?5, ?6, ?7, "
     " ?8, ?9, ?10, "
-    " ?11, ?12, ?13"
+    " ?11, ?12, ?13, "
+    " ?14"
     ");"
   );
 
@@ -314,6 +383,7 @@ int db_insert_occurrence(Db& db, Occurrence& o)
   else bind_null(st.stmt, 12);
 
   bind_int(st.stmt, 13, o.edited_by_user);
+  bind_int(st.stmt, 14, o.stat_checked_in_game);
 
   st.step_done();
 
@@ -328,8 +398,9 @@ void db_update_occurrence(Db& db, const Occurrence& o)
     " stat_key_id=?1, value=?2, "
     " context_type=?3, context_name=?4, level=?5, is_total=?6, "
     " file_path=?7, line_number=?8, raw_line=?9, "
-    " origin=?10, generated_from_total_id=?11, edited_by_user=?12 "
-    "WHERE id=?13;"
+    " origin=?10, generated_from_total_id=?11, edited_by_user=?12, "
+    " stat_checked_in_game=?13 "
+    "WHERE id=?14;"
   );
 
   bind_int(st.stmt, 1, o.stat_key_id);
@@ -353,7 +424,8 @@ void db_update_occurrence(Db& db, const Occurrence& o)
   else bind_null(st.stmt, 11);
 
   bind_int(st.stmt, 12, o.edited_by_user);
-  bind_int(st.stmt, 13, o.id);
+  bind_int(st.stmt, 13, o.stat_checked_in_game);
+  bind_int(st.stmt, 14, o.id);
 
   st.step_done();
 }

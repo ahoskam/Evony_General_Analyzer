@@ -35,6 +35,11 @@ struct EditorState {
 
   // modal state
   bool show_dirty_modal = false;
+  bool show_unmapped_delete_modal = false;
+  int pending_unmapped_delete_pending_id = 0;
+  std::string pending_unmapped_delete_context_type;
+  int pending_unmapped_delete_context_index = 0;
+  std::string pending_unmapped_delete_raw_key;
 
   // UI mode
   // pretty_view = true: read-only, compact verification view

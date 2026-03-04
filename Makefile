@@ -4,7 +4,7 @@ CXXFLAGS := -std=c++20 -Wall -Wextra -Wpedantic -O0 -MMD -MP
 BUILD := build
 OBJ := $(BUILD)/obj
 
-INC := -Iinclude -Isrc -Iexternal/imgui -Iexternal/imgui/backends -Iexternal/imgui/misc/cpp
+INC := -Isrc -Iexternal/imgui -Iexternal/imgui/backends -Iexternal/imgui/misc/cpp
 
 GLFW_CFLAGS := $(shell pkg-config --cflags glfw3 2>/dev/null)
 GLFW_LIBS   := $(shell pkg-config --libs glfw3 2>/dev/null)
@@ -13,7 +13,7 @@ SQL_CFLAGS := $(shell pkg-config --cflags sqlite3 2>/dev/null)
 SQL_LIBS   := $(shell pkg-config --libs sqlite3 2>/dev/null)
 
 GUI_CXXFLAGS := $(CXXFLAGS) $(INC) $(GLFW_CFLAGS) $(SQL_CFLAGS)
-IMP_CXXFLAGS := $(CXXFLAGS) -Iinclude -Isrc $(SQL_CFLAGS)
+IMP_CXXFLAGS := $(CXXFLAGS) -Isrc $(SQL_CFLAGS)
 
 GUI_LIBS := $(GLFW_LIBS) $(SQL_LIBS) -lGL -ldl -lpthread
 IMP_LIBS := $(SQL_LIBS)

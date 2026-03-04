@@ -1,96 +1,105 @@
 GENERAL: Cnut the Great
-ROLE: Unknown
+ROLE: Mayor
+IN_TAVERN: false
+
 Leadership: 110 (8.83)
 Attack: 109 (8.37)
 Defense: 106 (8.62)
 Politics: 113 (8.97)
 
-==============================
 BASE SKILL | Chief of Expedition
-==============================
-EnemyRangedTroopAttackPct -25
-EnemyGroundTroopHPPct -15
-EnemyMountedTroopHPPct -15
+EnemyRangedAttackDebuffPct +25
+EnemyGroundHPPct -15
+EnemyMountedHPPct -15
 
-==============================
 ASCENSION 1
-==============================
-EnemyRangedTroopAttackPct -5
-EnemySiegeMachineAttackPct -5
-EnemyGroundTroopDefensePct -15
-EnemyMountedTroopDefensePct -15
+EnemyRangedAttackDebuffPct -5
+EnemySiegeMachineAttackDebuffPct -5
+EnemyGroundDefenseDebuffPct -15
+EnemyMountedDefenseDebuffPct -15
 
-==============================
 ASCENSION 2
-==============================
-EnemyGroundTroopHPPct -15
-EnemyMountedTroopHPPct -15
-WhenGeneralIsMayorTrainingSpeedInThisSubordinateCityPct +15
+EnemyGroundHPPct -15
+EnemyMountedHPPct -15
+MayorTrainingSpeedPct +15
 
-==============================
 ASCENSION 3
-==============================
-EnemyGroundTroopDefensePct -20
-EnemyMountedTroopDefensePct -20
-WhenGeneralIsMayorDeathIntoSurvivalRateInThisSubordinateCityPct +15
+EnemyGroundDefenseDebuffPct -20
+EnemyMountedDefenseDebuffPct -20
+MayorDeathIntoSurvivalRatePct +15
 
-==============================
 ASCENSION 4
-==============================
-EnemyRangedTroopAttackPct -10
-EnemySiegeMachineAttackPct -10
-EnemyGroundTroopHPPct -20
-EnemyMountedTroopHPPct -20
+EnemyRangedAttackDebuffPct -10
+EnemySiegeMachineAttackDebuffPct -10
+EnemyGroundHPPct -20
+EnemyMountedHPPct -20
 
-==============================
 ASCENSION 5
-==============================
-EnemyRangedTroopAttackPct -15
-EnemySiegeMachineAttackPct -15
-EnemyGroundTroopDefensePct -25
-EnemyMountedTroopDefensePct -25
+EnemyRangedAttackDebuffPct -15
+EnemySiegeMachineAttackDebuffPct -15
+EnemyGroundDefenseDebuffPct -25
+EnemyMountedDefenseDebuffPct -25
 
-==============================
-SPECIALTIES
-==============================
-
-# SPECIALTY 1 | Mounted Troop Assault
 SPECIALTY 1 L5:
 MountedAttackPct +10
 MountedHPPct +10
 
-# SPECIALTY 2 | Snipe
 SPECIALTY 2 L5:
-EnemyTroopAttackPct -10
+EnemyTroopAttackDebuffPct -10
 
-# SPECIALTY 3 | Ruler
 SPECIALTY 3 L5:
-# Applied to Subordinate City Mayor
-TroopCapacityInSubordinateCityPct +36
+SubCityTroopCapacityPct +36
 
-# SPECIALTY 4 | The North Sea Empire
 SPECIALTY 4 L5:
-EnemyRangedTroopAttackPct -26
-EnemyRangedTroopDefensePct -26
-EnemyRangedTroopHPPct -26
+EnemyRangedAttackDebuffPct -26
+EnemyRangedDefenseDebuffPct -26
+EnemyRangedHPPct -26
+
+COVENANT | War
+# None available (locked or not shown)
 
 ==============================
-COVENANTS
+# SOURCE TEXT (VERBATIM)
 ==============================
-# None available (locked)
 
-==============================
-# NEW STAT KEYS NOTE
-==============================
-# NEW_STAT_KEYS:
-# - EnemyGroundTroopHPPct
-# - EnemyMountedTroopHPPct
-# - EnemyGroundTroopDefensePct
-# - EnemyMountedTroopDefensePct
-# - EnemySiegeMachineAttackPct
-# - EnemyTroopAttackPct
-# - TroopCapacityInSubordinateCityPct
-# - WhenGeneralIsMayorTrainingSpeedInThisSubordinateCityPct
-# - WhenGeneralIsMayorDeathIntoSurvivalRateInThisSubordinateCityPct
+# BASE_SKILL_TEXT:
+Chief of Expedition
+Reduces enemy ranged troops' attack by 25%, and enemy ground troops and mounted troops' HP by 15% when General is leading the army.
 
-IN_TAVERN: false
+# ASCENSION_1_TEXT:
+Enemy Ranged Troop and Siege Machine Attack -5%, Enemy Ground Troop and Mounted Troop Defense -15%
+
+# ASCENSION_2_TEXT:
+Enemy Ground Troop and Mounted Troop HP -15%; when General is the Mayor, Training Speed in this Subordinate City +15%
+
+# ASCENSION_3_TEXT:
+Enemy Ground Troop and Mounted Troop Defense -20%; when General is the Mayor, Death into Survival Rate in this Subordinate City +15%
+
+# ASCENSION_4_TEXT:
+Enemy Ranged Troop and Siege Machine Attack -10%, Enemy Ground Troop and Mounted Troop HP -20%
+
+# ASCENSION_5_TEXT:
+Enemy Ranged Troop and Siege Machine Attack -15%, Enemy Ground Troop and Mounted Troop Defense -25%
+
+# SPECIALTY_1_L5_TEXT:
+Mounted Troop Assault(Max Level Attributes)
+Mounted Troop Attack +10%
+Mounted Troop HP +10%
+
+# SPECIALTY_2_L5_TEXT:
+Snipe(Max Level Attributes)
+Enemy Troop Attack -10%
+
+# SPECIALTY_3_L5_TEXT:
+Ruler(Max Level Attributes)
+Applied to Subordinate City Mayor
+Increases Troop Capacity in Subordinate City. +36%
+
+# SPECIALTY_4_L5_TEXT:
+The North Sea Empire(Max Level Attributes)
+Enemy Ranged Troop Attack -26%
+Enemy Ranged Troop Defense -26%
+Enemy Ranged Troop HP -26%
+
+# COVENANT_TEXT:
+# None available (locked or not shown)

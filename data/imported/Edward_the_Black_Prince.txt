@@ -1,119 +1,91 @@
 GENERAL: Edward the Black Prince
-ROLE: Unknown
+ROLE: Ranged
+IN_TAVERN: false
+
 Leadership: 111 (8.96)
 Attack: 109 (8.39)
 Defense: 116 (8.83)
 Politics: 93 (7.94)
 
-==============================
 BASE SKILL | Rain of Arrows
-==============================
-LeadingRangedAttackPct +25
-LeadingEnemyMountedAttackDebuffPct +15
+AttackingRangedTroopAttackPct +25
+EnemyMountedTroopAttackPct -15
 
-==============================
 ASCENSION 1
-==============================
-RangedAttackPct +5
-EnemyMountedDefenseDebuffPct +15
+RangedTroopAttackPct +5
+EnemyMountedTroopDefensePct -15
 
-==============================
 ASCENSION 2
-==============================
-EnemyInCityTroopWoundedIntoDeathRatePct +8
+EnemyInCityTroopDeathToWoundedRatePct +8
 
-==============================
 ASCENSION 3
-==============================
 MarchSizeCapacityPct +10
 
-==============================
 ASCENSION 4
-==============================
-RangedAttackPct +10
-EnemyMountedHPDebuffPct +20
+RangedTroopAttackPct +10
+EnemyMountedTroopHPPct -20
 
-==============================
 ASCENSION 5
-==============================
-RangedAttackPct +15
-EnemyMountedAttackDebuffPct +5
+RangedTroopAttackPct +15
+EnemyMountedTroopAttackPct -5
 
-==============================
-SPECIALTIES
-==============================
-
-# SPECIALTY 1 | Ranged Troop Assault
-SPECIALTY 1 L1:
-LeadingRangedAttackPct +1
-LeadingRangedHPPct +1
-SPECIALTY 1 L2:
-LeadingRangedAttackPct +1
-LeadingRangedHPPct +1
-SPECIALTY 1 L3:
-LeadingRangedAttackPct +2
-LeadingRangedHPPct +2
-SPECIALTY 1 L4:
-LeadingRangedAttackPct +2
-LeadingRangedHPPct +2
 SPECIALTY 1 L5:
-LeadingRangedAttackPct +4
-LeadingRangedHPPct +4
+RangedTroopAttackPct +10
+RangedTroopHPPct +10
 
-# SPECIALTY 2 | Suppress
-SPECIALTY 2 L1:
-LeadingEnemyTroopHPDebuffPct +1
-SPECIALTY 2 L2:
-LeadingEnemyTroopHPDebuffPct +1
-SPECIALTY 2 L3:
-LeadingEnemyTroopHPDebuffPct +2
-SPECIALTY 2 L4:
-LeadingEnemyTroopHPDebuffPct +2
 SPECIALTY 2 L5:
-LeadingEnemyTroopHPDebuffPct +4
+EnemyTroopHPPct -10
 
-# SPECIALTY 3 | Ranged Troop Ares
-SPECIALTY 3 L1:
-LeadingRangedAttackPct +1
-LeadingRangedHPPct +1
-LeadingRangedDefensePct +1
-SPECIALTY 3 L2:
-LeadingRangedAttackPct +1
-LeadingRangedHPPct +1
-LeadingRangedDefensePct +1
-SPECIALTY 3 L3:
-LeadingRangedAttackPct +2
-LeadingRangedHPPct +2
-LeadingRangedDefensePct +2
-SPECIALTY 3 L4:
-LeadingRangedAttackPct +2
-LeadingRangedHPPct +2
-LeadingRangedDefensePct +2
 SPECIALTY 3 L5:
-LeadingRangedAttackPct +4
-LeadingRangedHPPct +4
-LeadingRangedDefensePct +4
+RangedTroopAttackPct +10
+RangedTroopHPPct +10
+RangedTroopDefensePct +10
 
-# SPECIALTY 4 | Battle of Poitiers
-SPECIALTY 4 L5CompletedTotal: 26
-LeadingRangedAttackPct +26
-LeadingRangedHPPct +26
+SPECIALTY 4 L5:
+RangedTroopAttackPct +26
+RangedTroopHPPct +26
 
-==============================
-COVENANTS
-==============================
-# None available (locked)
+# None available (locked or not shown)
 
 ==============================
-# NEW STAT KEYS NOTE
+# SOURCE TEXT (VERBATIM)
 ==============================
-# NEW_STAT_KEYS:
-# - LeadingRangedAttackPct | Ranged troops' attack when General is leading the army
-# - LeadingEnemyMountedAttackDebuffPct | Reduces enemy mounted troops' attack when General is leading the army
-# - EnemyInCityTroopWoundedIntoDeathRatePct | Enemy in-city troop wounded into death rate
-# - MarchSizeCapacityPct | March Size Capacity
-# - LeadingRangedHPPct | Ranged troops' HP when General is leading the army
-# - LeadingEnemyTroopHPDebuffPct | Enemy troop HP - when General is leading the army
-# - LeadingRangedDefensePct | Ranged troops' defense when General is leading the army
 
-IN_TAVERN: true
+# BASE_SKILL_TEXT:
+Rain of Arrows
+Increases your ranged troops' attack by 25% and reduces enemy mounted troops' attack by 15% when General is leading the army.
+
+# ASCENSION_1_TEXT:
+Ranged Troop Attack +5%, Enemy Mounted Troop Defense -15%
+
+# ASCENSION_2_TEXT:
+Enemy In-city Troop Wounded into Death rate +8%
+
+# ASCENSION_3_TEXT:
+March Size Capacity +10%
+
+# ASCENSION_4_TEXT:
+Ranged Troop Attack +10%, Enemy Mounted Troop HP -20%
+
+# ASCENSION_5_TEXT:
+Ranged Troop Attack +15%, Enemy Mounted Troop Attack -5%
+
+# SPECIALTY_1_L5_TEXT:
+Ranged Troop Assault(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop HP +10%
+
+# SPECIALTY_2_L5_TEXT:
+Suppress(Max Level Attributes)
+Enemy Troop HP -10%
+
+# SPECIALTY_3_L5_TEXT:
+Ranged Troop Ares(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop HP +10%
+Ranged Troop Defense +10%
+
+# SPECIALTY_4_L5_TEXT:
+Battle of Poitiers(Max Level Attributes)
+Ranged Troop Attack +26%
+Ranged Troop HP +26%

@@ -1,5 +1,5 @@
 GENERAL: Arminius
-ROLE: Unknown
+ROLE: Mayor
 IN_TAVERN: true
 
 Leadership: 115 (8.73)
@@ -7,95 +7,91 @@ Attack: 113 (8.42)
 Defense: 107 (8.52)
 Politics: 109 (9.06)
 
-==============================
 BASE SKILL | Germanic Hero
-==============================
 EnemyGroundTroopHPPct -10
 EnemyMountedTroopHPPct -10
 EnemyRangedTroopAttackPct -15
 EnemySiegeMachineAttackPct -15
-Condition: When General is leading the army
 
-==============================
 ASCENSION 1
-==============================
 EnemyGroundTroopHPPct -10
 EnemyMountedTroopHPPct -10
 
-==============================
 ASCENSION 2
-==============================
 EnemyGroundTroopDefensePct -5
 EnemyMountedTroopDefensePct -5
-When General is the Mayor:
-    SubCityDeathToSurvivalRatePct +10
+MayorSubCityDeathIntoSurvivalRatePct +10
 
-==============================
 ASCENSION 3
-==============================
 EnemyGroundTroopDefensePct -5
 EnemyMountedTroopDefensePct -5
-When General is the Mayor:
-    SubCityTrainingSpeedPct +20
+MayorSubCityTrainingSpeedPct +20
 
-==============================
 ASCENSION 4
-==============================
 EnemyRangedTroopDefensePct -15
 EnemyRangedTroopHPPct -15
 EnemySiegeMachineDefensePct -15
 EnemySiegeMachineHPPct -15
 
-==============================
 ASCENSION 5
-==============================
 EnemyRangedTroopAttackPct -10
 EnemyRangedTroopHPPct -10
 EnemySiegeMachineAttackPct -10
 EnemySiegeMachineHPPct -10
 
-==============================
-SPECIALTIES
-==============================
-
-# SPECIALTY 1 | Ranged Troop Assault
 SPECIALTY 1 L5:
-RangedAttackPct +10
-RangedHPPct +10
+RangedTroopAttackPct +10
+RangedTroopHPPct +10
 
-# SPECIALTY 2 | Snipe
 SPECIALTY 2 L5:
 EnemyTroopAttackPct -10
 
-# SPECIALTY 3 | Iron Warrior
 SPECIALTY 3 L5:
-EnemyWoundedToDeathWhenAttackingPct +10
+AttackingEnemyWoundedIntoDeathRatePct +10
 
-# SPECIALTY 4 | Battle of the Teutoburg Forest
 SPECIALTY 4 L5:
 EnemyGroundTroopHPPct -30
 EnemyMountedTroopHPPct -30
 
-==============================
-COVENANTS
-==============================
-# None available (locked)
+COVENANT:
+# None available (locked or not shown)
 
 ==============================
-# NEW STAT KEYS NOTE
+# SOURCE TEXT (VERBATIM)
 ==============================
-# NEW_STAT_KEYS:
-# - EnemyGroundTroopHPPct
-# - EnemyMountedTroopHPPct
-# - EnemyRangedTroopAttackPct
-# - EnemySiegeMachineAttackPct
-# - EnemyGroundTroopDefensePct
-# - EnemyMountedTroopDefensePct
-# - SubCityDeathToSurvivalRatePct
-# - SubCityTrainingSpeedPct
-# - EnemyRangedTroopDefensePct
-# - EnemyRangedTroopHPPct
-# - EnemySiegeMachineDefensePct
-# - EnemySiegeMachineHPPct
-# - EnemyTroopAttackPct
-# - EnemyWoundedToDeathWhenAttackingPct
+
+# BASE_SKILL_TEXT:
+Germanic Hero
+Reduces enemy ground troops and mounted troops' HP by 10% and enemy ranged troops and siege machines' attack by 15% when General is leading the army.
+
+# ASCENSION_1_TEXT:
+Enemy Ground Troop and Mounted Troop HP -10%
+
+# ASCENSION_2_TEXT:
+Enemy Ground Troop and Mounted Troop Defense -5%; when General is the Mayor, Death into Survival Rate in this Subordinate City +10%
+
+# ASCENSION_3_TEXT:
+Enemy Ground Troop and Mounted Troop Defense -5%; when General is the Mayor, Training Speed in this Subordinate City +20%
+
+# ASCENSION_4_TEXT:
+Enemy Ranged Troop and Siege Machine Defense and HP -15%
+
+# ASCENSION_5_TEXT:
+Enemy Ranged Troop and Siege Machine Attack -10% and HP -10%
+
+# SPECIALTY_1_L5_TEXT:
+Ranged Troop Assault(Max Level Attributes)
+Ranged Troop Attack +10%
+Ranged Troop HP +10%
+
+# SPECIALTY_2_L5_TEXT:
+Snipe(Max Level Attributes)
+Enemy Troop Attack -10%
+
+# SPECIALTY_3_L5_TEXT:
+Iron Warrior(Max Level Attributes)
+Enemy Wounded into Death when attacking +10%
+
+# SPECIALTY_4_L5_TEXT:
+Battle of the Teutoburg Forest(Max Level Attributes)
+Enemy Ground Troop and Mounted Troop HP -30%

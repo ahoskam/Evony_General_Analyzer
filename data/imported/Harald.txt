@@ -1,76 +1,93 @@
 GENERAL: Harald
 ROLE: Unknown
+IN_TAVERN: false
+
 Leadership: 110 (8.85)
 Attack: 113 (8.77)
 Defense: 112 (8.88)
 Politics: 103 (8.64)
 
-==============================
 BASE SKILL | King of the Vikings
-==============================
-Reduces enemy troops' attack by 10% and reduces enemy troops' HP by 10% when General is leading the army.
-
-==============================
-ASCENSION 1
-==============================
-EnemyTroopDefensePct -10
-
-==============================
-ASCENSION 2
-==============================
-EnemyRangedTroopDefensePct -10
-EnemySiegeMachineDefensePct -10
-SubordinateCityTrainingSpeedPct +20
-
-==============================
-ASCENSION 3
-==============================
-EnemyGroundTroopDefensePct -10
-EnemyMountedTroopDefensePct -10
-SubordinateCityDeathIntoSurvivalRatePct +15
-
-==============================
-ASCENSION 4
-==============================
+EnemyTroopAttackDebuffPct -10
 EnemyTroopHPPct -10
 
-==============================
+ASCENSION 1
+EnemyTroopDefenseDebuffPct -10
+
+ASCENSION 2
+EnemyRangedTroopDefenseDebuffPct -10
+EnemySiegeMachineDefenseDebuffPct -10
+SubCityTrainingSpeedPct +20
+
+ASCENSION 3
+EnemyGroundTroopDefenseDebuffPct -10
+EnemyMountedTroopDefenseDebuffPct -10
+SubCityDeathIntoSurvivalRatePct +15
+
+ASCENSION 4
+EnemyTroopHPPct -10
+
 ASCENSION 5
-==============================
-EnemyTroopAttackPct -10
+EnemyTroopAttackDebuffPct -10
 
-==============================
-SPECIALTIES
-==============================
-
-# SPECIALTY 1 | Siege Machine Assault
 SPECIALTY 1 L5:
 SiegeMachineAttackPct +10
 SiegeMachineHPPct +10
 
-# SPECIALTY 2 | Sabotage
 SPECIALTY 2 L5:
-EnemyTroopDefensePct -10
+EnemyTroopDefenseDebuffPct -10
 
-# SPECIALTY 3 | King's Ambition
 SPECIALTY 3 L5:
-TroopDeathIntoTroopSoulRateMainCityPct +10
+InCityTroopDeathIntoSoulRatePct +10
 
-# SPECIALTY 4 | Harald Bluetooth
 SPECIALTY 4 L5:
-EnemyWoundedToDeathWhenAttackingPct +10
-EnemyTroopDefensePct -10
+AttackingEnemyWoundedIntoDeathRatePct +10
+EnemyTroopDefenseDebuffPct -10
+
+# None available (locked or not shown)
+
+NEW STAT KEYS NOTE:
+- SubCityDeathIntoSurvivalRatePct
+- InCityTroopDeathIntoSoulRatePct
+- AttackingEnemyWoundedIntoDeathRatePct
 
 ==============================
-COVENANTS
+# SOURCE TEXT (VERBATIM)
 ==============================
-# None available (locked)
 
-==============================
-# NEW STAT KEYS NOTE
-==============================
-# NEW_STAT_KEYS:
-# - TroopDeathIntoTroopSoulRateMainCityPct | Troop death into troop soul rate in the main city
-# - SubordinateCityDeathIntoSurvivalRatePct | Death into Survival Rate in this Subordinate City
+# BASE_SKILL_TEXT:
+King of the Vikings
+Reduces enemy troops' attack by 10% and reduces enemy troops' HP by 10% when General is leading the army.
 
-IN_TAVERN: true
+# ASCENSION_1_TEXT:
+Enemy Troop Defense -10%
+
+# ASCENSION_2_TEXT:
+Enemy Ranged Troop and Siege Machine Defense -10%; when General is the Mayor, Training Speed in this Subordinate City +20%
+
+# ASCENSION_3_TEXT:
+Enemy Ground Troop and Mounted Troop Defense -10%; when General is the Mayor, Death into Survival Rate in this Subordinate City +15%
+
+# ASCENSION_4_TEXT:
+Enemy Troop HP -10%
+
+# ASCENSION_5_TEXT:
+Enemy Troop Attack -10%
+
+# SPECIALTY_1_L5_TEXT:
+Siege Machine Assault(Max Level Attributes)
+Siege Machine Attack +10%
+Siege Machine HP +10%
+
+# SPECIALTY_2_L5_TEXT:
+Sabotage(Max Level Attributes)
+Enemy Troop Defense -10%
+
+# SPECIALTY_3_L5_TEXT:
+King’s Ambition(Max Level Attributes)
+Troop death into troop soul rate in the main city +10%
+
+# SPECIALTY_4_L5_TEXT:
+Harald Bluetooth(Max Level Attributes)
+Enemy Wounded into Death when attacking +10%
+Enemy Troop Defense -10%

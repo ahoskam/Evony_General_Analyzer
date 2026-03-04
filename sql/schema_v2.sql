@@ -24,6 +24,26 @@ CREATE TABLE generals (
     politics_green  REAL NOT NULL
 );
 
+CREATE TRIGGER trg_generals_role_valid_insert
+BEFORE INSERT ON generals
+FOR EACH ROW
+BEGIN
+  SELECT CASE
+    WHEN NEW.role NOT IN ('Ground','Mounted','Ranged','Siege','Defense','Mixed','Admin','Duty','Mayor','Unknown')
+    THEN RAISE(ABORT, 'Invalid generals.role')
+  END;
+END;
+
+CREATE TRIGGER trg_generals_role_valid_update
+BEFORE UPDATE OF role ON generals
+FOR EACH ROW
+BEGIN
+  SELECT CASE
+    WHEN NEW.role NOT IN ('Ground','Mounted','Ranged','Siege','Defense','Mixed','Admin','Duty','Mayor','Unknown')
+    THEN RAISE(ABORT, 'Invalid generals.role')
+  END;
+END;
+
 -- ==========================================
 -- CANONICAL STAT KEYS
 -- ==========================================
@@ -79,6 +99,10 @@ CREATE TABLE stat_occurrences (
     file_path       TEXT NOT NULL,
     line_number     INTEGER NOT NULL,
     raw_line        TEXT NOT NULL,
+    origin          TEXT NOT NULL DEFAULT 'imported' CHECK (origin IN ('imported','generated','gui')),
+    generated_from_total_id INTEGER,
+    edited_by_user  INTEGER NOT NULL DEFAULT 0 CHECK (edited_by_user IN (0,1)),
+    stat_checked_in_game INTEGER NOT NULL DEFAULT 0,
 
     FOREIGN KEY (general_id) REFERENCES generals(id),
     FOREIGN KEY (stat_key_id) REFERENCES stat_keys(id)

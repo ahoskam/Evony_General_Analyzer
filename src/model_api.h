@@ -20,6 +20,8 @@ std::vector<PendingExample> db_load_pending_examples_for_general(
 
 LoadAllResult db_load_all_for_general(Db& db, int general_id);
 
+void db_normalize_general_roles(Db& db);
+
 bool db_update_general_meta(Db& db, int general_id, const GeneralMeta& g);
 
 void db_update_occurrence(Db& db, const Occurrence& o);

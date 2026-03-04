@@ -1,79 +1,92 @@
 GENERAL: William Wallace
-ROLE: Unknown
+ROLE: Siege
+IN_TAVERN: false
+
 Leadership: 103 (8.36)
 Attack: 113 (8.67)
 Defense: 110 (8.71)
 Politics: 97 (8.11)
 
-==============================
 BASE SKILL | Brave Heart
-==============================
 EnemyGroundDefensePct -20
-SiegeMachineAttackPct +20
+AttackingSiegeMachineAttackPct +20
 
-==============================
 ASCENSION 1
-==============================
 EnemyGroundDefensePct -10
 EnemyGroundHPPct -10
 
-==============================
 ASCENSION 2
-==============================
 AttackingTroopDeathToWoundedRatePct +8
 
-==============================
 ASCENSION 3
-==============================
-MarchSizePct +10
+MarchSizeCapacityPct +10
 
-==============================
 ASCENSION 4
-==============================
 SiegeMachineAttackPct +10
 EnemyGroundHPPct -10
 
-==============================
 ASCENSION 5
-==============================
 SiegeMachineAttackPct +15
 EnemyGroundDefensePct -10
 
-==============================
-SPECIALTIES
-==============================
-
-# SPECIALTY 1 | Siege Machine Assault
 SPECIALTY 1 L5:
 SiegeMachineAttackPct +10
 SiegeMachineHPPct +10
 
-# SPECIALTY 2 | Bash
 SPECIALTY 2 L5:
 RangedAttackPct +10
 SiegeMachineAttackPct +10
 
-# SPECIALTY 3 | Iron Warrior
 SPECIALTY 3 L5:
-EnemyWoundedToDeathWhenAttackingPct +10
+EnemyWoundedIntoDeathWhenAttackingPct +10
 
-# SPECIALTY 4 | Battle of Stirling Bridge
 SPECIALTY 4 L5:
 SiegeMachineAttackPct +26
 SiegeMachineHPPct +26
 
-==============================
-COVENANTS
-==============================
-# None available (locked)
+COVENANT
+# None available (locked or not shown)
+
+NEW STAT KEYS NOTE:
+- EnemyWoundedIntoDeathWhenAttackingPct
 
 ==============================
-# NEW STAT KEYS NOTE
+# SOURCE TEXT (VERBATIM)
 ==============================
-# NEW_STAT_KEYS:
-# - EnemyGroundDefensePct | Enemy Ground Troop Defense reduction
-# - EnemyGroundHPPct | Enemy Ground Troop HP reduction
-# - AttackingTroopDeathToWoundedRatePct | Attacking Troop Death into Wounded Rate
-# - EnemyWoundedToDeathWhenAttackingPct | Enemy Wounded into Death when attacking
 
-IN_TAVERN: true
+# BASE_SKILL_TEXT:
+Brave Heart
+Reduces enemy ground troops' defense by 20% and increases your siege machines' attack by 20% when General is leading the army.
+
+# ASCENSION_1_TEXT:
+Enemy Ground Troop Defense -10% and HP -10%
+
+# ASCENSION_2_TEXT:
+Attacking Troop Death into Wounded Rate +8%
+
+# ASCENSION_3_TEXT:
+March Size Capacity +10%
+
+# ASCENSION_4_TEXT:
+Siege Machine Attack +10%, Enemy Ground Troop HP -10%
+
+# ASCENSION_5_TEXT:
+Siege Machine Attack +15%, Enemy Ground Troop Defense -10%
+
+# SPECIALTY_1_L5_TEXT:
+Siege Machine Assault(Max Level Attributes)
+Siege Machine Attack +10%
+Siege Machine HP +10%
+
+# SPECIALTY_2_L5_TEXT:
+Bash(Max Level Attributes)
+Ranged Troop and Siege Machine Attack +10%
+
+# SPECIALTY_3_L5_TEXT:
+Iron Warrior(Max Level Attributes)
+Enemy Wounded into Death when attacking +10%
+
+# SPECIALTY_4_L5_TEXT:
+Battle of Stirling Bridge(Max Level Attributes)
+Siege Machine Attack +26%
+Siege Machine HP +26%
