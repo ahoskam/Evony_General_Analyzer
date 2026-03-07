@@ -8,9 +8,9 @@ Defense: 120 (9.08)
 Politics: 104 (8.57)
 
 BASE SKILL | Great Northern War
-RangedAttackPct +40
+RangedTroopAttackPct +40
 MarchSizeCapacityPct +10
-RangedDefensePct +10
+RangedTroopDefensePct +10
 SiegeMachineDefensePct +10
 
 ASCENSION 1

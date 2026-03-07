@@ -24,11 +24,11 @@ ASCENSION 3
 MarchSizeCapacityPct +10
 
 ASCENSION 4
-RangedAttackPct +10
+RangedTroopAttackPct +10
 SiegeMachineAttackPct +10
 
 ASCENSION 5
-RangedAttackPct +15
+RangedTroopAttackPct +15
 SiegeMachineAttackPct +15
 
 SPECIALTY 1 L5:
@@ -36,7 +36,7 @@ SiegeMachineAttackPct +10
 SiegeMachineHPPct +10
 
 SPECIALTY 2 L5:
-RangedAttackPct +10
+RangedTroopAttackPct +10
 SiegeMachineAttackPct +10
 
 SPECIALTY 3 L5:

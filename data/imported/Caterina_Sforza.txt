@@ -39,8 +39,8 @@ ASCENSION 4
 InCityRangedTroopAttackPct +20
 InCityRangedTroopDefensePct +20
 InCityRangedTroopHPPct +20
-InCitySiegeMachineAttackPct +20
-InCitySiegeMachineDefensePct +20
+InCitySiegeAttackPct +20
+InCitySiegeDefensePct +20
 InCitySiegeMachineHPPct +20
 
 ASCENSION 5
@@ -51,8 +51,8 @@ SiegeMachineHPPct +25
 WhenLaunchingAllianceWarRallyCapacityPct +6
 
 SPECIALTY 1 L5:
-GroundAttackPct +10
-GroundHPPct +10
+GroundTroopAttackPct +10
+GroundTroopHPPct +10
 
 SPECIALTY 2 L5:
 RangedTroopAttackPct +10

@@ -39,8 +39,8 @@ AttackingMountedHPPct +20
 ASCENSION 5
 ==============================
 AttackingMountedAttackPct +20
-DefenseAndHPPct +15
-
+TroopDefensePct +15
+TroopHPPct +15
 ==============================
 SPECIALTIES
 ==============================
@@ -87,8 +87,8 @@ COVENANTS
 ==============================
 # NEW_STAT_KEYS:
 # - EnemyInCityTroopWoundedIntoDeathRatePct
-# - DefenseAndHPPct
-
+# - TroopDefensePct
+# - TroopHPPct
 IN_TAVERN: false
 
 ==============================

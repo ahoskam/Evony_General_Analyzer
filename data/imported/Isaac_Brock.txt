@@ -27,7 +27,7 @@ InCityGroundTroopAttackPct +5
 
 ASCENSION 3
 InCityRangedTroopDefensePct +15
-InCitySiegeMachineDefensePct +15
+InCitySiegeDefensePct +15
 InCityRangedTroopHPPct +15
 InCitySiegeMachineHPPct +15
 
@@ -41,16 +41,16 @@ InCityGroundTroopDefensePct +20
 InCityGroundTroopHPPct +20
 
 SPECIALTY 1 L5:
-GroundHPPct +10
-GroundDefensePct +10
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
 
 SPECIALTY 2 L5:
 InCityTroopAttackPct +6
 
 SPECIALTY 3 L5:
-GroundAttackPct +10
-GroundHPPct +10
-GroundDefensePct +10
+GroundTroopAttackPct +10
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
 
 SPECIALTY 4 L5:
 InCityTroopHPPct +10

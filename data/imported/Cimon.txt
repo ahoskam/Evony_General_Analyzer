@@ -45,8 +45,8 @@ EnemySiegeMachineDefensePct -10
 EnemySiegeMachineHPPct -10
 
 SPECIALTY 1 L5:
-GroundHPPct +10
-GroundDefensePct +10
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
 
 SPECIALTY 2 L5:
 EnemyTroopAttackPct -10

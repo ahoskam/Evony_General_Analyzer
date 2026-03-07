@@ -16,11 +16,11 @@ MountedHPPct +15
 ASCENSION 1
 ==============================
 MountedAttackPct +5
-GroundAttackPct +5
+GroundTroopAttackPct +5
 MountedDefensePct +5
-GroundDefensePct +5
+GroundTroopDefensePct +5
 MountedHPPct +5
-GroundHPPct +5
+GroundTroopHPPct +5
 
 ==============================
 ASCENSION 2
@@ -36,9 +36,9 @@ MarchSizeCapacityPct +14
 ASCENSION 4
 ==============================
 MountedAttackPct +10
-GroundAttackPct +10
+GroundTroopAttackPct +10
 MountedDefensePct +20
-GroundDefensePct +20
+GroundTroopDefensePct +20
 
 ==============================
 ASCENSION 5

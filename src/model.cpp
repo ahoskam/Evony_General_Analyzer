@@ -90,12 +90,13 @@ std::vector<GeneralRow> db_load_general_list(Db& db, const std::string& role_fil
 
 std::vector<StatKey> db_load_stat_keys(Db& db)
 {
-  DbStmt st(db, "SELECT id, key FROM stat_keys ORDER BY key;");
+  DbStmt st(db, "SELECT id, key, is_active FROM stat_keys ORDER BY key;");
   std::vector<StatKey> out;
   while (st.step()) {
     StatKey k{};
     k.id = st.col_int(0);
     k.name = st.col_text(1);
+    k.is_active = st.col_int(2);
     out.push_back(std::move(k));
   }
   return out;

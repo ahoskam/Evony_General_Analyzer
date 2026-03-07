@@ -23,7 +23,7 @@ InCitySiegeMachineHPPct +35
 ASCENSION 2
 MayorConstructionSpeedSubordinateCityPct +6
 InCityRangedTroopDefensePct +40
-InCitySiegeMachineDefensePct +40
+InCitySiegeDefensePct +40
 
 ASCENSION 3
 InCityTroopsAttackPct +15

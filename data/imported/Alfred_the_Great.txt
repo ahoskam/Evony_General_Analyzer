@@ -36,8 +36,8 @@ AttackingRangedDefensePct +10
 AttackingSiegeMachineDefensePct +10
 
 SPECIALTY 1 L5:
-RangedAttackPct +10
-RangedDefensePct +10
+RangedTroopAttackPct +10
+RangedTroopDefensePct +10
 
 SPECIALTY 2 L5:
 MarchSizeCapacityPct +6
@@ -45,12 +45,12 @@ AttackingSiegeMachineAttackPct +10
 AttackingRangedAttackPct +10
 
 SPECIALTY 3 L5:
-RangedAttackPct +10
-RangedHPPct +10
-RangedDefensePct +10
+RangedTroopAttackPct +10
+RangedTroopHPPct +10
+RangedTroopDefensePct +10
 
 SPECIALTY 4 L5:
-RangedAttackPct +35
+RangedTroopAttackPct +35
 
 # None available (locked or not shown)
 

@@ -9,8 +9,8 @@ Politics: 106 (8.08)
 BASE SKILL | Monarchy Restoration
 ==============================
 AttackingMountedAttackPct +50
-GroundDefensePct +40
-GroundHPPct +40
+GroundTroopDefensePct +40
+GroundTroopHPPct +40
 MountedDefensePct +40
 MountedHPPct +40
 
@@ -69,19 +69,19 @@ MountedHPPct +4
 
 # SPECIALTY 2 | Formation
 SPECIALTY 2 L1:
-GroundAttackPct +1
+GroundTroopAttackPct +1
 MountedAttackPct +1
 SPECIALTY 2 L2:
-GroundAttackPct +1
+GroundTroopAttackPct +1
 MountedAttackPct +1
 SPECIALTY 2 L3:
-GroundAttackPct +2
+GroundTroopAttackPct +2
 MountedAttackPct +2
 SPECIALTY 2 L4:
-GroundAttackPct +2
+GroundTroopAttackPct +2
 MountedAttackPct +2
 SPECIALTY 2 L5:
-GroundAttackPct +4
+GroundTroopAttackPct +4
 MountedAttackPct +4
 
 # SPECIALTY 3 | Mounted Troop Ares

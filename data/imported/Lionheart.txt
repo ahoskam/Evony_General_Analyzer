@@ -47,8 +47,8 @@ SiegeMachineDefensePct +10
 # SPECIALTY 2 | Defensive
 SPECIALTY 2 L5:
 HospitalCapacityPct +10
-InCityGroundAttackPct +10
-InCityMountedAttackPct +10
+InCityGroundTroopAttackPct +10
+InCityMountedTroopAttackPct +10
 
 # SPECIALTY 3 | Siege Machine Ares
 SPECIALTY 3 L5:
@@ -72,7 +72,7 @@ COVENANTS
 # - InCityTroopsHPPct
 # - InCityTroopsDefensePct
 # - InCityTroopsAttackPct
-# - InCityGroundAttackPct
-# - InCityMountedAttackPct
+# - InCityGroundTroopAttackPct
+# - InCityMountedTroopAttackPct
 
 IN_TAVERN: true

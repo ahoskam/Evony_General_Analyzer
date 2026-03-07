@@ -8,7 +8,7 @@ Defense: 119 (9.04)
 Politics: 112 (8.77)
 
 BASE SKILL | Empire Defender
-InCitySiegeMachineAttackPct +30
+InCitySiegeAttackPct +30
 EnemyRangedTroopAttackPct -15
 
 ASCENSION 1
@@ -48,12 +48,12 @@ EnemyTroopDefensePct -10
 SPECIALTY 3 | Sage
 SPECIALTY 3 L5:
 TrapBuildingSpeedPct +40
-InCitySiegeMachineAttackPct +10
+InCitySiegeAttackPct +10
 
 SPECIALTY 4 | The Great Prestige
 SPECIALTY 4 L5:
 SiegeMachineRepairingCostPct -20
-InCitySiegeMachineAttackPct +20
+InCitySiegeAttackPct +20
 
 # None available (locked or not shown)
 

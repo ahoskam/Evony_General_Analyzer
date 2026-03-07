@@ -50,7 +50,7 @@ SiegeMachineHPPct +10
 SiegeMachineDefensePct +10
 
 SPECIALTY 4 L5:
-RangedAttackPct +20
+RangedTroopAttackPct +20
 SiegeMachineAttackPct +20
 
 # None available (locked or not shown)

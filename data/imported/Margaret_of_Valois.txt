@@ -21,15 +21,15 @@ AttackingMountedHPPct +20
 ResearchSpeedPct +4
 
 ASCENSION 2
-InCityGroundDefensePct +10
-InCityGroundHPPct +10
-InCityMountedDefensePct +10
-InCityMountedHPPct +10
+InCityGroundTroopDefensePct +10
+InCityGroundTroopHPPct +10
+InCityMountedTroopDefensePct +10
+InCityMountedTroopHPPct +10
 ResearchSpeedPct +6
 
 ASCENSION 3
-RangedAttackPct +20
-RangedDefensePct +20
+RangedTroopAttackPct +20
+RangedTroopDefensePct +20
 SiegeMachineAttackPct +20
 SiegeMachineDefensePct +20
 
@@ -51,7 +51,7 @@ RangedTroopHPPct +10
 RangedTroopDefensePct +10
 
 SPECIALTY 2 L5:
-GroundAttackPct +10
+GroundTroopAttackPct +10
 MountedAttackPct +10
 
 SPECIALTY 3 L5:

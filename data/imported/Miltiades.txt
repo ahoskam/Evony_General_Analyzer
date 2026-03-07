@@ -8,16 +8,16 @@ Politics: 113 (8.25)
 ==============================
 BASE SKILL | Athenian Phalanx
 ==============================
-GroundAttackPct +45
-GroundHPPct +45
-GroundDefensePct +35
+GroundTroopAttackPct +45
+GroundTroopHPPct +45
+GroundTroopDefensePct +35
 MountedDefensePct +35
 
 ==============================
 ASCENSION 1
 ==============================
-GroundAttackPct +15
-GroundHPPct +10
+GroundTroopAttackPct +15
+GroundTroopHPPct +10
 
 ==============================
 ASCENSION 2
@@ -27,9 +27,9 @@ AttackingTroopDeathToWoundedRatePct +8
 ==============================
 ASCENSION 3
 ==============================
-GroundAttackPct +10
-GroundDefensePct +10
-GroundHPPct +10
+GroundTroopAttackPct +10
+GroundTroopDefensePct +10
+GroundTroopHPPct +10
 
 ==============================
 ASCENSION 4
@@ -41,9 +41,9 @@ MarchSizeCapacityPct +8
 ==============================
 ASCENSION 5
 ==============================
-GroundAttackPct +30
-GroundDefensePct +20
-GroundHPPct +20
+GroundTroopAttackPct +30
+GroundTroopDefensePct +20
+GroundTroopHPPct +20
 
 ==============================
 SPECIALTIES
@@ -51,20 +51,20 @@ SPECIALTIES
 
 # SPECIALTY 1 | Ground Troop Defense
 SPECIALTY 1 L1:
-GroundHPPct +1
-GroundDefensePct +1
+GroundTroopHPPct +1
+GroundTroopDefensePct +1
 SPECIALTY 1 L2:
-GroundHPPct +1
-GroundDefensePct +1
+GroundTroopHPPct +1
+GroundTroopDefensePct +1
 SPECIALTY 1 L3:
-GroundHPPct +2
-GroundDefensePct +2
+GroundTroopHPPct +2
+GroundTroopDefensePct +2
 SPECIALTY 1 L4:
-GroundHPPct +2
-GroundDefensePct +2
+GroundTroopHPPct +2
+GroundTroopDefensePct +2
 SPECIALTY 1 L5:
-GroundHPPct +4
-GroundDefensePct +4
+GroundTroopHPPct +4
+GroundTroopDefensePct +4
 
 # SPECIALTY 2 | Annihilation
 SPECIALTY 2 L1:
@@ -90,54 +90,54 @@ AttackingGroundAttackPct +4
 
 # SPECIALTY 3 | Ground Troop Ares
 SPECIALTY 3 L1:
-GroundAttackPct +1
-GroundHPPct +1
-GroundDefensePct +1
+GroundTroopAttackPct +1
+GroundTroopHPPct +1
+GroundTroopDefensePct +1
 SPECIALTY 3 L2:
-GroundAttackPct +1
-GroundHPPct +1
-GroundDefensePct +1
+GroundTroopAttackPct +1
+GroundTroopHPPct +1
+GroundTroopDefensePct +1
 SPECIALTY 3 L3:
-GroundAttackPct +2
-GroundHPPct +2
-GroundDefensePct +2
+GroundTroopAttackPct +2
+GroundTroopHPPct +2
+GroundTroopDefensePct +2
 SPECIALTY 3 L4:
-GroundAttackPct +2
-GroundHPPct +2
-GroundDefensePct +2
+GroundTroopAttackPct +2
+GroundTroopHPPct +2
+GroundTroopDefensePct +2
 SPECIALTY 3 L5:
-GroundAttackPct +4
-GroundHPPct +4
-GroundDefensePct +4
+GroundTroopAttackPct +4
+GroundTroopHPPct +4
+GroundTroopDefensePct +4
 
 # SPECIALTY 4 | Battle of Marathon
 SPECIALTY 4 L1:
-GroundAttackPct +5
-GroundDefensePct +4
-GroundHPPct +4
+GroundTroopAttackPct +5
+GroundTroopDefensePct +4
+GroundTroopHPPct +4
 SPECIALTY 4 L2:
-GroundAttackPct +5
-GroundDefensePct +4
-GroundHPPct +4
+GroundTroopAttackPct +5
+GroundTroopDefensePct +4
+GroundTroopHPPct +4
 SPECIALTY 4 L3:
-GroundAttackPct +10
-GroundDefensePct +7
-GroundHPPct +7
+GroundTroopAttackPct +10
+GroundTroopDefensePct +7
+GroundTroopHPPct +7
 SPECIALTY 4 L4:
-GroundAttackPct +10
-GroundDefensePct +7
-GroundHPPct +7
+GroundTroopAttackPct +10
+GroundTroopDefensePct +7
+GroundTroopHPPct +7
 SPECIALTY 4 L5:
-GroundAttackPct +20
-GroundDefensePct +8
-GroundHPPct +8
+GroundTroopAttackPct +20
+GroundTroopDefensePct +8
+GroundTroopHPPct +8
 
 ==============================
 COVENANTS
 ==============================
 
 # War
-GroundAttackPct +5
+GroundTroopAttackPct +5
 
 # Cooperation
 MarchSpeedPct +10
@@ -147,14 +147,14 @@ GroundTroopTrainingCapacityPct +10
 
 # Faith
 ReinforcingGroundHPPct +5
-GroundAttackPct +5
+GroundTroopAttackPct +5
 
 # Honor
 ReinforcingGroundDefensePct +10
 
 # Civilization
-GroundDefensePct +5
-GroundHPPct +5
+GroundTroopDefensePct +5
+GroundTroopHPPct +5
 
 IN_TAVERN: false
 

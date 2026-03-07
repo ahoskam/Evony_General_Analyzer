@@ -37,8 +37,8 @@ SiegeMachineAttackPct +10
 SiegeMachineDefensePct +10
 
 SPECIALTY 2 L5:
-AttackingSiegeMachineAndRangedTroopAttackPct +10
-
+AttackingRangedTroopAttackPct +10
+AttackingSiegeMachineAttackPct +10
 SPECIALTY 3 L5:
 SiegeMachineAttackPct +10
 SiegeMachineHPPct +10

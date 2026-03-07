@@ -79,6 +79,10 @@ static bool starts_with_alpha_ci(const std::string &text, int upper_ch) {
   return std::toupper(static_cast<unsigned char>(text.front())) == upper_ch;
 }
 
+static std::string stat_key_display_name(const StatKey &k) {
+  return k.is_active ? k.name : (k.name + " *");
+}
+
 /* static int ascension_index(const Occurrence& o)
 {
   // importer uses context_name like "ASCENSION 1"
@@ -178,15 +182,25 @@ static std::optional<std::vector<int>>
 split_total_abs_to_increments(double abs_total) {
   // Match by integer totals. Patterns you’ve verified:
   // 10 => 1,1,2,2,4
+  // 15 => 1,2,3,3,6
   // 6  => 1,1,1,1,2
   // 50 => 5,5,10,10,20
   // 16 => 2,2,3,3,6
+  // 20 => 2,2,4,4,8
+  // 25 => 2,3,5,5,10
   // 26 => 3,3,5,5,10
+  // 30 => 3,3,6,6,12
   // 35 => 3,4,6,7,15
+  // 36 => 4,4,7,7,14
+  // 40 => 4,4,8,8,16
+  // 45 => 4,5,9,9,18
   // 46 => 5,5,9,9,18
   static const std::unordered_map<int, std::vector<int>> patterns = {
-      {10, {1, 1, 2, 2, 4}},  {6, {1, 1, 1, 1, 2}},   {50, {5, 5, 10, 10, 20}},
-      {16, {2, 2, 3, 3, 6}},  {26, {3, 3, 5, 5, 10}}, {35, {3, 4, 6, 7, 15}},
+      {10, {1, 1, 2, 2, 4}},  {15, {1, 2, 3, 3, 6}},  {6, {1, 1, 1, 1, 2}},
+      {50, {5, 5, 10, 10, 20}},
+      {16, {2, 2, 3, 3, 6}},  {20, {2, 2, 4, 4, 8}},  {25, {2, 3, 5, 5, 10}},
+      {26, {3, 3, 5, 5, 10}}, {30, {3, 3, 6, 6, 12}}, {35, {3, 4, 6, 7, 15}},
+      {36, {4, 4, 7, 7, 14}}, {40, {4, 4, 8, 8, 16}}, {45, {4, 5, 9, 9, 18}},
       {46, {5, 5, 9, 9, 18}},
   };
 
@@ -324,8 +338,15 @@ static bool save_changes(Db &db, EditorState &st) {
     // when no level rows exist yet, using known patterns.
     // This materializes the rows into DB on Save (no restart needed).
     // ------------------------------------------------------------
-    auto has_any_levels_for = [&](int spec_n, int stat_key_id) -> bool {
-      for (const auto &x : st.occ) {
+    struct SpecialtyLevelShape {
+      bool has_level_1to4 = false;
+      std::vector<int> level5_indices;
+    };
+    auto inspect_level_shape_for = [&](int spec_n,
+                                       int stat_key_id) -> SpecialtyLevelShape {
+      SpecialtyLevelShape out{};
+      for (int i = 0; i < (int)st.occ.size(); ++i) {
+        const auto &x = st.occ[(size_t)i];
         if (x.context_type != "Specialty")
           continue;
         if (specialty_index(x) != spec_n)
@@ -336,11 +357,15 @@ static bool save_changes(Db &db, EditorState &st) {
           continue;
         if (!x.level.has_value())
           continue;
-        int lv = *x.level;
-        if (lv >= 1 && lv <= 5)
-          return true;
+        const int lv = *x.level;
+        if (lv >= 1 && lv <= 4) {
+          out.has_level_1to4 = true;
+          continue;
+        }
+        if (lv == 5)
+          out.level5_indices.push_back(i);
       }
-      return false;
+      return out;
     };
 
     std::vector<Occurrence> to_add;
@@ -358,9 +383,6 @@ static bool save_changes(Db &db, EditorState &st) {
       if (spec_n <= 0)
         continue;
 
-      if (has_any_levels_for(spec_n, total.stat_key_id))
-        continue;
-
       double v = total.value;
       double abs_total = std::fabs(v);
       auto inc_opt = split_total_abs_to_increments(abs_total);
@@ -373,7 +395,28 @@ static bool save_changes(Db &db, EditorState &st) {
 
       double sign = (v < 0.0) ? -1.0 : 1.0;
 
-      for (int lv = 1; lv <= 5; ++lv) {
+      const auto level_shape = inspect_level_shape_for(spec_n, total.stat_key_id);
+      if (level_shape.has_level_1to4)
+        continue;
+
+      int legacy_singleton_l5_idx = -1;
+      if (!level_shape.level5_indices.empty()) {
+        if (level_shape.level5_indices.size() == 1) {
+          const int idx = level_shape.level5_indices.front();
+          const auto &existing_l5 = st.occ[(size_t)idx];
+          if (std::fabs(std::fabs(existing_l5.value) - abs_total) < 1e-9) {
+            // Legacy "L5-only Max Level Attributes" row stored as a level row.
+            // Reuse it as the L5 increment instead of creating a duplicate row.
+            legacy_singleton_l5_idx = idx;
+          } else {
+            continue;
+          }
+        } else {
+          continue;
+        }
+      }
+
+      for (int lv = 1; lv <= 4; ++lv) {
         Occurrence o{};
         o.id = 0;
         o.general_id = st.selected_general_id;
@@ -385,6 +428,53 @@ static bool save_changes(Db &db, EditorState &st) {
         o.stat_key_id = total.stat_key_id;
         o.stat_key = total.stat_key;
         o.value = sign * (double)inc[(size_t)lv - 1];
+
+        o.origin = "generated";
+        o.edited_by_user = 1;
+        o.stat_checked_in_game = 0;
+        if (total.id > 0)
+          o.generated_from_total_id = total.id;
+
+        o.file_path = "";
+        o.line_number = 0;
+        o.raw_line = "";
+
+        to_add.push_back(std::move(o));
+      }
+
+      if (legacy_singleton_l5_idx >= 0) {
+        auto &existing_l5 = st.occ[(size_t)legacy_singleton_l5_idx];
+        existing_l5.value = sign * (double)inc[4];
+        existing_l5.context_name = make_specialty_name(spec_n, 5, false);
+        existing_l5.level = 5;
+        existing_l5.is_total = 0;
+        existing_l5.origin = "generated";
+        existing_l5.raw_line = "NORMALIZED_SINGLETON_L5_TO_INCREMENT";
+
+        if (existing_l5.id > 0) {
+          db_update_occurrence(db, existing_l5);
+        } else {
+          int new_id = db_insert_occurrence(db, existing_l5);
+          if (new_id <= 0) {
+            db.rollback();
+            st.last_save_error =
+                "Auto-expand singleton L5 normalize insert failed";
+            return false;
+          }
+          existing_l5.id = new_id;
+        }
+      } else {
+        Occurrence o{};
+        o.id = 0;
+        o.general_id = st.selected_general_id;
+        o.context_type = "Specialty";
+        o.context_name = make_specialty_name(spec_n, 5, false);
+        o.level = 5;
+        o.is_total = 0;
+
+        o.stat_key_id = total.stat_key_id;
+        o.stat_key = total.stat_key;
+        o.value = sign * (double)inc[4];
 
         o.origin = "generated";
         o.edited_by_user = 1;
@@ -431,6 +521,7 @@ static bool save_changes(Db &db, EditorState &st) {
       double sum = 0.0;
       std::string stat_key;
       int level_rows = 0;
+      bool has_level_1to4 = false;
     };
 
     auto has_total_for = [&](int spec_n, int stat_key_id) -> bool {
@@ -467,6 +558,8 @@ static bool save_changes(Db &db, EditorState &st) {
       v.sum += x.value;
       v.stat_key = x.stat_key;
       v.level_rows += 1;
+      if (lv >= 1 && lv <= 4)
+        v.has_level_1to4 = true;
     }
 
     std::vector<Occurrence> totals_to_add;
@@ -476,6 +569,8 @@ static bool save_changes(Db &db, EditorState &st) {
         continue;
       if (has_total_for(k.spec_n, k.stat_key_id))
         continue;
+      if (!v.has_level_1to4 && v.level_rows == 1)
+        continue; // ambiguous singleton L5 row; do not auto-create TOTAL
 
       Occurrence o{};
       o.id = 0;
@@ -981,10 +1076,10 @@ static void draw_stat_row(EditorState &st, Occurrence &o) {
     ImGui::BeginDisabled();
 
   int current = o.stat_key_id;
-  const char *preview = o.stat_key.c_str();
+  std::string preview_label = o.stat_key;
   for (auto &k : st.stat_keys)
     if (k.id == current) {
-      preview = k.name.c_str();
+      preview_label = stat_key_display_name(k);
       break;
     }
 
@@ -1000,13 +1095,14 @@ static void draw_stat_row(EditorState &st, Occurrence &o) {
   if (stat_locked)
     ImGui::BeginDisabled();
 
-  if (ImGui::BeginCombo("Stat Key", preview)) {
+  if (ImGui::BeginCombo("Stat Key", preview_label.c_str())) {
     const int jump_ch = pressed_alpha_key_upper();
     bool jumped = false;
 
     for (auto &k : st.stat_keys) {
       bool sel = (k.id == current);
-      if (ImGui::Selectable(k.name.c_str(), sel)) {
+      std::string label = stat_key_display_name(k);
+      if (ImGui::Selectable(label.c_str(), sel)) {
         o.stat_key_id = k.id;
         o.stat_key = k.name;
         mark_dirty(st);

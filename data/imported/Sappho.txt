@@ -32,22 +32,22 @@ InCityMountedTroopHPPct +15
 ASCENSION 4
 ConstructionSpeedPct +2
 InCityRangedTroopAttackPct +10
-InCitySiegeMachineAttackPct +10
+InCitySiegeAttackPct +10
 InCityGroundTroopHPPct +10
 InCityMountedTroopHPPct +10
 
 ASCENSION 5
 ConstructionSpeedPct +2
 InCityRangedTroopAttackPct +15
-InCitySiegeMachineAttackPct +15
+InCitySiegeAttackPct +15
 HealingSpeedPct +15
 
 SPECIALTY 1 L5:
-GroundHPPct +10
-GroundDefensePct +10
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
 
 SPECIALTY 2 L5:
-GroundAttackPct +10
+GroundTroopAttackPct +10
 MountedTroopAttackPct +10
 
 SPECIALTY 3 L5:

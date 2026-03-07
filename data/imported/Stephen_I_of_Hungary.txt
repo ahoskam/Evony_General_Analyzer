@@ -38,7 +38,7 @@ MountedAttackPct +10
 MountedDefensePct +10
 
 SPECIALTY 2 L5:
-GroundAttackPct +10
+GroundTroopAttackPct +10
 MountedAttackPct +10
 
 SPECIALTY 3 L5:

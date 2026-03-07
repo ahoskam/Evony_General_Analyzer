@@ -8,55 +8,55 @@ Defense: 125 (8.67)
 Politics: 117 (8.49)
 
 BASE SKILL | Iron-Willed Queen
-GroundAttackPct +50
-GroundHPPct +50
-GroundDefensePct +40
+GroundTroopAttackPct +50
+GroundTroopHPPct +50
+GroundTroopDefensePct +40
 
 ASCENSION 1
-GroundAttackPct +10
-GroundDefensePct +5
-GroundHPPct +5
+GroundTroopAttackPct +10
+GroundTroopDefensePct +5
+GroundTroopHPPct +5
 
 ASCENSION 2
 AttackingTroopDeathToWoundedRatePct +8
 
 ASCENSION 3
-GroundAttackPct +20
+GroundTroopAttackPct +20
 MountedAttackPct +20
-GroundDefensePct +10
-GroundHPPct +10
+GroundTroopDefensePct +10
+GroundTroopHPPct +10
 
 ASCENSION 4
-GroundAttackPct +20
-GroundHPPct +10
+GroundTroopAttackPct +20
+GroundTroopHPPct +10
 MountedHPPct +10
 
 ASCENSION 5
-GroundAttackPct +30
-GroundDefensePct +25
-GroundHPPct +25
+GroundTroopAttackPct +30
+GroundTroopDefensePct +25
+GroundTroopHPPct +25
 
 SPECIALTY 1 L5:
-GroundHPPct +10
-GroundDefensePct +10
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
 
 SPECIALTY 2 L5:
-GroundAttackPct +10
+GroundTroopAttackPct +10
 MountedAttackPct +10
 
 SPECIALTY 3 L5:
-GroundAttackPct +10
-GroundHPPct +10
-GroundDefensePct +10
+GroundTroopAttackPct +10
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
 
 SPECIALTY 4 L5:
-GroundAttackPct +40
+GroundTroopAttackPct +40
 MountedAttackPct +40
-GroundHPPct +40
+GroundTroopHPPct +40
 MarchSizeCapacityPct +8
 
 COVENANT | War
-GroundHPPct +10
+GroundTroopHPPct +10
 
 COVENANT | Cooperation
 GroundTroopTrainingCapacityPct +5
@@ -65,15 +65,15 @@ COVENANT | Peace
 InRallyGroundAttackPct +10
 
 COVENANT | Faith
-GroundAttackPct +10
+GroundTroopAttackPct +10
 MountedAttackPct +10
-GroundDefensePct +5
+GroundTroopDefensePct +5
 
 COVENANT | Honor
 MarchSizeCapacityPct +6
 
 COVENANT | Civilization
-GroundAttackPct +10
+GroundTroopAttackPct +10
 InRallyGroundHPPct +10
 
 ==============================

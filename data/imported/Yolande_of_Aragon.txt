@@ -50,11 +50,11 @@ SiegeMachineDefensePct +10
 
 SPECIALTY 2 L5:
 MarchSizeCapacityPct +6
-AttackingSiegeMachineAndRangedTroopAttackPct +10
-
+AttackingRangedTroopAttackPct +10
+AttackingSiegeMachineAttackPct +10
 SPECIALTY 3 L5:
 MayorSubCityGoldProductionSpeedPct +30
-RangedAttackPct +10
+RangedTroopAttackPct +10
 SiegeMachineAttackPct +10
 
 SPECIALTY 4 L5:

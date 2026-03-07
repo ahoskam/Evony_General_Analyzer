@@ -8,16 +8,16 @@ Politics: 108 (8.51)
 ==============================
 BASE SKILL | King of Jerusalem
 ==============================
-RangedAttackPct +40
-RangedHPPct +40
+RangedTroopAttackPct +40
+RangedTroopHPPct +40
 SiegeMachineDefensePct +10
-RangedDefensePct +10
+RangedTroopDefensePct +10
 
 ==============================
 ASCENSION 1
 ==============================
-RangedAttackPct +10
-RangedDefensePct +15
+RangedTroopAttackPct +10
+RangedTroopDefensePct +15
 
 ==============================
 ASCENSION 2
@@ -32,15 +32,15 @@ MarchSizeCapacityPct +10
 ==============================
 ASCENSION 4
 ==============================
-RangedDefensePct +30
-RangedHPPct +30
+RangedTroopDefensePct +30
+RangedTroopHPPct +30
 
 ==============================
 ASCENSION 5
 ==============================
-RangedAttackPct +25
-RangedDefensePct +15
-RangedHPPct +15
+RangedTroopAttackPct +25
+RangedTroopDefensePct +15
+RangedTroopHPPct +15
 
 ==============================
 SPECIALTIES
@@ -48,8 +48,8 @@ SPECIALTIES
 
 # SPECIALTY 1 | Ranged Troop Defense
 SPECIALTY 1 L5:
-RangedHPPct +10
-RangedDefensePct +10
+RangedTroopHPPct +10
+RangedTroopDefensePct +10
 
 # SPECIALTY 2 | Siege
 SPECIALTY 2 L5:
@@ -59,22 +59,22 @@ AttackingRangedAttackPct +10
 
 # SPECIALTY 3 | Ranged Troop Ares
 SPECIALTY 3 L5:
-RangedAttackPct +10
-RangedHPPct +10
-RangedDefensePct +10
+RangedTroopAttackPct +10
+RangedTroopHPPct +10
+RangedTroopDefensePct +10
 
 # SPECIALTY 4 | Advocate of the Holy Sepulchre
 SPECIALTY 4 L5:
-RangedAttackPct +30
-RangedDefensePct +10
-RangedHPPct +10
+RangedTroopAttackPct +30
+RangedTroopDefensePct +10
+RangedTroopHPPct +10
 
 ==============================
 COVENANTS
 ==============================
 
 # War
-RangedDefensePct +5
+RangedTroopDefensePct +5
 RangedTrainingCapacityPct +5
 
 # Cooperation
@@ -82,7 +82,7 @@ DefendingRangedAttackPct +10
 
 # Peace
 MarchSpeedPct +15
-RangedAttackPct +5
+RangedTroopAttackPct +5
 SiegeMachineAttackPct +5
 
 # Faith
@@ -90,14 +90,14 @@ DefendingRangedAttackPct +10
 DefendingRangedDefensePct +15
 
 # Honor
-InCityRangedHPPct +10
+InCityRangedTroopHPPct +10
 InCitySiegeHPPct +10
 
 # Civilization
-InCityRangedAttackPct +5
-InCitySiegeMachineAttackPct +5
-InCityRangedDefensePct +5
-InCitySiegeMachineDefensePct +5
+InCityRangedTroopAttackPct +5
+InCitySiegeAttackPct +5
+InCityRangedTroopDefensePct +5
+InCitySiegeDefensePct +5
 
 IN_TAVERN: false
 

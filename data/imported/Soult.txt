@@ -8,14 +8,14 @@ Defense: 118 (8.88)
 Politics: 108 (8.67)
 
 BASE SKILL | Iron Arm
-GroundAttackPct +35
-GroundDefensePct +15
-GroundHPPct +15
+GroundTroopAttackPct +35
+GroundTroopDefensePct +15
+GroundTroopHPPct +15
 
 ASCENSION 1
-GroundDefensePct +10
+GroundTroopDefensePct +10
 MountedDefensePct +10
-GroundHPPct +5
+GroundTroopHPPct +5
 MountedHPPct +5
 
 ASCENSION 2
@@ -25,32 +25,32 @@ ASCENSION 3
 WhenLaunchingAllianceWarRallyCapacityPct +8
 
 ASCENSION 4
-GroundAttackPct +15
-GroundHPPct +10
+GroundTroopAttackPct +15
+GroundTroopHPPct +10
 MountedHPPct +10
 
 ASCENSION 5
-GroundAttackPct +15
-GroundDefensePct +10
-GroundHPPct +10
+GroundTroopAttackPct +15
+GroundTroopDefensePct +10
+GroundTroopHPPct +10
 
 SPECIALTY 1 L5:
-GroundAttackPct +10
-GroundHPPct +10
+GroundTroopAttackPct +10
+GroundTroopHPPct +10
 
 SPECIALTY 2 L5:
-GroundAttackPct +10
+GroundTroopAttackPct +10
 MountedAttackPct +10
 
 SPECIALTY 3 L5:
-GroundAttackPct +10
-GroundHPPct +10
-GroundDefensePct +10
+GroundTroopAttackPct +10
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
 
 SPECIALTY 4 L5:
-GroundAttackPct +30
-GroundDefensePct +15
-GroundHPPct +15
+GroundTroopAttackPct +30
+GroundTroopDefensePct +15
+GroundTroopHPPct +15
 
 # None available (locked or not shown)
 

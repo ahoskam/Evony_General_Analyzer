@@ -10,7 +10,7 @@ Politics: 118 (8.78)
 BASE SKILL | Maurices Formation
 EnemyRangedTroopAttackPct -15
 InCityRangedTroopAttackPct +20
-InCitySiegeMachineAttackPct +20
+InCitySiegeAttackPct +20
 
 ASCENSION 1
 InCityRangedTroopHPPct +35
@@ -20,7 +20,7 @@ EnemySiegeMachineDefensePct -20
 
 ASCENSION 2
 InCityRangedTroopDefensePct +35
-InCitySiegeMachineDefensePct +35
+InCitySiegeDefensePct +35
 EnemyRangedTroopHPPct -20
 EnemySiegeMachineHPPct -20
 
@@ -40,8 +40,8 @@ ASCENSION 5
 InCityRangedTroopAttackPct +30
 InCityRangedTroopDefensePct +30
 InCityRangedTroopHPPct +30
-InCitySiegeMachineAttackPct +30
-InCitySiegeMachineDefensePct +30
+InCitySiegeAttackPct +30
+InCitySiegeDefensePct +30
 InCitySiegeMachineHPPct +30
 
 SPECIALTY 1 L5:
@@ -56,7 +56,7 @@ ArcherTowerAttackPct +90
 
 SPECIALTY 4 L5:
 InCityRangedTroopAttackPct +30
-InCitySiegeMachineAttackPct +15
+InCitySiegeAttackPct +15
 
 NEW STAT KEYS NOTE:
 - ArcherTowerAttackPct

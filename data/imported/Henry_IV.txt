@@ -10,7 +10,7 @@ Politics: 115 (8.47)
 BASE SKILL | Good King Henry
 MountedAttackPct +55
 MountedHPPct +55
-GroundDefensePct +40
+GroundTroopDefensePct +40
 MountedDefensePct +40
 
 ASCENSION 1
@@ -23,12 +23,12 @@ AttackingTroopDeathToWoundedRatePct +8
 ASCENSION 3
 MountedAttackPct +20
 MountedHPPct +25
-GroundHPPct +25
+GroundTroopHPPct +25
 
 ASCENSION 4
 AttackingGroundAttackPct +25
 AttackingMountedAttackPct +25
-GroundDefensePct +25
+GroundTroopDefensePct +25
 MountedDefensePct +25
 
 ASCENSION 5
@@ -41,7 +41,7 @@ MountedHPPct +10
 MountedDefensePct +10
 
 SPECIALTY 2 L5:
-GroundAttackPct +10
+GroundTroopAttackPct +10
 MountedAttackPct +10
 
 SPECIALTY 3 L5:

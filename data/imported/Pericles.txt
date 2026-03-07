@@ -12,20 +12,20 @@ HospitalCapacityPct +25
 TroopHPPct +10
 
 ASCENSION 1
-InCityRangedDefensePct +20
-InCitySiegeMachineDefensePct +20
-InCityRangedHPPct +20
+InCityRangedTroopDefensePct +20
+InCitySiegeDefensePct +20
+InCityRangedTroopHPPct +20
 InCitySiegeHPPct +20
 
 ASCENSION 2
 HospitalCapacityPct +10
-InCityGroundHPPct +20
-InCityMountedHPPct +20
+InCityGroundTroopHPPct +20
+InCityMountedTroopHPPct +20
 
 ASCENSION 3
 HealingSpeedPct +15
-InCityGroundDefensePct +20
-InCityMountedDefensePct +20
+InCityGroundTroopDefensePct +20
+InCityMountedTroopDefensePct +20
 
 ASCENSION 4
 InCityTroopAttackPct +10

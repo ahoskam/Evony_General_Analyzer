@@ -8,7 +8,7 @@ Defense: 108 (8.63)
 Politics: 110 (8.85)
 
 BASE SKILL | Legendary Empress
-GroundAttackPct +30
+GroundTroopAttackPct +30
 MountedAttackPct +30
 AttackingMonsterDoubleItemsDropRatePct +10
 
@@ -52,7 +52,7 @@ SPECIALTY 3 L5:
 AttackingTroopDeathToWoundedRatePct +10
 
 SPECIALTY 4 L5:
-GroundAttackPct +15
+GroundTroopAttackPct +15
 MountedAttackPct +15
 EnemyMonsterAttackDebuffPct -15
 

@@ -38,8 +38,8 @@ RangedTroopDefensePct +10
 
 SPECIALTY 2 L5:
 MarchSizeCapacityPct +6
-AttackingSiegeMachineAndRangedTroopAttackPct +10
-
+AttackingRangedTroopAttackPct +10
+AttackingSiegeMachineAttackPct +10
 SPECIALTY 3 L5:
 RangedTroopAttackPct +10
 RangedTroopHPPct +10

@@ -15,7 +15,7 @@ MountedTroopHPPct +10
 ASCENSION 1
 MountedTroopAttackPct +5
 MountedTroopDefensePct +10
-GroundDefensePct +10
+GroundTroopDefensePct +10
 
 ASCENSION 2
 AttackingTroopDeathToWoundedRatePct +10
@@ -26,7 +26,7 @@ MarchSizeCapacityPct +12
 ASCENSION 4
 MountedTroopAttackPct +10
 MountedTroopHPPct +10
-GroundHPPct +10
+GroundTroopHPPct +10
 
 ASCENSION 5
 MountedTroopAttackPct +15

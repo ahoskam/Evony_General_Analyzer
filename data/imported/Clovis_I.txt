@@ -13,7 +13,7 @@ EnemyGroundTroopHPPct -15
 EnemyMountedTroopDefensePct -15
 EnemyMountedTroopHPPct -15
 InCityRangedTroopAttackPct +35
-InCitySiegeMachineAttackPct +35
+InCitySiegeAttackPct +35
 
 SPECIALTY 1 L5:
 RangedTroopHPPct +10

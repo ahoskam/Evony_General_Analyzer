@@ -40,8 +40,8 @@ AttackingMountedHPPct +10
 AttackingGroundHPPct +10
 
 SPECIALTY 1 L5:
-GroundHPPct +10
-GroundDefensePct +10
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
 
 SPECIALTY 2 L5:
 EnemyTroopAttackDebuffPct -10
@@ -50,9 +50,9 @@ SPECIALTY 3 L5:
 AllTroopsAttackPct +6
 
 SPECIALTY 4 L5:
-GroundAttackPct +20
+GroundTroopAttackPct +20
 MountedAttackPct +20
-GroundHPPct +10
+GroundTroopHPPct +10
 MountedHPPct +10
 
 # None available (locked or not shown)

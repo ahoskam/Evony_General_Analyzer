@@ -8,18 +8,18 @@ Politics: 103 (8.33)
 ==============================
 BASE SKILL | The 300 Spartans
 ==============================
-InCityGroundAttackPct +30
-InCityGroundHPPct +30
-InCityRangedAttackPct +25
+InCityGroundTroopAttackPct +30
+InCityGroundTroopHPPct +30
+InCityRangedTroopAttackPct +25
 Condition: When General is the Main City Defense General
 
 ==============================
 ASCENSION 1
 ==============================
-InCityMountedDefensePct +15
-InCityGroundDefensePct +15
-InCityMountedHPPct +10
-InCityGroundHPPct +10
+InCityMountedTroopDefensePct +15
+InCityGroundTroopDefensePct +15
+InCityMountedTroopHPPct +10
+InCityGroundTroopHPPct +10
 Condition: When General is the Main City Defense General
 
 ==============================
@@ -31,56 +31,56 @@ Condition: When General is the Main City Defense General
 ==============================
 ASCENSION 3
 ==============================
-InCityMountedAttackPct +20
-InCityGroundAttackPct +20
-InCityMountedDefensePct +15
-InCityGroundDefensePct +15
+InCityMountedTroopAttackPct +20
+InCityGroundTroopAttackPct +20
+InCityMountedTroopDefensePct +15
+InCityGroundTroopDefensePct +15
 Condition: When General is the Main City Defense General
 
 ==============================
 ASCENSION 4
 ==============================
-InCityGroundAttackPct +30
-InCityMountedHPPct +20
-InCityGroundHPPct +20
+InCityGroundTroopAttackPct +30
+InCityMountedTroopHPPct +20
+InCityGroundTroopHPPct +20
 Condition: When General is the Main City Defense General
 
 ==============================
 ASCENSION 5
 ==============================
-InCityRangedAttackPct +20
-InCityGroundHPPct +30
+InCityRangedTroopAttackPct +20
+InCityGroundTroopHPPct +30
 Condition: When General is the Main City Defense General
 
 ==============================
 # SPECIALTY 1 | Ground Troop Assault
 ==============================
 SPECIALTY 1 L5:
-GroundAttackPct +10
-GroundHPPct +10
+GroundTroopAttackPct +10
+GroundTroopHPPct +10
 
 ==============================
 # SPECIALTY 2 | Defensive
 ==============================
 SPECIALTY 2 L5:
 HospitalCapacityPct +10
-InCityGroundAttackPct +10
-InCityMountedAttackPct +10
+InCityGroundTroopAttackPct +10
+InCityMountedTroopAttackPct +10
 Condition: Applied to Main City Defense General
 
 ==============================
 # SPECIALTY 3 | Ground Troop Ares
 ==============================
 SPECIALTY 3 L5:
-GroundAttackPct +10
-GroundHPPct +10
-GroundDefensePct +10
+GroundTroopAttackPct +10
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
 
 ==============================
 # SPECIALTY 4 | Battle of Thermopylae
 ==============================
 SPECIALTY 4 L5:
-GroundAttackPct +30
+GroundTroopAttackPct +30
 EnemyMountedAttackPct -30
 
 ==============================
@@ -92,13 +92,13 @@ COVENANTS
 # NEW STAT KEYS NOTE
 ==============================
 # NEW_STAT_KEYS:
-# - InCityGroundAttackPct
-# - InCityGroundHPPct
-# - InCityRangedAttackPct
-# - InCityMountedDefensePct
-# - InCityGroundDefensePct
-# - InCityMountedHPPct
-# - InCityMountedAttackPct
+# - InCityGroundTroopAttackPct
+# - InCityGroundTroopHPPct
+# - InCityRangedTroopAttackPct
+# - InCityMountedTroopDefensePct
+# - InCityGroundTroopDefensePct
+# - InCityMountedTroopHPPct
+# - InCityMountedTroopAttackPct
 # - EnemyMountedAttackPct
 
 IN_TAVERN: false

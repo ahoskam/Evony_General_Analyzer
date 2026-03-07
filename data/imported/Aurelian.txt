@@ -37,16 +37,16 @@ AttackingGroundDefensePct +20
 AttackingGroundHPPct +20
 
 SPECIALTY 1 L5:
-GroundAttackPct +10
-GroundDefensePct +10
+GroundTroopAttackPct +10
+GroundTroopDefensePct +10
 
 SPECIALTY 2 L5:
 EnemyTroopDefensePct -10
 
 SPECIALTY 3 L5:
-GroundAttackPct +10
-GroundHPPct +10
-GroundDefensePct +10
+GroundTroopAttackPct +10
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
 
 SPECIALTY 4 L5:
 AttackingGroundAttackPct +35

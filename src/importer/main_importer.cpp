@@ -81,12 +81,26 @@ split_specialty_total_abs(int abs_total) {
     return std::array<int, 5>{1, 1, 1, 1, 2}; // Pattern B
   case 10:
     return std::array<int, 5>{1, 1, 2, 2, 4}; // Pattern A
+  case 15:
+    return std::array<int, 5>{1, 2, 3, 3, 6};
   case 16:
     return std::array<int, 5>{2, 2, 3, 3, 6};
+  case 20:
+    return std::array<int, 5>{2, 2, 4, 4, 8};
+  case 25:
+    return std::array<int, 5>{2, 3, 5, 5, 10};
   case 26:
     return std::array<int, 5>{3, 3, 5, 5, 10};
+  case 30:
+    return std::array<int, 5>{3, 3, 6, 6, 12};
+  case 36:
+    return std::array<int, 5>{4, 4, 7, 7, 14};
+  case 45:
+    return std::array<int, 5>{4, 5, 9, 9, 18};
   case 35:
     return std::array<int, 5>{3, 4, 6, 7, 15};
+  case 40:
+    return std::array<int, 5>{4, 4, 8, 8, 16};
   case 46:
     return std::array<int, 5>{5, 5, 9, 9, 18};
   case 50:

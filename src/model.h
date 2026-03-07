@@ -64,6 +64,7 @@ struct Occurrence {
 struct StatKey {
   int id = 0;
   std::string name; // stat_keys.key
+  int is_active = 1; // 1=canonical/active, 0=legacy/inactive
 };
 
 struct PendingExample {

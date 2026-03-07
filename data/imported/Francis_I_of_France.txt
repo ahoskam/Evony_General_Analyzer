@@ -8,53 +8,53 @@ Defense: 122 (8.61)
 Politics: 119 (8.15)
 
 BASE SKILL | Knight King
-GroundAttackPct +60
-GroundDefensePct +60
-GroundHPPct +45
+GroundTroopAttackPct +60
+GroundTroopDefensePct +60
+GroundTroopHPPct +45
 
 ASCENSION 1
-GroundDefensePct +10
-GroundHPPct +10
+GroundTroopDefensePct +10
+GroundTroopHPPct +10
 
 ASCENSION 2
 AttackingTroopDeathToWoundedRatePct +8
 
 ASCENSION 3
-GroundAttackPct +15
-GroundDefensePct +15
+GroundTroopAttackPct +15
+GroundTroopDefensePct +15
 
 ASCENSION 4
-GroundHPPct +15
+GroundTroopHPPct +15
 MarchSizeCapacityPct +8
 
 ASCENSION 5
 MountedAttackPct +35
-GroundAttackPct +35
-GroundDefensePct +35
-GroundHPPct +35
+GroundTroopAttackPct +35
+GroundTroopDefensePct +35
+GroundTroopHPPct +35
 
 SPECIALTY 1 L5:
-GroundHPPct +10
-GroundDefensePct +10
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
 
 SPECIALTY 2 L5:
-GroundAttackPct +10
+GroundTroopAttackPct +10
 MountedAttackPct +10
 
 SPECIALTY 3 L5:
-GroundAttackPct +10
-GroundHPPct +10
-GroundDefensePct +10
+GroundTroopAttackPct +10
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
 
 SPECIALTY 4 L5:
-GroundAttackPct +55
-GroundDefensePct +35
-GroundHPPct +35
+GroundTroopAttackPct +55
+GroundTroopDefensePct +35
+GroundTroopHPPct +35
 MountedDefensePct +35
 MountedHPPct +35
 
 COVENANT | War
-GroundHPPct +10
+GroundTroopHPPct +10
 
 COVENANT | Cooperation
 GroundTroopTrainingSpeedPct +10
@@ -63,11 +63,11 @@ COVENANT | Peace
 ReinforcingGroundAttackPct +10
 
 COVENANT | Faith
-GroundDefensePct +10
+GroundTroopDefensePct +10
 AttackingGroundDefensePct +5
 
 COVENANT | Honor
-GroundAttackPct +10
+GroundTroopAttackPct +10
 
 COVENANT | Civilization
 AttackingGroundAttackPct +10

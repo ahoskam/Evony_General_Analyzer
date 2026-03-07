@@ -8,13 +8,13 @@ Defense: 113 (8.76)
 Politics: 107 (8.64)
 
 BASE SKILL | Crossing the River Rhine
-GroundAttackPct +35
-GroundDefensePct +35
+GroundTroopAttackPct +35
+GroundTroopDefensePct +35
 MountedDefensePct +35
 
 ASCENSION 1
-GroundAttackPct +5
-GroundHPPct +10
+GroundTroopAttackPct +5
+GroundTroopHPPct +10
 MountedHPPct +10
 
 ASCENSION 2
@@ -24,30 +24,30 @@ ASCENSION 3
 MarchSizeCapacityPct +12
 
 ASCENSION 4
-GroundAttackPct +10
-GroundHPPct +20
+GroundTroopAttackPct +10
+GroundTroopHPPct +20
 
 ASCENSION 5
-GroundAttackPct +20
-GroundDefensePct +35
+GroundTroopAttackPct +20
+GroundTroopDefensePct +35
 
 SPECIALTY 1 L5:
-GroundAttackPct +10
-GroundHPPct +10
+GroundTroopAttackPct +10
+GroundTroopHPPct +10
 
 SPECIALTY 2 L5:
-GroundAttackPct +10
+GroundTroopAttackPct +10
 MountedAttackPct +10
 
 SPECIALTY 3 L5:
-GroundAttackPct +10
-GroundHPPct +10
-GroundDefensePct +10
+GroundTroopAttackPct +10
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
 
 SPECIALTY 4 L5:
-GroundAttackPct +30
-GroundDefensePct +25
-GroundHPPct +20
+GroundTroopAttackPct +30
+GroundTroopDefensePct +25
+GroundTroopHPPct +20
 
 # None available (locked or not shown)
 

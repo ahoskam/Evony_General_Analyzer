@@ -24,7 +24,7 @@ RangedTroopDefensePct +20
 RangedTroopHPPct +20
 SiegeMachineDefensePct +20
 SiegeMachineHPPct +20
-RangedAttackPct +30
+RangedTroopAttackPct +30
 
 ASCENSION 3
 InCityTroopsAttackPct +40
@@ -53,11 +53,11 @@ SiegeMachineAttackPct +10
 
 SPECIALTY 3 L5:
 InCityRangedTroopAttackPct +10
-RangedAttackPct +100
+RangedTroopAttackPct +100
 
 SPECIALTY 4 L5:
 InCityRangedTroopAttackPct +20
-InCitySiegeMachineAttackPct +40
+InCitySiegeAttackPct +40
 
 COVENANT
 # None available (locked or not shown)

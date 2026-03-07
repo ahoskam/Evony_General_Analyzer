@@ -12,8 +12,8 @@ AttackingRangedAttackPct +30
 AttackingGroundDefensePct +25
 
 ASCENSION 1
-RangedAttackPct +10
-GroundDefensePct +10
+RangedTroopAttackPct +10
+GroundTroopDefensePct +10
 
 ASCENSION 2
 AttackingTroopDeathIntoWoundedRatePct +10
@@ -22,29 +22,29 @@ ASCENSION 3
 InRallyMarchSizeCapacityPct +8
 
 ASCENSION 4
-RangedAttackPct +10
-GroundHPPct +10
+RangedTroopAttackPct +10
+GroundTroopHPPct +10
 
 ASCENSION 5
-RangedAttackPct +10
-GroundDefensePct +10
-GroundHPPct +10
+RangedTroopAttackPct +10
+GroundTroopDefensePct +10
+GroundTroopHPPct +10
 
 SPECIALTY 1 L5:
-RangedHPPct +10
-RangedDefensePct +10
+RangedTroopHPPct +10
+RangedTroopDefensePct +10
 
 SPECIALTY 2 L5:
 EnemyTroopAttackPct -10
 
 SPECIALTY 3 L5:
-RangedAttackPct +10
-RangedHPPct +10
-RangedDefensePct +10
+RangedTroopAttackPct +10
+RangedTroopHPPct +10
+RangedTroopDefensePct +10
 
 SPECIALTY 4 L5:
-RangedAttackPct +20
-GroundHPPct +20
+RangedTroopAttackPct +20
+GroundTroopHPPct +20
 
 # None available (locked or not shown)
 

@@ -20,9 +20,9 @@ TroopAttackPct +10
 
 ASCENSION 2
 InCityRangedTroopAttackPct +10
-InCitySiegeMachineAttackPct +10
+InCitySiegeAttackPct +10
 InCityRangedTroopDefensePct +10
-InCitySiegeMachineDefensePct +10
+InCitySiegeDefensePct +10
 MayorConstructionSpeedSubordinateCityPct +6
 
 ASCENSION 3
@@ -41,8 +41,8 @@ TroopDefensePct +10
 RallyCapacityPct +6
 
 SPECIALTY 1 L5:
-GroundAttackPct +10
-GroundHPPct +10
+GroundTroopAttackPct +10
+GroundTroopHPPct +10
 
 SPECIALTY 2 L5:
 RangedTroopAttackPct +10

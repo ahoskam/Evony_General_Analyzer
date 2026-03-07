@@ -37,17 +37,17 @@ AttackingGroundDefensePct +25
 AttackingGroundHPPct +25
 
 SPECIALTY 1 L5:
-GroundHPPct +10
-GroundDefensePct +10
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
 
 SPECIALTY 2 L5:
-GroundAttackPct +10
+GroundTroopAttackPct +10
 MountedAttackPct +10
 
 SPECIALTY 3 L5:
-GroundAttackPct +10
-GroundHPPct +10
-GroundDefensePct +10
+GroundTroopAttackPct +10
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
 
 SPECIALTY 4 L5:
 AttackingGroundAttackPct +50
@@ -61,10 +61,10 @@ COVENANT | Cooperation
 GroundTroopTrainingCapacityPct +10
 
 COVENANT | Peace
-GroundAttackPct +10
+GroundTroopAttackPct +10
 
 COVENANT | Faith
-GroundDefensePct +10
+GroundTroopDefensePct +10
 AttackingGroundAttackPct +5
 
 COVENANT | Honor

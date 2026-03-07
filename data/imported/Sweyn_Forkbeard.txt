@@ -8,56 +8,56 @@ Politics: 109 (8.69)
 ==============================
 BASE SKILL | Viking King
 ==============================
-GroundAttackPct +40
-GroundHPPct +40
-GroundDefensePct +10
+GroundTroopAttackPct +40
+GroundTroopHPPct +40
+GroundTroopDefensePct +10
 MountedDefensePct +10
 
 ==============================
 SPECIALTY 1 | Ground Troop Defense
 ==============================
 SPECIALTY 1 L5:
-GroundHPPct +10
-GroundDefensePct +10
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
 
 ==============================
 SPECIALTY 2 | Formation
 ==============================
 SPECIALTY 2 L5:
-GroundAttackPct +10
+GroundTroopAttackPct +10
 MountedAttackPct +10
 
 ==============================
 SPECIALTY 3 | Ground Troop Ares
 ==============================
 SPECIALTY 3 L5:
-GroundAttackPct +10
-GroundHPPct +10
-GroundDefensePct +10
+GroundTroopAttackPct +10
+GroundTroopHPPct +10
+GroundTroopDefensePct +10
 
 ==============================
 SPECIALTY 4 | Battle of Svolder
 ==============================
 SPECIALTY 4 L5:
-GroundAttackPct +40
+GroundTroopAttackPct +40
 MountedAttackPct +40
-GroundDefensePct +15
+GroundTroopDefensePct +15
 
 ==============================
 COVENANTS
 ==============================
 
 # War
-GroundDefensePct +5
+GroundTroopDefensePct +5
 MountedDefensePct +5
 MarchSpeedPct +5
 
 # Cooperation
-GroundHPPct +5
+GroundTroopHPPct +5
 MountedHPPct +5
 
 # Peace
-GroundAttackPct +5
+GroundTroopAttackPct +5
 GroundTroopTrainingCapacityPct +10
 
 # Faith
