@@ -6,6 +6,25 @@
 #include <string>
 #include <vector>
 #include <optional>
+#include <cstdint>
+#include <algorithm>
+#include <cctype>
+
+static std::string normalize_general_country(const std::string& country) {
+  std::string c = country;
+  std::transform(c.begin(), c.end(), c.begin(), [](unsigned char ch) {
+    return (char)std::tolower(ch);
+  });
+  if (c == "europe") return "Europe";
+  if (c == "america") return "America";
+  if (c == "japan") return "Japan";
+  if (c == "korea") return "Korea";
+  if (c == "china") return "China";
+  if (c == "russia") return "Russia";
+  if (c == "arabia") return "Arabia";
+  if (c == "other") return "Other";
+  return "Unknown";
+}
 
 std::vector<GeneralRow> db_load_general_list(Db& db, const std::string& role_filter, const std::string& name_like)
 {
@@ -106,9 +125,9 @@ GeneralMeta db_load_general_meta(Db& db, int id)
 {
   GeneralMeta m{};
   DbStmt st(db,
-    "SELECT id, name, role, in_tavern, base_skill_name,"
+    "SELECT id, name, role, country, has_covenant, covenant_member_1, covenant_member_2, covenant_member_3, in_tavern, base_skill_name,"
     " leadership, leadership_green, attack, attack_green, defense, defense_green, politics, politics_green,"
-    " role_confirmed, source_text_verbatim, double_checked_in_game "
+    " role_confirmed, source_text_verbatim, double_checked_in_game, general_image_blob, general_image_mime, general_image_filename "
     "FROM generals WHERE id=?1;");
   st.bind_int(1, id);
 
@@ -116,21 +135,40 @@ GeneralMeta db_load_general_meta(Db& db, int id)
     m.id = st.col_int(0);
     m.name = st.col_text(1);
     m.role = normalize_general_role(st.col_text(2));
-    m.in_tavern = st.col_int(3);
-    m.base_skill_name = st.col_text(4);
+    m.country = normalize_general_country(st.col_text(3));
+    m.has_covenant = st.col_int(4);
+    m.covenant_member_1 = st.col_text(5);
+    m.covenant_member_2 = st.col_text(6);
+    m.covenant_member_3 = st.col_text(7);
+    m.in_tavern = st.col_int(8);
+    m.base_skill_name = st.col_text(9);
 
-    m.leadership = st.col_int(5);
-    m.leadership_green = st.col_double(6);
-    m.attack = st.col_int(7);
-    m.attack_green = st.col_double(8);
-    m.defense = st.col_int(9);
-    m.defense_green = st.col_double(10);
-    m.politics = st.col_int(11);
-    m.politics_green = st.col_double(12);
+    m.leadership = st.col_int(10);
+    m.leadership_green = st.col_double(11);
+    m.attack = st.col_int(12);
+    m.attack_green = st.col_double(13);
+    m.defense = st.col_int(14);
+    m.defense_green = st.col_double(15);
+    m.politics = st.col_int(16);
+    m.politics_green = st.col_double(17);
 
-    m.role_confirmed = st.col_int(13);
-    m.source_text_verbatim = st.col_text(14);
-    m.double_checked_in_game = st.col_int(15);
+    m.role_confirmed = st.col_int(18);
+    m.source_text_verbatim = st.col_text(19);
+    m.double_checked_in_game = st.col_int(20);
+    if (!st.col_is_null(21)) {
+      const void* p = sqlite3_column_blob(st.st.stmt, 21);
+      const int n = sqlite3_column_bytes(st.st.stmt, 21);
+      if (p && n > 0) {
+        const auto* b = static_cast<const std::uint8_t*>(p);
+        m.image_blob.assign(b, b + n);
+      } else {
+        m.image_blob.clear();
+      }
+    } else {
+      m.image_blob.clear();
+    }
+    m.image_mime = st.col_text(22);
+    m.image_filename = st.col_text(23);
   }
   return m;
 }
@@ -242,6 +280,26 @@ void db_normalize_general_roles(Db& db)
     "    THEN RAISE(ABORT, 'Invalid generals.role') "
     "  END; "
     "END;"
+    "DROP TRIGGER IF EXISTS trg_generals_country_valid_insert;"
+    "DROP TRIGGER IF EXISTS trg_generals_country_valid_update;"
+    "CREATE TRIGGER trg_generals_country_valid_insert "
+    "BEFORE INSERT ON generals "
+    "FOR EACH ROW "
+    "BEGIN "
+    "  SELECT CASE "
+    "    WHEN NEW.country NOT IN ('Europe','America','Japan','Korea','China','Russia','Arabia','Other','Unknown') "
+    "    THEN RAISE(ABORT, 'Invalid generals.country') "
+    "  END; "
+    "END;"
+    "CREATE TRIGGER trg_generals_country_valid_update "
+    "BEFORE UPDATE OF country ON generals "
+    "FOR EACH ROW "
+    "BEGIN "
+    "  SELECT CASE "
+    "    WHEN NEW.country NOT IN ('Europe','America','Japan','Korea','China','Russia','Arabia','Other','Unknown') "
+    "    THEN RAISE(ABORT, 'Invalid generals.country') "
+    "  END; "
+    "END;"
   );
 
   db.exec(
@@ -288,6 +346,13 @@ static void bind_int(sqlite3_stmt* s, int idx, int v) {
 static void bind_double(sqlite3_stmt* s, int idx, double v) {
   sqlite3_bind_double(s, idx, v);
 }
+static void bind_blob(sqlite3_stmt* s, int idx, const std::vector<std::uint8_t>& v) {
+  if (v.empty()) {
+    sqlite3_bind_null(s, idx);
+    return;
+  }
+  sqlite3_bind_blob(s, idx, v.data(), (int)v.size(), SQLITE_TRANSIENT);
+}
 static void bind_null(sqlite3_stmt* s, int idx) {
   sqlite3_bind_null(s, idx);
 }
@@ -298,36 +363,46 @@ bool db_update_general_meta(Db& db, int general_id, const GeneralMeta& g)
     const std::string normalized_role = normalize_general_role(g.role);
     auto st = db.prepare(
       "UPDATE generals SET "
-      " role=?1, in_tavern=?2, base_skill_name=?3, "
-      " leadership=?4, leadership_green=?5, "
-      " attack=?6, attack_green=?7, "
-      " defense=?8, defense_green=?9, "
-      " politics=?10, politics_green=?11, "
-      " role_confirmed=?12, source_text_verbatim=?13, double_checked_in_game=?14 "
-      "WHERE id=?15;"
+      " role=?1, country=?2, has_covenant=?3, covenant_member_1=?4, covenant_member_2=?5, covenant_member_3=?6, "
+      " in_tavern=?7, base_skill_name=?8, "
+      " leadership=?9, leadership_green=?10, "
+      " attack=?11, attack_green=?12, "
+      " defense=?13, defense_green=?14, "
+      " politics=?15, politics_green=?16, "
+      " role_confirmed=?17, source_text_verbatim=?18, double_checked_in_game=?19, "
+      " general_image_blob=?20, general_image_mime=?21, general_image_filename=?22 "
+      "WHERE id=?23;"
     );
 
     bind_text(st.stmt, 1, normalized_role);
-    bind_int (st.stmt, 2, g.in_tavern);
-    bind_text(st.stmt, 3, g.base_skill_name);
+    bind_text(st.stmt, 2, normalize_general_country(g.country));
+    bind_int (st.stmt, 3, g.has_covenant ? 1 : 0);
+    bind_text(st.stmt, 4, g.covenant_member_1);
+    bind_text(st.stmt, 5, g.covenant_member_2);
+    bind_text(st.stmt, 6, g.covenant_member_3);
+    bind_int (st.stmt, 7, g.in_tavern);
+    bind_text(st.stmt, 8, g.base_skill_name);
 
-    bind_int   (st.stmt, 4, g.leadership);
-    bind_double(st.stmt, 5, g.leadership_green);
+    bind_int   (st.stmt, 9, g.leadership);
+    bind_double(st.stmt, 10, g.leadership_green);
 
-    bind_int   (st.stmt, 6, g.attack);
-    bind_double(st.stmt, 7, g.attack_green);
+    bind_int   (st.stmt, 11, g.attack);
+    bind_double(st.stmt, 12, g.attack_green);
 
-    bind_int   (st.stmt, 8, g.defense);
-    bind_double(st.stmt, 9, g.defense_green);
+    bind_int   (st.stmt, 13, g.defense);
+    bind_double(st.stmt, 14, g.defense_green);
 
-    bind_int   (st.stmt, 10, g.politics);
-    bind_double(st.stmt, 11, g.politics_green);
+    bind_int   (st.stmt, 15, g.politics);
+    bind_double(st.stmt, 16, g.politics_green);
 
-    bind_int (st.stmt, 12, g.role_confirmed);
-    bind_text(st.stmt, 13, g.source_text_verbatim);
-    bind_int (st.stmt, 14, g.double_checked_in_game);
+    bind_int (st.stmt, 17, g.role_confirmed);
+    bind_text(st.stmt, 18, g.source_text_verbatim);
+    bind_int (st.stmt, 19, g.double_checked_in_game);
+    bind_blob(st.stmt, 20, g.image_blob);
+    bind_text(st.stmt, 21, g.image_mime);
+    bind_text(st.stmt, 22, g.image_filename);
 
-    bind_int(st.stmt, 15, general_id);
+    bind_int(st.stmt, 23, general_id);
 
     st.step_done();
     return true;

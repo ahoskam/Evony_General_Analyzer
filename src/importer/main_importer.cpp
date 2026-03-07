@@ -507,7 +507,10 @@ int main(int argc, char **argv) {
         return 1;
 
       int general_id = -1;
-      if (!db.upsert_general(g.meta.name, g.meta.role,
+      if (!db.upsert_general(g.meta.name, g.meta.role, g.meta.country,
+                             g.meta.has_covenant, g.meta.covenant_member_1,
+                             g.meta.covenant_member_2,
+                             g.meta.covenant_member_3,
                              /*role_confirmed*/ (g.meta.role != "Unknown"),
                              g.meta.in_tavern, g.meta.base_skill_name,
                              g.meta.leadership, g.meta.leadership_green,

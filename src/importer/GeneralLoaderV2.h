@@ -20,6 +20,11 @@ struct StatOccurrenceV2 {
 struct GeneralMetaV2 {
   std::string name;
   std::string role;
+  std::string country = "Unknown";
+  bool has_covenant = false;
+  std::string covenant_member_1;
+  std::string covenant_member_2;
+  std::string covenant_member_3;
   bool in_tavern = false;
   std::string base_skill_name;
 

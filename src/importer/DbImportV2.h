@@ -28,6 +28,11 @@ public:
   // from file input; only GUI can. This parameter is accepted but should not
   // force lock = true.
   bool upsert_general(const std::string &name, const std::string &role,
+                      const std::string &country,
+                      bool has_covenant,
+                      const std::string &covenant_member_1,
+                      const std::string &covenant_member_2,
+                      const std::string &covenant_member_3,
                       bool role_confirmed, bool in_tavern,
                       const std::string &base_skill_name, int leadership,
                       double leadership_green, int attack, double attack_green,

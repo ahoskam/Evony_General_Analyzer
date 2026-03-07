@@ -4,6 +4,20 @@
 #include <string>
 #include <cctype>
 
+static std::string normalize_general_country(const std::string& country) {
+    std::string c = country;
+    for (auto& ch : c) ch = (char)std::tolower((unsigned char)ch);
+    if (c == "europe") return "Europe";
+    if (c == "america") return "America";
+    if (c == "japan") return "Japan";
+    if (c == "korea") return "Korea";
+    if (c == "china") return "China";
+    if (c == "russia") return "Russia";
+    if (c == "arabia") return "Arabia";
+    if (c == "other") return "Other";
+    return "Unknown";
+}
+
 DbImportV2::~DbImportV2() { close(); }
 
 bool DbImportV2::exec_sql(const char* sql)
@@ -64,6 +78,38 @@ bool DbImportV2::ensure_v2_migrations()
         {
             "double_checked_in_game",
             "ALTER TABLE generals ADD COLUMN double_checked_in_game INTEGER NOT NULL DEFAULT 0;"
+        },
+        {
+            "country",
+            "ALTER TABLE generals ADD COLUMN country TEXT NOT NULL DEFAULT 'Unknown';"
+        },
+        {
+            "has_covenant",
+            "ALTER TABLE generals ADD COLUMN has_covenant INTEGER NOT NULL DEFAULT 0;"
+        },
+        {
+            "covenant_member_1",
+            "ALTER TABLE generals ADD COLUMN covenant_member_1 TEXT NOT NULL DEFAULT '';"
+        },
+        {
+            "covenant_member_2",
+            "ALTER TABLE generals ADD COLUMN covenant_member_2 TEXT NOT NULL DEFAULT '';"
+        },
+        {
+            "covenant_member_3",
+            "ALTER TABLE generals ADD COLUMN covenant_member_3 TEXT NOT NULL DEFAULT '';"
+        },
+        {
+            "general_image_blob",
+            "ALTER TABLE generals ADD COLUMN general_image_blob BLOB;"
+        },
+        {
+            "general_image_mime",
+            "ALTER TABLE generals ADD COLUMN general_image_mime TEXT NOT NULL DEFAULT '';"
+        },
+        {
+            "general_image_filename",
+            "ALTER TABLE generals ADD COLUMN general_image_filename TEXT NOT NULL DEFAULT '';"
         }
     };
 
@@ -87,8 +133,19 @@ bool DbImportV2::ensure_v2_migrations()
     }
 
     if (!exec_sql(
+            "UPDATE generals SET country='Unknown' "
+            "WHERE country IS NULL OR TRIM(country)='' OR "
+            "country NOT IN ('Europe','America','Japan','Korea','China','Russia','Arabia','Other','Unknown');"
+            "UPDATE generals SET has_covenant=CASE WHEN has_covenant=1 THEN 1 ELSE 0 END;")) {
+        std::cerr << "Migration failed while normalizing country/has_covenant data.\n";
+        return false;
+    }
+
+    if (!exec_sql(
             "DROP TRIGGER IF EXISTS trg_generals_role_valid_insert;"
             "DROP TRIGGER IF EXISTS trg_generals_role_valid_update;"
+            "DROP TRIGGER IF EXISTS trg_generals_country_valid_insert;"
+            "DROP TRIGGER IF EXISTS trg_generals_country_valid_update;"
             "CREATE TRIGGER trg_generals_role_valid_insert "
             "BEFORE INSERT ON generals "
             "FOR EACH ROW "
@@ -105,6 +162,24 @@ bool DbImportV2::ensure_v2_migrations()
             "  SELECT CASE "
             "    WHEN NEW.role NOT IN ('Ground','Mounted','Ranged','Siege','Defense','Mixed','Admin','Duty','Mayor','Unknown') "
             "    THEN RAISE(ABORT, 'Invalid generals.role') "
+            "  END; "
+            "END;"
+            "CREATE TRIGGER trg_generals_country_valid_insert "
+            "BEFORE INSERT ON generals "
+            "FOR EACH ROW "
+            "BEGIN "
+            "  SELECT CASE "
+            "    WHEN NEW.country NOT IN ('Europe','America','Japan','Korea','China','Russia','Arabia','Other','Unknown') "
+            "    THEN RAISE(ABORT, 'Invalid generals.country') "
+            "  END; "
+            "END;"
+            "CREATE TRIGGER trg_generals_country_valid_update "
+            "BEFORE UPDATE OF country ON generals "
+            "FOR EACH ROW "
+            "BEGIN "
+            "  SELECT CASE "
+            "    WHEN NEW.country NOT IN ('Europe','America','Japan','Korea','China','Russia','Arabia','Other','Unknown') "
+            "    THEN RAISE(ABORT, 'Invalid generals.country') "
             "  END; "
             "END;")) {
         std::cerr << "Migration failed for generals role validation triggers.\n";
@@ -194,6 +269,11 @@ bool DbImportV2::get_general_lock_status(
 bool DbImportV2::upsert_general(
     const std::string& name,
     const std::string& role,
+    const std::string& country,
+    bool has_covenant,
+    const std::string& covenant_member_1,
+    const std::string& covenant_member_2,
+    const std::string& covenant_member_3,
     bool role_confirmed,
     bool in_tavern,
     const std::string& base_skill_name,
@@ -207,6 +287,7 @@ bool DbImportV2::upsert_general(
 {
     if (!db_) return false;
     const std::string normalized_role = normalize_general_role(role);
+    const std::string normalized_country = normalize_general_country(country);
 
     // Enforce project rule:
     // - If general is locked (double_checked_in_game==1), importer MUST skip all updates.
@@ -228,7 +309,8 @@ bool DbImportV2::upsert_general(
 
     const char* sql = R"SQL(
         INSERT INTO generals(
-            name, role, role_confirmed, in_tavern, base_skill_name,
+            name, role, country, has_covenant, covenant_member_1, covenant_member_2, covenant_member_3,
+            role_confirmed, in_tavern, base_skill_name,
             leadership, leadership_green,
             attack, attack_green,
             defense, defense_green,
@@ -236,16 +318,22 @@ bool DbImportV2::upsert_general(
             source_text_verbatim,
             double_checked_in_game
         ) VALUES (
-            ?1, ?2, ?3, ?4, ?5,
-            ?6, ?7,
-            ?8, ?9,
-            ?10, ?11,
-            ?12, ?13,
-            ?14,
-            ?15
+            ?1, ?2, ?3, ?4, ?5, ?6, ?7,
+            ?8, ?9, ?10,
+            ?11, ?12,
+            ?13, ?14,
+            ?15, ?16,
+            ?17, ?18,
+            ?19,
+            ?20
         )
         ON CONFLICT(name) DO UPDATE SET
             role=excluded.role,
+            country=excluded.country,
+            has_covenant=excluded.has_covenant,
+            covenant_member_1=excluded.covenant_member_1,
+            covenant_member_2=excluded.covenant_member_2,
+            covenant_member_3=excluded.covenant_member_3,
             role_confirmed=excluded.role_confirmed,
             in_tavern=excluded.in_tavern,
             base_skill_name=excluded.base_skill_name,
@@ -269,24 +357,29 @@ bool DbImportV2::upsert_general(
 
     sqlite3_bind_text(stmt, 1, name.c_str(), -1, SQLITE_TRANSIENT);
     sqlite3_bind_text(stmt, 2, normalized_role.c_str(), -1, SQLITE_TRANSIENT);
-    sqlite3_bind_int (stmt, 3, role_confirmed ? 1 : 0);
-    sqlite3_bind_int (stmt, 4, in_tavern ? 1 : 0);
-    sqlite3_bind_text(stmt, 5, base_skill_name.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 3, normalized_country.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_int (stmt, 4, has_covenant ? 1 : 0);
+    sqlite3_bind_text(stmt, 5, covenant_member_1.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 6, covenant_member_2.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 7, covenant_member_3.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_int (stmt, 8, role_confirmed ? 1 : 0);
+    sqlite3_bind_int (stmt, 9, in_tavern ? 1 : 0);
+    sqlite3_bind_text(stmt, 10, base_skill_name.c_str(), -1, SQLITE_TRANSIENT);
 
-    sqlite3_bind_int   (stmt, 6, leadership);
-    sqlite3_bind_double(stmt, 7, leadership_green);
+    sqlite3_bind_int   (stmt, 11, leadership);
+    sqlite3_bind_double(stmt, 12, leadership_green);
 
-    sqlite3_bind_int   (stmt, 8, attack);
-    sqlite3_bind_double(stmt, 9, attack_green);
+    sqlite3_bind_int   (stmt, 13, attack);
+    sqlite3_bind_double(stmt, 14, attack_green);
 
-    sqlite3_bind_int   (stmt, 10, defense);
-    sqlite3_bind_double(stmt, 11, defense_green);
+    sqlite3_bind_int   (stmt, 15, defense);
+    sqlite3_bind_double(stmt, 16, defense_green);
 
-    sqlite3_bind_int   (stmt, 12, politics);
-    sqlite3_bind_double(stmt, 13, politics_green);
+    sqlite3_bind_int   (stmt, 17, politics);
+    sqlite3_bind_double(stmt, 18, politics_green);
 
-    sqlite3_bind_text(stmt, 14, source_text_verbatim.c_str(), -1, SQLITE_TRANSIENT);
-    sqlite3_bind_int (stmt, 15, importer_sets_double_checked);
+    sqlite3_bind_text(stmt, 19, source_text_verbatim.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_int (stmt, 20, importer_sets_double_checked);
 
     bool ok = (sqlite3_step(stmt) == SQLITE_DONE);
     if (!ok) std::cerr << "upsert_general failed: " << sqlite3_errmsg(db_) << "\n";

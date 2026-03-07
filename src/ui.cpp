@@ -16,6 +16,45 @@
 #include <sstream>
 #include <unordered_map>
 #include <unordered_set>
+#include <filesystem>
+#include <fstream>
+
+static const char *kGeneralCountries[] = {
+    "Unknown", "Europe", "America", "Japan", "Korea",
+    "China",   "Russia", "Arabia",  "Other"};
+
+static std::string guess_mime_from_path(const std::string &path) {
+  std::string ext = std::filesystem::path(path).extension().string();
+  std::transform(ext.begin(), ext.end(), ext.begin(), [](unsigned char c) {
+    return (char)std::tolower(c);
+  });
+  if (ext == ".png")
+    return "image/png";
+  if (ext == ".jpg" || ext == ".jpeg")
+    return "image/jpeg";
+  if (ext == ".webp")
+    return "image/webp";
+  if (ext == ".bmp")
+    return "image/bmp";
+  return "application/octet-stream";
+}
+
+static bool load_file_bytes(const std::string &path,
+                            std::vector<std::uint8_t> &out) {
+  std::ifstream in(path, std::ios::binary);
+  if (!in)
+    return false;
+  in.seekg(0, std::ios::end);
+  const auto sz = in.tellg();
+  if (sz < 0)
+    return false;
+  in.seekg(0, std::ios::beg);
+  out.resize((size_t)sz);
+  if (sz == 0)
+    return true;
+  in.read(reinterpret_cast<char *>(out.data()), static_cast<std::streamsize>(sz));
+  return in.good();
+}
 
 static void mark_dirty(EditorState &st) { st.dirty = true; }
 static bool is_locked(const EditorState &st) {
@@ -814,8 +853,21 @@ static void draw_meta_contents(Db &db, EditorState &st) {
   // Pretty view is intentionally read-only (for easy in-game verification)
   if (st.pretty_view) {
     ImGui::Text("Role: %s", st.meta.role.c_str());
+    ImGui::Text("Country: %s", st.meta.country.c_str());
     ImGui::Text("Role Confirmed: %s", st.meta.role_confirmed ? "Yes" : "No");
     ImGui::Text("In Tavern: %s", st.meta.in_tavern ? "Yes" : "No");
+    ImGui::Text("Has Covenant: %s", st.meta.has_covenant ? "Yes" : "No");
+    if (st.meta.has_covenant) {
+      ImGui::Text("Covenant Member 1: %s", st.meta.covenant_member_1.c_str());
+      ImGui::Text("Covenant Member 2: %s", st.meta.covenant_member_2.c_str());
+      ImGui::Text("Covenant Member 3: %s", st.meta.covenant_member_3.c_str());
+    }
+    ImGui::Text("Has Image: %s", st.meta.image_blob.empty() ? "No" : "Yes");
+    if (!st.meta.image_blob.empty()) {
+      ImGui::Text("Image File: %s", st.meta.image_filename.c_str());
+      ImGui::Text("Image MIME: %s", st.meta.image_mime.c_str());
+      ImGui::Text("Image Size: %zu bytes", st.meta.image_blob.size());
+    }
     ImGui::Text("Double Checked In-Game (LOCK): %s",
                 st.meta.double_checked_in_game ? "Yes" : "No");
 
@@ -992,6 +1044,19 @@ static void draw_meta_contents(Db &db, EditorState &st) {
     ImGui::EndCombo();
   }
 
+  if (ImGui::BeginCombo("Country", st.meta.country.c_str())) {
+    for (const char *c : kGeneralCountries) {
+      bool sel = (st.meta.country == c);
+      if (ImGui::Selectable(c, sel)) {
+        st.meta.country = c;
+        mark_dirty(st);
+      }
+      if (sel)
+        ImGui::SetItemDefaultFocus();
+    }
+    ImGui::EndCombo();
+  }
+
   // int-backed checkboxes
   {
     bool rc = st.meta.role_confirmed != 0;
@@ -1003,6 +1068,20 @@ static void draw_meta_contents(Db &db, EditorState &st) {
     if (ImGui::Checkbox("In Tavern", &it)) {
       st.meta.in_tavern = it ? 1 : 0;
       mark_dirty(st);
+    }
+
+    bool hc = st.meta.has_covenant != 0;
+    if (ImGui::Checkbox("Has Covenant", &hc)) {
+      st.meta.has_covenant = hc ? 1 : 0;
+      mark_dirty(st);
+    }
+    if (st.meta.has_covenant) {
+      if (ImGui::InputText("Covenant Member 1", &st.meta.covenant_member_1))
+        mark_dirty(st);
+      if (ImGui::InputText("Covenant Member 2", &st.meta.covenant_member_2))
+        mark_dirty(st);
+      if (ImGui::InputText("Covenant Member 3", &st.meta.covenant_member_3))
+        mark_dirty(st);
     }
   }
 
@@ -1054,6 +1133,42 @@ static void draw_meta_contents(Db &db, EditorState &st) {
   if (ImGui::InputDouble("P Green", &st.meta.politics_green, 0.01, 0.1, "%.2f"))
     mark_dirty(st);
   ImGui::PopStyleColor(3);
+
+  ImGui::Separator();
+  ImGui::TextUnformatted("GENERAL IMAGE (stored in DB):");
+  static std::string image_path;
+  static std::string image_error;
+  if (ImGui::InputText("Image File Path", &image_path)) {
+    image_error.clear();
+  }
+  ImGui::SameLine();
+  if (ImGui::Button("Load Image")) {
+    image_error.clear();
+    std::vector<std::uint8_t> bytes;
+    if (!load_file_bytes(image_path, bytes)) {
+      image_error = "Failed to read image file.";
+    } else if (bytes.size() < 100 * 1024 || bytes.size() > 600 * 1024) {
+      image_error = "Recommended range is 100KB-600KB.";
+    } else {
+      st.meta.image_blob = std::move(bytes);
+      st.meta.image_filename = std::filesystem::path(image_path).filename().string();
+      st.meta.image_mime = guess_mime_from_path(image_path);
+      mark_dirty(st);
+    }
+  }
+  ImGui::SameLine();
+  if (ImGui::Button("Clear Image")) {
+    st.meta.image_blob.clear();
+    st.meta.image_filename.clear();
+    st.meta.image_mime.clear();
+    image_error.clear();
+    mark_dirty(st);
+  }
+  ImGui::Text("Current image bytes: %zu", st.meta.image_blob.size());
+  if (!image_error.empty()) {
+    ImGui::TextColored(ImVec4(1.0f, 0.45f, 0.45f, 1.0f), "%s",
+                       image_error.c_str());
+  }
 
   // Source text
   ImGui::Separator();

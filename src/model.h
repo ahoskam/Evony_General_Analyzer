@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <optional>
+#include <cstdint>
 
 struct GeneralRow {
   int id = 0;
@@ -25,6 +26,11 @@ struct GeneralMeta {
   int id = 0;
   std::string name;
   std::string role;
+  std::string country = "Unknown";
+  int has_covenant = 0;
+  std::string covenant_member_1;
+  std::string covenant_member_2;
+  std::string covenant_member_3;
   int in_tavern = 0;
   std::string base_skill_name;
 
@@ -36,6 +42,11 @@ struct GeneralMeta {
   int role_confirmed = 1;
   std::string source_text_verbatim;
   int double_checked_in_game = 0;
+
+  // Optional portrait/media stored directly in DB.
+  std::vector<std::uint8_t> image_blob;
+  std::string image_mime;
+  std::string image_filename;
 };
 
 struct Occurrence {

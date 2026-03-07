@@ -7,6 +7,14 @@ CREATE TABLE generals (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
     name            TEXT NOT NULL UNIQUE,
     role            TEXT NOT NULL,
+    country         TEXT NOT NULL DEFAULT 'Unknown' CHECK (country IN ('Europe','America','Japan','Korea','China','Russia','Arabia','Other','Unknown')),
+    has_covenant    INTEGER NOT NULL DEFAULT 0 CHECK (has_covenant IN (0,1)),
+    covenant_member_1 TEXT NOT NULL DEFAULT '',
+    covenant_member_2 TEXT NOT NULL DEFAULT '',
+    covenant_member_3 TEXT NOT NULL DEFAULT '',
+    general_image_blob BLOB,
+    general_image_mime TEXT NOT NULL DEFAULT '',
+    general_image_filename TEXT NOT NULL DEFAULT '',
     role_confirmed  INTEGER NOT NULL DEFAULT 1,
     in_tavern       INTEGER NOT NULL CHECK (in_tavern IN (0,1)),
     base_skill_name TEXT NOT NULL,
@@ -41,6 +49,26 @@ BEGIN
   SELECT CASE
     WHEN NEW.role NOT IN ('Ground','Mounted','Ranged','Siege','Defense','Mixed','Admin','Duty','Mayor','Unknown')
     THEN RAISE(ABORT, 'Invalid generals.role')
+  END;
+END;
+
+CREATE TRIGGER trg_generals_country_valid_insert
+BEFORE INSERT ON generals
+FOR EACH ROW
+BEGIN
+  SELECT CASE
+    WHEN NEW.country NOT IN ('Europe','America','Japan','Korea','China','Russia','Arabia','Other','Unknown')
+    THEN RAISE(ABORT, 'Invalid generals.country')
+  END;
+END;
+
+CREATE TRIGGER trg_generals_country_valid_update
+BEFORE UPDATE OF country ON generals
+FOR EACH ROW
+BEGIN
+  SELECT CASE
+    WHEN NEW.country NOT IN ('Europe','America','Japan','Korea','China','Russia','Arabia','Other','Unknown')
+    THEN RAISE(ABORT, 'Invalid generals.country')
   END;
 END;
 

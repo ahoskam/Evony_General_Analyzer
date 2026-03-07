@@ -205,6 +205,23 @@ static inline bool parse_bool_ci(std::string_view v, bool &out) {
   return false;
 }
 
+static inline std::string normalize_country_ci(std::string_view v) {
+  std::string s = trim(std::string(v));
+  std::transform(s.begin(), s.end(), s.begin(), [](unsigned char c) {
+    return static_cast<char>(std::tolower(c));
+  });
+  if (s == "europe") return "Europe";
+  if (s == "america") return "America";
+  if (s == "japan") return "Japan";
+  if (s == "korea") return "Korea";
+  if (s == "china") return "China";
+  if (s == "russia") return "Russia";
+  if (s == "arabia") return "Arabia";
+  if (s == "other") return "Other";
+  if (s == "unknown" || s.empty()) return "Unknown";
+  return "";
+}
+
 // ----------------------
 // kv parsing: "KEY: value" or "KEY=value"
 // ----------------------
@@ -608,6 +625,40 @@ LoadedGeneralV2 load_general_v2_from_file(const std::string &path) {
           continue;
         }
 
+        if (k_up == "COUNTRY") {
+          const std::string normalized = normalize_country_ci(v);
+          if (!normalized.empty()) {
+            out.meta.country = normalized;
+          } else {
+            out.errors.push_back(path + ":" + std::to_string(line_no) +
+                                 " invalid COUNTRY: " + v);
+          }
+          continue;
+        }
+
+        if (k_up == "HAS_COVENANT" || k_up == "HAS COVENANT") {
+          bool b = false;
+          if (parse_bool_ci(v, b))
+            out.meta.has_covenant = b;
+          else
+            out.errors.push_back(path + ":" + std::to_string(line_no) +
+                                 " invalid HAS_COVENANT: " + v);
+          continue;
+        }
+
+        if (k_up == "COVENANT_MEMBER_1" || k_up == "COVENANT MEMBER 1") {
+          out.meta.covenant_member_1 = v;
+          continue;
+        }
+        if (k_up == "COVENANT_MEMBER_2" || k_up == "COVENANT MEMBER 2") {
+          out.meta.covenant_member_2 = v;
+          continue;
+        }
+        if (k_up == "COVENANT_MEMBER_3" || k_up == "COVENANT MEMBER 3") {
+          out.meta.covenant_member_3 = v;
+          continue;
+        }
+
         if (k_up == "IN_TAVERN" || k_up == "INTAVERN") {
           bool b = false;
           if (parse_bool_ci(v, b))
@@ -745,6 +796,15 @@ LoadedGeneralV2 load_general_v2_from_file(const std::string &path) {
       if (!is_banned_raw_key(occ.raw_key))
         out.occurrences.push_back(std::move(occ));
       continue;
+    }
+  }
+
+  if (!out.meta.has_covenant) {
+    for (const auto& occ : out.occurrences) {
+      if (occ.context_type == "Covenant") {
+        out.meta.has_covenant = true;
+        break;
+      }
     }
   }
 
