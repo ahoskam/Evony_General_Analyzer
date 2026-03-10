@@ -56,6 +56,74 @@ static bool load_file_bytes(const std::string &path,
   return in.good();
 }
 
+static void mark_dirty(EditorState &st);
+
+static std::optional<std::string>
+find_named_image_for_general(const std::string &general_name) {
+  const std::filesystem::path dir = "data/GeneralImages";
+  if (!std::filesystem::exists(dir))
+    return std::nullopt;
+
+  const std::string underscored = [&]() {
+    std::string v = general_name;
+    std::replace(v.begin(), v.end(), ' ', '_');
+    return v;
+  }();
+  const std::string hyphenated = [&]() {
+    std::string v = general_name;
+    std::replace(v.begin(), v.end(), ' ', '-');
+    return v;
+  }();
+
+  const std::vector<std::string> stems = {
+      general_name, underscored, hyphenated};
+  const std::vector<std::string> exts = {".png", ".jpg", ".jpeg", ".webp",
+                                         ".bmp"};
+
+  for (const auto &stem : stems) {
+    for (const auto &ext : exts) {
+      auto p = dir / (stem + ext);
+      if (std::filesystem::exists(p) && std::filesystem::is_regular_file(p))
+        return p.string();
+    }
+  }
+  return std::nullopt;
+}
+
+static void refresh_all_general_names(Db &db, EditorState &st) {
+  st.all_general_names.clear();
+  auto all_rows = db_load_general_list(db, "All", "");
+  st.all_general_names.reserve(all_rows.size());
+  for (const auto &g : all_rows) {
+    st.all_general_names.push_back(g.name);
+  }
+}
+
+static void draw_general_name_combo(const char *label, EditorState &st,
+                                    std::string &value) {
+  const char *preview = value.empty() ? "(None)" : value.c_str();
+  if (ImGui::BeginCombo(label, preview)) {
+    bool none_sel = value.empty();
+    if (ImGui::Selectable("(None)", none_sel)) {
+      value.clear();
+      mark_dirty(st);
+    }
+    if (none_sel)
+      ImGui::SetItemDefaultFocus();
+
+    for (const auto &name : st.all_general_names) {
+      const bool sel = (value == name);
+      if (ImGui::Selectable(name.c_str(), sel)) {
+        value = name;
+        mark_dirty(st);
+      }
+      if (sel)
+        ImGui::SetItemDefaultFocus();
+    }
+    ImGui::EndCombo();
+  }
+}
+
 static void mark_dirty(EditorState &st) { st.dirty = true; }
 static bool is_locked(const EditorState &st) {
   return st.meta.double_checked_in_game != 0;
@@ -788,8 +856,6 @@ static void draw_left_contents(Db &db, EditorState &st) {
 // DETAILS PANEL (contents only)
 // ---------------------------
 static void draw_meta_contents(Db &db, EditorState &st) {
-  (void)db;
-
   if (st.selected_general_id <= 0) {
     ImGui::TextUnformatted("Select a general on the left.");
     return;
@@ -811,6 +877,7 @@ static void draw_meta_contents(Db &db, EditorState &st) {
         // actually saved.
         reload_current(db, st);
         st.list = db_load_general_list(db, st.filter_role, st.filter_name);
+        refresh_all_general_names(db, st);
       } else {
         last_save_failed = true;
       }
@@ -1076,12 +1143,9 @@ static void draw_meta_contents(Db &db, EditorState &st) {
       mark_dirty(st);
     }
     if (st.meta.has_covenant) {
-      if (ImGui::InputText("Covenant Member 1", &st.meta.covenant_member_1))
-        mark_dirty(st);
-      if (ImGui::InputText("Covenant Member 2", &st.meta.covenant_member_2))
-        mark_dirty(st);
-      if (ImGui::InputText("Covenant Member 3", &st.meta.covenant_member_3))
-        mark_dirty(st);
+      draw_general_name_combo("Covenant Member 1", st, st.meta.covenant_member_1);
+      draw_general_name_combo("Covenant Member 2", st, st.meta.covenant_member_2);
+      draw_general_name_combo("Covenant Member 3", st, st.meta.covenant_member_3);
     }
   }
 
@@ -1140,6 +1204,32 @@ static void draw_meta_contents(Db &db, EditorState &st) {
   static std::string image_error;
   if (ImGui::InputText("Image File Path", &image_path)) {
     image_error.clear();
+  }
+  auto named_image = find_named_image_for_general(st.meta.name);
+  if (named_image.has_value()) {
+    ImGui::Text("Detected named image: %s", named_image->c_str());
+  } else {
+    ImGui::TextDisabled("No named image found in data/GeneralImages");
+  }
+  if (ImGui::Button("Load Named Image")) {
+    image_error.clear();
+    if (!named_image.has_value()) {
+      image_error = "No matching image found for this general.";
+    } else {
+      std::vector<std::uint8_t> bytes;
+      if (!load_file_bytes(*named_image, bytes)) {
+        image_error = "Failed to read named image file.";
+      } else if (bytes.size() < 100 * 1024 || bytes.size() > 600 * 1024) {
+        image_error = "Recommended range is 100KB-600KB.";
+      } else {
+        st.meta.image_blob = std::move(bytes);
+        st.meta.image_filename =
+            std::filesystem::path(*named_image).filename().string();
+        st.meta.image_mime = guess_mime_from_path(*named_image);
+        image_path = *named_image;
+        mark_dirty(st);
+      }
+    }
   }
   ImGui::SameLine();
   if (ImGui::Button("Load Image")) {
@@ -1948,6 +2038,7 @@ void ui_init(Db &db, EditorState &st) {
   db_normalize_general_roles(db);
   st.filter_role = "All";
   st.list = db_load_general_list(db, st.filter_role, st.filter_name);
+  refresh_all_general_names(db, st);
   st.stat_keys = db_load_stat_keys(db);
 }
 

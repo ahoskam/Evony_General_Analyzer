@@ -10,6 +10,7 @@ struct EditorState {
 
   // loaded list
   std::vector<GeneralRow> list;
+  std::vector<std::string> all_general_names;
 
   // selection
   int selected_general_id = 0;
