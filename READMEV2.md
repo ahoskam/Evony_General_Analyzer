@@ -21,16 +21,12 @@ This is a **minimal, working GUI skeleton** for your Evony General Analyzer that
 
 ## Build (example)
 
-You likely have your own build system already. A small `CMakeLists.txt` is included for convenience.
+The current repo build path is the top-level `Makefile`.
 
 ```bash
-mkdir -p build
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build -j
-./build/evony_gui_v2 --db ../data/evony_v2.db
+make gui
+./build/evony_gui_v2 --db data/evony_v2.db
 ```
-
-If your repo already has ImGui as `external/imgui`, edit `CMakeLists.txt` include paths accordingly.
 
 ## Important
 

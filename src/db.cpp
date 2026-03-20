@@ -1,9 +1,15 @@
 #include "db.h"
 #include <cctype>
+#include <filesystem>
+#include <fstream>
 #include <iostream>
+#include <string_view>
 #include <string>
+#include <vector>
 
 namespace {
+
+namespace fs = std::filesystem;
 
 bool column_exists(sqlite3* db, const char* table, const char* column) {
   std::string sql = "PRAGMA table_info(" + std::string(table) + ");";
@@ -112,6 +118,67 @@ void ensure_generals_migrations(sqlite3* db) {
       "END;");
 }
 
+std::string trim_copy(std::string s) {
+  auto is_space = [](unsigned char ch) { return std::isspace(ch) != 0; };
+  while (!s.empty() && is_space((unsigned char)s.front())) s.erase(s.begin());
+  while (!s.empty() && is_space((unsigned char)s.back())) s.pop_back();
+  return s;
+}
+
+std::string infer_stat_key_kind(const std::string& key) {
+  constexpr std::string_view pct_suffix = "Pct";
+  constexpr std::string_view flat_suffix = "Flat";
+  if (key.size() >= pct_suffix.size() &&
+      key.compare(key.size() - pct_suffix.size(), pct_suffix.size(), pct_suffix) == 0) {
+    return "percent";
+  }
+  if (key.size() >= flat_suffix.size() &&
+      key.compare(key.size() - flat_suffix.size(), flat_suffix.size(), flat_suffix) == 0) {
+    return "flat";
+  }
+  return "unknown";
+}
+
+void sync_canonical_stat_keys(sqlite3* db) {
+  const fs::path canonical_path = fs::path("data") / "canonical_keys.txt";
+  std::ifstream in(canonical_path);
+  if (!in) {
+    std::cerr << "warning: could not open canonical key list: " << canonical_path << "\n";
+    return;
+  }
+
+  sqlite3_stmt* stmt = nullptr;
+  const char* sql =
+      "INSERT INTO stat_keys(key, kind, is_active) VALUES(?1, ?2, 1) "
+      "ON CONFLICT(key) DO UPDATE SET "
+      "  kind=excluded.kind, "
+      "  is_active=1;";
+  if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
+    throw std::runtime_error("prepare failed: " + std::string(sqlite3_errmsg(db)));
+  }
+
+  std::string line;
+  while (std::getline(in, line)) {
+    std::string key = trim_copy(line);
+    if (key.empty()) continue;
+    if (!key.empty() && key[0] == '#') continue;
+
+    const std::string kind = infer_stat_key_kind(key);
+    sqlite3_reset(stmt);
+    sqlite3_clear_bindings(stmt);
+    sqlite3_bind_text(stmt, 1, key.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 2, kind.c_str(), -1, SQLITE_TRANSIENT);
+
+    if (sqlite3_step(stmt) != SQLITE_DONE) {
+      const std::string err = sqlite3_errmsg(db);
+      sqlite3_finalize(stmt);
+      throw std::runtime_error("failed to sync canonical stat key '" + key + "': " + err);
+    }
+  }
+
+  sqlite3_finalize(stmt);
+}
+
 } // namespace
 
 Db::~Db() {
@@ -131,6 +198,7 @@ void Db::open(const std::string& path) {
   // Enforce foreign keys.
   exec("PRAGMA foreign_keys=ON;");
   ensure_generals_migrations(db_);
+  sync_canonical_stat_keys(db_);
 }
 
 void Db::exec(const std::string& sql) {
