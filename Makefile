@@ -25,7 +25,12 @@ GUI_SRCS := \
   src/main_gui.cpp \
   src/ui.cpp \
   src/model.cpp \
-  src/db.cpp
+  src/db.cpp \
+  src/db_admin.cpp \
+  src/db_maintenance.cpp \
+  src/importer/DbImportV2.cpp \
+  src/importer/GeneralLoaderV2.cpp \
+  src/importer/import_service.cpp
 
 IMGUI_SRCS := \
   external/imgui/imgui.cpp \
@@ -40,30 +45,49 @@ IMGUI_SRCS := \
 GUI_OBJS := $(patsubst %.cpp,$(OBJ)/%.o,$(GUI_SRCS) $(IMGUI_SRCS))
 
 # -----------------------
+# Analyzer sources (ONLY)
+# -----------------------
+ANALYZER_SRCS := \
+  src/analyzer/main_analyzer.cpp \
+  src/analyzer/readonly_db.cpp \
+  src/analyzer/model.cpp \
+  src/analyzer/compute.cpp \
+  src/analyzer/json.cpp \
+  src/analyzer/ui.cpp
+
+ANALYZER_OBJS := $(patsubst %.cpp,$(OBJ)/%.o,$(ANALYZER_SRCS) $(IMGUI_SRCS))
+
+# -----------------------
 # Importer v2 sources (ONLY)
 # -----------------------
 IMP_SRCS := \
   src/importer/main_importer.cpp \
   src/importer/DbImportV2.cpp \
-  src/importer/GeneralLoaderV2.cpp
+  src/importer/GeneralLoaderV2.cpp \
+  src/importer/import_service.cpp \
+  src/db_maintenance.cpp
 
 IMP_OBJS := $(patsubst %.cpp,$(OBJ)/%.o,$(IMP_SRCS))
 
 # -----------------------
 # Targets
 # -----------------------
-.PHONY: all clean gui importer run_gui run_importer
+.PHONY: all clean gui importer analyzer run_gui run_importer run_analyzer
 
-all: gui importer
+all: gui importer analyzer
 
 gui: $(BUILD)/evony_gui_v2
 importer: $(BUILD)/importer_v2
+analyzer: $(BUILD)/evony_analyzer_ro
 
 run_gui: gui
 	./$(BUILD)/evony_gui_v2 --db data/evony_v2.db
 
 run_importer: importer
 	./$(BUILD)/importer_v2 --db data/evony_v2.db --path data/import
+
+run_analyzer: analyzer
+	./$(BUILD)/evony_analyzer_ro --db data/evony_v2.db --state data/analyzer_owned_state.v1.json
 
 $(BUILD)/evony_gui_v2: $(GUI_OBJS)
 	@mkdir -p $(BUILD)
@@ -72,6 +96,10 @@ $(BUILD)/evony_gui_v2: $(GUI_OBJS)
 $(BUILD)/importer_v2: $(IMP_OBJS)
 	@mkdir -p $(BUILD)
 	$(CXX) $^ -o $@ $(IMP_LIBS)
+
+$(BUILD)/evony_analyzer_ro: $(ANALYZER_OBJS)
+	@mkdir -p $(BUILD)
+	$(CXX) $^ -o $@ $(GUI_LIBS)
 
 # -----------------------
 # Compile rules (SEPARATE FLAGS!)
@@ -89,3 +117,4 @@ clean:
 
 -include $(GUI_OBJS:.o=.d)
 -include $(IMP_OBJS:.o=.d)
+-include $(ANALYZER_OBJS:.o=.d)

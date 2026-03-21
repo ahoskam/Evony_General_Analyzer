@@ -69,8 +69,6 @@ private:
   sqlite3 *db_ = nullptr;
 
   bool exec_sql(const char *sql);
-  bool ensure_v2_migrations();
-  bool column_exists(const char *table, const char *column);
 
   bool get_general_lock_status(const std::string &name, bool &found,
                                int &general_id, bool &locked);

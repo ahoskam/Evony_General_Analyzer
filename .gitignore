@@ -58,5 +58,5 @@ exports/
 build_cmake/
 imgui.ini
 data/*.db
+data/analyzer_owned_state.v1.json
 data/*.bak_*
-

@@ -233,8 +233,6 @@ SiegeMachineRepairingCapacityPct
 SiegeMachineRepairingCostPct
 SiegeMachineTrainingCapacityPct
 SiegeMachineTrainingSpeedPct
-SubCityGoldProductionSpeedPct
-SubordinateCityGoldProductionSpeedPct
 TrapBuildingSpeedPct
 TrapTriggeringChancePct
 TroopAttackPct

@@ -1,4 +1,5 @@
 #include "DbImportV2.h"
+#include "../db_maintenance.h"
 #include "../role_utils.h"
 #include <iostream>
 #include <string>
@@ -34,161 +35,6 @@ bool DbImportV2::exec_sql(const char* sql)
     return true;
 }
 
-bool DbImportV2::column_exists(const char* table, const char* column)
-{
-    if (!db_) return false;
-
-    std::string sql = "PRAGMA table_info(" + std::string(table) + ");";
-    sqlite3_stmt* stmt = nullptr;
-
-    if (sqlite3_prepare_v2(db_, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK) {
-        std::cerr << "prepare failed (PRAGMA table_info): " << sqlite3_errmsg(db_) << "\n";
-        return false;
-    }
-
-    auto lower = [](std::string s){
-        for (auto& c : s) c = (char)std::tolower((unsigned char)c);
-        return s;
-    };
-
-    bool found = false;
-    while (sqlite3_step(stmt) == SQLITE_ROW) {
-        // columns: cid, name, type, notnull, dflt_value, pk
-        const unsigned char* nameTxt = sqlite3_column_text(stmt, 1);
-        std::string name = nameTxt ? (const char*)nameTxt : "";
-        if (lower(name) == lower(column)) { found = true; break; }
-    }
-
-    sqlite3_finalize(stmt);
-    return found;
-}
-
-bool DbImportV2::ensure_v2_migrations()
-{
-    if (!db_) return false;
-
-    const struct {
-        const char* col;
-        const char* alter_sql;
-    } migrations[] = {
-        {
-            "source_text_verbatim",
-            "ALTER TABLE generals ADD COLUMN source_text_verbatim TEXT NOT NULL DEFAULT '';"
-        },
-        {
-            "double_checked_in_game",
-            "ALTER TABLE generals ADD COLUMN double_checked_in_game INTEGER NOT NULL DEFAULT 0;"
-        },
-        {
-            "country",
-            "ALTER TABLE generals ADD COLUMN country TEXT NOT NULL DEFAULT 'Unknown';"
-        },
-        {
-            "has_covenant",
-            "ALTER TABLE generals ADD COLUMN has_covenant INTEGER NOT NULL DEFAULT 0;"
-        },
-        {
-            "covenant_member_1",
-            "ALTER TABLE generals ADD COLUMN covenant_member_1 TEXT NOT NULL DEFAULT '';"
-        },
-        {
-            "covenant_member_2",
-            "ALTER TABLE generals ADD COLUMN covenant_member_2 TEXT NOT NULL DEFAULT '';"
-        },
-        {
-            "covenant_member_3",
-            "ALTER TABLE generals ADD COLUMN covenant_member_3 TEXT NOT NULL DEFAULT '';"
-        },
-        {
-            "general_image_blob",
-            "ALTER TABLE generals ADD COLUMN general_image_blob BLOB;"
-        },
-        {
-            "general_image_mime",
-            "ALTER TABLE generals ADD COLUMN general_image_mime TEXT NOT NULL DEFAULT '';"
-        },
-        {
-            "general_image_filename",
-            "ALTER TABLE generals ADD COLUMN general_image_filename TEXT NOT NULL DEFAULT '';"
-        }
-    };
-
-    for (const auto& m : migrations) {
-        if (column_exists("generals", m.col)) continue;
-
-        char* err = nullptr;
-        int rc = sqlite3_exec(db_, m.alter_sql, nullptr, nullptr, &err);
-        if (rc != SQLITE_OK) {
-            std::string msg = err ? err : "";
-            sqlite3_free(err);
-
-            if (msg.find("duplicate column") != std::string::npos ||
-                msg.find("already exists") != std::string::npos) {
-                continue;
-            }
-
-            std::cerr << "Migration failed for generals." << m.col << ": " << msg << "\n";
-            return false;
-        }
-    }
-
-    if (!exec_sql(
-            "UPDATE generals SET country='Unknown' "
-            "WHERE country IS NULL OR TRIM(country)='' OR "
-            "country NOT IN ('Europe','America','Japan','Korea','China','Russia','Arabia','Other','Unknown');"
-            "UPDATE generals SET has_covenant=CASE WHEN has_covenant=1 THEN 1 ELSE 0 END;")) {
-        std::cerr << "Migration failed while normalizing country/has_covenant data.\n";
-        return false;
-    }
-
-    if (!exec_sql(
-            "DROP TRIGGER IF EXISTS trg_generals_role_valid_insert;"
-            "DROP TRIGGER IF EXISTS trg_generals_role_valid_update;"
-            "DROP TRIGGER IF EXISTS trg_generals_country_valid_insert;"
-            "DROP TRIGGER IF EXISTS trg_generals_country_valid_update;"
-            "CREATE TRIGGER trg_generals_role_valid_insert "
-            "BEFORE INSERT ON generals "
-            "FOR EACH ROW "
-            "BEGIN "
-            "  SELECT CASE "
-            "    WHEN NEW.role NOT IN ('Ground','Mounted','Ranged','Siege','Defense','Mixed','Admin','Duty','Mayor','Unknown') "
-            "    THEN RAISE(ABORT, 'Invalid generals.role') "
-            "  END; "
-            "END;"
-            "CREATE TRIGGER trg_generals_role_valid_update "
-            "BEFORE UPDATE OF role ON generals "
-            "FOR EACH ROW "
-            "BEGIN "
-            "  SELECT CASE "
-            "    WHEN NEW.role NOT IN ('Ground','Mounted','Ranged','Siege','Defense','Mixed','Admin','Duty','Mayor','Unknown') "
-            "    THEN RAISE(ABORT, 'Invalid generals.role') "
-            "  END; "
-            "END;"
-            "CREATE TRIGGER trg_generals_country_valid_insert "
-            "BEFORE INSERT ON generals "
-            "FOR EACH ROW "
-            "BEGIN "
-            "  SELECT CASE "
-            "    WHEN NEW.country NOT IN ('Europe','America','Japan','Korea','China','Russia','Arabia','Other','Unknown') "
-            "    THEN RAISE(ABORT, 'Invalid generals.country') "
-            "  END; "
-            "END;"
-            "CREATE TRIGGER trg_generals_country_valid_update "
-            "BEFORE UPDATE OF country ON generals "
-            "FOR EACH ROW "
-            "BEGIN "
-            "  SELECT CASE "
-            "    WHEN NEW.country NOT IN ('Europe','America','Japan','Korea','China','Russia','Arabia','Other','Unknown') "
-            "    THEN RAISE(ABORT, 'Invalid generals.country') "
-            "  END; "
-            "END;")) {
-        std::cerr << "Migration failed for generals role validation triggers.\n";
-        return false;
-    }
-
-    return true;
-}
-
 bool DbImportV2::open(const std::string& path)
 {
     close();
@@ -202,9 +48,9 @@ bool DbImportV2::open(const std::string& path)
     exec_sql("PRAGMA foreign_keys = ON;");
     exec_sql("PRAGMA journal_mode = WAL;");
 
-    std::cerr << "[DbImportV2] running ensure_v2_migrations()\n";
-    if (!ensure_v2_migrations()) {
-        std::cerr << "DB migrations failed.\n";
+    std::string err;
+    if (!db_apply_generals_migrations(db_, &err)) {
+        std::cerr << "DB migrations failed: " << err << "\n";
         close();
         return false;
     }
@@ -412,7 +258,11 @@ std::optional<int> DbImportV2::resolve_stat_key_id(const std::string& raw_key)
 
     // 1) alias match
     {
-        const char* sql = "SELECT stat_key_id FROM stat_key_aliases WHERE alias_key=?1;";
+        const char* sql =
+            "SELECT a.stat_key_id "
+            "FROM stat_key_aliases a "
+            "JOIN stat_keys k ON k.id = a.stat_key_id "
+            "WHERE a.alias_key=?1;";
         sqlite3_stmt* stmt = nullptr;
         if (sqlite3_prepare_v2(db_, sql, -1, &stmt, nullptr) != SQLITE_OK) {
             std::cerr << "prepare failed: " << sqlite3_errmsg(db_) << "\n";
@@ -652,7 +502,14 @@ bool DbImportV2::insert_stat_occurrence(
     sqlite3_bind_text(stmt, 10, raw_line.c_str(), -1, SQLITE_TRANSIENT);
 
     bool ok = (sqlite3_step(stmt) == SQLITE_DONE);
-    if (!ok) std::cerr << "insert_stat_occurrence failed: " << sqlite3_errmsg(db_) << "\n";
+    if (!ok) {
+        std::cerr << "insert_stat_occurrence failed: " << sqlite3_errmsg(db_)
+                  << " | general_id=" << general_id
+                  << " | stat_key_id=" << stat_key_id
+                  << " | file=" << file_path << ":" << line_number
+                  << " | context=" << context_type << "/" << context_name
+                  << "\n";
+    }
     sqlite3_finalize(stmt);
     return ok;
 }

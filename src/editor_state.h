@@ -1,4 +1,6 @@
 #pragma once
+#include "db_admin.h"
+#include "importer/import_service.h"
 #include "model.h"
 #include <vector>
 #include <string>
@@ -51,4 +53,20 @@ struct EditorState {
   std::vector<std::string> save_block_errors;
    // last save failure message (shown in UI)
   std::string last_save_error;
+
+  // import UI
+  std::string import_path = "data/import";
+  std::string import_report_path = "data/last_import_report.txt";
+  std::string import_status;
+  bool import_last_ok = true;
+  bool show_import_modal = false;
+  ImportPreviewResult import_preview;
+  bool has_import_preview = false;
+
+  // admin / integrity UI
+  bool show_integrity_modal = false;
+  IntegritySummary integrity_summary;
+  bool has_integrity_summary = false;
+  std::string integrity_status;
+  std::string integrity_report_path = "data/last_integrity_repair.txt";
 };

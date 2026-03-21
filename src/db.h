@@ -16,6 +16,7 @@ public:
   void open(const std::string& path);
   bool is_open() const { return db_ != nullptr; }
   sqlite3* raw() { return db_; }
+  const std::string& path() const { return path_; }
 
   void exec(const std::string& sql);
   void begin();
@@ -50,6 +51,7 @@ public:
 
 private:
   sqlite3* db_ = nullptr;
+  std::string path_;
 };
 
 // --- Add near the bottom of db.h (after class Db) ---

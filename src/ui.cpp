@@ -1,6 +1,8 @@
 #include "ui.h"
+#include "db_admin.h"
 #include "db.h"
 #include "editor_state.h"
+#include "importer/import_service.h"
 #include "model.h"
 #include "model_api.h"
 
@@ -130,6 +132,78 @@ static bool is_locked(const EditorState &st) {
 }
 static void ui_init(Db &db, EditorState &st);
 static void ui_draw(Db &db, EditorState &st);
+
+static std::string format_import_status(const ImportRunResult& result) {
+  std::ostringstream oss;
+  oss << (result.ok ? "Import completed." : "Import failed.") << "\n";
+  oss << "Files seen: " << result.files_seen << "\n";
+  oss << "Generals imported/updated: " << result.generals_imported << "\n";
+  oss << "Occurrences inserted: " << result.occurrences_inserted << "\n";
+  oss << "Occurrence insert failures: " << result.occurrence_insert_failures
+      << "\n";
+  oss << "Pending examples inserted: " << result.pending_examples_inserted
+      << "\n";
+  oss << "Invalid files: " << result.invalid_files << "\n";
+  oss << "Files moved to imported: " << result.imported_files;
+  oss << "\nFiles left untouched: " << result.untouched_files;
+  if (!result.messages.empty()) {
+    oss << "\n\nMessages:";
+    for (const auto& msg : result.messages) {
+      oss << "\n- " << msg;
+    }
+  }
+  return oss.str();
+}
+
+static std::string format_integrity_summary_text(const IntegritySummary& summary) {
+  std::ostringstream oss;
+  oss << "Orphan stat_occurrences (missing general): "
+      << summary.orphan_stat_occurrences_general << "\n";
+  oss << "Orphan stat_occurrences (missing stat key): "
+      << summary.orphan_stat_occurrences_stat_key << "\n";
+  oss << "Orphan pending examples: " << summary.orphan_pending_examples << "\n";
+  oss << "Orphan alias rows: " << summary.orphan_aliases << "\n";
+  oss << "Orphan transforms (missing alias): "
+      << summary.orphan_transforms_alias << "\n";
+  oss << "Orphan transforms (missing stat key): "
+      << summary.orphan_transforms_stat_key;
+  return oss.str();
+}
+
+static void append_integrity_status(EditorState& st, Db& db,
+                                    const std::string& prefix) {
+  IntegritySummary summary = audit_db_integrity(db.raw());
+  st.integrity_summary = summary;
+  st.has_integrity_summary = summary.ok;
+  if (!summary.ok) {
+    st.integrity_status = prefix + " Post-action integrity audit failed.";
+    return;
+  }
+
+  const int total_issues =
+      summary.orphan_stat_occurrences_general +
+      summary.orphan_stat_occurrences_stat_key +
+      summary.orphan_pending_examples + summary.orphan_aliases +
+      summary.orphan_transforms_alias + summary.orphan_transforms_stat_key;
+
+  if (total_issues == 0) {
+    st.integrity_status = prefix + " Post-action integrity audit: OK.";
+  } else {
+    st.integrity_status =
+        prefix + " Post-action integrity audit found remaining issues: " +
+        std::to_string(total_issues) + ".";
+  }
+}
+
+static int count_selected_repair_items(const IntegritySummary& summary) {
+  int count = 0;
+  for (const auto& item : summary.repair_items) {
+    if (item.selected) {
+      count++;
+    }
+  }
+  return count;
+}
 
 // Thicker / thinner separators (wide vs slim)
 static void ui_separator(float thickness) {
@@ -302,13 +376,23 @@ split_total_abs_to_increments(double abs_total) {
   // 40 => 4,4,8,8,16
   // 45 => 4,5,9,9,18
   // 46 => 5,5,9,9,18
+  // 55 => 5,6,11,11,22
+  // 60 => 6,6,12,12,24
+  // 90 => 9,9,18,18,36
+  // 100 => 10,10,20,20,40
+  // 200 => 20,20,40,40,80
+  // 8 => 1,1,2,2,2
+  // 5 => 1,1,1,1,1
   static const std::unordered_map<int, std::vector<int>> patterns = {
       {10, {1, 1, 2, 2, 4}},  {15, {1, 2, 3, 3, 6}},  {6, {1, 1, 1, 1, 2}},
       {50, {5, 5, 10, 10, 20}},
       {16, {2, 2, 3, 3, 6}},  {20, {2, 2, 4, 4, 8}},  {25, {2, 3, 5, 5, 10}},
       {26, {3, 3, 5, 5, 10}}, {30, {3, 3, 6, 6, 12}}, {35, {3, 4, 6, 7, 15}},
       {36, {4, 4, 7, 7, 14}}, {40, {4, 4, 8, 8, 16}}, {45, {4, 5, 9, 9, 18}},
-      {46, {5, 5, 9, 9, 18}},
+      {46, {5, 5, 9, 9, 18}}, {55, {5, 6, 11, 11, 22}},
+      {60, {6, 6, 12, 12, 24}}, {90, {9, 9, 18, 18, 36}},
+      {100, {10, 10, 20, 20, 40}}, {200, {20, 20, 40, 40, 80}},
+      {8, {1, 1, 2, 2, 2}}, {5, {1, 1, 1, 1, 1}},
   };
 
   int t = (int)std::lround(abs_total);
@@ -752,6 +836,9 @@ static void draw_left_contents(Db &db, EditorState &st) {
   };
 
   ImGui::TextUnformatted("Filters");
+  ImGui::Separator();
+
+  ImGui::TextDisabled("Use Menu -> Admin for Import and Integrity tools.");
   ImGui::Separator();
 
   if (ImGui::BeginCombo("Role", st.filter_role.c_str())) {
@@ -2043,6 +2130,16 @@ void ui_init(Db &db, EditorState &st) {
 }
 
 void ui_draw(Db &db, EditorState &st) {
+  if (st.show_import_modal) {
+    ImGui::OpenPopup("Import Files");
+    st.show_import_modal = false;
+  }
+
+  if (st.show_integrity_modal) {
+    ImGui::OpenPopup("Integrity Tools");
+    st.show_integrity_modal = false;
+  }
+
   // Dirty modal (unchanged)
   if (st.show_dirty_modal) {
     ImGui::OpenPopup("Unsaved changes");
@@ -2158,6 +2255,213 @@ void ui_draw(Db &db, EditorState &st) {
     ImGui::EndPopup();
   }
 
+  if (ImGui::BeginPopupModal("Import Files", nullptr,
+                             ImGuiWindowFlags_AlwaysAutoResize)) {
+    ImGui::TextUnformatted("Preview and run imports from a folder.");
+    ImGui::InputText("Import Folder", &st.import_path);
+    ImGui::InputText("Import Report File", &st.import_report_path);
+
+    if (ImGui::Button("Preview Import")) {
+      if (db.path().empty()) {
+        st.import_last_ok = false;
+        st.import_status = "Current DB path is unavailable.";
+        st.has_import_preview = false;
+      } else {
+        st.import_preview = preview_import_v2(db.path(), st.import_path);
+        st.has_import_preview = st.import_preview.ok;
+        st.import_last_ok = st.import_preview.ok;
+        if (!st.import_preview.ok) {
+          st.import_status = "Import preview failed.";
+        } else {
+          st.import_status.clear();
+        }
+      }
+    }
+
+    ImGui::SameLine();
+    const bool disable_run = st.dirty || db.path().empty();
+    if (disable_run)
+      ImGui::BeginDisabled();
+    if (ImGui::Button("Run Import")) {
+      const ImportRunResult result =
+          run_import_v2(db.path(), st.import_path, st.import_report_path);
+      st.import_last_ok = result.ok;
+      st.import_status = format_import_status(result);
+      if (result.ok) {
+        st.list = db_load_general_list(db, st.filter_role, st.filter_name);
+        refresh_all_general_names(db, st);
+        st.stat_keys = db_load_stat_keys(db);
+        if (st.selected_general_id > 0) {
+          reload_current(db, st);
+        }
+        append_integrity_status(st, db, "Import completed.");
+        if (!st.integrity_status.empty()) {
+          st.import_status += "\n\n" + st.integrity_status;
+        }
+      }
+    }
+    if (disable_run)
+      ImGui::EndDisabled();
+
+    if (st.dirty) {
+      ImGui::TextColored(ImVec4(1.0f, 0.45f, 0.45f, 1.0f),
+                         "Save or reload current edits before running import.");
+    }
+
+    if (st.has_import_preview) {
+      ImGui::Separator();
+      ImGui::Text("Files seen: %d", st.import_preview.files_seen);
+      ImGui::Text("New generals: %d", st.import_preview.generals_new);
+      ImGui::Text("Existing generals: %d", st.import_preview.generals_existing);
+      ImGui::Text("Locked generals: %d", st.import_preview.generals_locked);
+      ImGui::Text("Occurrences total: %d", st.import_preview.occurrences_total);
+      ImGui::Text("Resolved occurrences: %d",
+                  st.import_preview.resolved_occurrences);
+      ImGui::Text("Pending occurrences: %d",
+                  st.import_preview.pending_occurrences);
+      ImGui::Text("Synthesized occurrences: %d",
+                  st.import_preview.synthesized_occurrences);
+      ImGui::Text("Parse-error files: %d", st.import_preview.files_parse_errors);
+
+      ImGui::BeginChild("##import_preview_files", ImVec2(760, 320), true);
+      for (const auto& file : st.import_preview.files) {
+        ImGui::PushID(file.file_path.c_str());
+        const std::string header =
+            std::filesystem::path(file.file_path).filename().string() +
+            (file.general_name.empty() ? "" : " - " + file.general_name);
+        if (ImGui::TreeNode(header.c_str())) {
+          ImGui::Text("Parse OK: %s", file.parse_ok ? "yes" : "no");
+          if (file.parse_ok) {
+            ImGui::Text("General exists: %s", file.general_exists ? "yes" : "no");
+            ImGui::Text("General locked: %s", file.general_locked ? "yes" : "no");
+            ImGui::Text("Occurrences: %d", file.occurrence_count);
+            ImGui::Text("Resolved: %d", file.resolved_occurrences);
+            ImGui::Text("Pending: %d", file.pending_occurrences);
+            ImGui::Text("Synthesized: %d", file.synthesized_occurrences);
+          }
+          for (const auto& msg : file.messages) {
+            ImGui::BulletText("%s", msg.c_str());
+          }
+          ImGui::TreePop();
+        }
+        ImGui::PopID();
+      }
+      ImGui::EndChild();
+    }
+
+    if (!st.import_status.empty()) {
+      ImGui::Separator();
+      ImGui::TextWrapped("%s", st.import_status.c_str());
+    }
+
+    ImGui::Spacing();
+    if (ImGui::Button("Close")) {
+      ImGui::CloseCurrentPopup();
+    }
+    ImGui::EndPopup();
+  }
+
+  if (ImGui::BeginPopupModal("Integrity Tools", nullptr,
+                             ImGuiWindowFlags_AlwaysAutoResize)) {
+    ImGui::TextUnformatted("Audit and explicitly repair broken DB references.");
+
+    if (ImGui::Button("Audit Integrity")) {
+      st.integrity_summary = audit_db_integrity(db.raw());
+      st.has_integrity_summary = st.integrity_summary.ok;
+      st.integrity_status = st.integrity_summary.ok ? "" : "Integrity audit failed.";
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Repair Orphans")) {
+      std::string err;
+      if (repair_db_integrity(db.raw(), st.integrity_summary.repair_items,
+                              st.integrity_report_path, &err)) {
+        append_integrity_status(st, db, "Integrity repair completed.");
+        st.integrity_status +=
+            " Report written to " + st.integrity_report_path;
+        st.list = db_load_general_list(db, st.filter_role, st.filter_name);
+        refresh_all_general_names(db, st);
+        st.stat_keys = db_load_stat_keys(db);
+        if (st.selected_general_id > 0) {
+          reload_current(db, st);
+        }
+      } else {
+        st.integrity_status = "Integrity repair failed: " + err;
+      }
+    }
+
+    if (ImGui::Button("Promote Unchecked Specialty L5 -> TOTAL")) {
+      std::string err;
+      int changed = 0;
+      if (promote_unchecked_singleton_specialty_l5_to_total(
+              db.raw(), &changed, &err)) {
+        append_integrity_status(
+            st, db,
+            "Promoted unchecked singleton specialty L5 rows to TOTAL: " +
+                std::to_string(changed) + ".");
+        st.list = db_load_general_list(db, st.filter_role, st.filter_name);
+        refresh_all_general_names(db, st);
+        st.stat_keys = db_load_stat_keys(db);
+        if (st.selected_general_id > 0) {
+          reload_current(db, st);
+        }
+      } else {
+        st.integrity_status = "Specialty TOTAL promotion failed: " + err;
+      }
+    }
+
+    if (st.has_integrity_summary) {
+      ImGui::Separator();
+      ImGui::TextWrapped("%s",
+                         format_integrity_summary_text(st.integrity_summary).c_str());
+      ImGui::InputText("Repair Report File", &st.integrity_report_path);
+      ImGui::Text("Selected repair items: %d",
+                  count_selected_repair_items(st.integrity_summary));
+
+      if (ImGui::Button("Select All")) {
+        for (auto& item : st.integrity_summary.repair_items) {
+          item.selected = !item.delete_sql.empty();
+        }
+      }
+      ImGui::SameLine();
+      if (ImGui::Button("Select None")) {
+        for (auto& item : st.integrity_summary.repair_items) {
+          item.selected = false;
+        }
+      }
+
+      ImGui::BeginChild("##integrity_items", ImVec2(760, 220), true);
+      for (auto& item : st.integrity_summary.repair_items) {
+        ImGui::PushID(item.label.c_str());
+        if (item.delete_sql.empty()) {
+          ImGui::TextDisabled("%s", item.label.c_str());
+        } else {
+          ImGui::Checkbox("##selected", &item.selected);
+          ImGui::SameLine();
+          ImGui::TextWrapped("%s (%d rows)", item.label.c_str(), item.row_count);
+        }
+        ImGui::PopID();
+      }
+      ImGui::EndChild();
+
+      ImGui::BeginChild("##integrity_messages", ImVec2(760, 160), true);
+      for (const auto& msg : st.integrity_summary.messages) {
+        ImGui::BulletText("%s", msg.c_str());
+      }
+      ImGui::EndChild();
+    }
+
+    if (!st.integrity_status.empty()) {
+      ImGui::Separator();
+      ImGui::TextWrapped("%s", st.integrity_status.c_str());
+    }
+
+    ImGui::Spacing();
+    if (ImGui::Button("Close##integrity")) {
+      ImGui::CloseCurrentPopup();
+    }
+    ImGui::EndPopup();
+  }
+
   // ============================================================
   // SINGLE WORKSPACE WINDOW (prevents floating windows)
   // ============================================================
@@ -2180,6 +2484,16 @@ void ui_draw(Db &db, EditorState &st) {
   if (ImGui::Begin("##workspace", nullptr, root_flags)) {
     if (ImGui::BeginMenuBar()) {
       ImGui::TextUnformatted("Evony General Analyzer");
+      ImGui::SameLine();
+      if (ImGui::BeginMenu("Admin")) {
+        if (ImGui::MenuItem("Import Files...")) {
+          st.show_import_modal = true;
+        }
+        if (ImGui::MenuItem("Integrity Tools...")) {
+          st.show_integrity_modal = true;
+        }
+        ImGui::EndMenu();
+      }
       ImGui::EndMenuBar();
     }
 
