@@ -1,27 +1,33 @@
-HEAD
 build/
+build_cmake/
+cmake-build*/
+CMakeCache.txt
+CMakeFiles/
+compile_commands.json
+
 .vscode/.browse.VC.db*
 .vscode/ipch/
+
 # Prerequisites
 *.d
 
-# Compiled Object files
+# Compiled object files
 *.slo
 *.lo
 *.o
 *.obj
 
-# Precompiled Headers
+# Precompiled headers
 *.gch
 *.pch
 
 # Linker files
 *.ilk
 
-# Debugger Files
+# Debugger files
 *.pdb
 
-# Compiled Dynamic libraries
+# Compiled dynamic libraries
 *.so
 *.dylib
 *.dll
@@ -30,7 +36,7 @@ build/
 *.mod
 *.smod
 
-# Compiled Static libraries
+# Compiled static libraries
 *.lai
 *.la
 *.a
@@ -41,22 +47,18 @@ build/
 *.out
 *.app
 
-# debug information files
+# Debug information files
 *.dwo
-338b8b9c9f19df1da108662acd2ad400a32b6a90
 
-# sqlite db files
+# SQLite DB files
 /data/*.db
 /data/*.db-wal
 /data/*.db-shm
-
+data/*.bak_*
 
 data/import/
 data/imported/
 data/_invalid/
 exports/
-build_cmake/
 imgui.ini
-data/*.db
 data/analyzer_owned_state.v1.json
-data/*.bak_*

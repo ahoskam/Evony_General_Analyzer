@@ -124,7 +124,10 @@ You can run imports either from the GUI admin menu or from the CLI binary.
 
 ## Build
 
-The top-level `Makefile` builds all active binaries.
+The repo now supports both:
+
+- the existing top-level `Makefile`
+- a new top-level `CMakeLists.txt`
 
 Dependencies:
 
@@ -135,7 +138,7 @@ Dependencies:
 - OpenGL development libraries
 - `pkg-config`
 
-Build everything:
+Build everything with `make`:
 
 ```bash
 make
@@ -154,6 +157,80 @@ Produced binaries:
 - `build/evony_gui_v2`
 - `build/importer_v2`
 - `build/evony_analyzer_ro`
+
+### CMake Build
+
+Dependencies are the same:
+
+- C++20 compiler
+- `cmake`
+- `sqlite3`
+- `glfw3`
+- OpenGL development libraries
+- `pkg-config` on Linux when CMake package configs are not installed
+
+Configure:
+
+```bash
+cmake -S . -B cmake-build
+```
+
+Build:
+
+```bash
+cmake --build cmake-build -j
+```
+
+CMake-produced binaries:
+
+- `cmake-build/evony_gui_v2`
+- `cmake-build/importer_v2`
+- `cmake-build/evony_analyzer_ro`
+
+Optional switches:
+
+```bash
+cmake -S . -B cmake-build -DEVONY_BUILD_GUI=OFF
+cmake -S . -B cmake-build -DEVONY_BUILD_ANALYZER=OFF
+cmake -S . -B cmake-build -DEVONY_BUILD_IMPORTER=OFF
+```
+
+### Cross-Compile Windows From Linux
+
+You can cross-compile Windows binaries from Linux with MinGW-w64, but you need:
+
+- a Windows cross-compiler such as `x86_64-w64-mingw32-g++`
+- Windows builds of dependencies for any targets you enable
+  - `sqlite3` for all apps
+  - `glfw3` and OpenGL import libs for `evony_gui_v2` and `evony_analyzer_ro`
+
+The repo includes a MinGW toolchain file:
+
+- `cmake/toolchains/mingw-w64-x86_64.cmake`
+
+Example configure for the importer only:
+
+```bash
+cmake -S . -B cmake-build-windows \
+  -DCMAKE_TOOLCHAIN_FILE=cmake/toolchains/mingw-w64-x86_64.cmake \
+  -DEVONY_BUILD_GUI=OFF \
+  -DEVONY_BUILD_ANALYZER=OFF \
+  -DEVONY_BUILD_IMPORTER=ON
+```
+
+Then build:
+
+```bash
+cmake --build cmake-build-windows -j
+```
+
+If your Windows GLFW/SQLite packages install into a non-default prefix, pass that during configure:
+
+```bash
+cmake -S . -B cmake-build-windows \
+  -DCMAKE_TOOLCHAIN_FILE=cmake/toolchains/mingw-w64-x86_64.cmake \
+  -DCMAKE_PREFIX_PATH=/path/to/windows/deps
+```
 
 ## Running
 
