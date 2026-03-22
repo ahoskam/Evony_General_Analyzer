@@ -213,14 +213,27 @@ The writable GUI opens the database with migrations and canonical-key sync. The 
 
 ## Screenshots
 
-Examples from the current GUI workflow:
+### Older System Screenshots
 
-- ![Partial upgrade example](screenshots/ArtemisiaIPartial.png)
-- ![Fully maxed example](screenshots/ArtemisiaIFull.png)
-- ![Base build example](screenshots/ArtemisiaIBase.png)
-- ![Add covenant stat](screenshots/AddCovenantStat.png)
-- ![Add specialty stat](screenshots/AddSpcialtyStat.png)
-- ![Modifier list](screenshots/AddModifiersList.png)
+These images are from the older UI/workflow that the previous README was documenting:
+
+- ![Partial upgrade example - old system](screenshots/ArtemisiaIPartial.png)
+- ![Fully maxed example - old system](screenshots/ArtemisiaIFull.png)
+- ![Base build example - old system](screenshots/ArtemisiaIBase.png)
+- ![Add covenant stat - old system](screenshots/AddCovenantStat.png)
+- ![Add specialty stat - old system](screenshots/AddSpcialtyStat.png)
+- ![Modifier list - old system](screenshots/AddModifiersList.png)
+- ![Add stat key - old system](screenshots/AddStatKeyNotValuable.png)
+
+### New Program Screenshots
+
+These images are from the newer apps in the current repo:
+
+- GUI DB app: ![DB tool general editor](screenshots/DBtoolGeneralWithIndividualSpecialtyLevels.png)
+- GUI DB app: ![DB tool opening image workflow](screenshots/DBtoolOpening%20image.png)
+- Analyzer app: ![Analyzer opening screen](screenshots/analyzer%20opening%20screen.png)
+- Analyzer app: ![Analyzer owned/unowned view](screenshots/AnalyzerUnownedGeneral.png)
+- Analyzer app: ![Analyzer detail view](screenshots/analyzerimage2.png)
 
 ## Status
 
