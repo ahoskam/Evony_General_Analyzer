@@ -56,6 +56,7 @@ DutyOfficerAttackingSiegeMachineAttackPct
 DutyOfficerAttackingSiegeMachineDefensePct
 DutyOfficerAttackingSiegeMachineHPPct
 DutyOfficerAttackingTroopsAttackPct
+DutyOfficerBunkerCapacityPct
 DutyOfficerCraftingSpeedPct
 DutyOfficerDamagedSiegeMachineCapacityPct
 DutyOfficerEnemyDefendingRangedAttackPct
@@ -94,6 +95,7 @@ DutyOfficerRallyCapacityPct
 DutyOfficerRangedAttackPct
 DutyOfficerRangedDefensePct
 DutyOfficerRangedHPPct
+DutyOfficerResourcesProtectedPct
 DutyOfficerResearchSpeedPct
 DutyOfficerSiegeMachineAttackPct
 DutyOfficerSiegeMachineDefensePct
@@ -127,6 +129,7 @@ EnemyWoundedToDeathRatePct
 ExtraResourcesFromAllianceResourceSpotsPct
 ExtraResourcesFromWorldMapResourceSpotsPct
 FoodUpkeepReductionPct
+FoodGatheringSpeedPct
 FreeConstructionSpeedUpTimeFlat
 GroundTroopAttackPct
 GroundTroopDefensePct
@@ -166,6 +169,7 @@ InRallySiegeMachineHPPct
 InRallyTroopsAttackPct
 InRallyTroopsDefensePct
 InRallyTroopsHPPct
+LumberGatheringSpeedPct
 MarchSizePct
 MarchSpeedPct
 MarchTimeReductionPct
@@ -198,6 +202,7 @@ MountedTroopDefensePct
 MountedTroopHPPct
 MountedTroopTrainingCapacityPct
 MountedTroopTrainingSpeedPct
+OreGatheringSpeedPct
 OwnWoundedToDeathRatePct
 RallyCapacityPct
 RangedTrainingCapacityPct
@@ -218,6 +223,7 @@ ReinforcingRangedHPPct
 ReinforcingSiegeMachineAttackPct
 ReinforcingSiegeMachineDefensePct
 ReinforcingSiegeMachineHPPct
+StoneGatheringSpeedPct
 ReinforcingTroopsAttackPct
 ReinforcingTroopsDeathToWoundedRatePct
 ReinforcingTroopsDefensePct

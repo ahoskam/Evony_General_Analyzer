@@ -181,6 +181,14 @@ Build:
 cmake --build cmake-build -j
 ```
 
+Run convenience targets:
+
+```bash
+cmake --build cmake-build --target run_gui
+cmake --build cmake-build --target run_importer
+cmake --build cmake-build --target run_analyzer
+```
+
 CMake-produced binaries:
 
 - `cmake-build/evony_gui_v2`
@@ -223,6 +231,23 @@ Then build:
 ```bash
 cmake --build cmake-build-windows -j
 ```
+
+To bundle the built `.exe` files with the MinGW runtime DLLs into one folder:
+
+```bash
+cmake --build cmake-build-windows --target bundle_windows
+```
+
+Bundle output:
+
+- `cmake-build-windows/windows-bundle/`
+
+The bundle target also creates a minimal default `data/` layout for the apps:
+
+- `data/evony_v2.db`
+- `data/canonical_keys.txt`
+- `data/analyzer_owned_state.template.json`
+- `data/import/`
 
 If your Windows GLFW/SQLite packages install into a non-default prefix, pass that during configure:
 
