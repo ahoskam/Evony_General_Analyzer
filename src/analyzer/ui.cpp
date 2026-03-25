@@ -6,10 +6,12 @@
 #include <misc/cpp/imgui_stdlib.h>
 
 #include <algorithm>
+#include <array>
 #include <cctype>
 #include <cstdio>
 #include <map>
 #include <optional>
+#include <utility>
 
 namespace {
 
@@ -30,6 +32,19 @@ constexpr RoleGroup kRoleGroups[] = {
     {"Mayor", "Mayor"},
     {"Unknown", "Unknown"},
 };
+
+constexpr const char* kRankingRoleFilters[] = {
+    "All",   "Ground", "Mounted", "Ranged", "Siege",
+    "Defense", "Mixed",  "Admin",   "Duty",   "Mayor",
+    "Unknown"};
+
+constexpr const char* kTroopTypes[] = {"Ground", "Mounted", "Ranged", "Siege"};
+constexpr const char* kScoreModeLabels[] = {"Canonical Stat Key", "Troop Context"};
+constexpr const char* kTavernFilterLabels[] = {"Any", "In Tavern", "Not In Tavern"};
+constexpr const char* kOwnershipFilterLabels[] = {"All Generals", "Owned Only"};
+constexpr const char* kTroopContextLabels[] = {"Attacking", "Reinforcing", "In City"};
+constexpr const char* kTroopStatLabels[] = {"Attack", "Defense", "HP"};
+constexpr const char* kAnalyzerTabs[] = {"General Details", "Ranking"};
 
 bool contains_case_insensitive(const std::string& text,
                                const std::string& needle) {
@@ -64,7 +79,13 @@ OwnedGeneralState default_owned_state_for_general(
 
 void load_selected_general(AnalyzerDb& db, AnalyzerAppState& state,
                            int general_id) {
-  state.selected_general = analyzer_load_general_data(db, general_id);
+  auto cache_it = state.general_data_cache.find(general_id);
+  if (cache_it == state.general_data_cache.end()) {
+    cache_it = state.general_data_cache
+                   .emplace(general_id, analyzer_load_general_data(db, general_id))
+                   .first;
+  }
+  state.selected_general = cache_it->second;
   state.selected_general_id = general_id;
   state.has_loaded_selected = true;
 
@@ -76,6 +97,18 @@ void load_selected_general(AnalyzerDb& db, AnalyzerAppState& state,
     state.selected_owned = default_owned_state_for_general(state.selected_general);
     state.selected_is_owned = false;
   }
+}
+
+const AnalyzerGeneralData& cached_general_data(AnalyzerDb& db,
+                                               AnalyzerAppState& state,
+                                               int general_id) {
+  auto it = state.general_data_cache.find(general_id);
+  if (it == state.general_data_cache.end()) {
+    it = state.general_data_cache
+             .emplace(general_id, analyzer_load_general_data(db, general_id))
+             .first;
+  }
+  return it->second;
 }
 
 void save_state(AnalyzerAppState& state) {
@@ -224,6 +257,326 @@ void draw_general_list(AnalyzerDb& db, AnalyzerAppState& state) {
   }
 
   ImGui::EndChild();
+}
+
+const char* troop_stat_suffix(AnalyzerTroopStat stat) {
+  switch (stat) {
+    case AnalyzerTroopStat::Attack:
+      return "AttackPct";
+    case AnalyzerTroopStat::Defense:
+      return "DefensePct";
+    case AnalyzerTroopStat::HP:
+      return "HPPct";
+  }
+  return "AttackPct";
+}
+
+std::string troop_specific_stat_key(const std::string& troop_type,
+                                    AnalyzerTroopContext context,
+                                    AnalyzerTroopStat stat) {
+  const char* suffix = troop_stat_suffix(stat);
+  if (context == AnalyzerTroopContext::Attacking) {
+    if (troop_type == "Siege") {
+      return std::string("AttackingSiege") + suffix;
+    }
+    return std::string("Attacking") + troop_type + suffix;
+  }
+  if (context == AnalyzerTroopContext::Reinforcing) {
+    if (troop_type == "Siege") {
+      return std::string("ReinforcingSiegeMachine") + suffix;
+    }
+    return std::string("Reinforcing") + troop_type + suffix;
+  }
+  if (troop_type == "Siege") {
+    return std::string("InCitySiege") + suffix;
+  }
+  return std::string("InCity") + troop_type + "Troop" + suffix;
+}
+
+std::string troop_type_stat_key(const std::string& troop_type,
+                                AnalyzerTroopStat stat) {
+  const char* suffix = troop_stat_suffix(stat);
+  if (troop_type == "Siege") {
+    return std::string("SiegeMachine") + suffix;
+  }
+  return troop_type + "Troop" + suffix;
+}
+
+std::string generic_context_stat_key(AnalyzerTroopContext context,
+                                     AnalyzerTroopStat stat) {
+  const char* suffix = troop_stat_suffix(stat);
+  if (context == AnalyzerTroopContext::Attacking) {
+    return std::string("AttackingTroop") + suffix;
+  }
+  if (context == AnalyzerTroopContext::Reinforcing) {
+    return std::string("ReinforcingTroops") + suffix;
+  }
+  return std::string("InCityTroops") + suffix;
+}
+
+std::string generic_troop_stat_key(AnalyzerTroopStat stat) {
+  return std::string("Troop") + troop_stat_suffix(stat);
+}
+
+double stat_value_or_zero(const std::map<std::string, double>& totals,
+                          const std::string& key) {
+  auto it = totals.find(key);
+  return it == totals.end() ? 0.0 : it->second;
+}
+
+std::map<std::string, double> totals_for_general(const AnalyzerGeneralData& data,
+                                                 const OwnedGeneralState* owned) {
+  if (owned) {
+    OwnedGeneralState owned_copy = *owned;
+    return compute_total_stats(data, owned_copy);
+  }
+
+  OwnedGeneralState default_owned;
+  default_owned.general_id = data.id;
+  default_owned.general_name = data.name;
+  default_owned.general_level = 40;
+  default_owned.ascension_level = 5;
+  default_owned.specialty_levels = {5, 5, 5, 5};
+  default_owned.covenant_level = data.has_covenant ? data.covenant_max : 0;
+  return compute_total_stats(data, default_owned);
+}
+
+const char* current_canonical_stat_key(AnalyzerAppState& state) {
+  if (state.canonical_stat_keys.empty()) {
+    state.canonical_stat_key.clear();
+    state.canonical_stat_key_index = 0;
+    return "";
+  }
+
+  state.canonical_stat_key_index =
+      std::clamp(state.canonical_stat_key_index, 0,
+                 (int)state.canonical_stat_keys.size() - 1);
+  state.canonical_stat_key =
+      state.canonical_stat_keys[(size_t)state.canonical_stat_key_index];
+  return state.canonical_stat_key.c_str();
+}
+
+void rebuild_ranked_results(AnalyzerDb& db, AnalyzerAppState& state) {
+  state.ranked_results.clear();
+
+  const std::string exact_key = current_canonical_stat_key(state);
+  const std::string role_filter =
+      state.score_mode == AnalyzerScoreMode::TroopContext ? state.troop_type
+                                                          : state.ranking_role_filter;
+  const std::string specific_key =
+      troop_specific_stat_key(state.troop_type, state.troop_context, state.troop_stat);
+  const std::string troop_key =
+      troop_type_stat_key(state.troop_type, state.troop_stat);
+  const std::string generic_key =
+      state.score_mode == AnalyzerScoreMode::TroopContext
+          ? generic_context_stat_key(state.troop_context, state.troop_stat)
+          : std::string();
+  const std::string fallback_generic_key =
+      state.score_mode == AnalyzerScoreMode::TroopContext
+          ? generic_troop_stat_key(state.troop_stat)
+          : std::string();
+
+  for (const auto& item : state.general_list) {
+    if (role_filter != "All" && item.role != role_filter) {
+      continue;
+    }
+    if (state.tavern_filter == AnalyzerTavernFilter::InTavern && !item.in_tavern) {
+      continue;
+    }
+    if (state.tavern_filter == AnalyzerTavernFilter::NotInTavern && item.in_tavern) {
+      continue;
+    }
+
+    const OwnedGeneralState* owned = find_owned_state(state, item.id);
+    if (state.ownership_filter == AnalyzerOwnershipFilter::OwnedOnly && !owned) {
+      continue;
+    }
+
+    const AnalyzerGeneralData& data = cached_general_data(db, state, item.id);
+    const auto totals = totals_for_general(data, owned);
+
+    AnalyzerRankedResult result;
+    result.general_id = item.id;
+    result.general_name = item.name;
+    result.role = item.role;
+    result.in_tavern = item.in_tavern != 0;
+    result.is_owned = owned != nullptr;
+
+    if (state.score_mode == AnalyzerScoreMode::CanonicalStatKey) {
+      result.total_score = stat_value_or_zero(totals, exact_key);
+      result.specific_score = result.total_score;
+    } else {
+      result.specific_score = stat_value_or_zero(totals, specific_key);
+      result.troop_type_score = stat_value_or_zero(totals, troop_key);
+      result.generic_score =
+          stat_value_or_zero(totals, generic_key) +
+          stat_value_or_zero(totals, fallback_generic_key);
+      result.total_score =
+          result.specific_score + result.troop_type_score + result.generic_score;
+    }
+
+    state.ranked_results.push_back(std::move(result));
+  }
+
+  std::sort(state.ranked_results.begin(), state.ranked_results.end(),
+            [](const AnalyzerRankedResult& a, const AnalyzerRankedResult& b) {
+              if (a.total_score != b.total_score) {
+                return a.total_score > b.total_score;
+              }
+              return a.general_name < b.general_name;
+            });
+}
+
+void draw_ranking_controls(AnalyzerDb& db, AnalyzerAppState& state) {
+  ImGui::Separator();
+  ImGui::TextUnformatted("Rank Generals");
+
+  int score_mode = static_cast<int>(state.score_mode);
+  if (ImGui::Combo("Score Mode", &score_mode, kScoreModeLabels,
+                   IM_ARRAYSIZE(kScoreModeLabels))) {
+    state.score_mode = static_cast<AnalyzerScoreMode>(score_mode);
+  }
+
+  if (state.score_mode == AnalyzerScoreMode::CanonicalStatKey) {
+    current_canonical_stat_key(state);
+    if (ImGui::BeginCombo("Canonical Stat Key",
+                          state.canonical_stat_key.empty()
+                              ? "(none)"
+                              : state.canonical_stat_key.c_str())) {
+      for (size_t i = 0; i < state.canonical_stat_keys.size(); ++i) {
+        const bool selected = state.canonical_stat_key_index == (int)i;
+        if (ImGui::Selectable(state.canonical_stat_keys[i].c_str(), selected)) {
+          state.canonical_stat_key_index = (int)i;
+          state.canonical_stat_key = state.canonical_stat_keys[i];
+        }
+        if (selected) {
+          ImGui::SetItemDefaultFocus();
+        }
+      }
+      ImGui::EndCombo();
+    }
+
+    if (ImGui::BeginCombo("Role Filter", state.ranking_role_filter.c_str())) {
+      for (const char* role : kRankingRoleFilters) {
+        const bool selected = state.ranking_role_filter == role;
+        if (ImGui::Selectable(role, selected)) {
+          state.ranking_role_filter = role;
+        }
+        if (selected) {
+          ImGui::SetItemDefaultFocus();
+        }
+      }
+      ImGui::EndCombo();
+    }
+  } else {
+    if (ImGui::BeginCombo("Troop Type", state.troop_type.c_str())) {
+      for (const char* troop_type : kTroopTypes) {
+        const bool selected = state.troop_type == troop_type;
+        if (ImGui::Selectable(troop_type, selected)) {
+          state.troop_type = troop_type;
+        }
+        if (selected) {
+          ImGui::SetItemDefaultFocus();
+        }
+      }
+      ImGui::EndCombo();
+    }
+
+    int troop_context = static_cast<int>(state.troop_context);
+    if (ImGui::Combo("Battle Context", &troop_context, kTroopContextLabels,
+                     IM_ARRAYSIZE(kTroopContextLabels))) {
+      state.troop_context = static_cast<AnalyzerTroopContext>(troop_context);
+    }
+
+    int troop_stat = static_cast<int>(state.troop_stat);
+    if (ImGui::Combo("Troop Stat", &troop_stat, kTroopStatLabels,
+                     IM_ARRAYSIZE(kTroopStatLabels))) {
+      state.troop_stat = static_cast<AnalyzerTroopStat>(troop_stat);
+    }
+  }
+
+  int tavern_filter = static_cast<int>(state.tavern_filter);
+  if (ImGui::Combo("Tavern Filter", &tavern_filter, kTavernFilterLabels,
+                   IM_ARRAYSIZE(kTavernFilterLabels))) {
+    state.tavern_filter = static_cast<AnalyzerTavernFilter>(tavern_filter);
+  }
+
+  int ownership_filter = static_cast<int>(state.ownership_filter);
+  if (ImGui::Combo("Ownership Filter", &ownership_filter,
+                   kOwnershipFilterLabels,
+                   IM_ARRAYSIZE(kOwnershipFilterLabels))) {
+    state.ownership_filter =
+        static_cast<AnalyzerOwnershipFilter>(ownership_filter);
+  }
+
+  rebuild_ranked_results(db, state);
+
+  if (state.score_mode == AnalyzerScoreMode::TroopContext) {
+    const std::string specific_key =
+        troop_specific_stat_key(state.troop_type, state.troop_context, state.troop_stat);
+    const std::string troop_key =
+        troop_type_stat_key(state.troop_type, state.troop_stat);
+    const std::string generic_key =
+        generic_context_stat_key(state.troop_context, state.troop_stat);
+    const std::string fallback_generic_key = generic_troop_stat_key(state.troop_stat);
+    ImGui::TextWrapped("Score = %s + %s + %s + %s",
+                       specific_key.c_str(), troop_key.c_str(),
+                       generic_key.c_str(), fallback_generic_key.c_str());
+  }
+
+  ImGui::Spacing();
+  if (!ImGui::BeginTable("ranked_generals", 6,
+                         ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg |
+                             ImGuiTableFlags_ScrollY |
+                             ImGuiTableFlags_SizingStretchProp,
+                         ImVec2(0.0f, 260.0f))) {
+    return;
+  }
+
+  ImGui::TableSetupColumn("General");
+  ImGui::TableSetupColumn("Role");
+  ImGui::TableSetupColumn("Owned");
+  ImGui::TableSetupColumn("Tavern");
+  ImGui::TableSetupColumn("Score");
+  ImGui::TableSetupColumn("Breakdown");
+  ImGui::TableHeadersRow();
+
+  for (const auto& result : state.ranked_results) {
+    ImGui::TableNextRow();
+
+    ImGui::TableNextColumn();
+    char label[256];
+    std::snprintf(label, sizeof(label), "%s##rank_%d",
+                  result.general_name.c_str(), result.general_id);
+    if (ImGui::Selectable(label, state.selected_general_id == result.general_id,
+                          ImGuiSelectableFlags_SpanAllColumns)) {
+      load_selected_general(db, state, result.general_id);
+    }
+
+    ImGui::TableNextColumn();
+    ImGui::TextUnformatted(result.role.c_str());
+
+    ImGui::TableNextColumn();
+    ImGui::TextUnformatted(result.is_owned ? "Owned" : "No");
+
+    ImGui::TableNextColumn();
+    ImGui::TextUnformatted(result.in_tavern ? "Yes" : "No");
+
+    ImGui::TableNextColumn();
+    ImGui::Text("%.2f", result.total_score);
+
+    ImGui::TableNextColumn();
+    if (state.score_mode == AnalyzerScoreMode::CanonicalStatKey) {
+      ImGui::Text("%.2f", result.specific_score);
+    } else {
+      ImGui::Text("%.2f + %.2f + %.2f",
+                  result.specific_score,
+                  result.troop_type_score,
+                  result.generic_score);
+    }
+  }
+
+  ImGui::EndTable();
 }
 
 void draw_totals_table(const std::map<std::string, double>& totals) {
@@ -383,6 +736,11 @@ void draw_combined_summary_rows(const char* table_id,
 void analyzer_ui_tick(AnalyzerDb& db, AnalyzerAppState& state) {
   if (state.general_list.empty()) {
     state.general_list = analyzer_load_general_list(db);
+    state.canonical_stat_keys = analyzer_load_canonical_stat_keys(db);
+    if (state.canonical_stat_key.empty() && !state.canonical_stat_keys.empty()) {
+      state.canonical_stat_key_index = 0;
+      state.canonical_stat_key = state.canonical_stat_keys.front();
+    }
     if (!state.general_list.empty()) {
       int preferred_id = 0;
       if (!state.owned_file.generals.empty()) {
@@ -463,6 +821,11 @@ void analyzer_ui_tick(AnalyzerDb& db, AnalyzerAppState& state) {
   if (ImGui::Button("Reload DB List")) {
     try {
       state.general_list = analyzer_load_general_list(db);
+      state.canonical_stat_keys = analyzer_load_canonical_stat_keys(db);
+      state.general_data_cache.clear();
+      if (state.has_loaded_selected) {
+        load_selected_general(db, state, state.selected_general_id);
+      }
       state.status_message = "Reloaded checked general list from DB.";
     } catch (const std::exception& e) {
       state.status_message = std::string("Reload failed: ") + e.what();
@@ -476,169 +839,177 @@ void analyzer_ui_tick(AnalyzerDb& db, AnalyzerAppState& state) {
   }
 
   ImGui::Separator();
-
-  draw_general_list(db, state);
-  ImGui::SameLine();
-
-  ImGui::BeginGroup();
-  if (!state.has_loaded_selected) {
-    ImGui::TextUnformatted("No checked generals available.");
-    ImGui::EndGroup();
-    ImGui::End();
-    return;
-  }
-
-  OwnedGeneralState& owned = state.selected_owned;
-
-  ImGui::Text("%s", state.selected_general.name.c_str());
-  ImGui::SameLine();
-  if (state.selected_is_owned) {
-    draw_status_badge("OWNED", ImVec4(0.35f, 0.85f, 0.35f, 1.0f));
-    if (owned.locked) {
-      ImGui::SameLine();
-      draw_status_badge("LOCKED", ImVec4(0.95f, 0.65f, 0.20f, 1.0f));
-    }
-  } else {
-    draw_status_badge("UNOWNED", ImVec4(0.75f, 0.75f, 0.75f, 1.0f));
-  }
-  ImGui::Text("Role: %s", state.selected_general.role.c_str());
-  ImGui::Text("Covenant: %s", state.selected_general.has_covenant ? "Yes" : "No");
-  bool owned_toggle = state.selected_is_owned;
-  if (ImGui::Checkbox("Owned", &owned_toggle)) {
-    state.selected_is_owned = owned_toggle;
-    if (!state.selected_is_owned) {
-      owned.locked = false;
-    }
-    sync_selected_owned_to_file(state);
-    state.dirty = true;
-  }
-  ImGui::SameLine();
-  bool locked_toggle = owned.locked;
-  ImGui::BeginDisabled(!state.selected_is_owned);
-  if (ImGui::Checkbox("Lock", &locked_toggle)) {
-    owned.locked = locked_toggle;
-    sync_selected_owned_to_file(state);
-    state.dirty = true;
-  }
-  ImGui::EndDisabled();
-  ImGui::SameLine();
-  bool dragon_toggle = owned.has_dragon;
-  ImGui::BeginDisabled(!state.selected_is_owned);
-  if (ImGui::Checkbox("Has Dragon", &dragon_toggle)) {
-    owned.has_dragon = dragon_toggle;
-    if (owned.has_dragon) {
-      owned.has_spirit_beast = false;
-    }
-    owned.cached_input_key.clear();
-    owned.cached_totals.clear();
-    sync_selected_owned_to_file(state);
-    state.dirty = true;
-  }
-  ImGui::EndDisabled();
-  ImGui::SameLine();
-  bool beast_toggle = owned.has_spirit_beast;
-  ImGui::BeginDisabled(!state.selected_is_owned);
-  if (ImGui::Checkbox("Has Spirit Beast", &beast_toggle)) {
-    owned.has_spirit_beast = beast_toggle;
-    if (owned.has_spirit_beast) {
-      owned.has_dragon = false;
-    }
-    owned.cached_input_key.clear();
-    owned.cached_totals.clear();
-    sync_selected_owned_to_file(state);
-    state.dirty = true;
-  }
-  ImGui::EndDisabled();
-  if (!state.selected_general.warnings.empty()) {
-    ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.3f, 1.0f), "%s",
-                       state.selected_general.warnings.front().c_str());
-  }
-
-  bool changed = false;
-  const bool edit_disabled = !state.selected_is_owned || owned.locked;
-  ImGui::BeginDisabled(edit_disabled);
-  changed |= ImGui::InputInt("General Level", &owned.general_level);
-  owned.general_level = std::max(0, owned.general_level);
-  changed |= ImGui::SliderInt("Ascension Level", &owned.ascension_level, 0, 5);
-  for (int i = 0; i < 3; ++i) {
-    char label[64];
-    std::snprintf(label, sizeof(label), "Specialty %d Level", i + 1);
-    changed |= ImGui::SliderInt(label, &owned.specialty_levels[(size_t)i], 0, 5);
-  }
-
-  const bool specialty_4_unlocked = owned.specialty_levels[0] >= 5 &&
-                                    owned.specialty_levels[1] >= 5 &&
-                                    owned.specialty_levels[2] >= 5;
-  ImGui::BeginDisabled(!specialty_4_unlocked);
-  changed |= ImGui::SliderInt("Specialty 4 Level", &owned.specialty_levels[3], 0,
-                              5);
-  ImGui::EndDisabled();
-  if (!specialty_4_unlocked) {
-    owned.specialty_levels[3] = 0;
-    ImGui::TextDisabled("Specialty 4 unlocks after specialties 1-3 reach level 5.");
-  }
-
-  const int covenant_max =
-      state.selected_general.has_covenant ? state.selected_general.covenant_max : 0;
-  changed |= ImGui::SliderInt("Covenant Level", &owned.covenant_level, 0,
-                              std::max(0, covenant_max));
-  ImGui::EndDisabled();
-
-  if (changed) {
-    owned.general_name = state.selected_general.name;
-    owned.cached_input_key.clear();
-    owned.cached_totals.clear();
-    sync_selected_owned_to_file(state);
-    state.dirty = true;
-  }
-
+  ImGui::Combo("View", &state.active_tab, kAnalyzerTabs,
+               IM_ARRAYSIZE(kAnalyzerTabs));
   ImGui::Separator();
-  ImGui::TextUnformatted("Total Stat Values");
-  if (!state.selected_is_owned) {
-    ImGui::TextDisabled("Check Owned to enable build inputs and totals.");
-  } else if (owned.locked) {
-    ImGui::TextDisabled("Locked. Uncheck Lock to edit this owned general.");
-    const auto totals = compute_total_stats(state.selected_general, owned);
-    draw_totals_table(totals);
-    draw_combined_summary_rows("combined_summary_main",
-                               "Total ",
-                               state.selected_general,
-                               owned,
-                               totals);
-    ImGui::Spacing();
+
+  if (state.active_tab == 0) {
+    draw_general_list(db, state);
+    ImGui::SameLine();
+
+    ImGui::BeginGroup();
+    if (!state.has_loaded_selected) {
+      ImGui::TextUnformatted("No checked generals available.");
+      ImGui::EndGroup();
+      ImGui::End();
+      return;
+    }
+
+    OwnedGeneralState& owned = state.selected_owned;
+
+    ImGui::Text("%s", state.selected_general.name.c_str());
+    ImGui::SameLine();
+    if (state.selected_is_owned) {
+      draw_status_badge("OWNED", ImVec4(0.35f, 0.85f, 0.35f, 1.0f));
+      if (owned.locked) {
+        ImGui::SameLine();
+        draw_status_badge("LOCKED", ImVec4(0.95f, 0.65f, 0.20f, 1.0f));
+      }
+    } else {
+      draw_status_badge("UNOWNED", ImVec4(0.75f, 0.75f, 0.75f, 1.0f));
+    }
+    ImGui::Text("Role: %s", state.selected_general.role.c_str());
+    ImGui::Text("Covenant: %s", state.selected_general.has_covenant ? "Yes" : "No");
+    bool owned_toggle = state.selected_is_owned;
+    if (ImGui::Checkbox("Owned", &owned_toggle)) {
+      state.selected_is_owned = owned_toggle;
+      if (!state.selected_is_owned) {
+        owned.locked = false;
+      }
+      sync_selected_owned_to_file(state);
+      state.dirty = true;
+    }
+    ImGui::SameLine();
+    bool locked_toggle = owned.locked;
+    ImGui::BeginDisabled(!state.selected_is_owned);
+    if (ImGui::Checkbox("Lock", &locked_toggle)) {
+      owned.locked = locked_toggle;
+      sync_selected_owned_to_file(state);
+      state.dirty = true;
+    }
+    ImGui::EndDisabled();
+    ImGui::SameLine();
+    bool dragon_toggle = owned.has_dragon;
+    ImGui::BeginDisabled(!state.selected_is_owned);
+    if (ImGui::Checkbox("Has Dragon", &dragon_toggle)) {
+      owned.has_dragon = dragon_toggle;
+      if (owned.has_dragon) {
+        owned.has_spirit_beast = false;
+      }
+      owned.cached_input_key.clear();
+      owned.cached_totals.clear();
+      sync_selected_owned_to_file(state);
+      state.dirty = true;
+    }
+    ImGui::EndDisabled();
+    ImGui::SameLine();
+    bool beast_toggle = owned.has_spirit_beast;
+    ImGui::BeginDisabled(!state.selected_is_owned);
+    if (ImGui::Checkbox("Has Spirit Beast", &beast_toggle)) {
+      owned.has_spirit_beast = beast_toggle;
+      if (owned.has_spirit_beast) {
+        owned.has_dragon = false;
+      }
+      owned.cached_input_key.clear();
+      owned.cached_totals.clear();
+      sync_selected_owned_to_file(state);
+      state.dirty = true;
+    }
+    ImGui::EndDisabled();
+    if (!state.selected_general.warnings.empty()) {
+      ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.3f, 1.0f), "%s",
+                         state.selected_general.warnings.front().c_str());
+    }
+
+    bool changed = false;
+    const bool edit_disabled = !state.selected_is_owned || owned.locked;
+    ImGui::BeginDisabled(edit_disabled);
+    changed |= ImGui::InputInt("General Level", &owned.general_level);
+    owned.general_level = std::max(0, owned.general_level);
+    changed |= ImGui::SliderInt("Ascension Level", &owned.ascension_level, 0, 5);
+    for (int i = 0; i < 3; ++i) {
+      char label[64];
+      std::snprintf(label, sizeof(label), "Specialty %d Level", i + 1);
+      changed |= ImGui::SliderInt(label, &owned.specialty_levels[(size_t)i], 0, 5);
+    }
+
+    const bool specialty_4_unlocked = owned.specialty_levels[0] >= 5 &&
+                                      owned.specialty_levels[1] >= 5 &&
+                                      owned.specialty_levels[2] >= 5;
+    ImGui::BeginDisabled(!specialty_4_unlocked);
+    changed |= ImGui::SliderInt("Specialty 4 Level", &owned.specialty_levels[3], 0,
+                                5);
+    ImGui::EndDisabled();
+    if (!specialty_4_unlocked) {
+      owned.specialty_levels[3] = 0;
+      ImGui::TextDisabled("Specialty 4 unlocks after specialties 1-3 reach level 5.");
+    }
+
+    const int covenant_max = state.selected_general.has_covenant
+                                 ? state.selected_general.covenant_max
+                                 : 0;
+    changed |= ImGui::SliderInt("Covenant Level", &owned.covenant_level, 0,
+                                std::max(0, covenant_max));
+    ImGui::EndDisabled();
+
+    if (changed) {
+      owned.general_name = state.selected_general.name;
+      owned.cached_input_key.clear();
+      owned.cached_totals.clear();
+      sync_selected_owned_to_file(state);
+      state.dirty = true;
+    }
+
     ImGui::Separator();
-    ImGui::Spacing();
-    ImGui::TextUnformatted("Assistant Stat Values");
-    const auto assistant_totals =
-        compute_assistant_total_stats(state.selected_general, owned);
-    draw_totals_table(assistant_totals);
-    draw_combined_summary_rows("combined_summary_assistant",
-                               "Assistant Total ",
-                               state.selected_general,
-                               owned,
-                               assistant_totals);
+    ImGui::TextUnformatted("Total Stat Values");
+    if (!state.selected_is_owned) {
+      ImGui::TextDisabled("Check Owned to enable build inputs and totals.");
+    } else if (owned.locked) {
+      ImGui::TextDisabled("Locked. Uncheck Lock to edit this owned general.");
+      const auto totals = compute_total_stats(state.selected_general, owned);
+      draw_totals_table(totals);
+      draw_combined_summary_rows("combined_summary_main",
+                                 "Total ",
+                                 state.selected_general,
+                                 owned,
+                                 totals);
+      ImGui::Spacing();
+      ImGui::Separator();
+      ImGui::Spacing();
+      ImGui::TextUnformatted("Assistant Stat Values");
+      const auto assistant_totals =
+          compute_assistant_total_stats(state.selected_general, owned);
+      draw_totals_table(assistant_totals);
+      draw_combined_summary_rows("combined_summary_assistant",
+                                 "Assistant Total ",
+                                 state.selected_general,
+                                 owned,
+                                 assistant_totals);
+    } else {
+      const auto totals = compute_total_stats(state.selected_general, owned);
+      draw_totals_table(totals);
+      draw_combined_summary_rows("combined_summary_main",
+                                 "Total ",
+                                 state.selected_general,
+                                 owned,
+                                 totals);
+      ImGui::Spacing();
+      ImGui::Separator();
+      ImGui::Spacing();
+      ImGui::TextUnformatted("Assistant Stat Values");
+      const auto assistant_totals =
+          compute_assistant_total_stats(state.selected_general, owned);
+      draw_totals_table(assistant_totals);
+      draw_combined_summary_rows("combined_summary_assistant",
+                                 "Assistant Total ",
+                                 state.selected_general,
+                                 owned,
+                                 assistant_totals);
+    }
+    ImGui::EndGroup();
   } else {
-    const auto totals = compute_total_stats(state.selected_general, owned);
-    draw_totals_table(totals);
-    draw_combined_summary_rows("combined_summary_main",
-                               "Total ",
-                               state.selected_general,
-                               owned,
-                               totals);
-    ImGui::Spacing();
-    ImGui::Separator();
-    ImGui::Spacing();
-    ImGui::TextUnformatted("Assistant Stat Values");
-    const auto assistant_totals =
-        compute_assistant_total_stats(state.selected_general, owned);
-    draw_totals_table(assistant_totals);
-    draw_combined_summary_rows("combined_summary_assistant",
-                               "Assistant Total ",
-                               state.selected_general,
-                               owned,
-                               assistant_totals);
+    draw_ranking_controls(db, state);
   }
-  ImGui::EndGroup();
 
   ImGui::End();
   ImGui::PopStyleVar(3);

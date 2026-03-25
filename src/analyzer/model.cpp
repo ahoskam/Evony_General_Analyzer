@@ -38,7 +38,8 @@ std::vector<AnalyzerGeneralListItem> analyzer_load_general_list(AnalyzerDb& db) 
       "WHERE s.general_id = g.id "
       "  AND s.context_type='Covenant' "
       "  AND (s.context_name LIKE 'COVENANT %' OR s.context_name LIKE 'Covenant "
-      "%')), 0) AS covenant_max "
+      "%')), 0) AS covenant_max, "
+      "g.in_tavern "
       "FROM generals g "
       "WHERE g.double_checked_in_game = 1 "
       "ORDER BY g.name;");
@@ -51,7 +52,22 @@ std::vector<AnalyzerGeneralListItem> analyzer_load_general_list(AnalyzerDb& db) 
     item.role = stmt.col_text(2);
     item.has_covenant = stmt.col_int(3);
     item.covenant_max = stmt.col_int(4);
+    item.in_tavern = stmt.col_int(5);
     out.push_back(std::move(item));
+  }
+  return out;
+}
+
+std::vector<std::string> analyzer_load_canonical_stat_keys(AnalyzerDb& db) {
+  auto stmt = db.prepare(
+      "SELECT key "
+      "FROM stat_keys "
+      "WHERE is_active = 1 "
+      "ORDER BY key;");
+
+  std::vector<std::string> out;
+  while (stmt.step_row()) {
+    out.push_back(stmt.col_text(0));
   }
   return out;
 }

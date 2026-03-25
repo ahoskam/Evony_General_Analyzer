@@ -13,6 +13,7 @@ struct AnalyzerGeneralListItem {
   std::string role;
   int has_covenant = 0;
   int covenant_max = 0;
+  int in_tavern = 0;
 };
 
 struct AnalyzerGeneralData {
@@ -31,4 +32,5 @@ struct AnalyzerGeneralData {
 };
 
 std::vector<AnalyzerGeneralListItem> analyzer_load_general_list(AnalyzerDb& db);
+std::vector<std::string> analyzer_load_canonical_stat_keys(AnalyzerDb& db);
 AnalyzerGeneralData analyzer_load_general_data(AnalyzerDb& db, int general_id);
