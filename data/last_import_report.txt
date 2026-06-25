@@ -1,0 +1,12 @@
+Import report
+=============
+
+Files seen: 6
+Generals imported/updated: 6
+Occurrences inserted: 349
+Occurrence insert failures: 0
+Pending examples inserted: 111
+Files moved to imported: 6
+Files moved to invalid: 0
+Files left untouched: 0
+

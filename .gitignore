@@ -51,7 +51,7 @@ compile_commands.json
 *.dwo
 
 # SQLite DB files
-/data/*.db
+# /data/*.db
 /data/*.db-wal
 /data/*.db-shm
 data/*.bak_*
